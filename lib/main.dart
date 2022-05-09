@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/view/register_view.dart';
 import 'package:myapp/view/login_view.dart';
+//import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'My Green App',
       home: Login(),
     );
   }

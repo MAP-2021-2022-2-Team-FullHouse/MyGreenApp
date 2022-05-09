@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/view/register_view.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -49,13 +50,37 @@ class _LoginState extends State<Login> {
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.end, children: [
                 SizedBox(
-                  height: 5.0,
+                  height: 10.0,
                 ),
                 TextFormField(
                   controller: _userField,
                   decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Color.fromRGBO(242, 255, 231, 100),
                     hintText: "Username",
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+                    prefixIcon: Padding(
+                      padding:
+                          EdgeInsets.only(top: 1), // add padding to adjust icon
+                      child: Icon(Icons.account_circle_outlined),
+                    ),
+                    //icon: Icon(Icons.account_circle_outlined),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 10.0),
+
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Colors.green[900]!,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 1,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -65,31 +90,75 @@ class _LoginState extends State<Login> {
                   controller: _pwdField,
                   obscureText: true,
                   decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Color.fromRGBO(242, 255, 231, 100),
                     hintText: "Password",
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+                    prefixIcon: Padding(
+                      padding:
+                          EdgeInsets.only(top: 1), // add padding to adjust icon
+                      child: Icon(Icons.key),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 10.0),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Colors.green[900]!,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 1,
+                      ),
+                    ),
                   ),
                 ),
-                Text(
-                  "Forgot Password?",
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: Colors.black,
-                    fontStyle: FontStyle.italic,
-                  ),
+                SizedBox(
+                  height: 10.0,
                 ),
-                Text(
-                  "Do not have an account? Sign up",
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: Colors.black,
-                    fontStyle: FontStyle.italic,
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontSize: 10,
+                      color: Colors.black,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: 5.0,
                 ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Register()),
+                    );
+                  },
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Do not have an account? Sign up",
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontSize: 10,
+                        color: Colors.black,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
                 Container(
-                    width: MediaQuery.of(context).size.width / 1.4,
+                    width: MediaQuery.of(context).size.width / 2.5,
                     height: 30,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
