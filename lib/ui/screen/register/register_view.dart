@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mygreenapp/view/register/register_button.dart';
-import 'package:mygreenapp/view/register/register_textField.dart';
+import 'package:mygreenapp/ui/screen/register/register_button.dart';
+import 'package:mygreenapp/ui/screen/register/register_textField.dart';
 
 class Register extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => Register());

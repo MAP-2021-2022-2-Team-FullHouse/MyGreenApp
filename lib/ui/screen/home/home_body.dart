@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:map_mvvm/map_mvvm.dart';
-import '../../view/home/home_viewmodel.dart';
-import '../ui_utils.dart';
+import '../home/home_viewmodel.dart';
+import '../../ui_utils.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({

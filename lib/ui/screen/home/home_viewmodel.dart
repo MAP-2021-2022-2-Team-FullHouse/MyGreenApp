@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:map_mvvm/viewmodel.dart';
-import '../../app/app.dart';
+import '../../../app/app.dart';
 
 import '../../../app/service_locator.dart';
-import '../../model/counter.dart';
-import '../../services/counter/counter_service.dart';
+import '../../../model/counter.dart';
+import '../../../services/counter/counter_service.dart';
 
 class HomeViewmodel extends Viewmodel {
   CounterService get _service => locator<CounterService>();

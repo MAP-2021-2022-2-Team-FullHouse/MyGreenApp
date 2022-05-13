@@ -1,6 +1,6 @@
 import 'package:map_mvvm/service_locator.dart';
 
-import '../view/home/home_viewmodel.dart';
+import '../ui/screen/home/home_viewmodel.dart';
 import '../services/services.dart';
 
 final locator = ServiceLocator.locator;

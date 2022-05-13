@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mygreenapp/view/login/login_button.dart';
-import 'package:mygreenapp/view/register/register_view.dart';
+import 'package:mygreenapp/ui/screen/login/login_button.dart';
+import 'package:mygreenapp/ui/screen/register/register_view.dart';
 
 class Login extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => Login());

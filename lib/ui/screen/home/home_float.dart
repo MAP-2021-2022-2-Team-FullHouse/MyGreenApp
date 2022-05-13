@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:map_mvvm/view.dart';
-import '../ui_utils.dart';
+import '../../ui_utils.dart';
 import 'home_viewmodel.dart';
 
 class HomeFloat extends StatelessWidget {
