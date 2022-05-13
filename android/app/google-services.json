@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "968921106045",
-    "project_id": "map-fullhouse",
-    "storage_bucket": "map-fullhouse.appspot.com"
+    "project_number": "395126843664",
+    "project_id": "mygreen-app",
+    "storage_bucket": "mygreen-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:968921106045:android:ac600aaef1f91fc965d314",
+        "mobilesdk_app_id": "1:395126843664:android:325aa66f504ad6afd81d95",
         "android_client_info": {
-          "package_name": "com.example.myapp"
+          "package_name": "com.example.mygreenapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "968921106045-sca3udb0dp5s7jciq7kp89kk7ovfrnmi.apps.googleusercontent.com",
+          "client_id": "395126843664-v6ocrql5af3c7r1inhqv0g4hdtne43di.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA88MeJ8mHpid_o-dkmiPir6qP2lCRqmgE"
+          "current_key": "AIzaSyBItFyPG_Mk4LlPYnXa4zmRQ-ot9D9XhFY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "968921106045-sca3udb0dp5s7jciq7kp89kk7ovfrnmi.apps.googleusercontent.com",
+              "client_id": "395126843664-v6ocrql5af3c7r1inhqv0g4hdtne43di.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

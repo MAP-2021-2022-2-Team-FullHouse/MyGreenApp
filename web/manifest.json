@@ -1,6 +1,6 @@
 {
-    "name": "myapp",
-    "short_name": "myapp",
+    "name": "mygreenapp",
+    "short_name": "mygreenapp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

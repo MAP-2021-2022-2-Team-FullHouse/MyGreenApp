@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/view/register_view.dart';
+import 'package:mygreenapp/view/login/login_button.dart';
+import 'package:mygreenapp/view/register/register_view.dart';
 
 class Login extends StatefulWidget {
+  static Route route() => MaterialPageRoute(builder: (_) => Login());
   const Login({Key? key}) : super(key: key);
 
   @override
@@ -20,8 +23,8 @@ class _LoginState extends State<Login> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [
                 Color.fromRGBO(209, 239, 181, 100),
                 Color.fromRGBO(211, 250, 214, 100)
@@ -168,12 +171,12 @@ class _LoginState extends State<Login> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 3,
-                          offset: Offset(0, 2), // changes position of shadow
+                          offset: Offset(0, 2),
                         ),
                       ],
                     ),
-                    child:
-                        MaterialButton(onPressed: () {}, child: Text("Login"))),
+                    child: LoginButton(
+                        email: _userField.text, password: _pwdField.text)),
                 SizedBox(
                   height: 10.0,
                 ),
