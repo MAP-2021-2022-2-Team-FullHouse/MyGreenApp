@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mygreenapp/ui/screen/login/login_view.dart';
-import 'package:mygreenapp/ui/screen/register/register_view.dart';
+import 'package:mygreenapp/ui/screen/login/login_screen.dart';
+import 'package:mygreenapp/ui/screen/register/register_body.dart';
+import 'package:mygreenapp/ui/screen/register/register_screen.dart';
 
 import '../ui/screen/home/home_screen.dart';
 
@@ -14,9 +15,9 @@ class Routes {
       case homeRoute:
         return HomeScreen.route();
       case loginRoute:
-        return Login.route();
+        return LoginScreen.route();
       case registerRoute:
-        return Register.route();
+        return RegisterScreen.route();
     }
     return null;
   }

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'counter_service.dart';
 import '../../model/counter.dart';
 import 'package:map_mvvm/failure.dart';
-// import '../../app/failures.dart';
+import '../../app/failures.dart';
 
 class CounterServiceFirestore extends CounterService {
   static const _userId = 'user1001';

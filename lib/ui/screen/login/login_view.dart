@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+/*import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mygreenapp/ui/screen/login/login_button.dart';
-import 'package:mygreenapp/ui/screen/register/register_view.dart';
+import 'package:mygreenapp/ui/screen/register/register_screen.dart';
 
 class Login extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => Login());
@@ -141,7 +141,7 @@ class _LoginState extends State<Login> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Register()),
+                      MaterialPageRoute(builder: (context) => RegisterScreen()),
                     );
                   },
                   child: Align(
@@ -188,3 +188,4 @@ class _LoginState extends State<Login> {
     );
   }
 }
+*/
