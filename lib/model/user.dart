@@ -52,6 +52,7 @@ class User {
       : this(
             uid: from.uid,
             username: from.username,
+            password: from.password,
             name: from.name,
             email: from.email,
             phone: from.phone);

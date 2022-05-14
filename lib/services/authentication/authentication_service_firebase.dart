@@ -21,10 +21,9 @@ class AuthenticationServiceFirebase extends AuthenticationService {
       Function(AppUser.User) onSuccess,
       Function(Exception) onError}) async {
     try {
-      final userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-
-      final User user = userCredential?.user;
+      final UserCredential credential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      final User user = credential?.user;
 
       if (user == null) return;
 

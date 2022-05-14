@@ -28,7 +28,7 @@ class LoginButton extends StatelessWidget {
         ),
         child: MaterialButton(
             onPressed: () async {
-              state.onLogin();
+              state.onLogin(viewmodel);
             },
             child: Text("Login")));
   }

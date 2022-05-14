@@ -1,3 +1,4 @@
+import '../../model/user.dart';
 import 'counter_service.dart';
 import '../../model/counter.dart';
 

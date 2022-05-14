@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'counter_service.dart';
 import '../../model/counter.dart';
 import 'package:map_mvvm/failure.dart';
@@ -9,8 +10,7 @@ class CounterServiceFirestore extends CounterService {
   @override
   Future<Counter> readCounter() async {
     try {
-      final doc =
-          await FirebaseFirestore.instance.doc('counters/$_userId').get();
+      final doc = await FirebaseFirestore.instance.doc('User/$_userId').get();
       final counter = Counter.fromJson(doc.data()!);
       return counter;
     } on FirebaseException catch (e) {
@@ -69,4 +69,17 @@ class CounterServiceFirestore extends CounterService {
               'CounterServiceFireStore.transformData() on other exception');
     }
   }
+/*
+  @override
+  Future<void> readName() async {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc((await FirebaseAuth.instance.currentUser!()).uid)
+        .get()
+        .then((value) {
+      setState(() {
+        _userName = value.data['username'].toString();
+      });
+    });
+  }*/
 }

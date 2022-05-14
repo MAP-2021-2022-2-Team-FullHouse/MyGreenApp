@@ -8,7 +8,7 @@ import '../../model/user.dart';
 import '../../app/service_locator.dart';
 
 class UserRepository extends Repository {
-  late User _user;
+  late User _user = User();
   late String _error;
   late StreamSubscription _streamObserver;
   bool get isObservingStream => _streamObserver != null;
@@ -28,7 +28,7 @@ class UserRepository extends Repository {
     _streamObserver = _authService.observeStream(
       onData: (user) async {
         await notifyListeners(onNotify: () async {
-          _user = user?.copyWith();
+          _user = user.copyWith();
           //The above line means,  _user =  user != null ? user.copyWith() : null
 
           _error = "";
@@ -47,8 +47,8 @@ class UserRepository extends Repository {
         email: email,
         password: password,
         onSuccess: (user) {
-          _user = user.copyWith();
           _error = "";
+          print('yeah2');
         },
         onError: (e) async {
           _user = User();
@@ -58,7 +58,11 @@ class UserRepository extends Repository {
       );
 
   Future<void> signIn({required String email, required String password}) async {
-    if (_user != null) return; // sign in only if not signed in
+    _user = user.copyWith();
+    if (_user != null) {
+      print('user!null');
+    }
+    ; // sign in only if not signed in
 
     // If the auth service also provides stream (like in Firebase)
     // observe the response only from the stream. Do not use the "response"

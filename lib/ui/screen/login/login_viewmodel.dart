@@ -15,7 +15,7 @@ class LoginViewmodel extends Viewmodel {
     });
   }
 
-  User get user => _userRepository.user;
+  User get user => _userRepository.user.copyWith();
   String _errorMessage;
   String get errorMessage => _errorMessage;
   set errorMessage(value) => update(() => _errorMessage = value);
@@ -25,7 +25,7 @@ class LoginViewmodel extends Viewmodel {
     await _userRepository.signIn(email: email, password: password);
     if (_userRepository.user != null) {
       _errorMessage = null;
-      print('yeah');
+      print(_userRepository.user.uid);
     } else {
       _errorMessage = _userRepository.error;
     }

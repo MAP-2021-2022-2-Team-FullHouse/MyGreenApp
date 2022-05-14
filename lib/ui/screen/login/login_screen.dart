@@ -16,15 +16,15 @@ class LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
   bool _showPassword = false;
 
-  LoginViewmodel viewmodel = LoginViewmodel();
+  //LoginViewmodel viewmodel = LoginViewmodel();
   get showPassword => _showPassword;
   set showPassword(value) => setState(() => _showPassword = value);
 
-  void onLogin() async {
+  void onLogin(LoginViewmodel viewmodel) async {
     await viewmodel.signIn(
         email: usernameController.text, password: passwordController.text);
-    final user = viewmodel.user;
-    if (user != null) Navigator.pop(context, user);
+    final _user = viewmodel.user.copyWith();
+    if (_user != null) Navigator.pop(context, _user);
   }
 
   @override
