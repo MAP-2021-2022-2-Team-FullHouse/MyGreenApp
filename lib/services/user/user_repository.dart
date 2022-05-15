@@ -1,8 +1,9 @@
 import 'dart:async';
-
+import 'package:mygreenapp/app/app.dart';
 import 'package:mygreenapp/services/authentication/authentication_service.dart';
 import 'package:mygreenapp/services/registration/registration_service.dart';
 import 'package:mygreenapp/services/repository.dart';
+import 'package:mygreenapp/ui/screen/home/home_screen.dart';
 
 import '../../model/user.dart';
 import '../../app/service_locator.dart';
@@ -49,6 +50,7 @@ class UserRepository extends Repository {
         onSuccess: (user) {
           _error = "";
           print('yeah2');
+          return Routes.homeRoute;
         },
         onError: (e) async {
           _user = User();
@@ -121,7 +123,7 @@ class UserRepository extends Repository {
 
     await notifyListeners(
         onNotify: () => _authService.signOut(
-            onSuccess: () => {_user = User(), _error = ""}));
+            onSuccess: () => {_user = User(), _error = "", print("logout")}));
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:map_mvvm/service_locator.dart';
 import 'package:mygreenapp/services/authentication/authentication_service.dart';
 import 'package:mygreenapp/services/authentication/authentication_service_firebase.dart';
+import 'package:mygreenapp/services/navigation_service.dart';
 import 'package:mygreenapp/services/registration/registration_service.dart';
 import 'package:mygreenapp/services/registration/registration_service_firebase.dart';
 import 'package:mygreenapp/services/user/user_repository.dart';
@@ -30,12 +31,11 @@ Future<void> initializeServiceLocator() async {
   await serviceInitializer.init();
 
   // Register Services
-  locator
-      .registerLazySingleton<CounterService>(() => CounterServiceFirestore());
   locator.registerLazySingleton<RegistrationService>(
       () => RegistrationServiceFirebase());
   locator.registerLazySingleton<AuthenticationService>(
       () => AuthenticationServiceFirebase());
+  locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton<UserRepository>(() => UserRepository());
 
   // Register Viewmodels

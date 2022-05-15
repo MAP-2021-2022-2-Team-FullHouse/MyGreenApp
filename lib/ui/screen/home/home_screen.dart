@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mygreenapp/ui/screen/home/home_navBar.dart';
+import 'package:mygreenapp/ui/screen/home/home_screenState.dart';
 
 import 'home.dart';
 
@@ -11,8 +13,9 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: const HomeAppBar(),
-        body: const HomeBody(),
+        body: HomeScreenful(),
         floatingActionButton: const HomeFloat(),
+        bottomNavigationBar: HomeNavigationBar(),
       ),
     );
   }

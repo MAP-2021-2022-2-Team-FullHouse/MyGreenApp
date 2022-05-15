@@ -11,13 +11,6 @@ class HomeFloat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return View<HomeViewmodel>(
-      shouldRebuild: false,
-      builder: (_, viewmodel) => FloatingActionButton(
-        onPressed: () =>
-            showSnackBarWhenError(context, viewmodel.incrementCounter),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+        shouldRebuild: false, builder: (_, viewmodel) => Container());
   }
 }

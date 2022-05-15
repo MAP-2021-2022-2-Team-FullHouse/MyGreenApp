@@ -1,35 +1,37 @@
 import 'dart:async';
 
 import 'package:map_mvvm/viewmodel.dart';
+import 'package:mygreenapp/services/user/user_repository.dart';
 import '../../../app/app.dart';
 
 import '../../../app/service_locator.dart';
-import '../../../model/counter.dart';
-import '../../../services/counter/counter_service.dart';
 
 class HomeViewmodel extends Viewmodel {
-  CounterService get _service => locator<CounterService>();
-  Counter _counter = Counter();
   StreamSubscription? _streamListener;
   bool get isListeningToStream => _streamListener != null;
+  final UserRepository _userRepository = locator();
+
+  HomeViewmodel() {
+    _userRepository.addListener(() {
+      notifyListeners();
+    });
+  }
 
   @override
   void init() async {
     super.init();
     notifyListenersOnFailure = true;
-
-    await update(() async => _counter = await _service.readCounter());
-    _streamListener = _service.listen(
-      onData: (data) async =>
-          await update(() async => _counter = (data as Counter).copyWith()),
-      onError: (e) => catchError(e),
-    );
   }
 
-  Counter get counter => _counter;
-
-  Future<void> incrementCounter() async =>
-      await update(() async => _counter = await _service.incrementCounter());
+  Future<void> signOut() async {
+    await _userRepository.signOut();
+    /*if (_userRepository.user == null) {
+      print("Logout");
+    } else {
+      //_errorMessage = _userRepository.error;
+      print("Not logout");
+    }*/
+  }
 
   @override
   void dispose() {

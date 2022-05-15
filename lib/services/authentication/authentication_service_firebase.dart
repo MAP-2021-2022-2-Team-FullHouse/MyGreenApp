@@ -3,6 +3,8 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:mygreenapp/app/app.dart';
+import 'package:mygreenapp/ui/screen/home/home_screen.dart';
 
 import '../../model/user.dart'
     as AppUser; // To resolve conflict with firebase 'User' class

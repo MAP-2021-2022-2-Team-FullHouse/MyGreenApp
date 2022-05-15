@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mygreenapp/app/app.dart';
 import 'package:mygreenapp/ui/screen/login/login_body.dart';
 
 //import 'login_body.dart';
@@ -24,7 +25,8 @@ class LoginScreenState extends State<LoginScreen> {
     await viewmodel.signIn(
         email: usernameController.text, password: passwordController.text);
     final _user = viewmodel.user.copyWith();
-    if (_user != null) Navigator.pop(context, _user);
+    if (_user != null) Navigator.pushNamed(context, Routes.homeRoute);
+    //Navigator.pop(context, Routes.homeRoute);
   }
 
   @override

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:map_mvvm/map_mvvm.dart';
+import 'package:mygreenapp/ui/screen/home/home_screenState.dart';
+import 'package:mygreenapp/ui/screen/home/widget/logout_button.dart';
 import '../home/home_viewmodel.dart';
 import '../../ui_utils.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({
-    Key? key,
-  }) : super(key: key);
+  final HomeScreenfulState _state;
+  const HomeBody(this._state);
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +15,9 @@ class HomeBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text(
-            'Logout',
-          ),
           View<HomeViewmodel>(
-            builder: (_, viewmodel) => Text(
-              '${viewmodel.hasFailure ? ('Error occured: \n' + (viewmodel.failure?.toString())!) : viewmodel.counter.value}', // to simulate handling errors
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            builder: (_, viewmodel) =>
+                LogoutButton(viewmodel: viewmodel, state: _state),
           ),
         ],
       ),

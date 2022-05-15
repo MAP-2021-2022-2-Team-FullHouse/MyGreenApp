@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mygreenapp/services/navigation_service.dart';
 //import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'app/app.dart';
@@ -28,8 +29,9 @@ class MyApp extends StatelessWidget {
       title: 'My Green App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.lightGreen,
       ),
+      navigatorKey: locator<NavigationService>().navigatorKey,
       initialRoute: Routes.loginRoute,
       onGenerateRoute: Routes.createRoute,
     );
