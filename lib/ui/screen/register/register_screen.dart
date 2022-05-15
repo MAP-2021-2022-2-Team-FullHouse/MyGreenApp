@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mygreenapp/app/routes.dart';
 
 import 'register_body.dart';
 import 'register_viewmodel.dart';
@@ -31,7 +32,7 @@ class RegisterScreenState extends State<RegisterScreen> {
         address: addrsField.text,
         phone: phoneField.text);
     final _user = viewmodel.user;
-    if (_user != null) Navigator.pop(context, _user);
+    if (_user != null) Navigator.pushNamed(context, Routes.homeRoute);
   }
 
   @override

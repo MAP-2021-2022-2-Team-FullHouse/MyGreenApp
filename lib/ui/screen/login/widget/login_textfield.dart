@@ -21,6 +21,10 @@ class LoginTextField extends StatelessWidget {
     return Container(
       child: TextFormField(
         controller: controller,
+        obscureText: obscureText,
+        keyboardType: keyboard,
+        autocorrect: autoCorrect,
+        enableSuggestions: enableSuggestions,
         decoration: InputDecoration(
           filled: true,
           fillColor: Color.fromRGBO(242, 255, 231, 100),
@@ -30,10 +34,8 @@ class LoginTextField extends StatelessWidget {
             padding: EdgeInsets.only(top: 1), // add padding to adjust icon
             child: Icon(iconName),
           ),
-          //icon: Icon(Icons.account_circle_outlined),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide(
