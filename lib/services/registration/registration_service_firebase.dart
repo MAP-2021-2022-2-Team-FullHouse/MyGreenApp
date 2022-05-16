@@ -15,16 +15,17 @@ class RegistrationServiceFirebase extends RegistrationService {
   final _firebaseAuth = FirebaseAuthentication();
   FirebaseAuth get _auth => _firebaseAuth.auth;
   final firestoreInstance = FirebaseFirestore.instance;
+  final role = "user";
 
   @override
-  Future<void> addUser(
+  Future addUser(
       {@required String email,
       @required String password,
       @required String name,
       @required String address,
       @required String phone,
       Function onSuccess,
-      Function(Exception) onError}) async {
+      Function(Exception, String) onError}) async {
     try {
       final userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -35,7 +36,8 @@ class RegistrationServiceFirebase extends RegistrationService {
         "name": name,
         "phone": phone,
         "email": email,
-        "address": address
+        "address": address,
+        "role": role,
       }).then((value) {
         print('User added');
       });
@@ -47,7 +49,13 @@ class RegistrationServiceFirebase extends RegistrationService {
 
       onSuccess?.call(transformUserData(user));
     } on FirebaseAuthException catch (e) {
-      onError?.call(e);
+      String error;
+      if (e.code == 'weak-password') {
+        error = 'weak-password';
+      } else if (e.code == 'email-already-in-use') {
+        error = 'email-already-in-use';
+      }
+      onError?.call(e, error);
     }
   }
 
@@ -57,17 +65,10 @@ class RegistrationServiceFirebase extends RegistrationService {
     final User user = userData; // Firebase Auth User class
 
     return AppUser.User(
-      // User data that are passed to Viewmodel is in the form our own User model class (not Firebase Auth user)
-      username: user.email,
-      email: user.email,
-      name: user.displayName,
-      uid: user.uid,
-    );
-  }
-
-  @override
-  Future<void> signOut({Function onSuccess, Function(Exception p1) onError}) {
-    // TODO: implement signOut
-    throw UnimplementedError();
+        // User data that are passed to Viewmodel is in the form our own User model class (not Firebase Auth user)
+        username: user.email,
+        email: user.email,
+        name: user.displayName,
+        uid: user.uid);
   }
 }

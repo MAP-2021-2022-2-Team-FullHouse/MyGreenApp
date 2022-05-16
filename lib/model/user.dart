@@ -4,7 +4,7 @@ class User {
   String username;
   String password;
   String uid;
-  //String token;
+  String role;
   String name;
   String email;
   String phone;
@@ -13,7 +13,7 @@ class User {
     this.username = '',
     this.password = '',
     this.uid = '',
-    //this.token = '',
+    this.role = '',
     this.name = '',
     this.email = '',
     this.phone = '',
@@ -24,7 +24,7 @@ class User {
             username: json['username'],
             password: json['password'],
             uid: json['uid'],
-            //token: json['token'],
+            role: json['role'],
             name: json['name'],
             email: json['email'],
             phone: json['phone']);
@@ -33,17 +33,17 @@ class User {
         'username': username,
         'password': password,
         'uid': uid,
-        //'token': token,
+        'role': role,
         'name': name,
         'email': email,
         'phone': phone
       };
 
-  copyWith({username, password, uid, token, name, email}) => User(
+  copyWith({username, password, uid, role, name, email}) => User(
       username: username ?? this.email,
       password: password ?? this.password,
       uid: uid ?? this.uid,
-      //token: token ?? this.token,
+      role: role ?? this.role,
       name: name ?? this.name,
       email: email ?? this.email,
       phone: phone ?? this.phone);
@@ -53,6 +53,7 @@ class User {
             uid: from.uid,
             username: from.username,
             password: from.password,
+            role: from.role,
             name: from.name,
             email: from.email,
             phone: from.phone);

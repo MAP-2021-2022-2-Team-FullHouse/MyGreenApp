@@ -10,9 +10,7 @@ abstract class RegistrationService {
       @required String address,
       @required String phone,
       Function onSuccess,
-      Function(Exception) onError});
-
-  Future<void> signOut({Function onSuccess, Function(Exception) onError});
+      Function(Exception, String) onError});
 
   // this getter is to be overidden,
   @override

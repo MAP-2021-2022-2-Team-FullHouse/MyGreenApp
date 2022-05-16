@@ -1,5 +1,7 @@
 // @dart=2.9
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:mygreenapp/app/routes.dart';
 
 import '../../../model/user.dart';
 import '../../../app/service_locator.dart';
@@ -20,13 +22,13 @@ class RegisterViewmodel extends Viewmodel {
   String get errorMessage => _errorMessage;
   set errorMessage(value) => update(() => _errorMessage = value);
 
-  Future<void> addUser(
+  Future addUser(
       {@required String email,
       @required String password,
       @required String name,
       @required String address,
       @required String phone}) async {
-    await _userRepository.addUser(
+    dynamic result = await _userRepository.addUser(
         email: email,
         password: password,
         name: name,
@@ -36,6 +38,7 @@ class RegisterViewmodel extends Viewmodel {
       _errorMessage = null;
     } else {
       _errorMessage = _userRepository.error;
+      return _errorMessage;
     }
   }
 }
