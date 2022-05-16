@@ -22,10 +22,22 @@ class LoginScreenState extends State<LoginScreen> {
   set showPassword(value) => setState(() => _showPassword = value);
 
   void onLogin(LoginViewmodel viewmodel) async {
-    await viewmodel.signIn(
-        email: usernameController.text, password: passwordController.text);
-    final _user = viewmodel.user.copyWith();
-    if (_user != null) Navigator.pushNamed(context, Routes.homeRoute);
+    dynamic result;
+    try {
+      result = await viewmodel.signIn(
+          email: usernameController.text, password: passwordController.text);
+      final _user = viewmodel.user.copyWith();
+      print(_user);
+      Navigator.pushNamed(context, Routes.homeRoute);
+    } catch (e) {
+      /*  if (e == 'user-not-found') {
+        showAlertDialog(context, 'You are not registered.');
+      } else if (e == 'wrong-password') {
+        showAlertDialog(context, 'Wrong password.');
+      } */
+      showAlertDialog(context, "Invalid email or password.");
+    }
+    //if (_user != null) Navigator.pushNamed(context, Routes.homeRoute);
     //Navigator.pop(context, Routes.homeRoute);
   }
 
@@ -33,6 +45,33 @@ class LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: LoginBody(this),
+    );
+  }
+
+  showAlertDialog(BuildContext context, String text) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.pushNamed(context, Routes.loginRoute);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Error"),
+      content: Text(text),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
