@@ -15,6 +15,7 @@ class AdminBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Text("Admin Home Page"),
           View<AdminViewmodel>(
             builder: (_, viewmodel) =>
                 LogoutButton(viewmodel: viewmodel, state: _state),

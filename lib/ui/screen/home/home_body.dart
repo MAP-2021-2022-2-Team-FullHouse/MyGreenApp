@@ -20,7 +20,8 @@ class HomeBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(readUser()),
+          //Text(readUser()),
+          Text("User Home Page"),
           View<HomeViewmodel>(
             builder: (_, viewmodel) =>
                 LogoutButton(viewmodel: viewmodel, state: _state),
@@ -30,17 +31,17 @@ class HomeBody extends StatelessWidget {
     );
   }
 
-  String readUser() {
-    //HomeViewmodel _homeViewmodel;
-    final snapshot= HomeViewmodel().getDocUser().get();
+  // String readUser() {
+  //   //HomeViewmodel _homeViewmodel;
+  //   final snapshot= HomeViewmodel().getDocUser().get();
 
-    if(snapshot.exists)
-    {
-      return "Hi!"+ User.fromJson(snapshot.data()!).name;
-    }
-    else
-    {
-      return " ";
-    }
-  }
+  //   if(snapshot.exists)
+  //   {
+  //     return "Hi!"+ User.fromJson(snapshot.data()!).name;
+  //   }
+  //   else
+  //   {
+  //     return " ";
+  //   }
+  // }
 }
