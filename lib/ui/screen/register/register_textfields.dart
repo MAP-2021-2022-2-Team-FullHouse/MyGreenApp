@@ -5,16 +5,18 @@ import 'widget/register_textfield.dart';
 
 List<Widget> buildRegisterTextFields(RegisterScreenState state) => [
       RegisterTextField(
-          controller: state.phoneField,
-          hintText: "+60123456789",
-          labelText: "Phone Number: "),
+        controller: state.phoneField,
+        hintText: "+60123456789",
+        labelText: "Phone Number: ",
+      ),
       SizedBox(
         height: 5.0,
       ),
       RegisterTextField(
-          controller: state.usernameController,
-          hintText: "Ali bin Abu",
-          labelText: "Full Name: "),
+        controller: state.usernameController,
+        hintText: "Ali bin Abu",
+        labelText: "Full Name: ",
+      ),
       SizedBox(
         height: 5.0,
       ),

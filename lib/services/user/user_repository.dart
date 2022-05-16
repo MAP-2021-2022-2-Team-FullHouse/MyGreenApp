@@ -78,8 +78,8 @@ class UserRepository extends Repository {
     }
   }
 
-  Future<void> _addUser(String email, String password, String name,
-          String address, String phone) =>
+  Future _addUser(String email, String password, String name, String address,
+          String phone) =>
       _registrationService.addUser(
         email: email,
         password: password,
@@ -90,16 +90,14 @@ class UserRepository extends Repository {
           _user = user.copyWith();
           _error = "";
         },
-        onError: (e) async {
+        onError: (e, text) async {
           _user = null;
-
-          _error = e.toString();
-
+          _error = text;
           await notifyListeners();
         },
       );
 
-  Future<void> addUser(
+  Future addUser(
       {@required String email,
       @required String password,
       @required String name,

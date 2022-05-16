@@ -8,7 +8,7 @@ class HomeNavigationBar extends StatefulWidget {
 }
 
 class _HomeNavigationBarState extends State<HomeNavigationBar> {
-  int currIndex = 2;
+  int currIndex = 0;
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(

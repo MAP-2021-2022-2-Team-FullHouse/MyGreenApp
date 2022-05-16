@@ -25,20 +25,59 @@ class RegisterScreenState extends State<RegisterScreen> {
   set showPassword(value) => setState(() => _showPassword = value);
 
   void addUser() async {
-    await viewmodel.addUser(
-        email: emailField.text,
-        password: passwordController.text,
-        name: usernameController.text,
-        address: addrsField.text,
-        phone: phoneField.text);
-    final _user = viewmodel.user;
-    if (_user != null) Navigator.pushNamed(context, Routes.homeRoute);
+    dynamic result;
+    try {
+      result = await viewmodel.addUser(
+          email: emailField.text,
+          password: passwordController.text,
+          name: usernameController.text,
+          address: addrsField.text,
+          phone: phoneField.text);
+      final _user = viewmodel.user;
+      if (_user != null) Navigator.pushNamed(context, Routes.homeRoute);
+      if (result == 'email-already-in-use') {
+        showAlertDialog(context, "Email is registered.");
+      } else if (result == "weak-password") {
+        showAlertDialog(context, "Weak password");
+      } else if (result == 'invalid-email') {
+        showAlertDialog(context, "Invalid email address.");
+      }
+    } catch (e) {
+      showAlertDialog(context, "Something went wrong");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: RegisterBody(this),
+    );
+  }
+
+  showAlertDialog(BuildContext context, String text) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.pushNamed(context, Routes.registerRoute);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Error"),
+      content: Text(text),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

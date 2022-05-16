@@ -1,12 +1,12 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mygreenapp/app/app.dart';
 import 'package:mygreenapp/ui/screen/login/login_body.dart';
 
 //import 'login_body.dart';
-import '../../../model/user.dart';
 import 'login_viewmodel.dart';
+import '../../../model/user.dart';
+
 
 class LoginScreen extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => LoginScreen());
@@ -30,8 +30,8 @@ class LoginScreenState extends State<LoginScreen> {
       result = await viewmodel.signIn(
           email: usernameController.text, password: passwordController.text);
       final _user = viewmodel.user.copyWith();
-      print(_user.role);
-      print(_user.uid);
+      print(_user);
+
       final docUser= FirebaseFirestore.instance.collection('User').doc(_user.uid);
       final snapshot=await docUser.get();
       
