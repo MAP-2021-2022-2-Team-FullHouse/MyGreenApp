@@ -1,8 +1,11 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mygreenapp/app/app.dart';
 import 'package:mygreenapp/ui/screen/login/login_body.dart';
 
 //import 'login_body.dart';
+import '../../../model/user.dart';
 import 'login_viewmodel.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -27,8 +30,34 @@ class LoginScreenState extends State<LoginScreen> {
       result = await viewmodel.signIn(
           email: usernameController.text, password: passwordController.text);
       final _user = viewmodel.user.copyWith();
-      print(_user);
-      Navigator.pushNamed(context, Routes.homeRoute);
+      print(_user.role);
+      print(_user.uid);
+      final docUser= FirebaseFirestore.instance.collection('User').doc(_user.uid);
+      final snapshot=await docUser.get();
+      
+      
+      if(snapshot.exists)
+      {
+         String role=User.fromJson(snapshot.data()!).role;
+         if (role=="user")
+         {
+           print("user page");
+           Navigator.pushNamed(context, Routes.homeRoute);
+         }
+         else if(role=="Admin")
+         {
+           print("admin page");
+           Navigator.pushNamed(context, Routes.adminRoute);
+         }
+         else{
+           print("error");
+           throw 'error occur in reading user role';
+         }
+      }
+      else
+      {
+        throw 'error occur in reading user role';
+      }
     } catch (e) {
       /*  if (e == 'user-not-found') {
         showAlertDialog(context, 'You are not registered.');

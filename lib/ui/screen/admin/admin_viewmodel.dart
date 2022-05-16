@@ -8,12 +8,12 @@ import '../../../app/app.dart';
 
 import '../../../app/service_locator.dart';
 
-class HomeViewmodel extends Viewmodel {
+class AdminViewmodel extends Viewmodel {
   StreamSubscription? _streamListener;
   bool get isListeningToStream => _streamListener != null;
   final UserRepository _userRepository = locator();
 
-  HomeViewmodel() {
+  AdminViewmodel() {
     _userRepository.addListener(() {
       notifyListeners();
     });
@@ -23,13 +23,6 @@ class HomeViewmodel extends Viewmodel {
   void init() async {
     super.init();
     notifyListenersOnFailure = true;
-    
-  }
-
-  dynamic getDocUser()
-  {
-    User? user = FirebaseAuth.instance.currentUser;
-    return FirebaseFirestore.instance.collection("users").doc(user!.uid);
   }
 
   Future<void> signOut() async {

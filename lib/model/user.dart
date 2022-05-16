@@ -8,6 +8,7 @@ class User {
   String name;
   String email;
   String phone;
+  String role;
 
   User({
     this.username = '',
@@ -17,6 +18,7 @@ class User {
     this.name = '',
     this.email = '',
     this.phone = '',
+    this.role = '',
   });
 
   User.fromJson(Map<String, dynamic> json)
@@ -27,7 +29,8 @@ class User {
             //token: json['token'],
             name: json['name'],
             email: json['email'],
-            phone: json['phone']);
+            phone: json['phone'],
+            role: json['role']);
 
   Map<String, dynamic> toJson() => {
         'username': username,
@@ -36,7 +39,8 @@ class User {
         //'token': token,
         'name': name,
         'email': email,
-        'phone': phone
+        'phone': phone,
+        'role' : role
       };
 
   copyWith({username, password, uid, token, name, email}) => User(
@@ -46,7 +50,9 @@ class User {
       //token: token ?? this.token,
       name: name ?? this.name,
       email: email ?? this.email,
-      phone: phone ?? this.phone);
+      phone: phone ?? this.phone,
+      role: role ?? this.role);
+      
 
   User.copy(from)
       : this(
@@ -55,5 +61,6 @@ class User {
             password: from.password,
             name: from.name,
             email: from.email,
-            phone: from.phone);
+            phone: from.phone,
+            role: from.role);
 }

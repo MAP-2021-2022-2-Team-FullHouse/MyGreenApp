@@ -8,6 +8,7 @@ import 'package:mygreenapp/services/registration/registration_service_firebase.d
 import 'package:mygreenapp/services/user/user_repository.dart';
 import 'package:mygreenapp/ui/screen/login/login_viewmodel.dart';
 import 'package:mygreenapp/ui/screen/register/register_viewmodel.dart';
+import 'package:mygreenapp/ui/screen/admin/admin_viewmodel.dart';
 
 import '../ui/screen/home/home_viewmodel.dart';
 import '../services/services.dart';
@@ -34,4 +35,5 @@ Future<void> initializeServiceLocator() async {
   locator.registerLazySingleton<HomeViewmodel>(() => HomeViewmodel());
   locator.registerLazySingleton<RegisterViewmodel>(() => RegisterViewmodel());
   locator.registerLazySingleton<LoginViewmodel>(() => LoginViewmodel());
+  locator.registerLazySingleton<AdminViewmodel>(() => AdminViewmodel());
 }

@@ -6,12 +6,16 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   }) : super(key: key);
 
   @override
-  Size get preferredSize => Size.fromHeight(50);
+  Size get preferredSize => Size.fromHeight(150);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('My Green App'),
+      toolbarHeight: 150,
+      elevation: 10,
+      automaticallyImplyLeading: false, 
+      title: Image.asset("assets/logo.png",height: 100,),
+      centerTitle: true,
     );
   }
 }
