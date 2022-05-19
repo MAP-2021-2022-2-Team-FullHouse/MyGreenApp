@@ -31,20 +31,15 @@ class LoginScreenState extends State<LoginScreen> {
           email: usernameController.text, password: passwordController.text);
       final _user = viewmodel.user.copyWith();
       print(_user);
+      String role=await viewmodel.getRole(_user.uid);
 
-      final docUser= FirebaseFirestore.instance.collection('User').doc(_user.uid);
-      final snapshot=await docUser.get();
-      
-      
-      if(snapshot.exists)
-      {
-         String role=User.fromJson(snapshot.data()!).role;
-         if (role=="user")
+      print(role.toString());
+         if (role.toString()=="user")
          {
            print("user page");
            Navigator.pushNamed(context, Routes.homeRoute);
          }
-         else if(role=="Admin")
+         else if(role.toString()=="Admin")
          {
            print("admin page");
            Navigator.pushNamed(context, Routes.adminRoute);
@@ -53,11 +48,6 @@ class LoginScreenState extends State<LoginScreen> {
            print("error");
            throw 'error occur in reading user role';
          }
-      }
-      else
-      {
-        throw 'error occur in reading user role';
-      }
     } catch (e) {
       /*  if (e == 'user-not-found') {
         showAlertDialog(context, 'You are not registered.');

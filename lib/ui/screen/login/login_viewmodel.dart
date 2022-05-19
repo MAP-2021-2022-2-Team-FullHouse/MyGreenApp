@@ -1,4 +1,5 @@
 // @dart=2.9
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mygreenapp/app/app.dart';
@@ -46,5 +47,13 @@ class LoginViewmodel extends Viewmodel {
       _errorMessage = _userRepository.error;
       return _errorMessage;
     }
+  }
+
+  Future<String> getRole(String userid )
+  async {
+      final docUser= FirebaseFirestore.instance.collection('User').doc(userid);
+      final snapshot=await docUser.get();
+      String role=User.fromJson(snapshot.data()).role;
+      return role; 
   }
 }

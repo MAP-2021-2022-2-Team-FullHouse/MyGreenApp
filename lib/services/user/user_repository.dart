@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mygreenapp/app/app.dart';
 import 'package:mygreenapp/services/authentication/authentication_service.dart';
+import 'package:mygreenapp/services/resetpassword/reset_service.dart';
 import 'package:mygreenapp/services/navigation_service.dart';
 import 'package:mygreenapp/services/registration/registration_service.dart';
 import 'package:mygreenapp/services/repository.dart';
@@ -22,6 +23,7 @@ class UserRepository extends Repository {
   String get error => _error;
 
   final AuthenticationService _authService = locator();
+  final ResetPasswordService _resetPassService = locator();
   final RegistrationService _registrationService = locator();
   final NavigationService navigator = NavigationService();
 
@@ -108,6 +110,29 @@ class UserRepository extends Repository {
     } else {
       await notifyListeners(
           onNotify: () => _addUser(email, password, name, address, phone));
+    }
+  }
+
+  Future _sendResetPassEmail(String email) =>
+      _resetPassService.sendResetPassEmail(
+        email: email,
+        onSuccess: () {
+          _user = user.copyWith();
+          _error = "";
+        },
+        onError: (e, text) async {
+          _user = User();
+          _error = text;
+          await notifyListeners();
+          return _error;
+        },
+      );
+
+  Future sendResetPassEmail({String email}) async {
+    if (isObservingStream) {
+      await _sendResetPassEmail(email);
+    } else {
+      await notifyListeners(onNotify: () => _sendResetPassEmail(email));
     }
   }
 

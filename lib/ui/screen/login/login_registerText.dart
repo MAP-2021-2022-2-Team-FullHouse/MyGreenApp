@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mygreenapp/ui/screen/register/register_screen.dart';
+import 'package:mygreenapp/ui/screen/reset/reset_screen.dart';
+
 
 class LoginRegisterText extends StatelessWidget {
   const LoginRegisterText({Key? key}) : super(key: key);
@@ -10,7 +12,14 @@ class LoginRegisterText extends StatelessWidget {
       SizedBox(
         height: 10.0,
       ),
-      Align(
+      GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ResetScreen()),
+            );
+          },
+      child:Align(
           alignment: Alignment.centerLeft,
           child: Text("Forgot Password?",
               style: TextStyle(
@@ -18,7 +27,7 @@ class LoginRegisterText extends StatelessWidget {
                 fontSize: 10,
                 color: Colors.black,
                 fontStyle: FontStyle.italic,
-              ))),
+       )))),
       SizedBox(
         height: 5.0,
       ),

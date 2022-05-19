@@ -36,7 +36,7 @@ class RegisterScreenState extends State<RegisterScreen> {
       final _user = viewmodel.user;
       if (_user != null) Navigator.pushNamed(context, Routes.homeRoute);
       if (result == 'email-already-in-use') {
-        showAlertDialog(context, "Email is registered.");
+        showAlertDialog(context, "Email was registered.");
       } else if (result == "weak-password") {
         showAlertDialog(context, "Weak password");
       } else if (result == 'invalid-email') {
