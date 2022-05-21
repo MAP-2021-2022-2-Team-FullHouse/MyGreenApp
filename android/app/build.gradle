@@ -61,7 +61,7 @@ android {
             shrinkResources false
         }
     }
-    ndkVersion "24.0.8215888"
+    //ndkVersion "24.0.8215888"
 }
 
 flutter {

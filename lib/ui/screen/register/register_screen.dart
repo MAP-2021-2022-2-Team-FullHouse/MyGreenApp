@@ -59,7 +59,7 @@ class RegisterScreenState extends State<RegisterScreen> {
     Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
-        Navigator.pushNamed(context, Routes.homeRoute);
+        Navigator.pushNamed(context, Routes.registerRoute);
       },
     );
 

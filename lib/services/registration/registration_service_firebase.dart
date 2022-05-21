@@ -44,7 +44,7 @@ class RegistrationServiceFirebase extends RegistrationService {
       final UserCredential credential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       final User user = credential?.user;
-
+      print(credential.user.uid);
       if (user == null) return;
 
       onSuccess?.call(transformUserData(user));
