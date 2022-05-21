@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeNavigationBar extends StatefulWidget {
-  const HomeNavigationBar({Key? key}) : super(key: key);
+class AdminNavigationBar extends StatefulWidget {
+  const AdminNavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<HomeNavigationBar> createState() => _HomeNavigationBarState();
+  State<AdminNavigationBar> createState() => _AdminNavigationBarState();
 }
 
-class _HomeNavigationBarState extends State<HomeNavigationBar> {
+class _AdminNavigationBarState extends State<AdminNavigationBar> {
   int currIndex = 2;
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _HomeNavigationBarState extends State<HomeNavigationBar> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Profile',
+          label: 'Admin',
         ),
       ],
     );
