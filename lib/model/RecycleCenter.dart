@@ -4,17 +4,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class RecycleCenter{
     late String name,address, phone, image, email;
     late double lat, lon;
-    
 
-    RecycleCenter(name, address,phone,image, email, lat, lon){
-        this.name=name;
-        this.address=address;
-        this.phone=phone;
-        this.image=image;
-        this.email=email;
-        this.lat=lat;
-        this.lon=lon;
-    }
+    RecycleCenter({
+        this.name='',
+        this.address='',
+        this.phone='',
+        this.image='',
+        this.email='',
+        this.lat=-999,
+        this.lon=-999
+    });
+
+    // RecycleCenter(name, address,phone,image, email, lat, lon){
+    //     this.name=name;
+    //     this.address=address;
+    //     this.phone=phone;
+    //     this.image=image;
+    //     this.email=email;
+    //     this.lat=lat;
+    //     this.lon=lon;
+    // }
+
+    
 
     static Future getCenterList() async {
     // Get docs from collection reference
@@ -28,6 +39,16 @@ class RecycleCenter{
 
     return centerList;
 }
+
+  static RecycleCenter fromJson(Map<String,dynamic> json) => RecycleCenter(
+    name: json['name'],
+    address: json['address'],
+    phone: json['phone'],
+    image: json['image'],
+    email: json['email'],
+    lat: json['lat'] as double,
+    lon: json['lon'] as double
+  );
 
     
    

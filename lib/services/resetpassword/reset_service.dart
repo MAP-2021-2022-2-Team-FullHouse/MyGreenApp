@@ -1,12 +1,8 @@
-// @dart=2.9
-
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 
 abstract class ResetPasswordService {
-  Future sendResetPassEmail({@required String email,Function() onSuccess,Function(Exception, String) onError});
+  Future sendResetPassEmail({required String email});
 
   // this getter is to be overidden,
-  Stream get stream => null;
-
+  Stream? get stream => null;
 }

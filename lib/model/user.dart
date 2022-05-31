@@ -1,5 +1,3 @@
-// @dart=2.9
-
 class User {
   String username;
   String password;
@@ -19,15 +17,16 @@ class User {
     this.phone = '',
   });
 
-  User.fromJson(Map<String, dynamic> json)
+  User.fromJson(Map<String, dynamic>? json)
       : this(
-            username: json['username'],
-            password: json['password'],
-            uid: json['uid'],
-            role: json['role'],
-            name: json['name'],
-            email: json['email'],
-            phone: json['phone']);
+            /* 
+            username: json?['username'],
+            password: json?['password'], 
+            uid: json?['uid'],*/
+            role: json?['role'],
+            name: json?['name'],
+            email: json?['email'],
+            phone: json?['phone']);
 
   Map<String, dynamic> toJson() => {
         'username': username,
@@ -39,7 +38,7 @@ class User {
         'phone': phone
       };
 
-  copyWith({username, password, uid, role, name, email}) => User(
+  copyWith({username, password, uid, role, name, email, phone}) => User(
       username: username ?? this.email,
       password: password ?? this.password,
       uid: uid ?? this.uid,

@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
+/* import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:map_mvvm/failure.dart';
 
 /// Try running a callback. When error happened,
 /// it will open an error snackbar
@@ -18,3 +17,4 @@ Future<void> showSnackBarWhenError(
     ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 }
+ */

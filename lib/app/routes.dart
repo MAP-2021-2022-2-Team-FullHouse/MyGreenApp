@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mygreenapp/ui/screen/login/login_screen.dart';
-import 'package:mygreenapp/ui/screen/register/register_body.dart';
-import 'package:mygreenapp/ui/screen/register/register_screen.dart';
-import 'package:mygreenapp/ui/screen/admin/admin_screen.dart';
-import 'package:mygreenapp/ui/screen/reset/reset_screen.dart';
+import 'package:my_green_app/ui/views/login/login_screen.dart';
+import 'package:my_green_app/ui/views/register/register_body.dart';
+import 'package:my_green_app/ui/views/register/register_screen.dart';
+import 'package:my_green_app/ui/views/admin/admin_screen.dart';
+import 'package:my_green_app/ui/views/reset/reset_screen.dart';
 
-
-import '../ui/screen/home/home_screen.dart';
+import '../ui/views/home/home_screen.dart';
 
 class Routes {
   static const String homeRoute = '/home';
