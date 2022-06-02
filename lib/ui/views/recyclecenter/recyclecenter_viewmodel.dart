@@ -26,7 +26,7 @@ class RecycleCenterViewmodel extends BaseViewModel {
   }
 
   Stream<List<RecycleCenter>> getRCList() {
-    var results =  _recycleCenterService.readRC();
+    var results = _recycleCenterService.readRC();
     return results;
     // if (results != null) {
     //   return results;
@@ -38,23 +38,23 @@ class RecycleCenterViewmodel extends BaseViewModel {
     // }
   }
 
-/* 
-  @override
-  void init() async {
-    super.init();
-    notifyListenersOnFailure = true;
-  } */
+  Future deleteCenter(String email) async {
+    /* var dialogResponse = await _dialogService.showConfirmationDialog(
+      title: 'Are you sure?',
+      description: 'Do you really want to delete the recycle center?',
+      confirmationTitle: 'Yes',
+      cancelTitle: 'No',
+    );
 
-  
-
-  /* @override
-  void dispose() {
-    _streamListener?.cancel();
-    _streamListener = null;
-    super.dispose();
-  } */
-
-  // Future<User?> readUser() async {
-  //   final docUser=FirebaseFirestore.instance.collection('User').doc(FirebaseAuth.instance.currentUser.uid);
-  // }
+    if (dialogResponse.confirmed) {
+      setBusy(true); */
+    await _recycleCenterService.deleteCenter(email);
+    /* if (result == true) {
+        _navigationService.navigateTo(homeRoute);
+      } else {
+        _navigationService.navigateTo(adminRoute);
+      } */
+    /* setBusy(false);
+    } */
+  }
 }

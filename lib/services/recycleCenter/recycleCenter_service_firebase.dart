@@ -15,16 +15,26 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
       FirebaseFirestore.instance.collection('RecycleCenter');
 
   @override
-  Future deleteCenter(String documentId) async {
+  Future deleteCenter(String docemail) async {
     try {
-      await firestoreInstance
-          .collection("RecycleCenter")
-          .doc(documentId)
-          .delete();
-      /* if (firestoreInstance.collection("RecycleCenter").doc(documentId).get() ==
+      String id = '';
+      await FirebaseFirestore.instance
+          .collection('RecycleCenter')
+          .where('email', isEqualTo: docemail)
+          .get()
+          .then((value) {
+        value.docs.forEach((element) {
+          print(element.id);
+          id = element.id;
+        });
+      });
+      print(id);
+      await firestoreInstance.collection("RecycleCenter").doc(id).delete();
+
+      if (firestoreInstance.collection("RecycleCenter").doc(id).get() ==
           null) {
         return true;
-      } */
+      } 
     } on FirebaseException catch (e) {
       return e.code;
     }
@@ -44,9 +54,12 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
     }
   }
 
+
   @override
-  Stream<List<RecycleCenter>> readRC()=>FirebaseFirestore.instance
-  .collection('RecycleCenter')
-  .snapshots()
-  .map((snapshot) => snapshot.docs.map((doc) => RecycleCenter.fromJson(doc.data())).toList());
+  Stream<List<RecycleCenter>> readRC() => FirebaseFirestore.instance
+      .collection('RecycleCenter')
+      .snapshots()
+      .map((snapshot) => snapshot.docs
+          .map((doc) => RecycleCenter.fromJson(doc.data()))
+          .toList());
 }

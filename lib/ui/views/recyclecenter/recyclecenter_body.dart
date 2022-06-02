@@ -13,41 +13,33 @@ class RecycleCenterBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<RecycleCenterViewmodel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               StreamBuilder<List<RecycleCenter>>(
-                stream:  model.getRCList(),
-                builder: (context,snapshot){
-                  if(snapshot.hasError)
-                  {
-                    return Center(child: Text('Something went wrong'));
-                  }
-                  if(snapshot.hasData)
-                  {
-                    final recyclecenters=snapshot.data!;
-                    return ListView(
-                      children: recyclecenters.map(buildRC).toList(),
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                    );
-                  }
-                  else
-                  {
-                    return Center(child: Text('No data found'));
-                  }
-
-                }
-              )
-              
+                  stream: model.getRCList(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(child: Text('Something went wrong'));
+                    }
+                    if (snapshot.hasData) {
+                      final recyclecenters = snapshot.data!;
+                      return ListView(
+                        physics: NeverScrollableScrollPhysics(),
+                        children: recyclecenters.map(buildRC).toList(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                      );
+                    } else {
+                      return Center(child: Text('No data found'));
+                    }
+                  })
             ],
           ),
         ),
       ),
       viewModelBuilder: () => RecycleCenterViewmodel(),
-      
     );
-    
   }
 }
