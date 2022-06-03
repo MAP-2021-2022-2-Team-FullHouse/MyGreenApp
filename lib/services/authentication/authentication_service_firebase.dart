@@ -11,7 +11,7 @@ import 'authentication_service.dart';
 class AuthenticationServiceFirebase extends AuthenticationService {
   final _firebaseAuth = FirebaseAuthentication();
   FirebaseAuth get _auth => _firebaseAuth.auth;
-  final navigator = NavigationService();
+  final navigator = NavigatorService();
 
   @override
   Future signIn({required String email, required String password}) async {

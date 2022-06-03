@@ -12,8 +12,7 @@ import 'package:my_green_app/ui/views/recycleCenter/recycleCenter_viewmodel.dart
 import 'package:my_green_app/ui/views/register/register_viewmodel.dart';
 import 'package:my_green_app/ui/views/admin/admin_viewmodel.dart';
 import 'package:my_green_app/ui/views/reset/reset_viewmodel.dart';
-import 'package:my_green_app/services/dialog_service.dart';
-
+import 'package:stacked_services/stacked_services.dart';
 
 import '../services/resetpassword/reset_service.dart';
 import '../services/resetpassword/reset_service_firebase.dart';
@@ -31,9 +30,10 @@ void setupLocator() {
       () => ResetPasswordServiceFirebase());
   locator.registerLazySingleton<RecycleCenterService>(
       () => RecycleCenterServiceFirebase());
-  locator.registerLazySingleton<NavigationService>(() => NavigationService());
+  locator.registerLazySingleton<NavigatorService>(() => NavigatorService());
+  locator.registerLazySingleton(() => NavigationService());
+  locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton<UserRepository>(() => UserRepository());
-  locator.registerLazySingleton<DialogService>(() => DialogService());
 
   // Viewmodels
   locator.registerLazySingleton<HomeViewmodel>(() => HomeViewmodel());

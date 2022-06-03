@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
-import 'package:my_green_app/model/RecycleCenter.dart';
 import 'package:my_green_app/ui/views/admin/admin_screen.dart';
 import 'package:my_green_app/ui/views/home/home_screen.dart';
 import 'package:my_green_app/ui/views/login/login_screen.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screen.dart';
-import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screenstate.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {

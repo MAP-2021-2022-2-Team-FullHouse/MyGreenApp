@@ -13,7 +13,7 @@ class RecycleCenterBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<RecycleCenterViewmodel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -26,6 +26,7 @@ class RecycleCenterBody extends StatelessWidget {
                     if (snapshot.hasData) {
                       final recyclecenters = snapshot.data!;
                       return ListView(
+                        physics: NeverScrollableScrollPhysics(),
                         children: recyclecenters.map(buildRC).toList(),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,

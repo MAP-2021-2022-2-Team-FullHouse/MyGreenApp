@@ -3,6 +3,7 @@ import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:my_green_app/services/navigation_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import '../../../model/user.dart';
 import '../../../services/user/user_repository.dart';

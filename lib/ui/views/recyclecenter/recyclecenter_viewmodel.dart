@@ -39,22 +39,39 @@ class RecycleCenterViewmodel extends BaseViewModel {
   }
 
   Future deleteCenter(String email) async {
-    /* var dialogResponse = await _dialogService.showConfirmationDialog(
+    var dialogResponse = await _dialogService.showConfirmationDialog(
       title: 'Are you sure?',
       description: 'Do you really want to delete the recycle center?',
       confirmationTitle: 'Yes',
       cancelTitle: 'No',
     );
 
-    if (dialogResponse.confirmed) {
-      setBusy(true); */
-    await _recycleCenterService.deleteCenter(email);
-    /* if (result == true) {
-        _navigationService.navigateTo(homeRoute);
+    if (dialogResponse!.confirmed) {
+      setBusy(true);
+      dynamic result = await _recycleCenterService.deleteCenter(email);
+
+      if (result == true) {
+        result = null;
+        _dialogService.showDialog(
+          title: 'Successfull',
+          description: 'You have deleted the recycle center.',
+          buttonTitle: 'OK',
+          dialogPlatform: DialogPlatform.Material, // DialogPlatform.Material
+        );
+        setBusy(false);
+        //_navigationService.navigateTo(homeRoute);
       } else {
-        _navigationService.navigateTo(adminRoute);
-      } */
-    /* setBusy(false);
-    } */
+        result = "Error";
+        _dialogService.showDialog(
+          title: 'Failure',
+          description: 'Something went wrong. Please try again.',
+          buttonTitle: 'OK',
+          dialogPlatform: DialogPlatform.Material, // DialogPlatform.Material
+        );
+        setBusy(false);
+      }
+      //_navigationService.navigateTo(adminRoute);
+
+    }
   }
 }

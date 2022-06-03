@@ -9,7 +9,7 @@ import '../firebase.dart';
 import 'recycleCenter_service.dart';
 
 class RecycleCenterServiceFirebase extends RecycleCenterService {
-  final navigator = NavigationService();
+  final navigator = NavigatorService();
   final firestoreInstance = FirebaseFirestore.instance;
   CollectionReference _collectionRef =
       FirebaseFirestore.instance.collection('RecycleCenter');
@@ -18,6 +18,7 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
   Future deleteCenter(String docemail) async {
     try {
       String id = '';
+      String rcName = '';
       await FirebaseFirestore.instance
           .collection('RecycleCenter')
           .where('email', isEqualTo: docemail)
@@ -30,13 +31,9 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
       });
       print(id);
       await firestoreInstance.collection("RecycleCenter").doc(id).delete();
-
-      if (firestoreInstance.collection("RecycleCenter").doc(id).get() ==
-          null) {
-        return true;
-      } 
+      return true;
     } on FirebaseException catch (e) {
-      return e.code;
+      return e.code + ". Something went wrong. Please try again.";
     }
   }
 
@@ -53,7 +50,6 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
       return e.toString();
     }
   }
-
 
   @override
   Stream<List<RecycleCenter>> readRC() => FirebaseFirestore.instance

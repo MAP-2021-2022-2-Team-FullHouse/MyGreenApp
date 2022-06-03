@@ -12,6 +12,7 @@ Widget buildRC(RecycleCenter rc) => ListTile(
       leading: CircleAvatar(child: Text(rc.name)),
       title: Text(rc.name),
       subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(rc.email),
           Text(rc.phone),

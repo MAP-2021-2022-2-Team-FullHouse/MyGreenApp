@@ -11,18 +11,12 @@ class RecycleCenterScreenful extends StatefulWidget {
 
   @override
   State<RecycleCenterScreenful> createState() => RecycleCenterScreenfulState();
-
-  void onLogout(RecycleCenterViewmodel viewmodel) {}
 }
 
 class RecycleCenterScreenfulState extends State<RecycleCenterScreenful> {
   void onDelete(RecycleCenterViewmodel viewmodel, String email) async {
     //dynamic result;
-    try {
-      await viewmodel.deleteCenter(email);
-    } catch (e) {
-      showAlertDialog(context, "Invalid deletion.");
-    }
+    await viewmodel.deleteCenter(email);
   }
 
   @override

@@ -5,6 +5,7 @@ class RecycleCenter {
   late String name, address, phone, image, email;
   late double lat, lon;
   late String documentId;
+  late String password;
 
   RecycleCenter(
       {this.name = '',
@@ -14,7 +15,8 @@ class RecycleCenter {
       this.email = '',
       this.lat = -999,
       this.lon = -999,
-      this.documentId = ''});
+      this.documentId = '',
+      this.password=''});
 
   // RecycleCenter(name, address,phone,image, email, lat, lon){
   //     this.name=name;
@@ -46,5 +48,6 @@ class RecycleCenter {
       image: json['image'],
       email: json['email'],
       lat: json['lat'] as double,
-      lon: json['lon'] as double);
+      lon: json['lon'] as double,
+      password: json['password']);
 }
