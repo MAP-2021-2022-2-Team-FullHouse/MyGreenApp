@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:my_green_app/constants/routes_path.dart' as routes;
 
 class HomeNavigationBar extends StatefulWidget {
-  const HomeNavigationBar({Key? key}) : super(key: key);
+  final int pageNo;
+  const HomeNavigationBar({Key? key, required this.pageNo}) : super(key: key);
 
   @override
   State<HomeNavigationBar> createState() => _HomeNavigationBarState();
 }
 
 class _HomeNavigationBarState extends State<HomeNavigationBar> {
-  int currIndex = 2;
+  
   @override
   Widget build(BuildContext context) {
+    int currIndex;
+    currIndex=widget.pageNo;
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: currIndex,
-      onTap: (index) => setState(() => currIndex = index),
+      onTap: (index) => setState(() => {
+            currIndex = index,
+            if (currIndex == 0)
+              {Navigator.of(context).pushNamed(routes.user_rcRoute)}
+              else if(currIndex==2){
+                Navigator.of(context).pushNamed(routes.homeRoute)
+              }else if(currIndex==4){
+                Navigator.of(context).pushNamed(routes.profileRoute)
+              }
+          }),
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.map),

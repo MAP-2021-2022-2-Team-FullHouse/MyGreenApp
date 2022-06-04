@@ -21,7 +21,7 @@ class RecycleCenterScreenfulState extends State<RecycleCenterScreenful> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: RecycleCenterBody(this));
+    return Scaffold(body: RecycleCenterBody());
   }
 }
 

@@ -3,26 +3,28 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:my_green_app/services/recycleCenter/GPSService.dart';
+import 'package:my_green_app/services/recycleCenter/recycleCenter_service_firebase.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'dart:math';
 import 'package:my_green_app/model/RecycleCenter.dart';
+import 'package:my_green_app/ui/views/map/mapScreen.dart';
 
 class MapViewModel {
-  CollectionReference _collectionRef =
-      FirebaseFirestore.instance.collection('RecycleCenter');
-  List centerList = [];
-  List rcenterList = [];
-  final Set<Marker> markers = Set();
+  
+  
+  static List rcenterList = [];
+  static final Set<Marker> markers = Set();
 
-  Future getCenterList() async {
-    // Get docs from collection reference
-    QuerySnapshot querySnapshot = await _collectionRef.get();
+  // Future getCenterList() async {
+  //   // Get docs from collection reference
+  //   QuerySnapshot querySnapshot = await _collectionRef.get();
 
-    // Get data from docs and convert map to List
-    centerList = querySnapshot.docs.map((doc) => doc.data()).toList();
+  //   // Get data from docs and convert map to List
+  //   centerList = querySnapshot.docs.map((doc) => doc.data()).toList();
 
-    return centerList;
-  }
+  //   return centerList;
+  // }
 
   static double calculateDistance(lat1, lon1, lat2, lon2) {
     var p = 0.017453292519943295;
@@ -45,42 +47,49 @@ class MapViewModel {
     }
   }
 
-  Future fetchRecycleCenters() async {
-    rcenterList = await RecycleCenter.getCenterList();
+  static Future<void> currentCameraPosition() async{
+    
+    double lat=1.4823494048226642;
+    double lon=103.6470179124374;
+    MapScreenState.cam=CameraPosition(
+    target: LatLng(lat, lon),
+    zoom: 14.4746,
+  );
+    Position p= await GPSService.obtainLatLon();
+    lat=p.latitude;
+    lon=p.longitude;
+    
+    MapScreenState.cam= CameraPosition(
+    target: LatLng(lat, lon),
+    zoom: 14.4746,
+  );
+
+  }
+
+  static Future fetchRecycleCenters() async {
+    
+    rcenterList = await RecycleCenterServiceFirebase.getCenterList();
     if (rcenterList == null) {
       print('unable to retrieve');
     } else {
       for (int i = 0; i < rcenterList.length; i++) {
+        
         markers.add(new Marker(
           markerId: MarkerId(rcenterList[i]['name']),
           infoWindow: InfoWindow(title: rcenterList[i]['name']),
           icon: BitmapDescriptor.defaultMarker,
           position: LatLng(rcenterList[i]['lat'].toDouble(),
               rcenterList[i]['lon'].toDouble()),
+          
         ));
+        print(rcenterList[i]['lat'].toDouble());
       }
+      
     }
-    return markers;
+    
+
+    //return markers;
   }
 
-  Future fetchNearbyRecycleCenters() async {
-    var lat, lon;
-    var position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    //var lastPosition=await Geolocator.getLastKnownPosition();
-    lat = position.latitude;
-    lon = position.longitude;
-    dynamic r = await RecycleCenter.getCenterList();
-    List nearbyCenterList = r;
-    if (lat != null && lon != null) {
-      for (int i = 0; i < nearbyCenterList.length; i++) {
-        if (calculateDistance(lat, lon, nearbyCenterList[i]['lat'].toDouble(),
-                nearbyCenterList[i]['lat'].toDouble()) >
-            5) {
-          nearbyCenterList.remove(i);
-        }
-      }
-    }
-    return nearbyCenterList;
-  }
+
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_appbar.dart';
+import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_body.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_navbar.dart';
-import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screenstate.dart';
 
 class RecycleCenterScreen extends StatelessWidget {
   static Route route() =>
@@ -13,7 +13,7 @@ class RecycleCenterScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: const RecycleCenterAppBar(),
-        body: RecycleCenterScreenful(),
+        body: RecycleCenterBody(),
         //floatingActionButton: const AdminFloat(),
         bottomNavigationBar: RecycleCenterNavigationBar(),
       ),

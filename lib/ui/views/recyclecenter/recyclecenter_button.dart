@@ -16,16 +16,36 @@ class RCListButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Row(children: <Widget>[
-      FlatButton(
-        child: Text("View Details"),
-        onPressed: () {},
+      ElevatedButton.icon(
+        icon: Icon(
+          Icons.info_outline,
+          size: 18.0,
+        ),
+        label: Text('Details'),
+        onPressed: () async {
+          viewmodel.viewRC(context, model.email);
+        },
       ),
-      FlatButton(
-        child: Text("Edit"),
-        onPressed: () {},
+      SizedBox(
+        width: 8,
       ),
-      FlatButton(
-        child: Text("Delete"),
+      ElevatedButton.icon(
+        icon: Icon(
+          Icons.edit,
+          size: 18.0,
+        ),
+        label: Text('Edit'),
+        onPressed: () async {},
+      ),
+      SizedBox(
+        width: 8,
+      ),
+      ElevatedButton.icon(
+        icon: Icon(
+          Icons.delete,
+          size: 18.0,
+        ),
+        label: Text('Delete'),
         onPressed: () async {
           state.onDelete(viewmodel, model.email);
         },
