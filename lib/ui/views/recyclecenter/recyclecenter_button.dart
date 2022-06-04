@@ -15,7 +15,7 @@ class RCListButton extends StatelessWidget {
     return Container(
         child: Row(children: <Widget>[
       FlatButton(
-        child: Text("View Details"),
+        child: Text("View on Map"),
         onPressed: () {
           viewmodel.viewRC( context, model.email);
         },
