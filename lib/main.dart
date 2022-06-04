@@ -4,12 +4,15 @@ import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/services/navigation_service.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/app/router.dart' as router;
+import 'package:my_green_app/ui/setup_dialog_ui.dart';
+import 'package:stacked_services/stacked_services.dart';
 //import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   setupLocator();
+  setupDialogUi();
   // Keep splash screen until initialization has completed
   //FlutterNativeSplash.preserve(widgetsBinding: widgetBinding);
   // whenever your initialization is completed, remove the splash screen
@@ -31,7 +34,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightGreen,
       ),
-      navigatorKey: locator<NavigationService>().navigatorKey,
+      //navigatorKey: locator<NavigatorService>().navigatorKey,
+      navigatorKey: StackedService.navigatorKey,
       onGenerateRoute: router.generateRoute,
       initialRoute: routes.loginRoute,
     );

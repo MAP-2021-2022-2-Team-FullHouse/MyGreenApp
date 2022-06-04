@@ -15,16 +15,7 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: const HomeAppBar(),
         body: HomeScreenful(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => MapScreen(),
-            ));
-          },
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        ),
-        bottomNavigationBar: HomeNavigationBar(),
+        bottomNavigationBar: HomeNavigationBar(pageNo:2),
       ),
     );
   }

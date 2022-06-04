@@ -19,7 +19,7 @@ class UserRepository extends Repository {
   final AuthenticationService _authService = locator();
   final ResetPasswordService _resetPassService = locator();
   final RegistrationService _registrationService = locator();
-  final NavigationService navigator = NavigationService();
+  final NavigatorService navigator = NavigatorService();
 
   UserRepository() {
     _user = user.copyWith();

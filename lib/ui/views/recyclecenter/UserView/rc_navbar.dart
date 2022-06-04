@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 
-class HomeNavigationBar extends StatefulWidget {
-  final int pageNo;
-  const HomeNavigationBar({Key? key, required this.pageNo}) : super(key: key);
+
+class RCNavigationBar extends StatefulWidget {
+  const RCNavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<HomeNavigationBar> createState() => _HomeNavigationBarState();
+  State<RCNavigationBar> createState() => _RCNavigationBarState();
 }
 
-class _HomeNavigationBarState extends State<HomeNavigationBar> {
-  
+class _RCNavigationBarState extends State<RCNavigationBar> {
+  int currIndex = 2;
   @override
   Widget build(BuildContext context) {
-    int currIndex;
-    currIndex=widget.pageNo;
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: currIndex,
       onTap: (index) => setState(() => {
             currIndex = index,
-            if (currIndex == 0)
-              {Navigator.of(context).pushNamed(routes.user_rcRoute)}
-              else if(currIndex==2){
-                Navigator.of(context).pushNamed(routes.homeRoute)
-              }
+            if (currIndex == 2)
+              {Navigator.of(context).pushNamed(routes.adminRoute)}
           }),
       items: [
         BottomNavigationBarItem(
@@ -45,7 +40,7 @@ class _HomeNavigationBarState extends State<HomeNavigationBar> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Profile',
+          label: 'Admin',
         ),
       ],
     );

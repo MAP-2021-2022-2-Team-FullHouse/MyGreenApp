@@ -3,6 +3,7 @@ import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/services/navigation_service.dart';
 import 'package:my_green_app/services/registration/registration_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class RegisterViewmodel extends BaseViewModel {
   //late final UserRepository _userRepository = locator();

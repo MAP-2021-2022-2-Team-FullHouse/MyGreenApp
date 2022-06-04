@@ -5,6 +5,7 @@ import 'package:my_green_app/services/authentication/authentication_service.dart
 import 'package:my_green_app/services/navigation_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
+import 'package:stacked_services/stacked_services.dart';
 
 class HomeViewmodel extends BaseViewModel {
   final _authService = locator<AuthenticationService>();
