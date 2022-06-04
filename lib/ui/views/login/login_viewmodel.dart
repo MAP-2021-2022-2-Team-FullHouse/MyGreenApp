@@ -33,9 +33,6 @@ class LoginViewmodel extends BaseViewModel {
       } else if (role.toString() == "Admin") {
         print("admin page");
         _navigationService.navigateTo(routes.adminRoute);
-      } else if (role.toString() == "Recycle Center") {
-        print("admin page");
-        _navigationService.navigateTo(routes.adminRoute);
       } else {
         print("error");
         throw 'error occur in reading user role';

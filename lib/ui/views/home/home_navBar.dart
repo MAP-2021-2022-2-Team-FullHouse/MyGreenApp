@@ -24,6 +24,8 @@ class _HomeNavigationBarState extends State<HomeNavigationBar> {
               {Navigator.of(context).pushNamed(routes.user_rcRoute)}
               else if(currIndex==2){
                 Navigator.of(context).pushNamed(routes.homeRoute)
+              }else if(currIndex==4){
+                Navigator.of(context).pushNamed(routes.profileRoute)
               }
           }),
       items: [

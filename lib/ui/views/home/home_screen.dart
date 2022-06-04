@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: const HomeAppBar(),
         body: HomeScreenful(),
-        bottomNavigationBar: HomeNavigationBar(pageNo:2),
+        bottomNavigationBar: HomeNavigationBar(pageNo: 2),
       ),
     );
   }

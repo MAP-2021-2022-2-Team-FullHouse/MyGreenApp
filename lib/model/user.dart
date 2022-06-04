@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class User {
   String username;
   String password;
@@ -6,16 +9,19 @@ class User {
   String name;
   String email;
   String phone;
+  String address;
+  String image;
 
-  User({
-    this.username = '',
-    this.password = '',
-    this.uid = '',
-    this.role = '',
-    this.name = '',
-    this.email = '',
-    this.phone = '',
-  });
+  User(
+      {this.username = '',
+      this.password = '',
+      this.uid = '',
+      this.role = '',
+      this.name = '',
+      this.email = '',
+      this.phone = '',
+      this.address = '',
+      this.image = ''});
 
   User.fromJson(Map<String, dynamic>? json)
       : this(
@@ -26,7 +32,9 @@ class User {
             role: json?['role'],
             name: json?['name'],
             email: json?['email'],
-            phone: json?['phone']);
+            phone: json?['phone'],
+            address: json?['address'],
+            image: json?['image']);
 
   Map<String, dynamic> toJson() => {
         'username': username,
@@ -35,8 +43,12 @@ class User {
         'role': role,
         'name': name,
         'email': email,
-        'phone': phone
+        'phone': phone,
+        'address': address
       };
+
+  Map<String, dynamic> updateFirestore() =>
+      {'name': name, 'phone': phone, 'address': address, 'image': image};
 
   copyWith({username, password, uid, role, name, email, phone}) => User(
       username: username ?? this.email,

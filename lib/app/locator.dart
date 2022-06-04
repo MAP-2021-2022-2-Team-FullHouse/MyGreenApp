@@ -13,12 +13,10 @@ import 'package:my_green_app/ui/views/register/register_viewmodel.dart';
 import 'package:my_green_app/ui/views/admin/admin_viewmodel.dart';
 import 'package:my_green_app/ui/views/reset/reset_viewmodel.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:my_green_app/services/recycleCenter/GPSService.dart';
+
 import '../services/resetpassword/reset_service.dart';
 import '../services/resetpassword/reset_service_firebase.dart';
 import '../ui/views/home/home_viewmodel.dart';
-import 'package:my_green_app/ui/views/recyclecenter/CreateRecycleCenter/CreateRecycleCenter_ViewModel.dart';
-import 'package:my_green_app/ui/views/recyclecenter/UserView/rc_viewmodel.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -36,9 +34,6 @@ void setupLocator() {
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton<UserRepository>(() => UserRepository());
-  locator.registerLazySingleton<GPSService>(
-      () => GPSService());
-  
 
   // Viewmodels
   locator.registerLazySingleton<HomeViewmodel>(() => HomeViewmodel());
@@ -48,6 +43,4 @@ void setupLocator() {
   locator.registerLazySingleton<ResetViewmodel>(() => ResetViewmodel());
   locator.registerLazySingleton<RecycleCenterViewmodel>(
       () => RecycleCenterViewmodel());
-  locator.registerLazySingleton<CreateRecycleCenter_ViewModel>(()=>CreateRecycleCenter_ViewModel());
-   locator.registerLazySingleton<RCViewmodel>(()=>RCViewmodel());
 }

@@ -6,11 +6,11 @@ import 'package:my_green_app/model/RecycleCenter.dart';
 import 'package:my_green_app/services/navigation_service.dart';
 import 'package:my_green_app/services/recycleCenter/recycleCenter_service.dart';
 import 'package:my_green_app/services/user/user_repository.dart';
+import 'package:my_green_app/ui/views/recyclecenter/view/view_map.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
-import 'package:my_green_app/ui/views/recyclecenter/view/view_map.dart' as map;
 
 
 class RecycleCenterViewmodel extends BaseViewModel {
@@ -23,6 +23,7 @@ class RecycleCenterViewmodel extends BaseViewModel {
   static RecycleCenter recycleCenter= RecycleCenter();
   RecycleCenter get getRC=>recycleCenter;
   static bool viewAction=false;
+  bool get isViewAction=>viewAction;
 
   RecycleCenterViewmodel();
 
@@ -31,20 +32,25 @@ class RecycleCenterViewmodel extends BaseViewModel {
     return results;
   }
 
-  Future viewRC(context, String email)
+  Future viewRC( String email)
   async {
     recycleCenter=await _recycleCenterService.getRC(email);
     viewAction=true;
-    Navigator.of(context).pushNamed(routes.rcRoute);
+   
   }
 
-  void closeViewRC(context)
+  Image getImage()
+  {
+    return Image.asset("logo.png");
+  }
+
+  void closeViewRC()
   {
     recycleCenter=RecycleCenter();
     viewAction=false;
-    map.markers.clear();
-    Navigator.of(context).pushNamed(routes.rcRoute);
+    ViewMap.markers.clear();
   }
+
 
 
   Future deleteCenter(String email) async {
