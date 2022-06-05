@@ -2,39 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:my_green_app/model/RecycleCenter.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_rclist.dart';
-import 'package:my_green_app/ui/views/recyclecenter/view/view.dart';
-import 'package:my_green_app/ui/views/recyclecenter/view/view_map.dart' as map;
+import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screenstate.dart';
+import 'package:my_green_app/ui/views/recyclecenter/view/view_map.dart';
 import 'package:stacked/stacked.dart';
 import '../recyclecenter/recyclecenter_viewmodel.dart';
 import 'CreateRecycleCenter/CreateRecycleCenter_Screen.dart';
 
 
 class RecycleCenterBody extends StatefulWidget {
-  RecycleCenterBody({Key? key}) : super(key: key);
+  final RecycleCenterScreenfulState state;
+  RecycleCenterBody({required this.state});
 
   @override
   State<RecycleCenterBody> createState() => _RecycleCenterBodyState();
 }
 
 class _RecycleCenterBodyState extends State<RecycleCenterBody> {
-
-  @override
-  void initState() {
-    super.initState();
-    if(RecycleCenterViewmodel.viewAction==true) {
-      setState(() {
-      map.markers.add(Marker(
-        markerId: MarkerId(RecycleCenterViewmodel.recycleCenter.name),
-        position: LatLng(RecycleCenterViewmodel.recycleCenter.lat,RecycleCenterViewmodel.recycleCenter.lon),
-        infoWindow: InfoWindow(
-          title: RecycleCenterViewmodel.recycleCenter.name,
-          snippet: RecycleCenterViewmodel.recycleCenter.address,
-        ),
-        icon: BitmapDescriptor.defaultMarker,
-      ));
-    });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +78,7 @@ class _RecycleCenterBodyState extends State<RecycleCenterBody> {
               top: 0,
               left:0,
               child: Container(
-                child: getViewContainer(context,model, model.getRC)
+                child: widget.state.getViewContainer(context,model)
               ),
             ),
         ],

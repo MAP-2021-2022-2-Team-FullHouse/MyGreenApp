@@ -14,12 +14,11 @@ abstract class RecycleCenterService {
       required String email,
       required double lat,
       required double lon,
-      required String password
+      required String password});
 
-      });
-  
   Future<bool> isPhoneExist(String name);
   Future<bool> isImageExist(String name);
   Future<bool> isRecycleCenterNameExist(String name);
   Future getRC(String docemail);
+  Future<String> getImage(String pathname);
 }

@@ -209,7 +209,19 @@ return false;
     }
   }
 
-  
+  Future<String> getImage(String pathname) async
+  {
+    try {
+      final ref = FirebaseStorage.instance.ref().child(pathname);
+      String imageUrl = await ref.getDownloadURL();
+      print(imageUrl);
+      return imageUrl;
+    } catch (e) {
+      print("Error: $e");
+      return e.toString();
+    }
+  }
+
   static Future<UploadTask?> uploadFile(String destination, File file) async  {
     try {
       final ref = FirebaseStorage.instance.ref(destination);

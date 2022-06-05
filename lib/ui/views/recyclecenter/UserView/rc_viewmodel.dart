@@ -12,6 +12,8 @@ import 'package:stacked/stacked.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../../services/recycleCenter/recycleCenter_service_firebase.dart';
+
 class RCViewmodel extends BaseViewModel {
   /* StreamSubscription? _streamListener;
   bool get isListeningToStream => _streamListener != null; */
@@ -26,7 +28,11 @@ class RCViewmodel extends BaseViewModel {
       notifyListeners();
     }); */
   }
-
+ Future<String?> getImgUrl(String imgUrl) async {
+    RecycleCenterServiceFirebase rcService=new RecycleCenterServiceFirebase();
+    var result=await rcService.getImage(imgUrl);
+    return result;
+  }
   Stream<List<RecycleCenter>> getRCList() {
     var results = _recycleCenterService.readRC();
    

@@ -4,7 +4,9 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/services/navigation_service.dart';
 
 import '../../model/user.dart' as AppUser;
@@ -58,9 +60,17 @@ class AuthenticationServiceFirebase extends AuthenticationService {
     }
   }
 
+  static Future<String> getCurrentRole() async {
+    final String uid = FirebaseAuth.instance.currentUser!.uid;
+    final docUser = FirebaseFirestore.instance.collection('User').doc(uid);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data()).role;
+  }
+
   @override
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUser() {
     final String uid = FirebaseAuth.instance.currentUser!.uid;
+
     return FirebaseFirestore.instance.collection('User').doc(uid).snapshots();
   }
 
@@ -84,7 +94,8 @@ class AuthenticationServiceFirebase extends AuthenticationService {
     }
   }
 
-  static Future<String> getImage(String pathname) async {
+  @override
+  Future<String> getImage(String pathname) async {
     try {
       final ref = FirebaseStorage.instance.ref().child(pathname);
       String imageUrl = await ref.getDownloadURL();

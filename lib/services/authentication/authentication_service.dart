@@ -7,10 +7,11 @@ import '../../model/user.dart' as AppUser;
 abstract class AuthenticationService {
   Future signIn({required String email, required String password});
   Future<String> getRole(String userid);
-
+  Future<String> getImage(String pathname);
   Future signOut();
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUser();
   Future updateUser(AppUser.User user);
+  //Future<String> getCurrentRole();
   /* static Future<String> getImage(String pathname) async {
     try {
       final ref = FirebaseStorage.instance.ref().child(pathname);

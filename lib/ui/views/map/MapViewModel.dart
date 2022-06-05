@@ -11,8 +11,6 @@ import 'package:my_green_app/model/RecycleCenter.dart';
 import 'package:my_green_app/ui/views/map/mapScreen.dart';
 
 class MapViewModel {
-  
-  
   static List rcenterList = [];
   static final Set<Marker> markers = Set();
 
@@ -47,49 +45,44 @@ class MapViewModel {
     }
   }
 
-  static Future<void> currentCameraPosition() async{
-    
-    double lat=1.4823494048226642;
-    double lon=103.6470179124374;
-    MapScreenState.cam=CameraPosition(
-    target: LatLng(lat, lon),
-    zoom: 14.4746,
-  );
-    Position p= await GPSService.obtainLatLon();
-    lat=p.latitude;
-    lon=p.longitude;
-    
-    MapScreenState.cam= CameraPosition(
-    target: LatLng(lat, lon),
-    zoom: 14.4746,
-  );
+  static Future<void> currentCameraPosition() async {
+    //for testing purpose
+    double lat = 1.4823494048226642;
+    double lon = 103.6470179124374;
+    MapScreenState.cam = CameraPosition(
+      target: LatLng(lat, lon),
+      zoom: 14.4746,
+    );
 
+    //get realtime lat lon
+    Position p = await GPSService.obtainLatLon();
+    lat = p.latitude;
+    lon = p.longitude;
+
+    //create current camera position
+    MapScreenState.cam = CameraPosition(
+      target: LatLng(lat, lon),
+      zoom: 14.4746,
+    );
   }
 
   static Future fetchRecycleCenters() async {
-    
     rcenterList = await RecycleCenterServiceFirebase.getCenterList();
     if (rcenterList == null) {
       print('unable to retrieve');
     } else {
       for (int i = 0; i < rcenterList.length; i++) {
-        
         markers.add(new Marker(
           markerId: MarkerId(rcenterList[i]['name']),
           infoWindow: InfoWindow(title: rcenterList[i]['name']),
           icon: BitmapDescriptor.defaultMarker,
           position: LatLng(rcenterList[i]['lat'].toDouble(),
               rcenterList[i]['lon'].toDouble()),
-          
         ));
         print(rcenterList[i]['lat'].toDouble());
       }
-      
     }
-    
 
     //return markers;
   }
-
-
 }

@@ -26,4 +26,9 @@ class ProfileScreenState extends State<ProfileScreen> {
       bottomNavigationBar: ProfileNavigationBar(),
     );
   }
+
+  Future<String?> getImgUrl(String imgUrl) async {
+    ProfileViewmodel vm = new ProfileViewmodel();
+    return await vm.getImgUrl(imgUrl);
+  }
 }

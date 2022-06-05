@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:my_green_app/ui/views/profile/profile_screen.dart';
 import 'package:my_green_app/ui/views/profile/profile_viewmodel.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String imagePath;
   final bool isEdit;
+
   //final VoidCallback onClicked;
 
   const ProfileWidget({
@@ -20,7 +22,7 @@ class ProfileWidget extends StatelessWidget {
     final color = Theme.of(context).colorScheme.primary;
 
     return FutureBuilder(
-      future: ProfileViewmodel.getImgUrl(imagePath),
+      future: ProfileScreenState().getImgUrl(imagePath),
       builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
         bool error = snapshot.data == null;
         return Center(
