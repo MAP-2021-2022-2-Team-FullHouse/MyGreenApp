@@ -1,3 +1,3 @@
-export 'service_locator.dart';
-export 'routes.dart';
-export 'failures.dart';
+export 'router.dart';
+export 'locator.dart';
+//export 'routes.dart';

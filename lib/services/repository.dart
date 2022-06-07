@@ -1,8 +1,3 @@
-// @dart=2.9
-
-// Author: jumail@utm.my.
-// Date: Jan 2022
-
 import 'package:flutter/foundation.dart';
 
 // A repository is almost like a service but it can also store states.
@@ -12,11 +7,11 @@ abstract class Repository extends ChangeNotifier {
   bool _busy = false;
   get busy => _busy;
 
-  @override
+  /* @override
   Future<void> notifyListeners({AsyncCallback onNotify}) async {
     _busy = true;
     if (onNotify != null) await onNotify();
     _busy = false;
     super.notifyListeners();
-  }
+  } */
 }

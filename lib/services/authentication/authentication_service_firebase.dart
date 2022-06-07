@@ -1,16 +1,15 @@
-// @dart=2.9
-
 import 'dart:async';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
-import 'package:flutter/material.dart';
-import 'package:mygreenapp/app/app.dart';
-import 'package:mygreenapp/services/navigation_service.dart';
-import 'package:mygreenapp/ui/screen/home/home_screen.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:my_green_app/constants/routes_path.dart' as routes;
+import 'package:my_green_app/services/navigation_service.dart';
 
-import '../../model/user.dart'
-    as AppUser; // To resolve conflict with firebase 'User' class
+import '../../model/user.dart' as AppUser;
 
 import '../firebase.dart';
 import 'authentication_service.dart';
@@ -18,74 +17,111 @@ import 'authentication_service.dart';
 class AuthenticationServiceFirebase extends AuthenticationService {
   final _firebaseAuth = FirebaseAuthentication();
   FirebaseAuth get _auth => _firebaseAuth.auth;
-  final navigator = NavigationService();
+  final navigator = NavigatorService();
 
   @override
-  Future signIn(
-      {@required String email,
-      @required String password,
-      Function(AppUser.User) onSuccess,
-      Function(Exception) onError}) async {
+  Future signIn({required String email, required String password}) async {
     try {
       final UserCredential credential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      final User user = credential?.user;
+      User? user = credential.user;
 
-      if (user == null) return;
-      print(_auth.currentUser.uid);
-      onSuccess?.call(transformUserData(user));
+      if (user == null) {
+        return;
+      } else {
+        print(_auth.currentUser?.uid);
+        return user;
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password') {
-      } else if (e.code == 'user-not-found') {}
-      onError?.call(e);
+        return e.code;
+      } else if (e.code == 'user-not-found') {
+        return e.code;
+      }
+      return e.code;
     }
   }
-
-  Future<void> showErrorDialog(BuildContext context, String text) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Error'),
-            content: Text(text),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'),
-              )
-            ],
-          );
-        });
-  }
-
-  Future<void> signOut(
-      {Function onSuccess, Function(Exception) onError}) async {
-    try {
-      await _auth.signOut();
-      onSuccess?.call();
-    } on FirebaseAuthException catch (e) {
-      onError?.call(e);
-    }
-  }
-
-  // Commenting the following code out means, do not use auth stream from Firebase
-  // @override
-  // Stream get stream => _auth.authStateChanges();
 
   @override
-  AppUser.User transformUserData(dynamic userData) {
-    if (userData == null) return null;
+  Future<String> getRole(String userid) async {
+    final docUser = FirebaseFirestore.instance.collection('User').doc(userid);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data()).role;
+    //return role;
+  }
 
-    final User user = userData; // Firebase Auth User class
+  @override
+  Future signOut() async {
+    try {
+      await _auth.signOut();
+      return FirebaseAuth.instance.currentUser;
+    } on FirebaseAuthException catch (e) {
+      return e.code;
+    }
+  }
 
-    return AppUser.User(
-      // User data that are passed to Viewmodel is in the form our own User model class (not Firebase Auth user)
-      username: user.email,
-      email: user.email,
-      name: user.displayName,
-      uid: user.uid,
-    );
+  static Future<String> getCurrentRole() async {
+    final String uid = FirebaseAuth.instance.currentUser!.uid;
+    final docUser = FirebaseFirestore.instance.collection('User').doc(uid);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data()).role;
+  }
+
+  @override
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getUser() {
+    final String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    return FirebaseFirestore.instance.collection('User').doc(uid).snapshots();
+  }
+
+  static Future<UploadTask?> uploadFile(String destination, File file) async {
+    try {
+      final ref = FirebaseStorage.instance.ref(destination);
+      return ref.putFile(file);
+    } on FirebaseException catch (e) {
+      print("error");
+      return null;
+    }
+  }
+
+  static UploadTask? uploadBytes(String destination, Uint8List data) {
+    try {
+      final ref = FirebaseStorage.instance.ref(destination);
+
+      return ref.putData(data);
+    } on FirebaseException catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Future<String> getImage(String pathname) async {
+    try {
+      final ref = FirebaseStorage.instance.ref().child(pathname);
+      String imageUrl = await ref.getDownloadURL();
+      print(imageUrl);
+      return imageUrl;
+    } catch (e) {
+      print("Error: $e");
+      return e.toString();
+    }
+  }
+
+  @override
+  Future updateUser(AppUser.User user) async {
+    try {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      await FirebaseFirestore.instance
+          .collection('User')
+          .doc(uid)
+          .update(user.updateFirestore());
+      return true;
+    } catch (e) {
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
   }
 }
