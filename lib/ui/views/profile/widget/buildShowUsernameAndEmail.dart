@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/material.dart';
+import 'package:my_green_app/ui/views/profile/profile_screen.dart';
 import 'package:my_green_app/ui/views/profile/profile_viewmodel.dart'
     as profileviewmodel;
 import 'package:my_green_app/ui/views/profile/profile_viewmodel.dart';
 
 late final String imagePath;
 late final bool isEdit;
+ProfileScreenState state = ProfileScreenState();
 //late final VoidCallback onClicked;
 Widget buildName(DocumentSnapshot<Map<String, dynamic>> user) => Column(
       children: [
@@ -35,7 +37,7 @@ Widget buildName(DocumentSnapshot<Map<String, dynamic>> user) => Column(
 
 Widget futureBulder(String imgUrl) {
   return FutureBuilder(
-    future: ProfileViewmodel.getImgUrl(imgUrl),
+    future: state.getImgUrl(imgUrl),
     builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
       bool error = snapshot.data == null;
 //I use NetworkImage for demonstration purpose, use it whatever widget u want

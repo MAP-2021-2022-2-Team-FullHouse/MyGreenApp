@@ -10,23 +10,21 @@ class HomeNavigationBar extends StatefulWidget {
 }
 
 class _HomeNavigationBarState extends State<HomeNavigationBar> {
-  
   @override
   Widget build(BuildContext context) {
     int currIndex;
-    currIndex=widget.pageNo;
+    currIndex = widget.pageNo;
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: currIndex,
       onTap: (index) => setState(() => {
             currIndex = index,
             if (currIndex == 0)
-              {Navigator.of(context).pushNamed(routes.user_rcRoute)}
-              else if(currIndex==2){
-                Navigator.of(context).pushNamed(routes.homeRoute)
-              }else if(currIndex==4){
-                Navigator.of(context).pushNamed(routes.profileRoute)
-              }
+              {Navigator.of(context).pushReplacementNamed(routes.user_rcRoute)}
+            else if (currIndex == 2)
+              {Navigator.of(context).pushReplacementNamed(routes.homeRoute)}
+            else if (currIndex == 4)
+              {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
           }),
       items: [
         BottomNavigationBarItem(

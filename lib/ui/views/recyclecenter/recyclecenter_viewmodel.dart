@@ -39,9 +39,9 @@ class RecycleCenterViewmodel extends BaseViewModel {
    
   }
 
-  Image getImage()
-  {
-    return Image.asset("logo.png");
+  Future<String?> getImgUrl(String imgUrl) async {
+    var result=await _recycleCenterService.getImage(imgUrl);
+    return result;
   }
 
   void closeViewRC()

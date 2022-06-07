@@ -39,6 +39,11 @@ class RecycleCenterScreenfulState extends State<RecycleCenterScreenful> {
     }
   }
 
+  Future<String?> getImgUrl(String imgUrl) async {
+    RecycleCenterViewmodel viewmodel= new RecycleCenterViewmodel();
+    return await viewmodel.getImgUrl(imgUrl);
+  }
+
   void onView(RecycleCenterViewmodel viewmodel, String email)
   async {
     await viewmodel.viewRC(email);

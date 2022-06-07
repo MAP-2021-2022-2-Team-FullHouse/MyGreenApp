@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
@@ -33,12 +35,16 @@ class LoginViewmodel extends BaseViewModel {
       } else if (role.toString() == "Admin") {
         print("admin page");
         _navigationService.navigateTo(routes.adminRoute);
+      } else if (role.toString() == "Recycle Center") {
+        print("recycle center page");
+        _navigationService.navigateTo(routes.homeRoute);
       } else {
         print("error");
         throw 'error occur in reading user role';
       }
 
       return result;
+
       //_navigationService.navigateTo(routes.homeRoute);
     } else {
       return result;

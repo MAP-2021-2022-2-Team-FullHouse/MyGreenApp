@@ -1,11 +1,7 @@
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/constants/routes_path.dart';
 import 'package:my_green_app/model/user.dart';
@@ -21,6 +17,7 @@ class ProfileViewmodel extends BaseViewModel {
   late final _navigationService = locator<NavigationService>();
   static late File? file;
   static late String fileName;
+  static String currUserRole = "";
   late User _currUser = User();
   User get currUser => _currUser;
 
@@ -30,16 +27,18 @@ class ProfileViewmodel extends BaseViewModel {
     return _authService.getUser();
   }
 
-  static Future<String?> getImgUrl(String imgUrl) async {
-    try {
-      final ref = FirebaseStorage.instance.ref().child(imgUrl);
-      String imageUrl = await ref.getDownloadURL();
-      print(imageUrl);
-      return imageUrl;
-    } catch (e) {
-      print("Error: $e");
-      return null;
-    }
+  Future<String?> getImgUrl(String imgUrl) async {
+    var result = await _authService.getImage(imgUrl);
+    return result;
+  }
+
+  static Future getUserRole() async {
+    currUserRole = await AuthenticationServiceFirebase.getCurrentRole();
+  }
+
+  static String getRole() {
+    getUserRole();
+    return currUserRole;
   }
 
   Future updateUser(String name, String phone, String address) async {

@@ -18,7 +18,6 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
   final _firebaseAuth = FirebaseAuthentication();
   FirebaseAuth get _auth => _firebaseAuth.auth;
 
-
   @override
   Future deleteCenter(String docemail) async {
     try {
@@ -43,6 +42,28 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
   }
 
   @override
+  Future<RecycleCenter?> readCenter(String docemail) async {
+    String id = '';
+    await FirebaseFirestore.instance
+        .collection('RecycleCenter')
+        .where('email', isEqualTo: docemail)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        print(element.id);
+        id = element.id;
+      });
+    });
+    final rc = FirebaseFirestore.instance.collection("RecycleCenter").doc(id);
+    final snapshot = await rc.get();
+    if (snapshot.exists) {
+      return RecycleCenter.fromJson(snapshot.data()!);
+    } else {
+      return null;
+    }
+  }
+
+  @override
   Future getRCList() async {
     try {
       if (await RecycleCenter.getCenterList() != null) {
@@ -55,8 +76,8 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
       return e.toString();
     }
   }
-  
-   static Future getCenterList() async {
+
+  static Future getCenterList() async {
     // Get docs from collection reference
     CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection('RecycleCenter');
@@ -78,69 +99,70 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
           .toList());
 
   @override
-  Future getRC(String docemail) async
-  {
+  Future getRC(String docemail) async {
     var rc;
     await FirebaseFirestore.instance
-      .collection('RecycleCenter')
-      .where('email', isEqualTo: docemail)
-      .get()
-      .then((value) {
-        value.docs.forEach((element) {
-          print(element.id);
-          rc=element.data();
-        });
+        .collection('RecycleCenter')
+        .where('email', isEqualTo: docemail)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        print(element.id);
+        rc = element.data();
       });
+    });
     return RecycleCenter.fromJson(rc);
-    
   }
-  
-  Future<bool> isRecycleCenterNameExist(String name)async{
- CollectionReference _collectionRef =
+
+  Future<bool> isRecycleCenterNameExist(String name) async {
+    CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection('RecycleCenter');
     List centerList = [];
     QuerySnapshot querySnapshot = await _collectionRef.get();
 
     // Get data from docs and convert map to List
     centerList = querySnapshot.docs.map((doc) => doc.data()).toList();
-    for(int i=0; i<centerList.length; i++){
-      if(centerList[i]['name']==name){ 
+    for (int i = 0; i < centerList.length; i++) {
+      if (centerList[i]['name'] == name) {
         return true;
       }
     }
-return false;
+    return false;
   }
-  Future<bool> isImageExist(String name)async{
- CollectionReference _collectionRef =
+
+  Future<bool> isImageExist(String name) async {
+    CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection('RecycleCenter');
     List centerList = [];
     QuerySnapshot querySnapshot = await _collectionRef.get();
 
     // Get data from docs and convert map to List
     centerList = querySnapshot.docs.map((doc) => doc.data()).toList();
-    for(int i=0; i<centerList.length; i++){
-      if(centerList[i]['image']==name){ 
+    for (int i = 0; i < centerList.length; i++) {
+      if (centerList[i]['image'] == name) {
         return true;
       }
     }
-return false;
+    return false;
   }
-  Future<bool> isPhoneExist(String name)async{
- CollectionReference _collectionRef =
+
+  Future<bool> isPhoneExist(String name) async {
+    CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection('RecycleCenter');
     List centerList = [];
     QuerySnapshot querySnapshot = await _collectionRef.get();
 
     // Get data from docs and convert map to List
     centerList = querySnapshot.docs.map((doc) => doc.data()).toList();
-    for(int i=0; i<centerList.length; i++){
-      if(centerList[i]['phone']==name){ 
+    for (int i = 0; i < centerList.length; i++) {
+      if (centerList[i]['phone'] == name) {
         return true;
       }
     }
-return false;
+    return false;
   }
-@override
+
+  @override
   Future addRecycleCenter(
       {required String name,
       required String address,
@@ -149,20 +171,19 @@ return false;
       required String email,
       required double lat,
       required double lon,
-      required String password
-      }) async {
-      late bool n,i, p;
+      required String password}) async {
+    late bool n, i, p;
     try {
-      n=await isRecycleCenterNameExist(name);
-      i=await isImageExist(image);
-      p=await isPhoneExist(phone);
-      if(n==true){
+      n = await isRecycleCenterNameExist(name);
+      i = await isImageExist(image);
+      p = await isPhoneExist(phone);
+      if (n == true) {
         return "name duplicated";
       }
-      if(image!=null&&image!=""&&i==true){
+      if (image != null && image != "" && i == true) {
         return "image duplicated";
       }
-      if(p==true){
+      if (p == true) {
         return "phone duplicated";
       }
       final recycleCenterCredential =
@@ -170,21 +191,26 @@ return false;
         email: email,
         password: password,
       );
-      
 
-      firestoreInstance.collection("RecycleCenter").doc(recycleCenterCredential.user?.uid).set({
+      firestoreInstance
+          .collection("RecycleCenter")
+          .doc(recycleCenterCredential.user?.uid)
+          .set({
         "name": name,
-         "address": address,
+        "address": address,
         "phone": phone,
-        "image":image,
+        "image": image,
         "email": email,
-        "lat":lat,
-        "lon":lon,
-        "password":password
+        "lat": lat,
+        "lon": lon,
+        "password": password
       }).then((value) {
         print('Recycle Center added');
       });
-      firestoreInstance.collection("User").doc(recycleCenterCredential.user?.uid).set({
+      firestoreInstance
+          .collection("User")
+          .doc(recycleCenterCredential.user?.uid)
+          .set({
         "name": name,
         "phone": phone,
         "email": email,
@@ -194,8 +220,6 @@ return false;
         print('User added');
       });
       return "ok";
-
-
     } on FirebaseAuthException catch (e) {
       String error;
       if (e.code == 'weak-password') {
@@ -209,11 +233,152 @@ return false;
     }
   }
 
-  
-  static Future<UploadTask?> uploadFile(String destination, File file) async  {
+  @override
+  Future editRecycleCenter(
+      {required String oriemail,
+      required String name,
+      required String address,
+      required String phone,
+      required String image,
+      required String email,
+      required double lat,
+      required double lon,
+      required String password}) async {
+    late bool n, e, p;
+    try {
+      n = await isRecycleCenterNameUsedByOthers(name, oriemail);
+      e = await isEmailRegisteredByOthers(oriemail, email);
+      p = await isPhoneRegisteredByOthers(phone, oriemail);
+      if (n == true) {
+        return "name duplicated";
+      }
+      if (e == true) {
+        return "email registered by others";
+      }
+      if (p == true) {
+        return "phone duplicated";
+      }
+      String id = '';
+      await FirebaseFirestore.instance
+          .collection('RecycleCenter')
+          .where('email', isEqualTo: oriemail)
+          .get()
+          .then((value) {
+        value.docs.forEach((element) {
+          id = element.id;
+        });
+      });
+      firestoreInstance.collection("RecycleCenter").doc(id).update({
+        "name": name,
+        "address": address,
+        "phone": phone,
+        "image": image,
+        "email": email,
+        "lat": lat,
+        "lon": lon,
+        "password": password
+      }).then((value) {
+        print('Recycle Center edited');
+      });
+      firestoreInstance.collection("User").doc(id).update({
+        "name": name,
+        "phone": phone,
+        "email": email,
+        "address": address,
+        "role": "Recycle Center",
+      }).then((value) {
+        print('User edited');
+      });
+      return "ok";
+    } on FirebaseAuthException catch (e) {
+      String error;
+      if (e.code == 'weak-password') {
+        error = 'weak-password';
+      } /*else if (e.code == 'email-already-in-use') {
+        error = 'email-already-in-use';
+      }*/
+      else {
+        error = e.toString();
+      }
+      return error;
+    }
+  }
+
+  Future<bool> isRecycleCenterNameUsedByOthers(
+      String name, String email) async {
+    CollectionReference _collectionRef =
+        FirebaseFirestore.instance.collection('RecycleCenter');
+    List centerList = [];
+    QuerySnapshot querySnapshot = await _collectionRef.get();
+
+    // Get data from docs and convert map to List
+    centerList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    for (int i = 0; i < centerList.length; i++) {
+      if (centerList[i]['email'] == email) {
+        continue;
+      }
+      if (centerList[i]['name'] == name) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  Future<bool> isPhoneRegisteredByOthers(String phone, String email) async {
+    CollectionReference _collectionRef =
+        FirebaseFirestore.instance.collection('RecycleCenter');
+    List centerList = [];
+    QuerySnapshot querySnapshot = await _collectionRef.get();
+
+    // Get data from docs and convert map to List
+    centerList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    for (int i = 0; i < centerList.length; i++) {
+      if (centerList[i]['email'] == email) {
+        continue;
+      }
+      if (centerList[i]['phone'] == phone) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  Future<bool> isEmailRegisteredByOthers(
+      String oriemail, String newemail) async {
+    CollectionReference _collectionRef =
+        FirebaseFirestore.instance.collection('RecycleCenter');
+    List centerList = [];
+    QuerySnapshot querySnapshot = await _collectionRef.get();
+
+    // Get data from docs and convert map to List
+    centerList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    for (int i = 0; i < centerList.length; i++) {
+      if (centerList[i]['email'] == oriemail) {
+        continue;
+      }
+      if (centerList[i]['email'] == newemail) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  Future<String> getImage(String pathname) async {
+    try {
+      final ref = FirebaseStorage.instance.ref().child(pathname);
+      String imageUrl = await ref.getDownloadURL();
+      print(imageUrl);
+      return imageUrl;
+    } catch (e) {
+      print("Error: $e");
+      return e.toString();
+    }
+  }
+
+  static Future<UploadTask?> uploadFile(String destination, File file) async {
     try {
       final ref = FirebaseStorage.instance.ref(destination);
-      return  ref.putFile(file);
+      return ref.putFile(file);
     } on FirebaseException catch (e) {
       print("error");
       return null;
@@ -229,5 +394,4 @@ return false;
       return null;
     }
   }
-  
 }

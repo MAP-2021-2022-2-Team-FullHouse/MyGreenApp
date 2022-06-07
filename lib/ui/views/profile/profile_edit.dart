@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/profile/profile_edittextfields.dart';
+import 'package:my_green_app/ui/views/profile/profile_navbar.dart';
 import 'package:my_green_app/ui/views/profile/profile_screen.dart';
 import 'package:my_green_app/ui/views/profile/profile_uploadPic.dart';
 import 'package:my_green_app/ui/views/profile/profile_viewmodel.dart';
@@ -114,7 +115,8 @@ class EditProfile extends StatelessWidget {
                                           phoneField, addrsField,
                                           state: ProfileScreenState()),
                                     ],
-                                  )))))))),
+                                  )))))),
+              bottomNavigationBar: ProfileNavigationBar())),
       viewModelBuilder: () => ProfileViewmodel(),
     );
   }

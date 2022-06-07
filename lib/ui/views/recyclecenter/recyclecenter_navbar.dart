@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 
-
 class RecycleCenterNavigationBar extends StatefulWidget {
   const RecycleCenterNavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<RecycleCenterNavigationBar> createState() => _RecycleCenterNavigationBarState();
+  State<RecycleCenterNavigationBar> createState() =>
+      _RecycleCenterNavigationBarState();
 }
 
-class _RecycleCenterNavigationBarState extends State<RecycleCenterNavigationBar> {
+class _RecycleCenterNavigationBarState
+    extends State<RecycleCenterNavigationBar> {
   int currIndex = 1;
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,8 @@ class _RecycleCenterNavigationBarState extends State<RecycleCenterNavigationBar>
             currIndex = index,
             if (currIndex == 2)
               {Navigator.of(context).pushNamed(routes.adminRoute)}
+            else if (currIndex == 4)
+              {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
           }),
       items: [
         BottomNavigationBarItem(

@@ -10,6 +10,12 @@ import 'package:stacked_services/stacked_services.dart';
 class HomeViewmodel extends BaseViewModel {
   final _authService = locator<AuthenticationService>();
   final _navigationService = locator<NavigationService>();
+  final streamController = StreamController(
+    onPause: () => print('Paused'),
+    onResume: () => print('Resumed'),
+    onCancel: () => print('Cancelled'),
+    onListen: () => print('Listens'),
+  );
 
   HomeViewmodel() {}
 
