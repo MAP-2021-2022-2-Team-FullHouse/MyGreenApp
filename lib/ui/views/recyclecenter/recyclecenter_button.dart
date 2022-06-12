@@ -4,8 +4,8 @@ import 'package:my_green_app/ui/views/home/home_screenState.dart';
 import 'package:my_green_app/ui/views/home/home_viewmodel.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screenstate.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_viewmodel.dart';
+import 'EditRecycleCenter/EditRecycleCenter_Screen.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
-
 
 class RCListButton extends StatelessWidget {
   final RecycleCenterViewmodel viewmodel;
@@ -26,7 +26,8 @@ class RCListButton extends StatelessWidget {
         label: Text('Map'),
         onPressed: () async {
           state.onView(viewmodel, model.email);
-          Navigator.of(context).pushNamed(routes.rcRoute);        },
+          Navigator.of(context).pushNamed(routes.rcRoute);
+        },
       ),
       SizedBox(
         width: 8,
@@ -37,7 +38,12 @@ class RCListButton extends StatelessWidget {
           size: 18.0,
         ),
         label: Text('Edit'),
-        onPressed: () async {},
+        onPressed: () async {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                EditRecycleCenterScreen(docEmail: model.email),
+          ));
+        },
       ),
       SizedBox(
         width: 8,

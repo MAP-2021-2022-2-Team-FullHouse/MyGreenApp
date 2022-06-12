@@ -5,21 +5,21 @@ import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screenstate.da
 
 import '../../../model/RecycleCenter.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_viewmodel.dart'
-  as rcviewmodel;
+    as rcviewmodel;
 
- RecycleCenterScreenfulState state=new RecycleCenterScreenfulState();
+RecycleCenterScreenfulState state = new RecycleCenterScreenfulState();
 
 Widget buildRC(RecycleCenter rc) => ListTile(
       leading: CircleAvatar(
         child: FutureBuilder(
-      future: state.getImgUrl("files/"+rc.image),
-      builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
-        bool error = snapshot.data == null;
-        return Container(
-            child: buildImage(snapshot.data),
-          );
-      },
-    ),
+          future: state.getImgUrl("files/" + rc.image),
+          builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+            bool error = snapshot.data == null;
+            return Container(
+              child: buildImage(snapshot.data),
+            );
+          },
+        ),
       ),
       title: Text(rc.name),
       subtitle: Column(
@@ -38,17 +38,17 @@ Widget buildRC(RecycleCenter rc) => ListTile(
       ),
     );
 
-    Widget buildImage(String? data) {
-    return ClipOval(
-      child: Material(
-        color: Colors.transparent,
-        child: Ink.image(
-          image: NetworkImage(data.toString()),
-          fit: BoxFit.cover,
-          width: 128,
-          height: 128,
-          child: InkWell(/* onTap: onClicked */),
-        ),
+Widget buildImage(String? data) {
+  return ClipOval(
+    child: Material(
+      color: Colors.transparent,
+      child: Ink.image(
+        image: NetworkImage(data.toString()),
+        fit: BoxFit.cover,
+        width: 128,
+        height: 128,
+        child: InkWell(/* onTap: onClicked */),
       ),
-    );
-  }
+    ),
+  );
+}
