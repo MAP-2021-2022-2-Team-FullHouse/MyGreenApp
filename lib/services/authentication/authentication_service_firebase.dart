@@ -4,9 +4,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/services/navigation_service.dart';
 
 import '../../model/user.dart' as AppUser;

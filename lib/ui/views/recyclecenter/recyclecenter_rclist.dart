@@ -1,18 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_button.dart';
-import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screenstate.dart';
-
-import '../../../model/RecycleCenter.dart';
+import 'recyclecenter.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_viewmodel.dart'
     as rcviewmodel;
 
-RecycleCenterScreenfulState state = new RecycleCenterScreenfulState();
+RecycleCenterScreenfulState state = RecycleCenterScreenfulState();
 
 Widget buildRC(RecycleCenter rc) => ListTile(
       leading: CircleAvatar(
         child: FutureBuilder(
-          future: state.getImgUrl("files/" + rc.image),
+          future: state.getImgUrl("files/${rc.image}"),
           builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
             bool error = snapshot.data == null;
             return Container(
@@ -47,7 +43,7 @@ Widget buildImage(String? data) {
         fit: BoxFit.cover,
         width: 128,
         height: 128,
-        child: InkWell(/* onTap: onClicked */),
+        child: const InkWell(),
       ),
     ),
   );

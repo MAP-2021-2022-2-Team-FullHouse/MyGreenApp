@@ -1,17 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:my_green_app/app/locator.dart';
-import 'package:my_green_app/constants/routes_path.dart';
-import 'package:my_green_app/model/RecycleCenter.dart';
-import 'package:my_green_app/services/navigation_service.dart';
-import 'package:my_green_app/services/recycleCenter/recycleCenter_service.dart';
-import 'package:my_green_app/services/user/user_repository.dart';
-import 'package:my_green_app/ui/views/recyclecenter/view/view_map.dart';
+import 'recyclecenter.dart';
 import 'package:stacked/stacked.dart';
-import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:my_green_app/constants/routes_path.dart' as routes;
-
+import 'package:my_green_app/services/services.dart';
 
 class RecycleCenterViewmodel extends BaseViewModel {
   /* StreamSubscription? _streamListener;
@@ -20,10 +11,10 @@ class RecycleCenterViewmodel extends BaseViewModel {
   late final _recycleCenterService = locator<RecycleCenterService>();
   late List<RecycleCenter> _rc = <RecycleCenter>[];
   List<RecycleCenter> get rc => _rc;
-  static RecycleCenter recycleCenter= RecycleCenter();
-  RecycleCenter get getRC=>recycleCenter;
-  static bool viewAction=false;
-  bool get isViewAction=>viewAction;
+  static RecycleCenter recycleCenter = RecycleCenter();
+  RecycleCenter get getRC => recycleCenter;
+  static bool viewAction = false;
+  bool get isViewAction => viewAction;
 
   RecycleCenterViewmodel();
 
@@ -32,26 +23,21 @@ class RecycleCenterViewmodel extends BaseViewModel {
     return results;
   }
 
-  Future viewRC( String email)
-  async {
-    recycleCenter=await _recycleCenterService.getRC(email);
-    viewAction=true;
-   
+  Future viewRC(String email) async {
+    recycleCenter = await _recycleCenterService.getRC(email);
+    viewAction = true;
   }
 
   Future<String?> getImgUrl(String imgUrl) async {
-    var result=await _recycleCenterService.getImage(imgUrl);
+    var result = await _recycleCenterService.getImage(imgUrl);
     return result;
   }
 
-  void closeViewRC()
-  {
-    recycleCenter=RecycleCenter();
-    viewAction=false;
+  void closeViewRC() {
+    recycleCenter = RecycleCenter();
+    viewAction = false;
     ViewMap.markers.clear();
   }
-
-
 
   Future deleteCenter(String email) async {
     var dialogResponse = await _dialogService.showConfirmationDialog(
@@ -85,7 +71,6 @@ class RecycleCenterViewmodel extends BaseViewModel {
         );
         setBusy(false);
       }
-
     }
   }
 }
