@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/login/login_screen.dart';
-import 'package:my_green_app/ui/views/register/register_body.dart';
 import 'package:my_green_app/ui/views/register/register_screen.dart';
 import 'package:my_green_app/ui/views/admin/admin_screen.dart';
 import 'package:my_green_app/ui/views/reset/reset_screen.dart';

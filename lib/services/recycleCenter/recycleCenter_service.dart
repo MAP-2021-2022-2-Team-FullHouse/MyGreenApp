@@ -32,6 +32,7 @@ abstract class RecycleCenterService {
   Future<bool> isRecycleCenterNameUsedByOthers(String name, String email);
   Future<bool> isPhoneRegisteredByOthers(String phone, String email);
   Future<bool> isEmailRegisteredByOthers(String oriemail, String newemail);
+  Future<String> readImage(String email);
   Future getRC(String docemail);
   Future<String> getImage(String pathname);
 }

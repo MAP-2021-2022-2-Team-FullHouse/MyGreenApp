@@ -20,7 +20,7 @@ class EditRecycleCenter_ViewModel extends BaseViewModel {
 
   static late String lat;
   static late String lon;
-  static late File? file;
+  static late File? file = File('');
   static late String fileName;
   late String _errorMessage;
   String get errorMessage => _errorMessage;
@@ -31,6 +31,11 @@ class EditRecycleCenter_ViewModel extends BaseViewModel {
   Future<RecycleCenter?> readCenter(String docEmail) {
     var rc = _recycleCenterService.readCenter(docEmail);
     return rc;
+  }
+
+  Future<String> readImage(String docEmail) {
+    var image = _recycleCenterService.readImage(docEmail);
+    return image;
   }
 
   static Future<Position> getPosition() async {
@@ -87,7 +92,9 @@ class EditRecycleCenter_ViewModel extends BaseViewModel {
       lon: lon,
       password: password,
     );
-    uploadFile(image);
+    if (readImage(oriemail) != image) {
+      uploadFile(image);
+    }
     if (result != null) {
       if (result == 'email registered by others"') {
         return "Email is registered.";

@@ -245,6 +245,7 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
       required double lon,
       required String password}) async {
     late bool n, e, p;
+    print("yes");
     try {
       n = await isRecycleCenterNameUsedByOthers(name, oriemail);
       e = await isEmailRegisteredByOthers(oriemail, email);
@@ -268,6 +269,7 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
           id = element.id;
         });
       });
+      print("yes");
       firestoreInstance.collection("RecycleCenter").doc(id).update({
         "name": name,
         "address": address,
@@ -280,6 +282,7 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
       }).then((value) {
         print('Recycle Center edited');
       });
+      print("yes");
       firestoreInstance.collection("User").doc(id).update({
         "name": name,
         "phone": phone,
@@ -289,6 +292,7 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
       }).then((value) {
         print('User edited');
       });
+      print("yes");
       return "ok";
     } on FirebaseAuthException catch (e) {
       String error;
@@ -361,6 +365,28 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
       }
     }
     return false;
+  }
+
+  Future<String> readImage(String email) async {
+    String id = '';
+    String image = '';
+    await FirebaseFirestore.instance
+        .collection('RecycleCenter')
+        .where('email', isEqualTo: email)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        id = element.id;
+      });
+    });
+    final rc = FirebaseFirestore.instance.collection("RecycleCenter").doc(id);
+    final snapshot = await rc.get();
+    if (snapshot.exists) {
+      //return RecycleCenter.fromJson(snapshot.data()!);
+      return snapshot.get(image).toString();
+    } else {
+      return '';
+    }
   }
 
   Future<String> getImage(String pathname) async {
