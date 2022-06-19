@@ -10,12 +10,17 @@ class UserRewardAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      toolbarHeight: 100,
-      elevation: 10,
-      automaticallyImplyLeading: false, 
-      title: const Text("Reward"),
-      centerTitle: true,
-    );
+     return  AppBar(
+        elevation: 10,
+        toolbarHeight: 100,
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(
+          'Reward',
+          style: TextStyle(color: Colors.black.withOpacity(1.0)),
+        ),
+        // backgroundColor: Colors.green,
+      );
+    
   }
 }

@@ -22,7 +22,17 @@ class RCSearchBody extends StatelessWidget {
    
     return ViewModelBuilder<RCViewmodel>.reactive(
       builder: (context, model, child) => Scaffold(
-        appBar: const RCAppBar(),
+        appBar: AppBar(
+        elevation: 10,
+        toolbarHeight: 70,
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(
+          'Nearby Recycle Center',
+          style: TextStyle(color: Colors.black.withOpacity(1.0)),
+        ),
+        // backgroundColor: Colors.green,
+      ),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

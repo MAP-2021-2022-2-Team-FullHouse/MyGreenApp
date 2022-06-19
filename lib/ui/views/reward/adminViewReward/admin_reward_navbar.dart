@@ -29,7 +29,7 @@ class _AdminRewardNavigationBarState
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.card_giftcard),
-          label: 'Map',
+          label: 'Reward',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.recycling),

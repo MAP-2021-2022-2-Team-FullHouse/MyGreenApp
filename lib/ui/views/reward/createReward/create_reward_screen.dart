@@ -56,6 +56,7 @@ class CreateRewardScreenState extends State<CreateRewardScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        toolbarHeight: 70,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(

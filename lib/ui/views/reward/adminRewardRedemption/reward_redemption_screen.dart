@@ -15,13 +15,13 @@ class RewardRedemptionScreen extends StatelessWidget {
         appBar: AppBar(
       toolbarHeight:75,
       elevation: 10,
-      automaticallyImplyLeading: false, 
+     
       title: const Text("Manage Reward Redemption"),
       centerTitle: true,
     ),
         body: const RewardRedemptionBody(),
         //floatingActionButton: const AdminFloat(),
-        bottomNavigationBar: const AdminRewardNavigationBar(),
+       
       ),
     );
   }

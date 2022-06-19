@@ -26,8 +26,8 @@ class _AdminNavigationBarState extends State<AdminNavigationBar> {
           }),
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.map),
-          label: 'Map',
+          icon: Icon(Icons.redeem),
+          label: 'Reward',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.recycling),
