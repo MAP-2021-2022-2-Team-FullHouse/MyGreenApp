@@ -6,14 +6,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_green_app/model/RecycleCenter.dart';
 import 'package:my_green_app/services/navigation_service.dart';
-import '../../model/user.dart' as AppUser;
 import '../firebase.dart';
 import 'recycleCenter_service.dart';
 
 class RecycleCenterServiceFirebase extends RecycleCenterService {
   final navigator = NavigatorService();
   final firestoreInstance = FirebaseFirestore.instance;
-  CollectionReference _collectionRef =
+  final CollectionReference _collectionRef =
       FirebaseFirestore.instance.collection('RecycleCenter');
   final _firebaseAuth = FirebaseAuthentication();
   FirebaseAuth get _auth => _firebaseAuth.auth;
@@ -22,22 +21,21 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
   Future deleteCenter(String docemail) async {
     try {
       String id = '';
-      String rcName = '';
       await FirebaseFirestore.instance
           .collection('RecycleCenter')
           .where('email', isEqualTo: docemail)
           .get()
           .then((value) {
-        value.docs.forEach((element) {
-          print(element.id);
+        for (var element in value.docs) {
+          //print(element.id);
           id = element.id;
-        });
+        }
       });
-      print(id);
+      //print(id);
       await firestoreInstance.collection("RecycleCenter").doc(id).delete();
       return true;
     } on FirebaseException catch (e) {
-      return e.code + ". Something went wrong. Please try again.";
+      return "${e.code}. Something went wrong. Please try again.";
     }
   }
 
@@ -49,10 +47,10 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
         .where('email', isEqualTo: docemail)
         .get()
         .then((value) {
-      value.docs.forEach((element) {
-        print(element.id);
+      for (var element in value.docs) {
+        //print(element.id);
         id = element.id;
-      });
+      }
     });
     final rc = FirebaseFirestore.instance.collection("RecycleCenter").doc(id);
     final snapshot = await rc.get();
@@ -106,14 +104,15 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
         .where('email', isEqualTo: docemail)
         .get()
         .then((value) {
-      value.docs.forEach((element) {
-        print(element.id);
+      for (var element in value.docs) {
+        //print(element.id);
         rc = element.data();
-      });
+      }
     });
     return RecycleCenter.fromJson(rc);
   }
 
+  @override
   Future<bool> isRecycleCenterNameExist(String name) async {
     CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection('RecycleCenter');
@@ -130,6 +129,7 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
     return false;
   }
 
+  @override
   Future<bool> isImageExist(String name) async {
     CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection('RecycleCenter');
@@ -146,6 +146,7 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
     return false;
   }
 
+  @override
   Future<bool> isPhoneExist(String name) async {
     CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection('RecycleCenter');

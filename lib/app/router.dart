@@ -2,6 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/ui/views/admin/admin_screen.dart';
+import 'package:my_green_app/ui/views/appointment/CreateAppointment/CreateAppointment_Screen.dart';
+import 'package:my_green_app/ui/views/appointment/CreateAppointment/create_appointment_upload.dart';
+import 'package:my_green_app/ui/views/appointment/appointment_screen.dart';
+import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_screen.dart';
+import 'package:my_green_app/ui/views/appointment/rc_view_details/rc_appointment_view_screen.dart';
+import 'package:my_green_app/ui/views/appointment/view/appointment_view_screen.dart';
 import 'package:my_green_app/ui/views/home/home_screen.dart';
 import 'package:my_green_app/ui/views/login/login_screen.dart';
 import 'package:my_green_app/ui/views/profile/profile_screen.dart';
@@ -24,8 +30,24 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case routes.user_rcRoute:
       return MaterialPageRoute(builder: (context) => RCScreen());
     case routes.createRecycleCenterRoute:
-      return MaterialPageRoute(builder: (context) => CreateRecycleCenterScreen());
-    
+      return MaterialPageRoute(
+          builder: (context) => CreateRecycleCenterScreen());
+    case routes.appointmentRoute:
+      return MaterialPageRoute(builder: (context) => AppointmentScreen());
+    case routes.createAppointmentRoute:
+      return MaterialPageRoute(builder: (context) => CreateAppointmentScreen());
+    case routes.addImageRoute:
+      return MaterialPageRoute(builder: (context) => AddImage());
+    case routes.appointmentDetailsRoute:
+      return MaterialPageRoute(
+          builder: (context) => AppointmentDetailsScreen());
+    case routes.recycleCenterAppointmentRoute:
+      return MaterialPageRoute(
+          builder: (context) => RecycleCenterAppointmentScreen());
+    case routes.rcAppointmentDetailsRoute:
+      return MaterialPageRoute(
+          builder: (context) => RecycleCenterAppointmentDetailsScreen());
+
     default:
       return MaterialPageRoute(
         builder: (context) => Scaffold(

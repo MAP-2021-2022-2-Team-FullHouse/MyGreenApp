@@ -43,6 +43,18 @@ class AuthenticationServiceFirebase extends AuthenticationService {
   }
 
   @override
+  String? getUID() {
+    return _auth.currentUser!.email;
+  }
+
+  @override
+  Future<String> getEmail(String uid) async {
+    final docUser = FirebaseFirestore.instance.collection('User').doc(uid);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data()).email;
+  }
+
+  @override
   Future<String> getRole(String userid) async {
     final docUser = FirebaseFirestore.instance.collection('User').doc(userid);
     final snapshot = await docUser.get();

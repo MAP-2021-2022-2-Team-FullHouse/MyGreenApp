@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:my_green_app/app/routes.dart';
-import 'package:my_green_app/ui/views/login/widget/login_textfield.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screen.dart';
-import 'package:my_green_app/constants/routes_path.dart' as routes;
-import 'package:my_green_app/app/router.dart' as router;
 
-import '../../admin/admin_screen.dart';
-import '../../home/home_screen.dart';
 import 'CreateRecycleCenter_ViewModel.dart';
 import 'CreateRecycleCenter_body.dart';
+
 class CreateRecycleCenterScreen extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => CreateRecycleCenterScreen());
+  static Route route() =>
+      MaterialPageRoute(builder: (_) => CreateRecycleCenterScreen());
 
   @override
-  CreateRecycleCenterScreenState createState() => CreateRecycleCenterScreenState();
+  CreateRecycleCenterScreenState createState() =>
+      CreateRecycleCenterScreenState();
 }
 
 class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
@@ -23,54 +19,47 @@ class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
   final emailField = TextEditingController();
   final phoneField = TextEditingController();
   final addrsField = TextEditingController();
-  var latField=TextEditingController();
-  var lonField=TextEditingController();
-  var fileField=TextEditingController();
+  var latField = TextEditingController();
+  var lonField = TextEditingController();
+  var fileField = TextEditingController();
   bool _showPassword = false;
   String? filename;
   CreateRecycleCenter_ViewModel viewmodel = CreateRecycleCenter_ViewModel();
   get showPassword => _showPassword;
   set showPassword(value) => setState(() => _showPassword = value);
 
-
- 
-   void addRecycleCenter() async {
+  void addRecycleCenter() async {
     dynamic result;
     try {
       result = await viewmodel.addRecycleCenter(
-          name: nameController.text,
-          address: addrsField.text,
-          phone: phoneField.text,
-          image:fileField.text,
-          email: emailField.text,
-          lat:double.parse(latField.text),
-          lon:double.parse(lonField.text),
-         
-          password: passwordController.text,
-          );
-          print(result);
+        name: nameController.text,
+        address: addrsField.text,
+        phone: phoneField.text,
+        image: fileField.text,
+        email: emailField.text,
+        lat: double.parse(latField.text),
+        lon: double.parse(lonField.text),
+        password: passwordController.text,
+      );
+      print(result);
       if (result != null) {
         if (result == 'Email is registered.') {
-         
           showAlertDialog(context, "Email is registered.");
         } else if (result == "weak-password") {
           showAlertDialog(context, "Weak password");
         } else if (result == 'invalid-email') {
           showAlertDialog(context, "Invalid email address.");
-        }else if(result=="Name duplicated"){
-          showAlertDialog(context, "This recycle center name is already registered.");
-        }else if(result=="Image duplicated"){
+        } else if (result == "Name duplicated") {
+          showAlertDialog(
+              context, "This recycle center name is already registered.");
+        } else if (result == "Image duplicated") {
           showAlertDialog(context, "This image is already uploaded.");
-        }
-        else if(result=="Phone duplicated"){
+        } else if (result == "Phone duplicated") {
           showAlertDialog(context, "This phone is already registered.");
-        }
-        else {
+        } else {
           showConfirmDialog(context, "Created Successfully!");
-          
         }
       }
-     
     } catch (e) {
       showAlertDialog(context, "Form is not completely filled.");
     }
@@ -86,19 +75,19 @@ class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
           'Nearest Recycle center',
           style: TextStyle(color: Colors.black.withOpacity(1.0)),
         ),
-        
       ),
-      body:CreateRecycleCenterBody(this),
+      body: CreateRecycleCenterBody(this),
     );
   }
-  showConfirmDialog(BuildContext context, String text){
+
+  showConfirmDialog(BuildContext context, String text) {
     Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
         //Navigator.pushNamed(context, Routes.homeRoute);
         Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => RecycleCenterScreen(),
-            ));
+          builder: (context) => RecycleCenterScreen(),
+        ));
       },
     );
 
@@ -119,6 +108,7 @@ class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
       },
     );
   }
+
   showAlertDialog(BuildContext context, String text) {
     // set up the button
     Widget okButton = TextButton(

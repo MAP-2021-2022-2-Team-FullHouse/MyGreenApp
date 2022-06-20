@@ -1,2 +1,9 @@
 export 'initializer/service_initializer.dart';
 export 'initializer/service_initializer_firebase.dart';
+export 'authentication/authentication_service.dart';
+export 'authentication/authentication_service_firebase.dart';
+export 'recycleCenter/GPSService.dart';
+export 'recycleCenter/recycleCenter_service.dart';
+export 'recycleCenter/recycleCenter_service_firebase.dart';
+export 'registration/registration_service.dart';
+export 'registration/registration_service_firebase.dart';

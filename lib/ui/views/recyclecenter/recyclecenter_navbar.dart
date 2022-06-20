@@ -24,7 +24,7 @@ class _RecycleCenterNavigationBarState
             else if (currIndex == 4)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
           }),
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.map),
           label: 'Map',

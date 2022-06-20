@@ -37,7 +37,7 @@ class EditProfile extends StatelessWidget {
                                   Color.fromRGBO(211, 250, 214, 100)
                                 ]),
                           ),
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 50),
                           child: Center(
                               child: Container(
@@ -51,16 +51,16 @@ class EditProfile extends StatelessWidget {
                                         color: Colors.grey.withOpacity(0.5),
                                         spreadRadius: 5,
                                         blurRadius: 7,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             0, 3), // changes position of shadow
                                       ),
                                     ],
                                   ),
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 15, vertical: 15),
                                   child: ListView(
                                     children: [
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5.0,
                                       ),
                                       const Text(
@@ -83,7 +83,7 @@ class EditProfile extends StatelessWidget {
                                         stream: model.getUserData(),
                                         builder: (ctx, streamSnapshot) {
                                           if (streamSnapshot.hasError) {
-                                            return Center(
+                                            return const Center(
                                                 child: Text(
                                                     'Something went wrong'));
                                           }
@@ -93,7 +93,7 @@ class EditProfile extends StatelessWidget {
                                                 ProfileWidget(
                                                     imagePath: streamSnapshot
                                                         .data!['image']),
-                                                SizedBox(height: 5),
+                                                const SizedBox(height: 5),
                                                 ProfileUploadPicture(
                                                     state:
                                                         ProfileScreenState()),
@@ -102,11 +102,11 @@ class EditProfile extends StatelessWidget {
                                                 ...buildProfileTextFields(
                                                     ProfileScreenState(),
                                                     streamSnapshot.data!),
-                                                SizedBox(height: 5),
+                                                const SizedBox(height: 5),
                                               ],
                                             );
                                           } else {
-                                            return Center(
+                                            return const Center(
                                                 child: Text('No data found.'));
                                           }
                                         },
@@ -116,7 +116,7 @@ class EditProfile extends StatelessWidget {
                                           state: ProfileScreenState()),
                                     ],
                                   )))))),
-              bottomNavigationBar: ProfileNavigationBar())),
+              bottomNavigationBar: const ProfileNavigationBar())),
       viewModelBuilder: () => ProfileViewmodel(),
     );
   }

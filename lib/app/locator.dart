@@ -1,12 +1,10 @@
 import 'package:get_it/get_it.dart';
-import 'package:my_green_app/services/authentication/authentication_service.dart';
-import 'package:my_green_app/services/authentication/authentication_service_firebase.dart';
+import 'package:my_green_app/services/appointment/appointment_service.dart';
+import 'package:my_green_app/services/appointment/appointment_service_firebase.dart';
 import 'package:my_green_app/services/navigation_service.dart';
-import 'package:my_green_app/services/recycleCenter/recycleCenter_service.dart';
-import 'package:my_green_app/services/recycleCenter/recycleCenter_service_firebase.dart';
-import 'package:my_green_app/services/registration/registration_service.dart';
-import 'package:my_green_app/services/registration/registration_service_firebase.dart';
 import 'package:my_green_app/services/user/user_repository.dart';
+import 'package:my_green_app/ui/views/appointment/CreateAppointment/CreateAppointment_ViewModel.dart';
+import 'package:my_green_app/ui/views/appointment/appointment_viewmodel.dart';
 import 'package:my_green_app/ui/views/login/login_viewmodel.dart';
 import 'package:my_green_app/ui/views/recycleCenter/recycleCenter_viewmodel.dart';
 import 'package:my_green_app/ui/views/register/register_viewmodel.dart';
@@ -17,6 +15,7 @@ import 'package:stacked_services/stacked_services.dart';
 import '../services/resetpassword/reset_service.dart';
 import '../services/resetpassword/reset_service_firebase.dart';
 import '../ui/views/home/home_viewmodel.dart';
+import '../services/services.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -30,6 +29,8 @@ void setupLocator() {
       () => ResetPasswordServiceFirebase());
   locator.registerLazySingleton<RecycleCenterService>(
       () => RecycleCenterServiceFirebase());
+  locator.registerLazySingleton<AppointmentService>(
+      () => AppointmentServiceFirebase());
   locator.registerLazySingleton<NavigatorService>(() => NavigatorService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
@@ -43,4 +44,8 @@ void setupLocator() {
   locator.registerLazySingleton<ResetViewmodel>(() => ResetViewmodel());
   locator.registerLazySingleton<RecycleCenterViewmodel>(
       () => RecycleCenterViewmodel());
+  locator.registerLazySingleton<AppointmentViewmodel>(
+      () => AppointmentViewmodel());
+  locator.registerLazySingleton<CreateAppointment_ViewModel>(
+      () => CreateAppointment_ViewModel());
 }

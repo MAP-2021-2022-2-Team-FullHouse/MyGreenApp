@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
+import 'package:my_green_app/services/authentication/authentication_service_firebase.dart';
 import 'package:my_green_app/services/navigation_service.dart';
+import 'package:my_green_app/ui/views/login/login_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:stacked_services/stacked_services.dart';
@@ -16,6 +18,8 @@ class HomeViewmodel extends BaseViewModel {
     onCancel: () => print('Cancelled'),
     onListen: () => print('Listens'),
   );
+  static String role = '';
+  static String currUserRole = '';
 
   HomeViewmodel() {}
 
@@ -26,5 +30,18 @@ class HomeViewmodel extends BaseViewModel {
     } else {
       return result;
     }
+  }
+
+  String getRole() {
+    return LoginViewmodel.currRole;
+  }
+
+  static Future getUserRole() async {
+    currUserRole = await AuthenticationServiceFirebase.getCurrentRole();
+  }
+
+  static String getCurrentRole() {
+    getUserRole();
+    return currUserRole;
   }
 }
