@@ -14,6 +14,7 @@ class LoginViewmodel extends BaseViewModel {
   late final UserRepository _userRepository = locator<UserRepository>();
   final _navigationService = locator<NavigationService>();
   final _authService = locator<AuthenticationService>();
+  static String currRole = '';
 
   User get user => _userRepository.user.copyWith();
   String? _errorMessage;
@@ -27,6 +28,7 @@ class LoginViewmodel extends BaseViewModel {
 
       print(result.uid);
       String role = await _authService.getRole(result.uid);
+      currRole = role;
 
       print(role.toString());
       if (role.toString() == "user") {
@@ -37,7 +39,7 @@ class LoginViewmodel extends BaseViewModel {
         _navigationService.navigateTo(routes.adminRoute);
       } else if (role.toString() == "Recycle Center") {
         print("recycle center page");
-        _navigationService.navigateTo(routes.homeRoute);
+        _navigationService.navigateTo(routes.rcHomeRoute);
       } else {
         print("error");
         throw 'error occur in reading user role';

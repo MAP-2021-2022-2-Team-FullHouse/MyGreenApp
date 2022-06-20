@@ -21,11 +21,13 @@ class _AdminNavigationBarState extends State<AdminNavigationBar> {
               {Navigator.of(context).pushNamed(routes.rcRoute)}
             else if (currIndex == 4)
               {Navigator.of(context).pushNamed(routes.profileRoute)}
+              else if(currIndex==0)
+              {Navigator.of(context).pushNamed(routes.adminRewardRoute)}
           }),
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.map),
-          label: 'Map',
+          icon: Icon(Icons.redeem),
+          label: 'Reward',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.recycling),

@@ -19,6 +19,11 @@ class AuthenticationServiceFirebase extends AuthenticationService {
   FirebaseAuth get _auth => _firebaseAuth.auth;
   final navigator = NavigatorService();
 
+   @override
+  String? getUID() {
+    return _auth.currentUser!.email;
+  }
+
   @override
   Future signIn({required String email, required String password}) async {
     try {
@@ -51,6 +56,14 @@ class AuthenticationServiceFirebase extends AuthenticationService {
   }
 
   @override
+  Future readUser(String docID) async {
+    final docUser = FirebaseFirestore.instance.collection('User').doc(docID);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data());
+
+  }
+
+  @override
   Future signOut() async {
     try {
       await _auth.signOut();
@@ -65,6 +78,13 @@ class AuthenticationServiceFirebase extends AuthenticationService {
     final docUser = FirebaseFirestore.instance.collection('User').doc(uid);
     final snapshot = await docUser.get();
     return AppUser.User.fromJson(snapshot.data()).role;
+  }
+
+  static Future<String> getCurrentEmail() async {
+    final String uid = FirebaseAuth.instance.currentUser!.uid;
+    final docUser = FirebaseFirestore.instance.collection('User').doc(uid);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data()).email;
   }
 
   @override
