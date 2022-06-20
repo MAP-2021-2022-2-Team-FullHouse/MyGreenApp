@@ -78,15 +78,6 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
     }
   }
 
-  /*static Future<UploadTask?> uploadFile(String destination, File file) async {
-    try {
-      final ref = FirebaseStorage.instance.ref(destination);
-      return ref.putFile(file);
-    } on FirebaseException catch (e) {
-      return null;
-    }
-  }*/
-
   @override
   Stream<List<RecyclingInfo>> readRecyclingInfoList() =>
       FirebaseFirestore.instance.collection('RecyclingInfo').snapshots().map(

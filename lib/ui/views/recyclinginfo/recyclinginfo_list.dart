@@ -25,7 +25,8 @@ Widget buildRecyclingInfo(RecyclingInfo recyclingInfo) => ListTile(
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(DateFormat('yyyy-MM-dd').format(recyclingInfo.createdDate)),
+          Text(DateFormat('yyyy-MM-dd')
+              .format(recyclingInfo.createdDate.toDate())),
           Container(child: Row()),
           RecyclingInfoListButton(
             viewmodel: rlviewmodel.RecyclingInfoViewmodel(),

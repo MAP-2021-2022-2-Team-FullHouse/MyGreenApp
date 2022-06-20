@@ -22,7 +22,7 @@ List<Widget> buildRecyclingInfo(
         },
       ),
       Text(
-        DateFormat('yyyy-MM-dd').format(rl.createdDate),
+        DateFormat('yyyy-MM-dd').format(rl.createdDate.toDate()),
         textAlign: TextAlign.left,
       ),
       const SizedBox(

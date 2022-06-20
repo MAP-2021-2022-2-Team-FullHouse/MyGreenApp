@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RecyclingInfo {
   late String infoId, title, content, image;
-  late DateTime createdDate;
+  late Timestamp createdDate;
 
   RecyclingInfo({
     this.infoId = '',
@@ -10,8 +10,8 @@ class RecyclingInfo {
     this.content = '',
     this.image = '',
     //this.createdDate = DateTime.utc(2022, 1, 9),
-    DateTime? creationDate,
-  }) : createdDate = creationDate ?? DateTime.now();
+    Timestamp? creationDate,
+  }) : createdDate = creationDate ?? Timestamp.now();
 
   static Future getRecyclingInfoList() async {
     // Get docs from collection reference
@@ -31,5 +31,10 @@ class RecyclingInfo {
       title: json['title'],
       content: json['content'],
       image: json['image'],
-      creationDate: json['createdDate'] as DateTime);
+      creationDate: json['createdDate'] as Timestamp);
+  /*json['createdTime'] == null
+          ? null
+          : const CustomDateTimeConverter()
+              .fromJson(json['createdTime'] as String)*/
+  //json['createdDate'] as DateTime);
 }
