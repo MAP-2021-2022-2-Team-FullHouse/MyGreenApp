@@ -52,7 +52,7 @@ class ViewRecyclingInfoBody extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 5.0,
                       ),
                       FutureBuilder<RecyclingInfo?>(
@@ -70,9 +70,7 @@ class ViewRecyclingInfoBody extends StatelessWidget {
                               return Center(child: Text('No data found'));
                             }
                           }),
-                      SizedBox(
-                        height: 20.0,
-                      ),
+                      const SizedBox(height: 20.0,),
                     ],
                   ),
                 )

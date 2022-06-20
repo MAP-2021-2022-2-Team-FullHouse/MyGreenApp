@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/create_recyclinginfo/widget/create_multilinetextfield.dart';
 import 'package:stacked/stacked.dart';
@@ -85,7 +83,7 @@ class CreateRecyclingInfoBody extends StatelessWidget {
                       Text(
                         "Title",
                         style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 15),
+                            fontWeight: FontWeight.bold, fontSize: 15),
                         textAlign: TextAlign.left,
                       ),
                       CreateTextField(
