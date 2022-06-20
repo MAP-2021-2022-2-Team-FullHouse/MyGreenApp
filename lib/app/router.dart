@@ -9,6 +9,7 @@ import 'package:my_green_app/ui/views/recyclecenter/CreateRecycleCenter/create_r
 import 'package:my_green_app/ui/views/recyclecenter/UserView/rc_screen.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screen.dart';
 
+import '../ui/views/home/rc_home_screen.dart';
 import '../ui/views/reward/adminViewReward/admin_reward_screen.dart';
 import '../ui/views/reward/createReward/create_reward_screen.dart';
 
@@ -32,6 +33,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => CreateRewardScreen());
        case routes.adminRewardRoute:
       return MaterialPageRoute(builder: (context) => AdminRewardScreen());
+      case routes.rcHomeRoute:
+      return MaterialPageRoute(builder: (context) => RCHomeScreen());
     
     default:
       return MaterialPageRoute(

@@ -99,6 +99,7 @@ HomeViewmodel vm=HomeViewmodel();
                                   blurRadius: 5)
                             ],
                           ),),
+                          
                   ]
                 ),
               )
@@ -108,17 +109,18 @@ HomeViewmodel vm=HomeViewmodel();
             return const Center(child: Text('No data found'));
           }
         }),
-          FutureBuilder(
-            future: readUser(),
-            initialData: "Hi User",
-            builder: (BuildContext context, AsyncSnapshot<String> text) {
-              return SingleChildScrollView(
-                child: Text(
-                  text.data!,
-                ),
-              );
-            },
-          ),
+        SizedBox(height:5),
+          // FutureBuilder(
+          //   future: readUser(),
+          //   initialData: "Hi User",
+          //   builder: (BuildContext context, AsyncSnapshot<String> text) {
+          //     return SingleChildScrollView(
+          //       child: Text(
+          //         text.data!,
+          //       ),
+          //     );
+          //   },
+          // ),
           
                      
                       
