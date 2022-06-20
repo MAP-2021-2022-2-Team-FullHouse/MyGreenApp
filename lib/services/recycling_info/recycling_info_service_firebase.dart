@@ -15,31 +15,10 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
       {required String title,
       required String content,
       required String image,
-      //required String createdDate,
       File? file}) async {
-    //String id = ' ';
-    //String id = firestoreInstance.collection("RecyclingInfo").id;
     final recyclingInfo =
         FirebaseFirestore.instance.collection('RecyclingInfo').doc();
     try {
-      /*
-      firestoreInstance.collection("RecyclingInfo").add({
-        "title": title,
-        "content": content,
-        "image": image,
-        "createdDate": DateTime.now()
-      }).then((value) {
-        id = value.id;
-      });
-      
-      firestoreInstance.collection("RecyclingInfo").doc(id).set({
-        "infoId": id,
-        "title": title,
-        "content": content,
-        "image": image,
-        "createdDate": DateTime.now(),
-      });*/
-      //firestoreInstance.collection("RecyclingInfo").doc(id).set({"infoId": id});
       String? img = '';
       int pos = image.indexOf('.');
       img = "${recyclingInfo.id}${image.substring(pos)}";
@@ -50,15 +29,6 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
         "image": img,
         "createdDate": DateTime.now(),
       });
-      /*firestoreInstance.collection('RecyclingInfo').doc(id).set(
-          {'infoId': id, 'image': img}, SetOptions(merge: true)).then((value) {
-        //Do your stuff.
-      });*/
-      /*
-      await firestoreInstance
-          .collection('RecyclingInfo')
-          .doc(id)
-          .set({"infoId": id, "image": img}, SetOptions(merge: true));*/
       if (file != null) {
         uploadFile(img, file);
       }
@@ -70,7 +40,7 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
 
   static Future<UploadTask?> uploadFile(String img, File file) async {
     try {
-      final destination = "recyclingInfo/" + img;
+      final destination = "recyclingInfo/$img";
       final ref = FirebaseStorage.instance.ref(destination);
       return ref.putFile(file);
     } on FirebaseException catch (e) {

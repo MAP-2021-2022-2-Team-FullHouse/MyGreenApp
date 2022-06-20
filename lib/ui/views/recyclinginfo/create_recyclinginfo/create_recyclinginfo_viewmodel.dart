@@ -45,12 +45,11 @@ class CreateRecyclingInfo_ViewModel extends BaseViewModel {
     if (task == null) return;
   }*/
 
-  Future addRecyclingInfo(
-      {required String title,
-      required String content,
-      required String image,
-      File? file}) async {
-    print(file);
+  Future addRecyclingInfo({
+    required String title,
+    required String content,
+    required String image,
+  }) async {
     dynamic result = await _RecyclingInfoService.addRecyclingInfo(
       title: title,
       content: content,
