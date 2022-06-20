@@ -6,7 +6,7 @@ import 'package:my_green_app/model/recycling_info.dart';
 import 'package:my_green_app/services/navigation_service.dart';
 import 'recycling_info_service.dart';
 
-class RecyclingInfoServiceFirebase extends RecyclingInfoService{
+class RecyclingInfoServiceFirebase extends RecyclingInfoService {
   final navigator = NavigatorService();
   final firestoreInstance = FirebaseFirestore.instance;
 
@@ -17,8 +17,12 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService{
       required String image,
       //required String createdDate,
       File? file}) async {
-    String id = ' ';
+    //String id = ' ';
+    //String id = firestoreInstance.collection("RecyclingInfo").id;
+    final recyclingInfo =
+        FirebaseFirestore.instance.collection('RecyclingInfo').doc();
     try {
+      /*
       firestoreInstance.collection("RecyclingInfo").add({
         "title": title,
         "content": content,
@@ -27,10 +31,34 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService{
       }).then((value) {
         id = value.id;
       });
-      firestoreInstance.collection("RecyclingInfo").doc(id).set({"infoId": id});
+      
+      firestoreInstance.collection("RecyclingInfo").doc(id).set({
+        "infoId": id,
+        "title": title,
+        "content": content,
+        "image": image,
+        "createdDate": DateTime.now(),
+      });*/
+      //firestoreInstance.collection("RecyclingInfo").doc(id).set({"infoId": id});
       String? img = '';
       int pos = image.indexOf('.');
-      img = "${id}${image.substring(pos)}";
+      img = "${recyclingInfo.id}${image.substring(pos)}";
+      recyclingInfo.set({
+        'infoId': recyclingInfo.id,
+        "title": title,
+        "content": content,
+        "image": img,
+        "createdDate": DateTime.now(),
+      });
+      /*firestoreInstance.collection('RecyclingInfo').doc(id).set(
+          {'infoId': id, 'image': img}, SetOptions(merge: true)).then((value) {
+        //Do your stuff.
+      });*/
+      /*
+      await firestoreInstance
+          .collection('RecyclingInfo')
+          .doc(id)
+          .set({"infoId": id, "image": img}, SetOptions(merge: true));*/
       if (file != null) {
         uploadFile(img, file);
       }
@@ -47,6 +75,36 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService{
       return ref.putFile(file);
     } on FirebaseException catch (e) {
       return null;
+    }
+  }
+
+  /*static Future<UploadTask?> uploadFile(String destination, File file) async {
+    try {
+      final ref = FirebaseStorage.instance.ref(destination);
+      return ref.putFile(file);
+    } on FirebaseException catch (e) {
+      return null;
+    }
+  }*/
+
+  @override
+  Stream<List<RecyclingInfo>> readRecyclingInfo() => FirebaseFirestore.instance
+      .collection('RecyclingInfo')
+      .snapshots()
+      .map((snapshot) => snapshot.docs
+          .map((doc) => RecyclingInfo.fromJson(doc.data()))
+          .toList());
+
+  @override
+  Future<String> getRecyclingInfoImage(String pathname) async {
+    try {
+      final ref = FirebaseStorage.instance.ref().child(pathname);
+      String imageUrl = await ref.getDownloadURL();
+      print(imageUrl);
+      return imageUrl;
+    } catch (e) {
+      print("Error: $e");
+      return e.toString();
     }
   }
 

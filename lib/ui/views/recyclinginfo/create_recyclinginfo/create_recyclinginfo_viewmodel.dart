@@ -9,8 +9,6 @@ import '../../../../services/recycling_info/recycling_info_service_firebase.dart
 
 class CreateRecyclingInfo_ViewModel extends BaseViewModel {
   final _RecyclingInfoService = locator<RecyclingInfoService>();
-  //final _navigationService = locator<NavigationService>();
-  // final _gpsService = locator<GPSService>();
   static late File? file;
   static late String fileName;
   late String _errorMessage;
@@ -32,28 +30,33 @@ class CreateRecyclingInfo_ViewModel extends BaseViewModel {
     if (fileName != null)
     // ignore: await_only_futures
     {
-      state.fileField.text = await fileName;
+      state.fileField.text = fileName;
     }
+    //return file;
   }
 
-  static Future uploadFile(String img) async {
+  /*static Future uploadFile(String img) async {
     if (file == null) {
       return;
     }
-  }
+    final destination = 'recyclingInfo/$img';
+    UploadTask? task =
+        await RecyclingInfoServiceFirebase.uploadFile(destination, file!);
+    if (task == null) return;
+  }*/
 
   Future addRecyclingInfo(
       {required String title,
       required String content,
       required String image,
       File? file}) async {
+    print(file);
     dynamic result = await _RecyclingInfoService.addRecyclingInfo(
       title: title,
       content: content,
       image: image,
       file: file,
     );
-    uploadFile(image);
     if (result != null) {
       return "ok";
     } else {

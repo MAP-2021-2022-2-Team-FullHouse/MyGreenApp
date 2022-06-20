@@ -28,9 +28,6 @@ class _CreateRecyclingInfoImageState extends State<CreateRecyclingInfoImage> {
   }
 
   CreateRecyclingInfo_ViewModel vm = CreateRecyclingInfo_ViewModel();
-  // UploadTask? task;
-  static late File file;
-  //var _text = '';
   TextInputType? key;
 
   get keyboard => key;
@@ -39,14 +36,15 @@ class _CreateRecyclingInfoImageState extends State<CreateRecyclingInfoImage> {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(height: 10),
           TextFormField(
             controller: widget.state.fileField,
             keyboardType: keyboard,
             decoration: InputDecoration(
-                labelText: "Image File: ",
-                // errorText: errorLon,
-                labelStyle: TextStyle(color: Colors.black, fontSize: 12)),
+                labelText: "Image File ",
+                labelStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
             onChanged: (text) => setState(() => ""),
           ),
           ButtonWidget(

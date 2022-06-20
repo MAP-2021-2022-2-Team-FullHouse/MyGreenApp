@@ -9,10 +9,11 @@ class RecyclingInfo {
     this.title = '',
     this.content = '',
     this.image = '',
-    required DateTime creationDate,
-  }) : createdDate = creationDate;
+    //this.createdDate = DateTime.utc(2022, 1, 9),
+    DateTime? creationDate,
+  }) : createdDate = creationDate ?? DateTime.now();
 
-  static Future getRecyclingInfoListList() async {
+  static Future getRecyclingInfoList() async {
     // Get docs from collection reference
     CollectionReference collectionRef =
         FirebaseFirestore.instance.collection('RecyclingInfo');

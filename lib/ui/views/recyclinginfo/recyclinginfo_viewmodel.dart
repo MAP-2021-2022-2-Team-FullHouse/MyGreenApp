@@ -13,14 +13,30 @@ import 'package:my_green_app/constants/routes_path.dart' as routes;
 class RecyclingInfoViewmodel extends BaseViewModel {
   late final _dialogService = locator<DialogService>();
   late final _recyclingInfoService = locator<RecyclingInfoService>();
-  /*late List<RecycleCenter> _rc = <RecycleCenter>[];
-  List<RecycleCenter> get rc => _rc;
-  static RecycleCenter recycleCenter= RecycleCenter();
-  RecycleCenter get getRC=>recycleCenter;*/
+  late List<RecyclingInfo> _rc = <RecyclingInfo>[];
+  List<RecyclingInfo> get rc => _rc;
+  static RecyclingInfo recyclingInfo = RecyclingInfo();
+  RecyclingInfo get getRC => recyclingInfo;
   static bool viewAction = false;
   bool get isViewAction => viewAction;
 
   RecyclingInfoViewmodel();
+
+  Stream<List<RecyclingInfo>> getRecyclingInfoList() {
+    var results = _recyclingInfoService.readRecyclingInfo();
+    return results;
+  }
+
+  /*Future viewRC( String email)
+  async {
+    recycleCenter=await _recycleCenterService.getRC(email);
+    viewAction=true;
+  }*/
+
+  Future<String?> getImgUrl(String imgUrl) async {
+    var result = await _recyclingInfoService.getRecyclingInfoImage(imgUrl);
+    return result;
+  }
 
   Future deleteRecyclingInfo(String id) async {
     var dialogResponse = await _dialogService.showConfirmationDialog(

@@ -40,7 +40,7 @@ class _CreateMultiLineTextFieldState extends State<CreateMultiLineTextField> {
       child: TextFormField(
         controller: widget.controller,
         minLines: 5,
-        maxLines: 20,
+        maxLines: 30,
         keyboardType: keyboard,
         initialValue: widget.initialValue,
         decoration: InputDecoration(

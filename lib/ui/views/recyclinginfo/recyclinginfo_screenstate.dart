@@ -17,6 +17,11 @@ class RecyclingInfoScreenfulState extends State<RecyclingInfoScreenful> {
     await viewmodel.deleteRecyclingInfo(id);
   }
 
+  Future<String?> getImgUrl(String imgUrl) async {
+    RecyclingInfoViewmodel viewmodel = new RecyclingInfoViewmodel();
+    return await viewmodel.getImgUrl(imgUrl);
+  }
+
 /*
   Widget getViewContainer(context,RecycleCenterViewmodel viewmodel)
   {
@@ -32,13 +37,8 @@ class RecyclingInfoScreenfulState extends State<RecyclingInfoScreenful> {
     {
       return Container();
     }
-  }
-
-  Future<String?> getImgUrl(String imgUrl) async {
-    RecycleCenterViewmodel viewmodel= new RecycleCenterViewmodel();
-    return await viewmodel.getImgUrl(imgUrl);
-  }
-
+  }*/
+/*
   void onView(RecycleCenterViewmodel viewmodel, String email)
   async {
     await viewmodel.viewRC(email);

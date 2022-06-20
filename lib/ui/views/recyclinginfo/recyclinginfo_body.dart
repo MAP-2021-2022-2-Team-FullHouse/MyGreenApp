@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/model/recycling_info.dart';
-//import 'package:my_green_app/ui/views/recyclecenter/RecyclingInfo_rclist.dart';
+import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_list.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_screenstate.dart';
 import 'package:stacked/stacked.dart';
 import '../recyclinginfo/recyclinginfo_viewmodel.dart';
@@ -47,11 +47,9 @@ class _RecyclingInfoBodyState extends State<RecyclingInfoBody> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                      height:
-                          10), /*
+                  SizedBox(height: 10),
                   StreamBuilder<List<RecyclingInfo>>(
-                      stream: model.getRCList(),
+                      stream: model.getRecyclingInfoList(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           return Center(child: Text('Something went wrong'));
@@ -60,14 +58,15 @@ class _RecyclingInfoBodyState extends State<RecyclingInfoBody> {
                           final RecyclingInfos = snapshot.data!;
                           return ListView(
                             physics: NeverScrollableScrollPhysics(),
-                            children: RecyclingInfos.map(buildRC).toList(),
+                            children:
+                                RecyclingInfos.map(buildRecyclingInfo).toList(),
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                           );
                         } else {
                           return Center(child: Text('No data found'));
                         }
-                      }),*/
+                      }),
                 ],
               ),
             ), /*

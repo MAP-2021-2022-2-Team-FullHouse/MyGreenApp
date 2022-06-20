@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/create_recyclinginfo/widget/create_multilinetextfield.dart';
 import 'package:stacked/stacked.dart';
@@ -24,7 +26,7 @@ class CreateRecyclingInfoBody extends StatelessWidget {
           body: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -35,35 +37,36 @@ class CreateRecyclingInfoBody extends StatelessWidget {
               ),
               child: SingleChildScrollView(
                   child: Column(children: [
-                Container(
-                    child: SizedBox(
+                const SizedBox(
                   height: 10.0,
-                )
-                    // Image.asset('assets/logo.png', height: 150, width: 250),
-                    ),
+                ),
                 Container(
                   margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  decoration: new BoxDecoration(
-                    borderRadius: new BorderRadius.circular(16.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
+                    //crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(
-                        height: 5.0,
+                      const SizedBox(
+                        height: 15.0,
                       ),
-                      Text(
+                      Center(
+                          child: const Text(
                         "Create Recycling Info",
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 25,
                           color: Colors.black,
@@ -75,26 +78,42 @@ class CreateRecyclingInfoBody extends StatelessWidget {
                                 blurRadius: 10)
                           ],
                         ),
+                      )),
+                      const SizedBox(
+                        height: 15.0,
                       ),
-                      SizedBox(
-                        height: 5.0,
+                      Text(
+                        "Title",
+                        style: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 15),
+                        textAlign: TextAlign.left,
                       ),
                       CreateTextField(
                         controller: _state.titleController,
-                        hintText: "Recycle Information Title",
-                        labelText: "Title: ",
+                        hintText: "Enter the Title",
+                      ),
+                      const SizedBox(height: 30.0),
+                      Text(
+                        "Content",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
+                        textAlign: TextAlign.left,
+                      ),
+                      CreateMultiLineTextField(
+                        controller: _state.contentController,
+                        hintText: "Enter the Content",
                       ),
                       const SizedBox(height: 10.0),
                       CreateRecyclingInfoImage(state: _state),
                       const SizedBox(height: 10.0),
-                      CreateMultiLineTextField(
-                        controller: _state.contentController,
-                        hintText: "Enter the content",
-                        labelText: "Content: ",
+                      new Positioned(
+                        top: 50,
+                        left: 0,
+                        right: 0,
+                        child: CreateButton(state: _state),
                       ),
-                      CreateButton(state: _state),
-                      SizedBox(
-                        height: 10.0,
+                      const SizedBox(
+                        height: 30.0,
                       ),
                     ],
                   ),

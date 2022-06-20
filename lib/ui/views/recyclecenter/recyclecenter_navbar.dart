@@ -26,8 +26,8 @@ class _RecycleCenterNavigationBarState
           }),
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.map),
-          label: 'Map',
+          icon: Icon(Icons.article),
+          label: 'Info',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.recycling),

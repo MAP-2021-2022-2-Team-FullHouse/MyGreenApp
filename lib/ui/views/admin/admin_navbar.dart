@@ -27,7 +27,7 @@ class _AdminNavigationBarState extends State<AdminNavigationBar> {
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.article),
-          label: 'Recycling Info',
+          label: 'Info',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.recycling),
