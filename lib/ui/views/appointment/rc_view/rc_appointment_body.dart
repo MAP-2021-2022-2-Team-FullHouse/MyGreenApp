@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:my_green_app/model/Appointment.dart';
-import 'package:my_green_app/ui/views/appointment/appointment_rclist.dart';
+import 'package:my_green_app/ui/views/appointment/appointment_user_list.dart';
 import 'package:my_green_app/ui/views/appointment/appointment_screenstate.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_list.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_screenstate.dart';
@@ -64,7 +64,7 @@ class _RecycleCenterAppointmentBodyState
                   ), */
                   const SizedBox(height: 20),
                   StreamBuilder<List<Appointment>>(
-                      stream: model.getRCList(),
+                      stream: model.getAppointmentList(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -78,7 +78,8 @@ class _RecycleCenterAppointmentBodyState
 
                           return ListView(
                             physics: NeverScrollableScrollPhysics(),
-                            children: appointments.map(buildRC2).toList(),
+                            children:
+                                appointments.map(buildRCAppointment).toList(),
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                           );

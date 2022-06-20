@@ -23,7 +23,7 @@ abstract class AppointmentService {
   Future<String> retrieveUserName(String email);
   Future<String> retrievePhone(String email);
   Future<String> getID(String rcEmail, DateTime dt, String uEmail);
-  Stream<List<Appointment>> readRC();
+  Stream<List<Appointment>> readUserAppointment();
   String? getEmail();
   Future cancelAppointment(String id);
   Future changeAppointmentStatus(String id, String status);

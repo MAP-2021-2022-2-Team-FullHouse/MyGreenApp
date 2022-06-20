@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/appointment/CreateAppointment/create_appointment_upload.dart';
 import 'package:stacked/stacked.dart';
-import 'CreateAppointment_Screen.dart';
-import 'CreateAppointment_Textfield.dart';
-import 'CreateAppointmentButton.dart';
+import 'create_appointment_screen.dart';
+import 'create_appointment_textfield.dart';
+import 'create_appointment_button.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 
-import 'CreateAppointment_ViewModel.dart';
+import 'create_appointment_viewmodel.dart';
 
 class CreateAppointmentBody extends StatelessWidget {
   final CreateAppointmentScreenState _state;

@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_green_app/services/dialog_service.dart' as dg;
+import 'package:my_green_app/ui/views/appointment/CreateAppointment/create_appointment_viewmodel.dart';
 import 'package:path/path.dart' as Path;
-import 'package:my_green_app/ui/views/appointment/CreateAppointment/CreateAppointment_ViewModel.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class AddImage extends StatefulWidget {

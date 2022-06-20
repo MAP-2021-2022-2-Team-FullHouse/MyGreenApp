@@ -9,7 +9,7 @@ import 'package:my_green_app/model/RecycleCenter.dart';
 import 'package:my_green_app/services/navigation_service.dart';
 import 'package:my_green_app/services/recycleCenter/recycleCenter_service.dart';
 import 'package:my_green_app/services/user/user_repository.dart';
-import 'package:my_green_app/ui/views/appointment/CreateAppointment/CreateAppointment_ViewModel.dart';
+import 'package:my_green_app/ui/views/appointment/CreateAppointment/create_appointment_viewmodel.dart';
 import 'package:my_green_app/ui/views/appointment/appointment_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';

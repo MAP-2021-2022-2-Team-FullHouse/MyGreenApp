@@ -14,7 +14,7 @@ import 'package:my_green_app/ui/views/appointment/rc_view_details/rc_appointment
 RecycleCenterAppointmentScreenfulState state =
     new RecycleCenterAppointmentScreenfulState();
 
-Widget buildRC2(Appointment appointment) {
+Widget buildRCAppointment(Appointment appointment) {
   int count = 0;
 
   return ListTile(

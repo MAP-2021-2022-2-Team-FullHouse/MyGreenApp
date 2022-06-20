@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/ui/views/admin/admin_screen.dart';
-import 'package:my_green_app/ui/views/appointment/CreateAppointment/CreateAppointment_Screen.dart';
+import 'package:my_green_app/ui/views/appointment/CreateAppointment/create_appointment_screen.dart';
 import 'package:my_green_app/ui/views/appointment/CreateAppointment/create_appointment_upload.dart';
 import 'package:my_green_app/ui/views/appointment/appointment_screen.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_screen.dart';

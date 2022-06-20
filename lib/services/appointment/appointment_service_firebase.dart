@@ -166,7 +166,7 @@ class AppointmentServiceFirebase extends AppointmentService {
   }
 
   @override
-  Stream<List<Appointment>> readRC() {
+  Stream<List<Appointment>> readUserAppointment() {
     var currEmail = getEmail();
     print(currEmail);
     var appointments;

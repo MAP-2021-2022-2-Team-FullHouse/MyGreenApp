@@ -10,7 +10,7 @@ import 'package:my_green_app/ui/views/appointment/appointment_viewmodel.dart'
 
 AppointmentScreenfulState state = new AppointmentScreenfulState();
 
-Widget buildRC(Appointment appointment) {
+Widget buildAppointment(Appointment appointment) {
   int count = 0;
 
   return ListTile(

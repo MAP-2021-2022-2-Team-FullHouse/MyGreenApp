@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/appointment/CreateAppointment/create_appointment_upload.dart';
 import 'package:my_green_app/ui/views/appointment/appointment_screen.dart';
 
-import 'CreateAppointment_ViewModel.dart';
-import 'CreateAppointment_body.dart';
+import 'create_appointment_viewmodel.dart';
+import 'create_appointment_body.dart';
 
 class CreateAppointmentScreen extends StatefulWidget {
   static Route route() =>

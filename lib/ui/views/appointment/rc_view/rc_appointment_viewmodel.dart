@@ -59,7 +59,7 @@ class RecycleCenterAppointmentViewmodel extends BaseViewModel {
     await NavigationService().navigateTo(homeRoute);
   }
 
-  Stream<List<Appointment>> getRCList() {
+  Stream<List<Appointment>> getAppointmentList() {
     var results = _AppointmentService.readRCAppointments();
 
     return results;

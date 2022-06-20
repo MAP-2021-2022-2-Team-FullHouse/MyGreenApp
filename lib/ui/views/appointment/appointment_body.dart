@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/model/Appointment.dart';
-import 'package:my_green_app/ui/views/appointment/appointment_rclist.dart';
+import 'package:my_green_app/ui/views/appointment/appointment_user_list.dart';
 import 'package:my_green_app/ui/views/appointment/appointment_screenstate.dart';
 import 'package:stacked/stacked.dart';
 import '../appointment/appointment_viewmodel.dart';
@@ -33,7 +33,7 @@ class _AppointmentBodyState extends State<AppointmentBody> {
                   ), */
                   const SizedBox(height: 20),
                   StreamBuilder<List<Appointment>>(
-                      stream: model.getRCList(),
+                      stream: model.getAppointmentList(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           return Center(child: Text('Something went wrong'));
@@ -43,7 +43,8 @@ class _AppointmentBodyState extends State<AppointmentBody> {
 
                           return ListView(
                             physics: NeverScrollableScrollPhysics(),
-                            children: appointments.map(buildRC).toList(),
+                            children:
+                                appointments.map(buildAppointment).toList(),
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                           );

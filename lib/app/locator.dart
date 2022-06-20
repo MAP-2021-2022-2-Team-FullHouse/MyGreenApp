@@ -3,7 +3,7 @@ import 'package:my_green_app/services/appointment/appointment_service.dart';
 import 'package:my_green_app/services/appointment/appointment_service_firebase.dart';
 import 'package:my_green_app/services/navigation_service.dart';
 import 'package:my_green_app/services/user/user_repository.dart';
-import 'package:my_green_app/ui/views/appointment/CreateAppointment/CreateAppointment_ViewModel.dart';
+import 'package:my_green_app/ui/views/appointment/CreateAppointment/create_appointment_viewmodel.dart';
 import 'package:my_green_app/ui/views/appointment/appointment_viewmodel.dart';
 import 'package:my_green_app/ui/views/login/login_viewmodel.dart';
 import 'package:my_green_app/ui/views/recycleCenter/recycleCenter_viewmodel.dart';

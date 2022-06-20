@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'CreateAppointment_Screen.dart';
+import 'create_appointment_screen.dart';
 
 class CreateButton extends StatelessWidget {
   final firestoreInstance = FirebaseFirestore.instance;

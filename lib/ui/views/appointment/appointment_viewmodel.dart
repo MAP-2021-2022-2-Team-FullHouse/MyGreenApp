@@ -42,8 +42,8 @@ class AppointmentViewmodel extends BaseViewModel {
   String rcName = '';
   AppointmentViewmodel() {}
 
-  Stream<List<Appointment>> getRCList() {
-    var results = _AppointmentService.readRC();
+  Stream<List<Appointment>> getAppointmentList() {
+    var results = _AppointmentService.readUserAppointment();
 
     //print(results as List<Appointment>);
 
