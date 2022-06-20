@@ -20,7 +20,7 @@ class _RCHomeNavigationBarState extends State<RCHomeNavigationBar> {
       onTap: (index) => setState(() => {
             currIndex = index,
             if (currIndex == 0)
-              {Navigator.of(context).pushReplacementNamed(routes.rcHomeRoute)}
+              {Navigator.of(context).pushReplacementNamed(routes.recycleCenterAppointmentRoute)}
             else if (currIndex == 1)
               {Navigator.of(context).pushReplacementNamed(routes.rcHomeRoute)}
             else if (currIndex == 2)

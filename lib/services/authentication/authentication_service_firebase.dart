@@ -19,6 +19,11 @@ class AuthenticationServiceFirebase extends AuthenticationService {
   FirebaseAuth get _auth => _firebaseAuth.auth;
   final navigator = NavigatorService();
 
+   @override
+  String? getUID() {
+    return _auth.currentUser!.email;
+  }
+
   @override
   Future signIn({required String email, required String password}) async {
     try {
