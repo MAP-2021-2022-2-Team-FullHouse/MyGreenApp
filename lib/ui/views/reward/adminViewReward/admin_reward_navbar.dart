@@ -19,12 +19,15 @@ class _AdminRewardNavigationBarState
       currentIndex: currIndex,
       onTap: (index) => setState(() => {
             currIndex = index,
+
             if (currIndex == 2)
               {Navigator.of(context).pushNamed(routes.adminRoute)}
             else if (currIndex == 4)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
               else if (currIndex == 0)
               {Navigator.of(context).pushReplacementNamed(routes.adminRewardRoute)}
+               else if (currIndex == 1)
+              {Navigator.of(context).pushReplacementNamed(routes.rcRoute)}
           }),
       items: const [
         BottomNavigationBarItem(

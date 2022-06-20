@@ -5,8 +5,10 @@ import 'package:my_green_app/ui/views/home/home_viewmodel.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screenstate.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_viewmodel.dart';
 import 'package:my_green_app/ui/views/reward/createReward/create_reward_screen.dart';
-
+import 'EditRecycleCenter/EditRecycleCenter_Screen.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
+
+import 'CreateRecycleCenter/create_recycle_center.dart';
 
 class RCListButton extends StatelessWidget {
   final RecycleCenterViewmodel viewmodel;
@@ -42,8 +44,8 @@ class RCListButton extends StatelessWidget {
         onPressed: () async {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-            CreateRewardScreen(),
-                //EditRecycleCenterScreen(docEmail: model.email),
+            
+                EditRecycleCenterScreen(docEmail: model.email),
           ));
         },
       ),
