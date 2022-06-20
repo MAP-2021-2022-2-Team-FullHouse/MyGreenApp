@@ -9,11 +9,11 @@ import 'package:my_green_app/services/registration/registration_service_firebase
 import 'package:my_green_app/services/user/user_repository.dart';
 import 'package:my_green_app/ui/views/login/login_viewmodel.dart';
 import 'package:my_green_app/ui/views/recycleCenter/recycleCenter_viewmodel.dart';
+import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_viewmodel.dart';
 import 'package:my_green_app/ui/views/register/register_viewmodel.dart';
 import 'package:my_green_app/ui/views/admin/admin_viewmodel.dart';
 import 'package:my_green_app/ui/views/reset/reset_viewmodel.dart';
 import 'package:stacked_services/stacked_services.dart';
-
 import '../services/resetpassword/reset_service.dart';
 import '../services/resetpassword/reset_service_firebase.dart';
 import '../ui/views/home/home_viewmodel.dart';
@@ -43,4 +43,6 @@ void setupLocator() {
   locator.registerLazySingleton<ResetViewmodel>(() => ResetViewmodel());
   locator.registerLazySingleton<RecycleCenterViewmodel>(
       () => RecycleCenterViewmodel());
+  locator.registerLazySingleton<RecyclingInfoViewmodel>(
+      () => RecyclingInfoViewmodel());
 }
