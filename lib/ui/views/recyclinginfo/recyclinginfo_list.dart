@@ -37,7 +37,7 @@ Widget buildRecyclingInfo(RecyclingInfo recyclingInfo) => ListTile(
     );
 
 Widget buildImage(String? data) {
-  return ClipOval(
+  return Container(
     child: Material(
       color: Colors.transparent,
       child: Ink.image(
@@ -45,7 +45,7 @@ Widget buildImage(String? data) {
         fit: BoxFit.cover,
         width: 128,
         height: 128,
-        child: InkWell(/* onTap: onClicked */),
+        child: InkWell(),
       ),
     ),
   );

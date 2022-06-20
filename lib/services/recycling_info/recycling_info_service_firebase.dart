@@ -88,12 +88,11 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
   }*/
 
   @override
-  Stream<List<RecyclingInfo>> readRecyclingInfo() => FirebaseFirestore.instance
-      .collection('RecyclingInfo')
-      .snapshots()
-      .map((snapshot) => snapshot.docs
-          .map((doc) => RecyclingInfo.fromJson(doc.data()))
-          .toList());
+  Stream<List<RecyclingInfo>> readRecyclingInfoList() =>
+      FirebaseFirestore.instance.collection('RecyclingInfo').snapshots().map(
+          (snapshot) => snapshot.docs
+              .map((doc) => RecyclingInfo.fromJson(doc.data()))
+              .toList());
 
   @override
   Future<String> getRecyclingInfoImage(String pathname) async {
@@ -105,6 +104,18 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
     } catch (e) {
       print("Error: $e");
       return e.toString();
+    }
+  }
+
+  @override
+  Future<RecyclingInfo?> readRecyclingInfo(String infoId) async {
+    final rc =
+        FirebaseFirestore.instance.collection("RecycleCenter").doc(infoId);
+    final snapshot = await rc.get();
+    if (snapshot.exists) {
+      return RecyclingInfo.fromJson(snapshot.data()!);
+    } else {
+      return null;
     }
   }
 

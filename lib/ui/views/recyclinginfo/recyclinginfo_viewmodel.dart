@@ -1,14 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:my_green_app/app/locator.dart';
-import 'package:my_green_app/constants/routes_path.dart';
 import 'package:my_green_app/model/recycling_info.dart';
-import 'package:my_green_app/services/navigation_service.dart';
 import 'package:my_green_app/services/recycling_info/recycling_info_service.dart';
 import 'package:stacked/stacked.dart';
-import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:my_green_app/constants/routes_path.dart' as routes;
 
 class RecyclingInfoViewmodel extends BaseViewModel {
   late final _dialogService = locator<DialogService>();
@@ -23,7 +17,7 @@ class RecyclingInfoViewmodel extends BaseViewModel {
   RecyclingInfoViewmodel();
 
   Stream<List<RecyclingInfo>> getRecyclingInfoList() {
-    var results = _recyclingInfoService.readRecyclingInfo();
+    var results = _recyclingInfoService.readRecyclingInfoList();
     return results;
   }
 

@@ -32,11 +32,10 @@ class RecycleCenterViewmodel extends BaseViewModel {
     return results;
   }
 
-  Future viewRC( String email)
+  Future viewRC(String email)
   async {
     recycleCenter=await _recycleCenterService.getRC(email);
     viewAction=true;
-   
   }
 
   Future<String?> getImgUrl(String imgUrl) async {
@@ -50,8 +49,6 @@ class RecycleCenterViewmodel extends BaseViewModel {
     viewAction=false;
     ViewMap.markers.clear();
   }
-
-
 
   Future deleteCenter(String email) async {
     var dialogResponse = await _dialogService.showConfirmationDialog(

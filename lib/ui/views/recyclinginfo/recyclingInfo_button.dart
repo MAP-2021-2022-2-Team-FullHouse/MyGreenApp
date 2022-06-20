@@ -3,6 +3,7 @@ import 'package:my_green_app/model/recycling_info.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_screenstate.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_viewmodel.dart';
 //import 'ditRecycleCenter/EditRecycleCenter_Screen.dart';
+import 'package:my_green_app/ui/views/recyclinginfo/view/viewrecyclinginfo_screen.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 
 class RecyclingInfoListButton extends StatelessWidget {
@@ -16,18 +17,22 @@ class RecyclingInfoListButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Row(children: <Widget>[
-      /*ElevatedButton.icon(
+      ElevatedButton.icon(
         icon: Icon(
-          Icons.map_outlined,
+          Icons.preview_outlined, 
           size: 18.0,
         ),
-        label: Text('Map'),
+        label: Text('View'),
         onPressed: () async {
-          state.onView(viewmodel, model.email);
-          Navigator.of(context).pushNamed(routes.rcRoute);
+          //state.onView(viewmodel, model.email);
+          //Navigator.of(context).pushNamed(routes.rcRoute);
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                ViewRecyclingInfoScreen(infoId: model.infoId),
+          ));
         },
-      ),*/
-      SizedBox(
+      ),
+      const SizedBox(
         width: 8,
       ),
       ElevatedButton.icon(
@@ -42,7 +47,7 @@ class RecyclingInfoListButton extends StatelessWidget {
           Navigator.of(context).pushNamed(routes.recyclingInfoRoute);
         },
       ),
-      SizedBox(
+      const SizedBox(
         width: 8,
       ),
       ElevatedButton.icon(
