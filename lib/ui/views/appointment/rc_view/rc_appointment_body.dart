@@ -73,6 +73,10 @@ class _RecycleCenterAppointmentBodyState
                         if (snapshot.hasError) {
                           return Center(child: Text('Something went wrong'));
                         }
+                        if (snapshot.data!.length == 0) {
+                          return Center(
+                              child: Text('There are no appointments.'));
+                        }
                         if (snapshot.hasData) {
                           final appointments = snapshot.data!;
 
