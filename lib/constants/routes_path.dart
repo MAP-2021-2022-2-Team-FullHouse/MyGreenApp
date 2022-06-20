@@ -5,3 +5,5 @@ const String rcRoute = 'recyclecenter';
 const String profileRoute = 'profile';
 const String user_rcRoute = 'user_rc';
 const String createRecycleCenterRoute = 'createRecycleCenter';
+const String recyclingInfoRoute = 'recyclinginfo';
+const String createRecyclingInfoRoute = 'createrecyclinginfo';

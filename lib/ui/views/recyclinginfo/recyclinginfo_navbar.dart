@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 
-class AdminNavigationBar extends StatefulWidget {
-  const AdminNavigationBar({Key? key}) : super(key: key);
+class RecyclingInfoNavigationBar extends StatefulWidget {
+  const RecyclingInfoNavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<AdminNavigationBar> createState() => _AdminNavigationBarState();
+  State<RecyclingInfoNavigationBar> createState() =>
+      _RecyclingInfoNavigationBarState();
 }
 
-class _AdminNavigationBarState extends State<AdminNavigationBar> {
-  int currIndex = 2;
+class _RecyclingInfoNavigationBarState
+    extends State<RecyclingInfoNavigationBar> {
+  int currIndex = 0;
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -17,9 +19,7 @@ class _AdminNavigationBarState extends State<AdminNavigationBar> {
       currentIndex: currIndex,
       onTap: (index) => setState(() => {
             currIndex = index,
-            if (currIndex == 0)
-              {Navigator.of(context).pushNamed(routes.recyclingInfoRoute)}
-            else if (currIndex == 1)
+            if (currIndex == 1)
               {Navigator.of(context).pushNamed(routes.rcRoute)}
             else if (currIndex == 4)
               {Navigator.of(context).pushNamed(routes.profileRoute)}

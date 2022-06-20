@@ -7,6 +7,8 @@ import 'package:my_green_app/ui/views/profile/profile_screen.dart';
 import 'package:my_green_app/ui/views/recyclecenter/CreateRecycleCenter/CreateRecycleCenter_Screen.dart';
 import 'package:my_green_app/ui/views/recyclecenter/UserView/rc_screen.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screen.dart';
+import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_screen.dart';
+import 'package:my_green_app/ui/views/recyclinginfo/create_recyclinginfo/create_recyclinginfo_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -24,6 +26,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => RCScreen());
     case routes.createRecycleCenterRoute:
       return MaterialPageRoute(builder: (context) => CreateRecycleCenterScreen());
+    case routes.recyclingInfoRoute:
+      return MaterialPageRoute(builder: (context) => RecyclingInfoScreen());
+    case routes.createRecyclingInfoRoute:
+      return MaterialPageRoute(builder: (context) => CreateRecyclingInfoScreen());
     
     default:
       return MaterialPageRoute(
