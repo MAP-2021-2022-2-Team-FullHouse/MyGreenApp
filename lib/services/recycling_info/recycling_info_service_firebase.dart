@@ -6,7 +6,7 @@ import 'package:my_green_app/model/recycling_info.dart';
 import 'package:my_green_app/services/navigation_service.dart';
 import 'recycling_info_service.dart';
 
-class RecyclingInfoServiceFirebase extends RecyclingInfoService {
+class RecyclingInfoServiceFirebase extends RecyclingInfoService{
   final navigator = NavigatorService();
   final firestoreInstance = FirebaseFirestore.instance;
 

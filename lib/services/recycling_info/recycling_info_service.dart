@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:my_green_app/model/recycling_info.dart';
+import '../../model/recycling_info.dart';
 import 'dart:io';
 
 abstract class RecyclingInfoService {

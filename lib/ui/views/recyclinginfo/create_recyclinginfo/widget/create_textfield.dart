@@ -35,20 +35,18 @@ class _CreateTextFieldState extends State<CreateTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TextFormField(
-        controller: widget.controller,
-        //obscureText: obscureText,
-        keyboardType: keyboard,
-        initialValue: widget.initialValue,
-        decoration: InputDecoration(
-            hintText: widget.hintText,
-            hintStyle: const TextStyle(color: Colors.grey, fontSize: 12),
-            labelText: widget.labelText,
-            border: const OutlineInputBorder(),
-            labelStyle: const TextStyle(color: Colors.black, fontSize: 12)),
-        onChanged: (text) => setState(() => ""),
-      ),
+    return TextFormField(
+      controller: widget.controller,
+      //obscureText: obscureText,
+      keyboardType: keyboard,
+      initialValue: widget.initialValue,
+      decoration: InputDecoration(
+          hintText: widget.hintText,
+          hintStyle: const TextStyle(color: Colors.grey, fontSize: 12),
+          labelText: widget.labelText,
+          border: const OutlineInputBorder(),
+          labelStyle: const TextStyle(color: Colors.black, fontSize: 12)),
+      onChanged: (text) => setState(() => ""),
     );
   }
 }

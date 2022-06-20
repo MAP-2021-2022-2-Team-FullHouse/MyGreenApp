@@ -4,6 +4,8 @@ import 'package:my_green_app/services/authentication/authentication_service_fire
 import 'package:my_green_app/services/navigation_service.dart';
 import 'package:my_green_app/services/recycleCenter/recycleCenter_service.dart';
 import 'package:my_green_app/services/recycleCenter/recycleCenter_service_firebase.dart';
+import 'package:my_green_app/services/recycling_info/recycling_info_service.dart';
+import 'package:my_green_app/services/recycling_info/recycling_info_service_firebase.dart';
 import 'package:my_green_app/services/registration/registration_service.dart';
 import 'package:my_green_app/services/registration/registration_service_firebase.dart';
 import 'package:my_green_app/services/user/user_repository.dart';
@@ -30,6 +32,8 @@ void setupLocator() {
       () => ResetPasswordServiceFirebase());
   locator.registerLazySingleton<RecycleCenterService>(
       () => RecycleCenterServiceFirebase());
+  locator.registerLazySingleton<RecyclingInfoService>(
+      () => RecyclingInfoServiceFirebase());
   locator.registerLazySingleton<NavigatorService>(() => NavigatorService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
