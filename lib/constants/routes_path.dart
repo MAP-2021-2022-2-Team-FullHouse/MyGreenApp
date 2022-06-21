@@ -16,3 +16,5 @@ const String rcAppointmentDetailsRoute = 'rcAppointmentDetails';
 const String recycleCenterAppointmentRoute = 'rcAppointment';
 const String shopRoute = 'shop';
 const String manageListingRoute = 'shop/manage_listing';
+const String recyclingInfoRoute = 'recyclinginfo';
+const String createRecyclingInfoRoute = 'createrecyclinginfo';

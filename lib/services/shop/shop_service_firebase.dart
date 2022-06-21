@@ -11,22 +11,21 @@ class ShopServiceFirebase extends ShopService {
   final firestoreInstance = FirebaseFirestore.instance;
 
   @override
-  Stream<List<Listing>> readListingList(String email) => 
-  FirebaseFirestore.instance
-      .collection('Listing')
-      .where('seller', isEqualTo: email)
-      .snapshots()
-      .map((snapshot) => snapshot.docs
-          .map((doc) => Listing.fromJson(doc.id,doc.data()))
-          .toList());
+  Stream<List<Listing>> readListingList(String email) =>
+      FirebaseFirestore.instance
+          .collection('Listing')
+          .where('seller', isEqualTo: email)
+          .snapshots()
+          .map((snapshot) => snapshot.docs
+              .map((doc) => Listing.fromJson(doc.id, doc.data()))
+              .toList());
 
   @override
-  Stream<List<Listing>> readAllListingList() => 
-  FirebaseFirestore.instance
+  Stream<List<Listing>> readAllListingList() => FirebaseFirestore.instance
       .collection('Listing')
       .snapshots()
       .map((snapshot) => snapshot.docs
-          .map((doc) => Listing.fromJson(doc.id,doc.data()))
+          .map((doc) => Listing.fromJson(doc.id, doc.data()))
           .toList());
 
   @override
@@ -39,6 +38,7 @@ class ShopServiceFirebase extends ShopService {
       return e.toString();
     }
   }
+
   @override
   Future addListing(
       {required String title,
@@ -51,30 +51,29 @@ class ShopServiceFirebase extends ShopService {
       required String useremail,
       File? file}) async {
     try {
-      String? img='';
-      int pos=image.indexOf('.');
-      final listingFirebase =await firestoreInstance
-          .collection("Listing")
-          .add({
+      String? img = '';
+      int pos = image.indexOf('.');
+      final listingFirebase =
+          await firestoreInstance.collection("Listing").add({
         "title": title,
         "category": category,
         "condition": condition,
         "price": price,
         "description": description,
         "method": method,
-        "seller":useremail,
+        "seller": useremail,
       });
-      img="${listingFirebase.id}${image.substring(pos)}";
-      if(file!=null){
+      img = "${listingFirebase.id}${image.substring(pos)}";
+      if (file != null) {
         uploadFile(img, file);
       }
-      
     } on FirebaseAuthException catch (e) {
       String error;
       error = e.toString();
       return error;
     }
   }
+
   @override
   Future editListing(
       {required String title,
@@ -88,45 +87,36 @@ class ShopServiceFirebase extends ShopService {
       required String docid,
       File? file}) async {
     try {
-      
-      await firestoreInstance
-          .collection("Listing")
-          .doc(docid)
-          .update({
+      await firestoreInstance.collection("Listing").doc(docid).update({
         "title": title,
         "category": category,
         "condition": condition,
         "price": price,
         "description": description,
         "method": method,
-        "seller":useremail,
+        "seller": useremail,
       });
-      if(image.isNotEmpty)
-      {
-        String? img='';
-        int pos=image.indexOf('.');
-        img="${docid}${image.substring(pos)}";
-        print(img);
-        if(file!=null){
+      if (image.isNotEmpty) {
+        String? img = '';
+        int pos = image.indexOf('.');
+        img = "${docid}${image.substring(pos)}";
+        if (file != null) {
           uploadFile(img, file);
         }
       }
-      
-      
-      
     } on FirebaseAuthException catch (e) {
       String error;
       error = e.toString();
       return error;
     }
   }
+
   static Future<UploadTask?> uploadFile(String img, File file) async {
     try {
-      final destination="listing/"+img;
+      final destination = "listing/$img";
       final ref = FirebaseStorage.instance.ref(destination);
       return ref.putFile(file);
     } on FirebaseException catch (e) {
-      print("error");
       return null;
     }
   }
@@ -143,14 +133,11 @@ class ShopServiceFirebase extends ShopService {
 
   @override
   Future<Listing?> readListing(String docid) async {
-    String id = '';
-    final listing=await FirebaseFirestore.instance
-        .collection('Listing')
-        .doc(docid);
-        
+    final listing = FirebaseFirestore.instance.collection('Listing').doc(docid);
+
     final snapshot = await listing.get();
     if (snapshot.exists) {
-      return Listing.fromJson(docid,snapshot.data()!);
+      return Listing.fromJson(docid, snapshot.data()!);
     } else {
       return null;
     }
@@ -162,7 +149,7 @@ class ShopServiceFirebase extends ShopService {
       await firestoreInstance.collection("Listing").doc(docid).delete();
       return true;
     } on FirebaseException catch (e) {
-      return e.code + ". Something went wrong. Please try again.";
+      return "${e.code}. Something went wrong. Please try again.";
     }
   }
 }

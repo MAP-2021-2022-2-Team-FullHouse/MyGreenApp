@@ -21,6 +21,7 @@ class _ShopNavigationBarState
             currIndex = index,
             if (currIndex == 0)
               {Navigator.of(context).pushReplacementNamed(routes.user_rcRoute)}
+            
             else if (currIndex == 2)
               {Navigator.of(context).pushReplacementNamed(routes.homeRoute)}
             else if (currIndex == 3)
