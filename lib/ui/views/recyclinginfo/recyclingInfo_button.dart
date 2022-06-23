@@ -39,8 +39,6 @@ class RecyclingInfoListButton extends StatelessWidget {
         ),
         label: const Text('Edit'),
         onPressed: () async {
-          //Navigator.of(context).push(MaterialPageRoute(
-          //builder: (context) =>) );
           Navigator.of(context).pushNamed(routes.recyclingInfoRoute);
         },
       ),
