@@ -3,9 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:my_green_app/services/navigation_service.dart';
+import 'package:my_green_app/services/reward/reward_firebaseservice.dart';
+import 'package:my_green_app/services/reward/reward_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:stacked_services/stacked_services.dart';
+
+import '../../../services/authentication/authentication_service_firebase.dart';
+import '../login/login_viewmodel.dart';
 
 class HomeViewmodel extends BaseViewModel {
   final _authService = locator<AuthenticationService>();
@@ -16,6 +21,8 @@ class HomeViewmodel extends BaseViewModel {
     onCancel: () => print('Cancelled'),
     onListen: () => print('Listens'),
   );
+  static String role = '';
+  static String currUserRole = '';
 
   HomeViewmodel() {}
 
@@ -26,5 +33,22 @@ class HomeViewmodel extends BaseViewModel {
     } else {
       return result;
     }
+  }
+  Future <String> getRewardPoint()async{  
+    RewardService service=RewardFirebaseService();
+    var result=service. getRewardPoint();
+    return result;
+  }
+  String getRole() {
+    return LoginViewmodel.currRole;
+  }
+
+  static Future getUserRole() async {
+    currUserRole = await AuthenticationServiceFirebase.getCurrentRole();
+  }
+
+  static String getCurrentRole() {
+    getUserRole();
+    return currUserRole;
   }
 }

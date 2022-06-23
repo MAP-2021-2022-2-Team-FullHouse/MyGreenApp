@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_green_app/model/RecycleCenter.dart';
 import 'package:my_green_app/services/navigation_service.dart';
+import 'package:my_green_app/ui/views/map/MapViewModel.dart';
 import '../../model/user.dart' as AppUser;
 import '../firebase.dart';
 import 'recycleCenter_service.dart';
@@ -18,6 +19,13 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
   final _firebaseAuth = FirebaseAuthentication();
   FirebaseAuth get _auth => _firebaseAuth.auth;
 
+Future queryData(String queryString)async{
+  print("aaaaa");
+  return FirebaseFirestore.instance
+  .collection("RecycleCenter")
+  .where( "name", isGreaterThanOrEqualTo:queryString)
+  .get();
+}
   @override
   Future deleteCenter(String docemail) async {
     try {
@@ -90,6 +98,8 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
     return centerList;
   }
 
+  
+
   @override
   Stream<List<RecycleCenter>> readRC() => FirebaseFirestore.instance
       .collection('RecycleCenter')
@@ -97,6 +107,8 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
       .map((snapshot) => snapshot.docs
           .map((doc) => RecycleCenter.fromJson(doc.data()))
           .toList());
+
+  
 
   @override
   Future getRC(String docemail) async {
@@ -171,7 +183,9 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
       required String email,
       required double lat,
       required double lon,
-      required String password}) async {
+      required String password,
+     
+      File? file}) async {
     late bool n, i, p;
     try {
       n = await isRecycleCenterNameExist(name);
@@ -191,6 +205,9 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
         email: email,
         password: password,
       );
+      String? img='';
+      int pos=image.indexOf('.');
+      img="${recycleCenterCredential.user?.uid}${image.substring(pos)}";
 
       firestoreInstance
           .collection("RecycleCenter")
@@ -199,7 +216,7 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
         "name": name,
         "address": address,
         "phone": phone,
-        "image": image,
+        "image": img,
         "email": email,
         "lat": lat,
         "lon": lon,
@@ -219,6 +236,10 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
       }).then((value) {
         print('User added');
       });
+
+      if(file!=null){
+        uploadFile(img, file);
+      }
       return "ok";
     } on FirebaseAuthException catch (e) {
       String error;
@@ -375,8 +396,9 @@ class RecycleCenterServiceFirebase extends RecycleCenterService {
     }
   }
 
-  static Future<UploadTask?> uploadFile(String destination, File file) async {
+  static Future<UploadTask?> uploadFile(String img, File file) async {
     try {
+      final destination="recycleCenter/"+img;
       final ref = FirebaseStorage.instance.ref(destination);
       return ref.putFile(file);
     } on FirebaseException catch (e) {

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:my_green_app/model/RecycleCenter.dart';
 
@@ -15,7 +16,9 @@ abstract class RecycleCenterService {
       required String email,
       required double lat,
       required double lon,
-      required String password});
+      required String password,
+   
+      File? file});
   Future editRecycleCenter(
       {required String oriemail,
       required String name,
@@ -34,4 +37,5 @@ abstract class RecycleCenterService {
   Future<bool> isEmailRegisteredByOthers(String oriemail, String newemail);
   Future getRC(String docemail);
   Future<String> getImage(String pathname);
+  Future queryData(String queryString);
 }

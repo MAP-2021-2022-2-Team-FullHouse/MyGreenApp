@@ -1,5 +1,5 @@
 import 'package:my_green_app/model/RecycleCenter.dart';
-import 'package:my_green_app/services/recycleCenter/GPSService.dart';
+import 'package:my_green_app/services/recycleCenter/gps_service.dart';
 import 'package:my_green_app/ui/views/recyclecenter/EditRecycleCenter/EditRecycleCenter_Screen.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/app/locator.dart';

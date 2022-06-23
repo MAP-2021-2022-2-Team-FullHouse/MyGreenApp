@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/recyclecenter/UserView/rc_screenstate.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_button.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
-
+import 'package:my_green_app/ui/views/recyclecenter/UserView/rc_viewmodel.dart'
+    as userRCviewmodel;
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_viewmodel.dart'
     as rcviewmodel;
 
@@ -18,7 +19,7 @@ Widget RCList(RecycleCenter rc)
     child: ListTile(
       leading: CircleAvatar(
         child: FutureBuilder(
-      future: st.getImgUrl("files/"+rc.image),
+      future: st.getImgUrl("recycleCenter/"+rc.image),
       builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
         bool error = snapshot.data == null;
         return Container(
@@ -36,6 +37,16 @@ Widget RCList(RecycleCenter rc)
             Text(rc.phone),
             Text(rc.address),
              ButtonBar(children: <Widget>[
+                                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                    ),
+                    onPressed: () {
+                      userRCviewmodel.RCViewmodel.navigateAppointment(rc.email);
+                    },
+                    child: Text('Make Appointment'),
+                  ),
                                   ElevatedButton(
                                     style: ButtonStyle(
                                       backgroundColor:

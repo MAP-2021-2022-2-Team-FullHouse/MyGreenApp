@@ -6,7 +6,7 @@ class RCAppBar extends StatelessWidget implements PreferredSizeWidget {
   }) : super(key: key);
 
   @override
-  Size get preferredSize => Size.fromHeight(75);
+  Size get preferredSize => const Size.fromHeight(75);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class RCAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 100,
       elevation: 10,
       automaticallyImplyLeading: false, 
-      title: Text("Nearby Recycle Center"),
+      title: const Text("Nearby Recycle Center"),
       centerTitle: true,
     );
   }

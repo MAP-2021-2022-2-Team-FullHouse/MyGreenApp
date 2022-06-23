@@ -11,6 +11,8 @@ abstract class AuthenticationService {
   Future signOut();
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUser();
   Future updateUser(AppUser.User user);
+   Future readUser(String docID);
+   String? getUID();
   //Future<String> getCurrentRole();
   /* static Future<String> getImage(String pathname) async {
     try {

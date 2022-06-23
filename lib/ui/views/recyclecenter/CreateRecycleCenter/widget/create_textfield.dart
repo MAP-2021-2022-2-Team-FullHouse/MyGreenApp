@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CreateTextField extends StatefulWidget {
   TextEditingController? controller;
   final String? hintText, labelText;
@@ -28,7 +29,7 @@ class CreateTextField extends StatefulWidget {
 }
 
 class _CreateTextFieldState extends State<CreateTextField> {
-  var _text = '';
+  
   TextInputType? key;
   get controller => widget.controller;
 
@@ -44,20 +45,18 @@ class _CreateTextFieldState extends State<CreateTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TextFormField(
-        controller: widget.controller,
-        obscureText: obscureText,
-        keyboardType: keyboard,
-        initialValue:widget.initialValue,
-        decoration: InputDecoration(
-            hintText: widget.hintText,
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
-            labelText: widget.labelText,
-            errorText: error,
-            labelStyle: TextStyle(color: Colors.black, fontSize: 12)),
-        onChanged: (text) => setState(() => ""),
-      ),
+    return TextFormField(
+      controller: widget.controller,
+      obscureText: obscureText,
+      keyboardType: keyboard,
+      initialValue:widget.initialValue,
+      decoration: InputDecoration(
+          hintText: widget.hintText,
+          hintStyle: const TextStyle(color: Colors.grey, fontSize: 12),
+          labelText: widget.labelText,
+          errorText: error,
+          labelStyle: const TextStyle(color: Colors.black, fontSize: 12)),
+      onChanged: (text) => setState(() => ""),
     );
   }
 
