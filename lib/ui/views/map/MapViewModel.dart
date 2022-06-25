@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:my_green_app/services/recycleCenter/GPSService.dart';
+import 'package:my_green_app/services/recycleCenter/gps_service.dart';
 import 'package:my_green_app/services/recycleCenter/recycleCenter_service_firebase.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'dart:math';
@@ -14,15 +14,7 @@ class MapViewModel {
   static List rcenterList = [];
   static final Set<Marker> markers = Set();
 
-  // Future getCenterList() async {
-  //   // Get docs from collection reference
-  //   QuerySnapshot querySnapshot = await _collectionRef.get();
-
-  //   // Get data from docs and convert map to List
-  //   centerList = querySnapshot.docs.map((doc) => doc.data()).toList();
-
-  //   return centerList;
-  // }
+  
 
   static double calculateDistance(lat1, lon1, lat2, lon2) {
     var p = 0.017453292519943295;
@@ -74,10 +66,17 @@ class MapViewModel {
       for (int i = 0; i < rcenterList.length; i++) {
         markers.add(new Marker(
           markerId: MarkerId(rcenterList[i]['name']),
-          infoWindow: InfoWindow(title: rcenterList[i]['name']),
+          infoWindow: InfoWindow(
+            title: rcenterList[i]['name'],
+            snippet: rcenterList[i]['address'],
+            onTap: (){
+              openMap(rcenterList[i]['lat'].toDouble(),rcenterList[i]['lon'].toDouble());
+            }
+            ),
           icon: BitmapDescriptor.defaultMarker,
           position: LatLng(rcenterList[i]['lat'].toDouble(),
               rcenterList[i]['lon'].toDouble()),
+         
         ));
         print(rcenterList[i]['lat'].toDouble());
       }

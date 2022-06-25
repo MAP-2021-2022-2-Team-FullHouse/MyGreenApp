@@ -18,12 +18,19 @@ class _AppointmentNavigationBarState extends State<AppointmentNavigationBar> {
       currentIndex: currIndex,
       onTap: (index) => setState(() => {
             currIndex = index,
-            if (currIndex == 2)
-              {Navigator.of(context).pushNamed(routes.homeRoute)}
+            if (currIndex == 0)
+              {Navigator.of(context).pushReplacementNamed(routes.user_rcRoute)}
+            else if (currIndex == 2)
+              {Navigator.of(context).pushReplacementNamed(routes.homeRoute)}
+            else if (currIndex == 3)
+              {Navigator.of(context).pushReplacementNamed(routes.shopRoute)}
             else if (currIndex == 4)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
-            else if (currIndex == 0)
-              {Navigator.of(context).pushReplacementNamed(routes.user_rcRoute)}
+            else if (currIndex == 1)
+              {
+                Navigator.of(context)
+                    .pushReplacementNamed(routes.appointmentRoute)
+              }
           }),
       items: [
         BottomNavigationBarItem(
@@ -44,7 +51,7 @@ class _AppointmentNavigationBarState extends State<AppointmentNavigationBar> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Admin',
+          label: 'Profile',
         ),
       ],
     );

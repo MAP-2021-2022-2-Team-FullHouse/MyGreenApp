@@ -16,6 +16,7 @@ import 'package:my_green_app/services/authentication/authentication_service.dart
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../../services/recycleCenter/recycleCenter_service_firebase.dart';
+import '../../appointment/CreateAppointment/create_appointment_viewmodel.dart';
 
 class RCViewmodel extends BaseViewModel {
   /* StreamSubscription? _streamListener;
@@ -31,6 +32,12 @@ class RCViewmodel extends BaseViewModel {
       notifyListeners();
     }); */
   }
+
+  static void navigateAppointment(String chosenRecycleCenter) {
+    CreateAppointment_ViewModel.retrievedRCEmail = chosenRecycleCenter;
+    NavigationService().navigateTo(createAppointmentRoute);
+  }
+
   Future<String?> getImgUrl(String imgUrl) async {
     RecycleCenterServiceFirebase rcService = new RecycleCenterServiceFirebase();
     var result = await rcService.getImage(imgUrl);
@@ -38,6 +45,7 @@ class RCViewmodel extends BaseViewModel {
   }
 
   Stream<List<RecycleCenter>> getRCList() {
+    print("here");
     var results = _recycleCenterService.readRC();
 
     return results;
@@ -49,10 +57,5 @@ class RCViewmodel extends BaseViewModel {
         cos((lat2 - lat1) * p) / 2 +
         cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
-  }
-
-  static void navigateAppointment(String chosenRecycleCenter) {
-    CreateAppointment_ViewModel.retrievedRCEmail = chosenRecycleCenter;
-    NavigationService().navigateTo(createAppointmentRoute);
   }
 }

@@ -6,6 +6,7 @@ import 'package:my_green_app/ui/views/register/register_screen.dart';
 import 'package:my_green_app/ui/views/admin/admin_screen.dart';
 import 'package:my_green_app/ui/views/reset/reset_screen.dart';
 
+import '../ui/views/appointment/appointment_screen.dart';
 import '../ui/views/home/home_screen.dart';
 
 class Routes {

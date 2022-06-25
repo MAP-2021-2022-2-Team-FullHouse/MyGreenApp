@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_green_app/app/routes.dart';
 import 'package:my_green_app/ui/views/home/home.dart';
 import 'package:my_green_app/ui/views/home/home_viewmodel.dart';
 
 class HomeScreenful extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => HomeScreenful());
+  const HomeScreenful({Key? key}) : super(key: key);
+
+  static Route route() => MaterialPageRoute(builder: (_) => const HomeScreenful());
 
   @override
   State<HomeScreenful> createState() => HomeScreenfulState();
@@ -20,6 +21,6 @@ class HomeScreenfulState extends State<HomeScreenful> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: HomeBody(this));
+    return Scaffold(body: HomeBody(state:this));
   }
 }

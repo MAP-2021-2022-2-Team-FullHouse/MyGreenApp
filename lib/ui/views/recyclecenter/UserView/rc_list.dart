@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/recyclecenter/UserView/rc_screenstate.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_button.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
-import 'package:my_green_app/constants/routes_path.dart' as routes;
-
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_viewmodel.dart'
     as rcviewmodel;
 
@@ -16,11 +14,11 @@ import '../../map/MapViewModel.dart';
 Widget RCList(RecycleCenter rc) {
   RCScreenfulState st = new RCScreenfulState();
   return SingleChildScrollView(
-      child: Expanded(
-    child: ListTile(
+      child: Column(children: [
+    ListTile(
         leading: CircleAvatar(
           child: FutureBuilder(
-            future: st.getImgUrl("files/" + rc.image),
+            future: st.getImgUrl("recycleCenter/" + rc.image),
             builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
               bool error = snapshot.data == null;
               return Container(
@@ -47,6 +45,16 @@ Widget RCList(RecycleCenter rc) {
                       foregroundColor: MaterialStateProperty.all(Colors.white),
                     ),
                     onPressed: () {
+                      userRCviewmodel.RCViewmodel.navigateAppointment(rc.email);
+                    },
+                    child: Text('Make Appointment'),
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                    ),
+                    onPressed: () {
                       MapViewModel.openMap(rc.lat, rc.lon);
                     },
                     child: Text('Direction'),
@@ -61,16 +69,6 @@ Widget RCList(RecycleCenter rc) {
                     },
                     child: Text('Call'),
                   ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.green),
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                    ),
-                    onPressed: () {
-                      userRCviewmodel.RCViewmodel.navigateAppointment(rc.email);
-                    },
-                    child: Text('Make Appointment'),
-                  ),
                 ],
               ),
               SizedBox(
@@ -80,7 +78,7 @@ Widget RCList(RecycleCenter rc) {
                 ),
               ),
             ])),
-  ));
+  ]));
 }
 
 Widget buildImage(String? data) {

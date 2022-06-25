@@ -4,10 +4,14 @@ import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:my_green_app/services/authentication/authentication_service_firebase.dart';
 import 'package:my_green_app/services/navigation_service.dart';
-import 'package:my_green_app/ui/views/login/login_viewmodel.dart';
+import 'package:my_green_app/services/reward/reward_firebaseservice.dart';
+import 'package:my_green_app/services/reward/reward_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:stacked_services/stacked_services.dart';
+
+import '../../../services/authentication/authentication_service_firebase.dart';
+import '../login/login_viewmodel.dart';
 
 class HomeViewmodel extends BaseViewModel {
   final _authService = locator<AuthenticationService>();
@@ -31,7 +35,11 @@ class HomeViewmodel extends BaseViewModel {
       return result;
     }
   }
-
+  Future <String> getRewardPoint()async{  
+    RewardService service=RewardFirebaseService();
+    var result=service. getRewardPoint();
+    return result;
+  }
   String getRole() {
     return LoginViewmodel.currRole;
   }

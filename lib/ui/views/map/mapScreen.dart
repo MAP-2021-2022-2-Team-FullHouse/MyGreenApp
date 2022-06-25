@@ -42,7 +42,7 @@ static late CameraPosition  cam;
           'Nearest Recycle center',
           style: TextStyle(color: Colors.black.withOpacity(1.0)),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green,
       ),
 
       body: Stack(children: [

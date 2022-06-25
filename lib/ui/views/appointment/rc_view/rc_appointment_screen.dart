@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_appbar.dart';
-import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_navbar.dart';
+
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_screenstate.dart';
+
+import '../../home/rc_home_navBar.dart';
 
 class RecycleCenterAppointmentScreen extends StatelessWidget {
   static Route route() =>
@@ -15,7 +17,7 @@ class RecycleCenterAppointmentScreen extends StatelessWidget {
         appBar: const RecycleCenterAppointmentAppBar(),
         body: RecycleCenterAppointmentScreenful(),
         //floatingActionButton: const AdminFloat(),
-        bottomNavigationBar: RecycleCenterAppointmentNavigationBar(),
+        bottomNavigationBar: const RCHomeNavigationBar(pageNo: 0),
       ),
     );
   }

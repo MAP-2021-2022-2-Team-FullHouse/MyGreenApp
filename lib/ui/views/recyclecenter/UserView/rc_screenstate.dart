@@ -28,6 +28,7 @@ class RCScreenfulState extends State<RCScreenful> {
   
   Future<String?> getImgUrl(String imgUrl) async {
     RCViewmodel vm=new RCViewmodel();
+    print(imgUrl);
     return await vm.getImgUrl(imgUrl);
   }
 }

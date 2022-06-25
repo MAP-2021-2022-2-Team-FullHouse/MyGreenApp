@@ -28,15 +28,11 @@ class _HomeNavigationBarState extends State<HomeNavigationBar> {
               {
                 Navigator.of(context)
                     .pushReplacementNamed(routes.appointmentRoute)
-
-                /* else if (HomeViewmodel.getCurrentRole() == 'Recycle Center')
-                  {
-                    Navigator.of(context).pushReplacementNamed(
-                        routes.recycleCenterAppointmentRoute)
-                  } */
               }
             else if (currIndex == 2)
               {Navigator.of(context).pushReplacementNamed(routes.homeRoute)}
+            else if (currIndex == 3)
+              {Navigator.of(context).pushReplacementNamed(routes.shopRoute)}
             else if (currIndex == 4)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
           }),

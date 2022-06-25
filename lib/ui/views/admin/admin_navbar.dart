@@ -19,13 +19,17 @@ class _AdminNavigationBarState extends State<AdminNavigationBar> {
             currIndex = index,
             if (currIndex == 1)
               {Navigator.of(context).pushNamed(routes.rcRoute)}
-            else if (currIndex == 4)
-              {Navigator.of(context).pushNamed(routes.profileRoute)}
+              else if(currIndex==0)
+              {Navigator.of(context).pushNamed(routes.adminRewardRoute)}
+            else if (currIndex == 3)
+              {Navigator.of(context).pushNamed(routes.recyclingInfoRoute)}
+            else if (currIndex == 2)
+              {Navigator.of(context).pushNamed(routes.adminRoute)}
           }),
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.map),
-          label: 'Map',
+          icon: Icon(Icons.redeem),
+          label: 'Reward',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.recycling),
@@ -36,12 +40,8 @@ class _AdminNavigationBarState extends State<AdminNavigationBar> {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.store),
-          label: 'Shop',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Admin',
+          icon: Icon(Icons.article),
+          label: 'Info',
         ),
       ],
     );

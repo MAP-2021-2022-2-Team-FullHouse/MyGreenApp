@@ -6,7 +6,7 @@ import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screenstate.da
 import 'package:my_green_app/ui/views/recyclecenter/view/view_map.dart';
 import 'package:stacked/stacked.dart';
 import '../recyclecenter/recyclecenter_viewmodel.dart';
-import 'CreateRecycleCenter/CreateRecycleCenter_Screen.dart';
+import 'CreateRecycleCenter/create_recycle_center_screen.dart';
 
 class RecycleCenterBody extends StatefulWidget {
   final RecycleCenterScreenfulState state;
