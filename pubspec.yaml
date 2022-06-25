@@ -54,6 +54,7 @@ dependencies:
   path: ^1.8.1
   firebase_image: ^1.1.1
   datetime_picker_formfield: ^2.0.0
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
