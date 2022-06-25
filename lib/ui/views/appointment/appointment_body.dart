@@ -25,12 +25,6 @@ class _AppointmentBodyState extends State<AppointmentBody> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  /* const SizedBox(height: 10),
-                  Container(
-                    width: 350,
-                    height: 50,
-                    //child:
-                  ), */
                   const SizedBox(height: 20),
                   StreamBuilder<List<Appointment>>(
                       stream: model.getAppointmentList(),
@@ -38,7 +32,30 @@ class _AppointmentBodyState extends State<AppointmentBody> {
                         if (snapshot.hasError) {
                           return Center(child: Text('Something went wrong'));
                         }
+
                         if (snapshot.hasData) {
+                          if (snapshot.data!.length == 0) {
+                            return ListView(
+                                physics: NeverScrollableScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                children: [
+                                  Center(
+                                      child: Text(
+                                          'You do not have any appointments made.')),
+                                  ElevatedButton.icon(
+                                    icon: const Icon(
+                                      Icons.add,
+                                      size: 18.0,
+                                    ),
+                                    label: const Text('Make An Appointment'),
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed(
+                                          routes.createAppointmentRoute);
+                                    },
+                                  ),
+                                ]);
+                          }
                           final appointments = snapshot.data!;
 
                           return ListView(

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 
-class AdminNavigationBar extends StatefulWidget {
-  const AdminNavigationBar({Key? key}) : super(key: key);
+class RecyclingInfoNavigationBar extends StatefulWidget {
+  const RecyclingInfoNavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<AdminNavigationBar> createState() => _AdminNavigationBarState();
+  State<RecyclingInfoNavigationBar> createState() =>
+      _RecyclingInfoNavigationBarState();
 }
 
-class _AdminNavigationBarState extends State<AdminNavigationBar> {
-  int currIndex = 2;
+class _RecyclingInfoNavigationBarState
+    extends State<RecyclingInfoNavigationBar> {
+  int currIndex = 3;
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -19,14 +21,14 @@ class _AdminNavigationBarState extends State<AdminNavigationBar> {
             currIndex = index,
             if (currIndex == 1)
               {Navigator.of(context).pushNamed(routes.rcRoute)}
-              else if(currIndex==0)
+            else if (currIndex == 0)
               {Navigator.of(context).pushNamed(routes.adminRewardRoute)}
             else if (currIndex == 3)
               {Navigator.of(context).pushNamed(routes.recyclingInfoRoute)}
             else if (currIndex == 2)
               {Navigator.of(context).pushNamed(routes.adminRoute)}
           }),
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.redeem),
           label: 'Reward',

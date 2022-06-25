@@ -8,6 +8,8 @@ import 'package:my_green_app/ui/views/profile/profile_screen.dart';
 import 'package:my_green_app/ui/views/recyclecenter/CreateRecycleCenter/create_recycle_center_screen.dart';
 import 'package:my_green_app/ui/views/recyclecenter/UserView/rc_screen.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screen.dart';
+import 'package:my_green_app/ui/views/recyclinginfo/create_recyclinginfo/create_recyclinginfo_screen.dart';
+import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_screen.dart';
 
 import '../ui/views/appointment/CreateAppointment/create_appointment_screen.dart';
 import '../ui/views/appointment/CreateAppointment/create_appointment_upload.dart';
@@ -18,6 +20,9 @@ import '../ui/views/appointment/view/appointment_view_screen.dart';
 import '../ui/views/home/rc_home_screen.dart';
 import '../ui/views/reward/adminViewReward/admin_reward_screen.dart';
 import '../ui/views/reward/createReward/create_reward_screen.dart';
+import 'package:my_green_app/ui/views/shop/manage_listing/managelisting_screen.dart';
+import 'package:my_green_app/ui/views/shop/shop_screen.dart';
+
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -56,6 +61,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case routes.rcAppointmentDetailsRoute:
       return MaterialPageRoute(
           builder: (context) => RecycleCenterAppointmentDetailsScreen());
+    case routes.shopRoute:
+      return MaterialPageRoute(builder: (context) => ShopScreen());
+    case routes.manageListingRoute:
+      return MaterialPageRoute(builder: (context) => ManageListingScreen());
+    case routes.recyclingInfoRoute:
+      return MaterialPageRoute(builder: (context) => RecyclingInfoScreen());
+    case routes.createRecyclingInfoRoute:
+      return MaterialPageRoute(builder: (context) => CreateRecyclingInfoScreen());
 
     
     default:

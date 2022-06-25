@@ -15,8 +15,8 @@ Widget RCList(RecycleCenter rc)
 { 
   RCScreenfulState st=new RCScreenfulState();
   return SingleChildScrollView(
-  child:Expanded(
-    child: ListTile(
+  child:Column(
+    children: [ListTile(
       leading: CircleAvatar(
         child: FutureBuilder(
       future: st.getImgUrl("recycleCenter/"+rc.image),
@@ -87,7 +87,7 @@ Widget RCList(RecycleCenter rc)
                                    
         ]
         )
-),
+),]
   )
 
 

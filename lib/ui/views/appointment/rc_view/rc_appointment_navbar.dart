@@ -21,36 +21,28 @@ class _RecycleCenterAppointmentNavigationBarState
       currentIndex: currIndex,
       onTap: (index) => setState(() => {
             currIndex = index,
-            if (currIndex == 2)
-              {Navigator.of(context).pushNamed(routes.homeRoute)}
-            else if (currIndex == 4)
-              {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
-            else if (currIndex == 1)
+            if (currIndex == 0)
               {
                 Navigator.of(context)
-                    .pushNamed(routes.recycleCenterAppointmentRoute)
+                    .pushReplacementNamed(routes.recycleCenterAppointmentRoute)
               }
+            else if (currIndex == 1)
+              {Navigator.of(context).pushReplacementNamed(routes.rcHomeRoute)}
+            else if (currIndex == 2)
+              {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
           }),
       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.map),
-          label: 'Map',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.recycling),
-          label: 'Recycle',
+          icon: Icon(Icons.book_online),
+          label: 'Appointment',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.store),
-          label: 'Shop',
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Admin',
+          label: 'Profile',
         ),
       ],
     );

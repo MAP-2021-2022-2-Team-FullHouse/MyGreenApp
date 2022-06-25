@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 
-class AppointmentNavigationBar extends StatefulWidget {
-  const AppointmentNavigationBar({Key? key}) : super(key: key);
+class ShopNavigationBar extends StatefulWidget {
+  const ShopNavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<AppointmentNavigationBar> createState() =>
-      _AppointmentNavigationBarState();
+  State<ShopNavigationBar> createState() =>
+      _ShopNavigationBarState();
 }
 
-class _AppointmentNavigationBarState extends State<AppointmentNavigationBar> {
-  int currIndex = 1;
+class _ShopNavigationBarState
+    extends State<ShopNavigationBar> {
+  int currIndex = 3;
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -20,16 +21,15 @@ class _AppointmentNavigationBarState extends State<AppointmentNavigationBar> {
             currIndex = index,
             if (currIndex == 0)
               {Navigator.of(context).pushReplacementNamed(routes.user_rcRoute)}
+            
             else if (currIndex == 2)
               {Navigator.of(context).pushReplacementNamed(routes.homeRoute)}
             else if (currIndex == 3)
               {Navigator.of(context).pushReplacementNamed(routes.shopRoute)}
             else if (currIndex == 4)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
-              else if(currIndex==1)
-              {Navigator.of(context).pushReplacementNamed(routes.appointmentRoute)}
           }),
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.map),
           label: 'Map',
