@@ -1,5 +1,3 @@
-
-
 class User {
   String username;
   String password;
@@ -11,6 +9,7 @@ class User {
   String address;
   String image;
   int point;
+  String deviceToken;
 
   User(
       {this.username = '',
@@ -22,7 +21,8 @@ class User {
       this.phone = '',
       this.address = '',
       this.image = '',
-      this.point=0});
+      this.point = 0,
+      this.deviceToken = ''});
 
   User.fromJson(Map<String, dynamic>? json)
       : this(
@@ -36,7 +36,8 @@ class User {
             phone: json?['phone'],
             address: json?['address'],
             image: json?['image'],
-            point:json?['point']);
+            point: json?['point'],
+            deviceToken: json?['fcmToken']);
 
   Map<String, dynamic> toJson() => {
         'username': username,
@@ -47,7 +48,6 @@ class User {
         'email': email,
         'phone': phone,
         'address': address,
-        
       };
 
   Map<String, dynamic> updateFirestore() =>
@@ -60,8 +60,7 @@ class User {
       role: role ?? this.role,
       name: name ?? this.name,
       email: email ?? this.email,
-      phone: phone ?? this.phone
-      );
+      phone: phone ?? this.phone);
 
   User.copy(from)
       : this(
@@ -73,10 +72,9 @@ class User {
             email: from.email,
             phone: from.phone);
 
-    
-            /* 
+  /* 
             username: json?['username'],
             password: json?['password'], 
             uid: json?['uid'],*/
-            
+
 }

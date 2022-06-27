@@ -36,8 +36,8 @@ class AppointmentDetailsScreenState extends State<AppointmentDetailsScreen> {
     return viewmodel.getImgUrls(AppointmentViewmodel.chosenID);
   }
 
-  void onCancel(AppointmentViewmodel viewmodel) {
-    viewmodel.cancelAppointment(AppointmentViewmodel.chosenID);
+  void onCancel(AppointmentViewmodel viewmodel, String rcEmail) {
+    viewmodel.cancelAppointment(AppointmentViewmodel.chosenID, rcEmail);
   }
 
   @override

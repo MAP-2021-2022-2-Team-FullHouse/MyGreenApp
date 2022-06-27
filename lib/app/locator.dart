@@ -1,7 +1,10 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:my_green_app/services/appointment/appointment_service.dart';
 import 'package:my_green_app/services/appointment/appointment_service_firebase.dart';
+import 'package:my_green_app/services/local_notification_service.dart';
 import 'package:my_green_app/services/navigation_service.dart';
+import 'package:my_green_app/services/push_notification_service.dart';
 import 'package:my_green_app/services/recycleCenter/recycleCenter_service.dart';
 import 'package:my_green_app/services/recycleCenter/recycleCenter_service_firebase.dart';
 import 'package:my_green_app/services/registration/registration_service.dart';
@@ -34,7 +37,7 @@ import 'package:my_green_app/services/recycling_info/recycling_info_service.dart
 import 'package:my_green_app/services/recycling_info/recycling_info_service_firebase.dart';
 
 GetIt locator = GetIt.instance;
-
+final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 void setupLocator() {
   // Services
   locator.registerLazySingleton<RegistrationService>(
@@ -54,6 +57,10 @@ void setupLocator() {
   locator.registerLazySingleton<NavigatorService>(() => NavigatorService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
+  locator.registerLazySingleton<PushNotificationService>(
+      () => PushNotificationService());
+  locator.registerLazySingleton<LocalNotificationService>(
+      () => LocalNotificationService());
 
   locator.registerLazySingleton<UserRepository>(() => UserRepository());
 

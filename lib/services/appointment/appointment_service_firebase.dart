@@ -9,6 +9,7 @@ import 'package:my_green_app/model/Appointment.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:my_green_app/services/authentication/authentication_service_firebase.dart';
 import 'package:my_green_app/services/navigation_service.dart';
+import 'package:my_green_app/services/push_notification_service.dart';
 import 'package:path/path.dart' as Path;
 import '../firebase.dart';
 import 'appointment_service.dart';
@@ -89,7 +90,14 @@ class AppointmentServiceFirebase extends AppointmentService {
 
   @override
   String? getEmail() {
-    return AuthenticationServiceFirebase().getUID();
+    return AuthenticationServiceFirebase().getCurrentUserEmail();
+    //print(email);
+  }
+
+  @override
+  Future<String> getRole() async {
+    var id = _auth.currentUser!.uid;
+    return await AuthenticationServiceFirebase().getRole(id);
     //print(email);
   }
 
@@ -241,19 +249,47 @@ class AppointmentServiceFirebase extends AppointmentService {
   }
 
   @override
-  Future cancelAppointment(String id) async {
+  Future cancelAppointment(String id, String oppositeEmail) async {
     await firestoreInstance
         .collection("Appointment")
         .doc(id)
         .update({'status': 'cancel'});
+    var currentRole = await getRole();
+    if (currentRole == 'user') {
+      var userDevice = await retrieveUserDevice(oppositeEmail);
+      PushNotificationService().sendPushMessage(
+          'Appointment', 'An appointment has been cancelled.', userDevice);
+    } else if (currentRole == 'Recycle Center') {
+      var userDevice = await retrieveUserDevice(oppositeEmail);
+      PushNotificationService().sendPushMessage(
+          'Appointment', 'Your appointment has been cancelled.', userDevice);
+    }
   }
 
   @override
-  Future changeAppointmentStatus(String id, String status) async {
+  Future changeAppointmentStatus(String id, String status, String email) async {
     await firestoreInstance
         .collection("Appointment")
         .doc(id)
         .update({'status': status});
+
+    var userDevice = await retrieveUserDevice(email);
+    if (status == 'approve') {
+      PushNotificationService().sendPushMessage('Congratulations!',
+          "Your appointment has been approved.", userDevice);
+    } else if (status == 'reject') {
+      PushNotificationService().sendPushMessage(
+          'Appointment', 'Your appointment has been rejected.', userDevice);
+    } else if (status == 'going') {
+      PushNotificationService().sendPushMessage('Appointment',
+          'The recycle center is going to pick up now.', userDevice);
+    } else if (status == 'complete') {
+      PushNotificationService().sendPushMessage(
+          'Appointment', 'Your appointment has been completed.', userDevice);
+    } else {
+      PushNotificationService().sendPushMessage(
+          'Appointment', 'Check out your appointment status.', userDevice);
+    }
   }
   /* @override
   Future<String> getImage() async {
@@ -315,6 +351,16 @@ class AppointmentServiceFirebase extends AppointmentService {
         .get();
     var name = await collection.docs[0]['name'];
     return name;
+  }
+
+  @override
+  Future<String> retrieveUserDevice(String email) async {
+    var collection = await FirebaseFirestore.instance
+        .collection('User')
+        .where('email', isEqualTo: email)
+        .get();
+    var token = await collection.docs[0]['fcmToken'];
+    return token;
   }
 
   @override

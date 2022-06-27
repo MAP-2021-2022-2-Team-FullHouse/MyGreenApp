@@ -43,7 +43,7 @@ class CreateAppointment_ViewModel extends BaseViewModel {
       required AddImageState state}) async {
     //String uid = _authenticationService.getUID();
     //currUserID = uid;
-    var uEmail = await _authenticationService.getUID();
+    var uEmail = await _authenticationService.getCurrentUserEmail();
     // currUserEmail = uEmail;
     dynamic result = await _AppointmentService.addAppointment(
         name: name,

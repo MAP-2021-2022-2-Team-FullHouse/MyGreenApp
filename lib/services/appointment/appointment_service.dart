@@ -22,11 +22,12 @@ abstract class AppointmentService {
   Future<String> retrieveRecycleCenterName(String email);
   Future<String> retrieveUserName(String email);
   Future<String> retrievePhone(String email);
+  Future<String> retrieveUserDevice(String email);
   Future<String> getID(String rcEmail, DateTime dt, String uEmail);
   Stream<List<Appointment>> readUserAppointment();
   String? getEmail();
-  Future cancelAppointment(String id);
-  Future changeAppointmentStatus(String id, String status);
+  Future cancelAppointment(String id, String oppositeEmail);
+  Future changeAppointmentStatus(String id, String status, String email);
   Future getPhotoURLs(String id);
   Future readPhoto(String email);
   Future getPostsOnceOff();

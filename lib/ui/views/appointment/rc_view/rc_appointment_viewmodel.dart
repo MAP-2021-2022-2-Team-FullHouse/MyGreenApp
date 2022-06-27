@@ -103,12 +103,13 @@ class RecycleCenterAppointmentViewmodel extends BaseViewModel {
     //notifyListeners();
   }
 
-  Future cancelAppointment(String id) async {
-    await _AppointmentService.cancelAppointment(id);
+  Future cancelAppointment(String id, String oppositeEmail) async {
+    await _AppointmentService.cancelAppointment(id, oppositeEmail);
   }
 
-  Future changeAppointmentStatus(String id, String newStatus) async {
-    await _AppointmentService.changeAppointmentStatus(id, newStatus);
+  Future changeAppointmentStatus(
+      String id, String newStatus, String email) async {
+    await _AppointmentService.changeAppointmentStatus(id, newStatus, email);
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> getAppointmentData() {
