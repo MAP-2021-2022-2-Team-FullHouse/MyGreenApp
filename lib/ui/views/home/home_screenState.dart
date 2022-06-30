@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:my_green_app/model/PushNotification.dart';
 import 'package:my_green_app/services/local_notification_service.dart';
+import 'package:my_green_app/services/push_notification_service.dart';
 import 'package:my_green_app/ui/notification_badge.dart';
 import 'package:my_green_app/ui/views/home/home.dart';
 import 'package:my_green_app/ui/views/home/home_viewmodel.dart';
@@ -25,9 +27,9 @@ class HomeScreenful extends StatefulWidget {
   void onLogout(HomeViewmodel viewmodel) {}
 }
 
-Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+/* Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
-}
+} */
 
 class HomeScreenfulState extends State<HomeScreenful> {
   late int _totalNotifications = 0;
@@ -37,35 +39,40 @@ class HomeScreenfulState extends State<HomeScreenful> {
   late FirebaseMessaging _messaging = FirebaseMessaging.instance;
   late PushNotification? _notificationInfo = PushNotification();
   String notificationMsg = "Waiting for notifications";
+  final StreamController _myStreamCtrl = StreamController.broadcast();
+  Stream get onVariableChanged => _myStreamCtrl.stream;
+  var stream;
+
   @override
   void initState() {
     _totalNotifications = 0;
     super.initState();
     //LocalNotificationService.initilize();
     getToken();
-    requestPermission();
-    loadFCM();
-    listenFCM();
-    sendPushMessage(
+    HomeViewmodel().requestPermission();
+    HomeViewmodel().loadFCM();
+    HomeViewmodel().listenFCM();
+    /*PushNotificationService().sendPushMessage(
         'Notification Body',
         'Notification Title',
         /* 'eu4WdXm8SwSTr47yDIJMf8:APA91bFS2306ncfClQiyqrUwTHJJCCXuRp6wsJogVAbzPoOoqZjj-auFFcedvhB9Vk0NmpaL4MK0A9exWkKrpyee1G95bNHNPILVC7qKidT4-87aLefRgMOVaUcUj3DWATk1QvLZZphA' 
-        'cWfStNg1R1iFnSS2sEWRIM:APA91bHsHKP5WAvsgFDBU7Zl16zUbn3wF_jRvHQg1Xm0VwOAfaSBE4AIBMpuk28k7DKzgbFpesBeFVfK3NAn8t-hWjx9-WyH-QsBfB0_J1wpl34BNGBBfmKdno6Gn0XXzECZnz9w-w2C'
-        'crnZVWXQQqWkKXIhem53DM:APA91bF16pB7kNYMdoadGQc1gkmi6F-BUfVLnona33HQWbXgivvWVMUTMRasmImwO9wAfo1N0C9XjJwfGzgkCROsgdqv_MM-3rmKYi5KWhnxsdNFiqtCMpsKTIFcBtlDPx1zJZ5gDgXH',*/
-        'd0DOM9z-RZWozXeDyi6z9m:APA91bEj8DUolmcaO8_PTcnLvPCVp7vKkEI3HXKQVvx3n0l2ZZPNoV4Pbq0qiae8VK-fegBB_Kthwdmp9yPC5vfNTAE3Fa-lWqWh9ll9h6OmvEn6HMiU_Y66xujd9OHBsK2hA8rC2nWR');
-
+        'cWfStNg1R1iFnSS2sEWRIM:APA91bHsHKP5WAvsgFDBU7Zl16zUbn3wF_jRvHQg1Xm0VwOAfaSBE4AIBMpuk28k7DKzgbFpesBeFVfK3NAn8t-hWjx9-WyH-QsBfB0_J1wpl34BNGBBfmKdno6Gn0XXzECZnz9w-w2C'*/
+        //'crnZVWXQQqWkKXIhem53DM:APA91bF16pB7kNYMdoadGQc1gkmi6F-BUfVLnona33HQWbXgivvWVMUTMRasmImwO9wAfo1N0C9XjJwfGzgkCROsgdqv_MM-3rmKYi5KWhnxsdNFiqtCMpsKTIFcBtlDPx1zJZ5gDgXH');
+        //'d0DOM9z-RZWozXeDyi6z9m:APA91bEj8DUolmcaO8_PTcnLvPCVp7vKkEI3HXKQVvx3n0l2ZZPNoV4Pbq0qiae8VK-fegBB_Kthwdmp9yPC5vfNTAE3Fa-lWqWh9ll9h6OmvEn6HMiU_Y66xujd9OHBsK2hA8rC2nWR');
+        'dkZsDfABRhedmTmrSB866g:APA91bFnknFhGA4LzTLL7uZpBEReQDv1jRk_y4vElhCgsx6B2G89xy-xZaR-VdQvjCMt4CuhUaCBXamuoDLvkxhI58cY2pswlUL8hNYuGvqYClS8-uDQZOxwtija6RpZmjEedfsI6W4x');
+    //'cipQ0SiCScGu4R9z--C1GT:APA91bE95WbwArZKK7TC2p0qUSRY0NyuUhQMNI7P_kO4VeClo_KsjLmFp7crX_86k_yaZPY6WdudXT_w8vgAyFk4v3TAzzRgjNTEtQ9cZstA1mFXKiqpWx3B4bOvfQ3iFzI4k45X0eWC');
     // Terminated State
     FirebaseMessaging.instance.getInitialMessage().then((event) {
       if (event != null) {
         setState(() {
-          notificationMsg =
-              "${event.notification!.title} ${event.notification!.body} I am coming from terminated state";
-          _totalNotifications++;
+          // notificationMsg =
+          "${event.notification!.title} ${event.notification!.body} I am coming from terminated state";
+          Navigator.of(context).pushNamed(event.data['route']);
         });
       }
     });
 
-    // Foregrand State
+     Foregrand State
     FirebaseMessaging.onMessage.listen((event) {
       LocalNotificationService.showNotificationOnForeground(event);
       setState(() {
@@ -78,11 +85,11 @@ class HomeScreenfulState extends State<HomeScreenful> {
     // background State
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
       setState(() {
-        notificationMsg =
-            "${event.data['route']} ${event.notification!.body} I am coming from background";
+        //notificationMsg =
+        //    "${event.data['route']} ${event.notification!.body} I am coming from background";
         Navigator.of(context).pushNamed(event.data['route']);
       });
-    });
+    });*/
     /* FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       registerNotification();
       checkForInitialMessage();
@@ -92,14 +99,16 @@ class HomeScreenfulState extends State<HomeScreenful> {
   }
 
   void getToken() async {
-    await FirebaseMessaging.instance.getToken().then((token) {
+    /*await FirebaseMessaging.instance.getToken().then((token) {
       setState(() {
         mtoken = token;
         print(mtoken);
       });
-    });
+    });*/
+    mtoken = HomeViewmodel().getToken();
+    print(mtoken);
   }
-
+/*
   void requestPermission() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -175,39 +184,7 @@ class HomeScreenfulState extends State<HomeScreenful> {
         );
       }
     });
-  }
-
-  void sendPushMessage(String body, String title, String token) async {
-    try {
-      await http.post(
-        Uri.parse('https://fcm.googleapis.com/fcm/send'),
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-          'Authorization':
-              'key=AAAAW_9lKRA:APA91bFJkK4zXIzF2UM7ahoz5NCJfZ74-wCPw2NJ6DcTAQ0SuwFMkV0oh8bKyzOK5rG7P2vicrUv3L5sLbF3Ui6JIDRji3cWJdn5-W30-xHbvH3C32P7pphSITYaFjUvFE1qPNOG_TY5',
-        },
-        body: jsonEncode(
-          <String, dynamic>{
-            'notification': <String, dynamic>{
-              'body': body,
-              'title': title,
-            },
-            'priority': 'high',
-            'data': <String, dynamic>{
-              'click_action': 'FLUTTER_NOTIFICATION_CLICK',
-              'id': '1',
-              'status': 'done',
-              'route': routes.appointmentRoute
-            },
-            "to": token,
-          },
-        ),
-      );
-      print('done');
-    } catch (e) {
-      print("error push notification");
-    }
-  }
+  }*/
 
   void onLogout(HomeViewmodel viewmodel) async {
     await viewmodel.signOut();
@@ -216,11 +193,7 @@ class HomeScreenfulState extends State<HomeScreenful> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: HomeBody(
-          state: this,
-          notification: _notificationInfo,
-          totalNotifications: _totalNotifications,
-          notificationMsg: notificationMsg),
+      body: HomeBody(state: this, notificationMsg: notificationMsg),
     );
   }
 }

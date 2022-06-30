@@ -62,22 +62,4 @@ class CreateAppointment_ViewModel extends BaseViewModel {
       return "Something went wrong.";
     }
   }
-
-  /* static Future uploadFile(AddImageState state) async {
-    int i = 1;
-    var image = getUploadedImages(state);
-    var ref;
-
-    for (var img in image) {
-      ref = AppointmentServiceFirebase.transferReference(img, currUserEmail);
-      await ref.putFile(img).whenComplete(() async {
-        await ref.getDownloadURL().then((value) {
-          //imgRef.add({'url': value});
-          imagesURL.add(value);
-          i++;
-        });
-      });
-    }
-    return imagesURL;
-  } */
 }

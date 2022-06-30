@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // ignore: library_prefixes
 import 'package:my_green_app/model/user.dart' as AppUser;
-import 'package:my_green_app/ui/notification_badge.dart';
 import 'package:my_green_app/ui/views/home/home_screenState.dart';
 import 'package:my_green_app/ui/views/home/widget/logout_button.dart';
 import 'package:stacked/stacked.dart';
@@ -12,15 +11,10 @@ import '../home/home_viewmodel.dart';
 
 class HomeBody extends StatelessWidget {
   final HomeScreenfulState state;
-  final PushNotification? notification;
+  //final PushNotification? notification;
   final String notificationMsg;
-  final int totalNotifications;
-  const HomeBody(
-      {Key? key,
-      required this.state,
-      required this.notification,
-      required this.totalNotifications,
-      required this.notificationMsg})
+  //final int totalNotifications;
+  const HomeBody({Key? key, required this.state, required this.notificationMsg})
       : super(key: key);
 
   @override
@@ -29,11 +23,9 @@ class HomeBody extends StatelessWidget {
 
     return Center(
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-
         children: <Widget>[
-          notification != null
-              ? Column(
+          /* notification != null
+              //? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -53,12 +45,12 @@ class HomeBody extends StatelessWidget {
                     ),
                   ],
                 )
-              : Container(),
+              : Container(), */
           const SizedBox(height: 20),
-          Text(
+          /* Text(
             notificationMsg,
             textAlign: TextAlign.center,
-          ),
+          ), */
           const Text(
             "User Home Page",
             style: TextStyle(
@@ -147,22 +139,10 @@ class HomeBody extends StatelessWidget {
             builder: (context, viewmodel, child) =>
                 LogoutButton(viewmodel: viewmodel, state: state),
             viewModelBuilder: () => HomeViewmodel(),
+            onModelReady: (model) => model.listenToMessage(),
           ),
         ],
       ),
     );
-  }
-
-  Future<String> readUser() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    final docUser =
-        FirebaseFirestore.instance.collection("users").doc(user!.uid);
-    final snapshot = await docUser.get();
-
-    if (snapshot.exists) {
-      return "Hi!${AppUser.User.fromJson(snapshot.data()!).name}";
-    } else {
-      return " ";
-    }
   }
 }

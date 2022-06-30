@@ -43,7 +43,7 @@ class RecycleCenterAppointmentViewmodel extends BaseViewModel {
   late List<Appointment> _posts = [];
   List<Appointment> get posts => _posts;
 
-  void listenToPosts() {
+  /* void listenToPosts() {
     setBusy(true);
     _AppointmentService.listenToPostsRealTime().listen((postsData) {
       List<Appointment> updatedPosts = postsData;
@@ -53,7 +53,7 @@ class RecycleCenterAppointmentViewmodel extends BaseViewModel {
       }
       setBusy(false);
     });
-  }
+  } */
 
   Future navigateToCreateView() async {
     await NavigationService().navigateTo(homeRoute);

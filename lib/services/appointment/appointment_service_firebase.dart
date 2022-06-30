@@ -257,7 +257,7 @@ class AppointmentServiceFirebase extends AppointmentService {
     var currentRole = await getRole();
     if (currentRole == 'user') {
       var userDevice = await retrieveUserDevice(oppositeEmail);
-      PushNotificationService().sendPushMessage(
+      PushNotificationService().sendPushMessageRecycleCenter(
           'Appointment', 'An appointment has been cancelled.', userDevice);
     } else if (currentRole == 'Recycle Center') {
       var userDevice = await retrieveUserDevice(oppositeEmail);
@@ -291,18 +291,6 @@ class AppointmentServiceFirebase extends AppointmentService {
           'Appointment', 'Check out your appointment status.', userDevice);
     }
   }
-  /* @override
-  Future<String> getImage() async {
-    try {
-      final ref = FirebaseStorage.instance.ref().child(pathname);
-      String imageUrl = await ref.getDownloadURL();
-      print(imageUrl);
-      return imageUrl;
-    } catch (e) {
-      print("Error: $e");
-      return e.toString();
-    }
-  } */
 
   @override
   Future readPhoto(String email) async {
@@ -376,6 +364,7 @@ class AppointmentServiceFirebase extends AppointmentService {
     //return phone;
   }
 
+/*
   @override
   Future getPostsOnceOff() async {
     try {
@@ -400,7 +389,7 @@ class AppointmentServiceFirebase extends AppointmentService {
     }
   }
 
-  // Create the controller that will broadcast the posts
+   // Create the controller that will broadcast the posts
   final StreamController<List<Appointment>> _appsController =
       StreamController<List<Appointment>>.broadcast();
 
@@ -427,5 +416,5 @@ class AppointmentServiceFirebase extends AppointmentService {
 
     // Return the stream underlying our _postsController.
     return _appsController.stream;
-  }
+  } */
 }

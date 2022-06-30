@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_body.dart';
-import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_body2.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_viewmodel.dart';
 
 class RecycleCenterAppointmentScreenful extends StatefulWidget {
