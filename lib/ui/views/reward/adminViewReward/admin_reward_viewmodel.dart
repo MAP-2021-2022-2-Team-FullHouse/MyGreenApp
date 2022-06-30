@@ -57,6 +57,12 @@ class AdminRewardViewmodel extends BaseViewModel {
    
   }
 
+   Future<String?> getImgUrl(String imgUrl) async {
+    RewardService rs=new RewardFirebaseService();
+    var result=await rs.getImage(imgUrl);
+    return result;
+  }
+
 
   Future deleteReward(String docID) async {
     var dialogResponse = await _dialogService.showConfirmationDialog(

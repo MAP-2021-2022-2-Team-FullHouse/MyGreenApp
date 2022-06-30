@@ -29,6 +29,7 @@ class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
 
  
    void addRecycleCenter() async {
+
     dynamic result;
     try {
       result = await viewmodel.addRecycleCenter(
@@ -65,6 +66,22 @@ class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
           // ignore: use_build_context_synchronously
           showAlertDialog(context, "This phone is already registered.");
         }
+        else if(result=="Form is not completely filled."){
+          // ignore: use_build_context_synchronously
+          showAlertDialog(context, "Form is not completely filled.");
+        }
+        else if(result=="Invalid email format."){
+          // ignore: use_build_context_synchronously
+          showAlertDialog(context, "Invalid email format.");
+        }
+        else if(result=="Invalid phone format."){
+          // ignore: use_build_context_synchronously
+          showAlertDialog(context, "Invalid phone format.");
+        }
+        else if(result=="Password too short."){
+          // ignore: use_build_context_synchronously
+          showAlertDialog(context, "Password too short.");
+        }
         else {
           // ignore: use_build_context_synchronously
           showConfirmDialog(context, "Created Successfully!");
@@ -73,7 +90,7 @@ class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
       }
      
     } catch (e) {
-      showAlertDialog(context, "Form is not completely filled.");
+      showAlertDialog(context, "Something wrong. Please try again.");
     }
   }
 

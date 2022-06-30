@@ -51,4 +51,12 @@ class HomeViewmodel extends BaseViewModel {
     getUserRole();
     return currUserRole;
   }
+
+  Future<String>  myRole()async{
+    String role=await _authService.getUserRole();
+    print("lalalalala"+role);
+    return role;
+   
+
+  }
 }

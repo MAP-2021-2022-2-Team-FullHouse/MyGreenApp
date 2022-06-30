@@ -6,6 +6,8 @@ class Reward {
   late String description;
   late int quantity;
   late int point;
+  late String image;
+
 
 
    Reward(
@@ -14,8 +16,21 @@ class Reward {
       this.description = '',
       this.quantity= 0,
       this.point =0,
+      this.image=''
       });
 
+  
+  Map<String, dynamic> toJson() => {
+       
+        'title': title,
+        'description': description,
+        'quantity': quantity,
+        'redeemPoint': point,
+        'image':image,
+     
+     
+        
+      };
 
   static Reward fromJson(String docId, Map<String, dynamic> json) {
    
@@ -24,7 +39,8 @@ class Reward {
       title: json['title'],
       description: json['description'],
       quantity: json['quantity'],
-      point: json['redeemPoint']);
+      point: json['redeemPoint'],
+      image:json['image']);
       
       return reward;
 }

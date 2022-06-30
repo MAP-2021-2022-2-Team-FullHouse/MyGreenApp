@@ -13,6 +13,7 @@ abstract class AuthenticationService {
   Future updateUser(AppUser.User user);
    Future readUser(String docID);
    String? getUID();
+    Future getUserRole();
   //Future<String> getCurrentRole();
   /* static Future<String> getImage(String pathname) async {
     try {

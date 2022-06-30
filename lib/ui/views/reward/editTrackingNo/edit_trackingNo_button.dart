@@ -15,10 +15,10 @@ class EditTrackingNoButton extends StatelessWidget {
         height: 35,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: const Color.fromRGBO(195, 196, 141, 100),
+          color: Color.fromARGB(255, 227, 231, 0),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 3,
               offset: const Offset(0, 2), // changes position of shadow
@@ -26,6 +26,6 @@ class EditTrackingNoButton extends StatelessWidget {
           ],
         ),
         child: MaterialButton(
-            onPressed: () => {state.editTrackingNo()}, child: const Text("Save")));
+            onPressed: () => {state.editTrackingNo()}, child: const Text("Save", style:TextStyle(fontSize: 16))));
   }
 }

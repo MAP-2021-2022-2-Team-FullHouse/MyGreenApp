@@ -41,4 +41,17 @@ class RecycleCenter {
       lat: json['lat'] as double,
       lon: json['lon'] as double,
       password: json['password']);
+
+      Map<String, dynamic> toJson() => {
+        'name': name,
+        'address': address,
+        'phone': phone,
+        'image': image,
+        'email': email,
+        'lat':lat,
+        'lon':lon,
+        'password':password, 
+      };
 }
+
+

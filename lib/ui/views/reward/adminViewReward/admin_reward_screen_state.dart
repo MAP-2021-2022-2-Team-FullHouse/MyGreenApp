@@ -24,7 +24,13 @@ class AdminRewardScreenfulState extends State<AdminRewardScreenful> {
   Widget build(BuildContext context) {
     return const Scaffold(body: AdminRewardBody());
   }
+  Future<String?> getImgUrl(String imgUrl, AdminRewardViewmodel viewmodel) async {
+    print(viewmodel.getImgUrl(imgUrl));
+    return await viewmodel.getImgUrl(imgUrl);
+  }
 }
+
+
 
 showAlertDialog(BuildContext context, String text) {
   // set up the button

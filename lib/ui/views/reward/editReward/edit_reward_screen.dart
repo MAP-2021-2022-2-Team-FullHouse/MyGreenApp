@@ -17,7 +17,8 @@ class EditRewardScreenState extends State<EditRewardScreen> {
   final descriptionController = TextEditingController();
   final quantityController = TextEditingController();
   final pointController = TextEditingController();
-  
+   var fileField=TextEditingController();
+  String? filename;
   
   EditRewardViewModel viewmodel = EditRewardViewModel();
   
@@ -49,6 +50,7 @@ class EditRewardScreenState extends State<EditRewardScreen> {
         description:descriptionController.text,
         quantity: int.parse(quantityController.text),
         point: int.parse(pointController.text),
+        image:fileField.text,
         
       );
       

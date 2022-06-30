@@ -1,44 +1,31 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// ignore: library_prefixes
-import 'package:my_green_app/model/user.dart' as AppUser;
-import 'package:my_green_app/ui/views/home/home_screenState.dart';
-import 'package:my_green_app/ui/views/home/widget/logout_button.dart';
-import 'package:stacked/stacked.dart';
-import '../home/home_viewmodel.dart';
-import 'home_redeem_point.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:my_green_app/ui/views/home/home_viewmodel.dart';
 
-class HomeBody extends StatelessWidget {
-  final HomeScreenfulState state;
-  const HomeBody({Key? key, required this.state}): super(key: key);
-  
+class HomeRedeemPoint extends StatefulWidget {
+  const HomeRedeemPoint({Key? key}) : super(key: key);
+
+  @override
+  State<HomeRedeemPoint> createState() => _HomeRedeemPointState();
+}
+
+class _HomeRedeemPointState extends State<HomeRedeemPoint> {
+  String role='';
+  @override
+  void initState(){
+    setRole();
+    super.initState();
+
+  }
   @override
   Widget build(BuildContext context) {
-HomeViewmodel vm=HomeViewmodel();
+    HomeViewmodel vm=HomeViewmodel();
+      if( HomeViewmodel.role.compareTo("user")==0)
+      {
 
-
-
-    return Center(
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-
-        children: <Widget>[
-        const SizedBox(height:20),
-          const Text("User Home Page",
-          style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          shadows: [
-                            Shadow(
-                                color: Colors.grey,
-                                offset: Offset(2, 1),
-                                blurRadius: 10)
-                          ],
-                        ),),
-         const SizedBox(height:20),
-         Container(
+      }
+    return Container(
                   margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.0),
@@ -111,49 +98,12 @@ HomeViewmodel vm=HomeViewmodel();
                       },
                     ),
 
-                      ] )  ),
-        
-      
-          
-                     
+                      ] )  );
 
-                   
-                    
-        SizedBox(height:5),
-        const SizedBox(height:50),
-                ViewModelBuilder<HomeViewmodel>.reactive(
-            builder: (context, viewmodel, child)
-               { return LogoutButton(viewmodel: viewmodel, state: state);},
-            viewModelBuilder: () => HomeViewmodel(),
-          ),
-                     
-                      
-                    ],
-                  ),
-                );
-                
-          
- 
-    
-   
     
   }
-
-  // Future<String> readUser() async {
-  //   User? user = FirebaseAuth.instance.currentUser;
-  //   final docUser =
-  //       FirebaseFirestore.instance.collection("users").doc(user!.uid);
-  //   final snapshot = await docUser.get();
-
-  //   if (snapshot.exists) {
-  //     return "Hi!${AppUser.User.fromJson(snapshot.data()!).name}";
-  //   } else {
-  //     return " ";
-  //   }
-  // }
-  
+  Future setRole() async{
+    role=await HomeViewmodel().myRole();
+  }
 }
-
-
-
 
