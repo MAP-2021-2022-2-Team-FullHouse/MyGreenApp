@@ -16,12 +16,12 @@ class AdminBody extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Admin Home Page"),
-              ViewModelBuilder<AdminViewmodel>.reactive(
-                builder: (context, viewmodel, child) =>
-                    LogoutButton(viewmodel: viewmodel, state: _state),
-                viewModelBuilder: () => AdminViewmodel(),
-              ),
+              // Text("Admin Home Page"),
+              // ViewModelBuilder<AdminViewmodel>.reactive(
+              //   builder: (context, viewmodel, child) =>
+              //       LogoutButton(viewmodel: viewmodel, state: _state),
+              //   viewModelBuilder: () => AdminViewmodel(),
+              // ),
             ],
           ),
         ),

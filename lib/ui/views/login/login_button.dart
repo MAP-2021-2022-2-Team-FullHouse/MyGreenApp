@@ -16,10 +16,10 @@ class LoginButton extends StatelessWidget {
         height: 30,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Color.fromRGBO(195, 196, 141, 100),
+          color: Color.fromARGB(255, 251, 255, 1),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 3,
               offset: Offset(0, 2),

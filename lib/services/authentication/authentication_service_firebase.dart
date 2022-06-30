@@ -167,4 +167,27 @@ class AuthenticationServiceFirebase extends AuthenticationService {
       return e.toString();
     }
   }
+
+  @override
+  Future getUserName()async{
+     try {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      String name='';
+      await FirebaseFirestore.instance
+                  .collection('User')
+                  .doc(uid)
+                  .get()
+                  .then((value) {
+                 name= value.data()?['name'];    
+              }); 
+              return name;
+      
+    } catch (e) {
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
+  }
 }

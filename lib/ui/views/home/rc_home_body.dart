@@ -7,7 +7,7 @@ import 'package:my_green_app/ui/views/home/home_screenState.dart';
 import 'package:my_green_app/ui/views/home/widget/logout_button.dart';
 import 'package:stacked/stacked.dart';
 import '../home/home_viewmodel.dart';
-import 'home_redeem_point.dart';
+
 
 
 class RCHomeBody extends StatelessWidget {
@@ -26,19 +26,19 @@ HomeViewmodel vm=HomeViewmodel();
 
         children: <Widget>[
         const SizedBox(height:20),
-          const Text("Recycle Center Home Page",
-          style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          shadows: [
-                            Shadow(
-                                color: Colors.grey,
-                                offset: Offset(2, 1),
-                                blurRadius: 10)
-                          ],
-                        ),),
-         const SizedBox(height:20),
+        //   const Text("Recycle Center Home Page",
+        //   style: TextStyle(
+        //                   fontSize: 25,
+        //                   color: Colors.black,
+        //                   fontWeight: FontWeight.w700,
+        //                   shadows: [
+        //                     Shadow(
+        //                         color: Colors.grey,
+        //                         offset: Offset(2, 1),
+        //                         blurRadius: 10)
+        //                   ],
+        //                 ),),
+        //  const SizedBox(height:20),
        
         
       
@@ -49,11 +49,11 @@ HomeViewmodel vm=HomeViewmodel();
                     
         SizedBox(height:5),
         const SizedBox(height:50),
-                ViewModelBuilder<HomeViewmodel>.reactive(
-            builder: (context, viewmodel, child)
-               { return LogoutButton(viewmodel: viewmodel, state: state);},
-            viewModelBuilder: () => HomeViewmodel(),
-          ),
+          //       ViewModelBuilder<HomeViewmodel>.reactive(
+          //   builder: (context, viewmodel, child)
+          //      { return LogoutButton(viewmodel: viewmodel, state: state);},
+          //   viewModelBuilder: () => HomeViewmodel(),
+          // ),
                      
                       
                     ],

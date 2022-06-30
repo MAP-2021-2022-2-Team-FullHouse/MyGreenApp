@@ -14,7 +14,7 @@ class LogoutButton extends StatelessWidget {
         height: 30,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Color.fromRGBO(195, 196, 141, 100),
+          color: Color.fromARGB(255, 247, 251, 6),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -28,6 +28,6 @@ class LogoutButton extends StatelessWidget {
             onPressed: () async {
               state.onLogout(viewmodel);
             },
-            child: Text("Logout")));
+            child: Text("Logout", style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16))));
   }
 }

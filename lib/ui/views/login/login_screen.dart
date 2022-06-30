@@ -47,7 +47,8 @@ class LoginScreenState extends State<LoginScreen> {
     Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
-        Navigator.pushNamed(context, routes.loginRoute);
+        // Navigator.pushNamed(context, routes.loginRoute);
+         Navigator.pop(context);
       },
     );
 

@@ -10,30 +10,60 @@ late final String imagePath;
 late final bool isEdit;
 ProfileScreenState state = ProfileScreenState();
 //late final VoidCallback onClicked;
-Widget buildName(DocumentSnapshot<Map<String, dynamic>> user) => Column(
-      children: [
-        Container(width: 128, height: 128, child: futureBulder(user['image'])),
-        const SizedBox(height: 8),
-        Text(
-          user['name'],
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          "Email: " + user['email'],
-          style: TextStyle(color: Colors.grey),
-        ),
-        Text(
-          "Phone: " + user['phone'],
-          style: TextStyle(color: Colors.grey),
-        ),
-        Text(
-          "Address: " + user['address'],
-          style: TextStyle(color: Colors.grey),
-        ),
-        const SizedBox(height: 15),
-      ],
-    );
+Widget buildName(DocumentSnapshot<Map<String, dynamic>> user) => Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(width: 128, height: 128, child: futureBulder(user['image'])),
+          const SizedBox(height: 8),
+          Center(
+            child: Text(
+              
+              user['name'],
+              textAlign:TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(35, 3,10, 3),
+            child: Align(
+              alignment:Alignment.centerLeft,
+              child: Text(
+                "Email: " + user['email'],
+                style: TextStyle(color: Colors.grey,fontSize: 18),
+              ),
+            ),
+          ),
+          
+           Padding(
+            padding: const EdgeInsets.fromLTRB(35, 3, 10, 3),
+            child: Align(
+              alignment:Alignment.centerLeft,
+              child: Text(
+                "Phone: " + user['phone'],
+                style: TextStyle(color: Colors.grey,fontSize: 18),
+              ),
+            ),
+          ),
+          const SizedBox(height: 5),
+           Padding(
+           padding: const EdgeInsets.fromLTRB(12, 3, 12, 3),
+            child: Align(
+              alignment:Alignment.center,
+              child: Text(
+                  user['address'],
+                 textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey,fontSize: 18),
+              ),
+            ),
+          ),
+         
+          const SizedBox(height: 15),
+        ],
+      ),
+);
 
 Widget futureBulder(String imgUrl) {
   return FutureBuilder(

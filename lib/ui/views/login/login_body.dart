@@ -23,15 +23,17 @@ class LoginBody extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Color.fromRGBO(209, 239, 181, 100),
-                      Color.fromRGBO(211, 250, 214, 100)
+                      Color.fromARGB(250, 123, 253, 2),
+                      Color.fromARGB(255, 210, 255, 127)
                     ]),
               ),
               child: Column(children: [
+                SizedBox(height: 50,),
                 Container(
                   child:
                       Image.asset('assets/logo.png', height: 150, width: 250),
                 ),
+                 SizedBox(height: 70,),
                 Container(
                     margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                     decoration: new BoxDecoration(
@@ -51,7 +53,7 @@ class LoginBody extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           SizedBox(
-                            height: 10.0,
+                            height: 20.0,
                           ),
                           ...buildLoginTextFields(_state),
                           LoginRegisterText(),

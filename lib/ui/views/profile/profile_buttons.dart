@@ -8,6 +8,7 @@ import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_button.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screenstate.dart'
     as state;
 import 'package:my_green_app/ui/views/reward/userViewReward/user_reward_screen.dart';
+import 'package:my_green_app/ui/views/home/home_viewmodel.dart';
 
 class ProfileButton extends StatelessWidget {
   final ProfileViewmodel viewmodel;
@@ -16,6 +17,7 @@ class ProfileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      String role = '';
     return Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -27,7 +29,7 @@ class ProfileButton extends StatelessWidget {
               size: 20.0,
             ),
             style: ElevatedButton.styleFrom(
-              primary: Color.fromRGBO(195, 196, 141, 100), // Background color
+              primary: Color.fromARGB(250, 115, 253, 2), // Background color
             ),
             label: Text('Edit Profile'),
             onPressed: () async {
@@ -39,13 +41,17 @@ class ProfileButton extends StatelessWidget {
           SizedBox(
             width: 20,
           ),
-          ElevatedButton.icon(
+          FutureBuilder(future:HomeViewmodel().myRole(), builder:(context, snapshot){
+        if(snapshot.hasData){
+          role="${snapshot.data}";
+          return  role.compareTo("user") == 0
+          ? ElevatedButton.icon(
             icon: Icon(
               Icons.card_giftcard,
               size: 20.0,
             ),
             style: ElevatedButton.styleFrom(
-              primary: Color.fromRGBO(195, 196, 141, 100), // Background color
+              primary: Color.fromARGB(250, 115, 253, 2), // Background color
             ),
             label: Text('Redeem Rewards'),
             onPressed: () async {
@@ -53,7 +59,28 @@ class ProfileButton extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => UserRewardScreen()),
               );
             },
-          ),
+          )
+           :Container();
+        }else{
+          return Container();
+        }
+      }),
+          
+          // ElevatedButton.icon(
+          //   icon: Icon(
+          //     Icons.card_giftcard,
+          //     size: 20.0,
+          //   ),
+          //   style: ElevatedButton.styleFrom(
+          //     primary: Color.fromARGB(250, 115, 253, 2), // Background color
+          //   ),
+          //   label: Text('Redeem Rewards'),
+          //   onPressed: () async {
+          //     Navigator.of(context).push(
+          //       MaterialPageRoute(builder: (context) => UserRewardScreen()),
+          //     );
+          //   },
+          // ),
         ]));
   }
 }

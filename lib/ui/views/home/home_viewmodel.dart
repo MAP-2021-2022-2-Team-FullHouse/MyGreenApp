@@ -59,4 +59,12 @@ class HomeViewmodel extends BaseViewModel {
    
 
   }
+
+  Future<String>  myName()async{
+    String name=await _authService.getUserName();
+    
+    return name;
+   
+
+  }
 }

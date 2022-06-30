@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+
         appBar: const HomeAppBar(),
         body: HomeScreenful(),
         bottomNavigationBar: HomeNavigationBar(pageNo: 2),

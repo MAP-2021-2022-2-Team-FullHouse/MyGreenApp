@@ -7,7 +7,7 @@ import 'package:my_green_app/ui/views/home/home_screenState.dart';
 import 'package:my_green_app/ui/views/home/widget/logout_button.dart';
 import 'package:stacked/stacked.dart';
 import '../home/home_viewmodel.dart';
-import 'home_redeem_point.dart';
+
 
 class HomeBody extends StatelessWidget {
   final HomeScreenfulState state;
@@ -25,18 +25,65 @@ HomeViewmodel vm=HomeViewmodel();
 
         children: <Widget>[
         const SizedBox(height:20),
-          const Text("User Home Page",
-          style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          shadows: [
-                            Shadow(
-                                color: Colors.grey,
-                                offset: Offset(2, 1),
-                                blurRadius: 10)
-                          ],
-                        ),),
+        // FutureBuilder<String>(
+        //   future: HomeViewmodel().myName(),
+        //   builder: (context, snapshot){
+        //     if(snapshot.hasError){
+        //       return Text("User Home Page",style: TextStyle(
+        //                   fontSize: 25,
+        //                   color: Colors.black,
+        //                   fontWeight: FontWeight.w700,
+        //                   shadows: [
+        //                     Shadow(
+        //                         color: Colors.grey,
+        //                         offset: Offset(2, 1),
+        //                         blurRadius: 10)
+        //                   ],
+        //                 ),);
+        //     }
+        //     if(snapshot.hasData){
+        //       return SizedBox(
+
+        //         width:300,
+        //         child: Text('Welcome, \n${snapshot.data}', textAlign: TextAlign.center,style: TextStyle(
+        //                     fontSize: 25,
+        //                     color: Colors.black,
+        //                     fontWeight: FontWeight.w700,
+        //                     shadows: [
+        //                       Shadow(
+        //                           color: Colors.grey,
+        //                           offset: Offset(2, 1),
+        //                           blurRadius: 10)
+        //                     ],
+        //                   ),),
+        //       );
+        //     }else{
+        //       return Text("User Home Page",style: TextStyle(
+        //                   fontSize: 25,
+        //                   color: Colors.black,
+        //                   fontWeight: FontWeight.w700,
+        //                   shadows: [
+        //                     Shadow(
+        //                         color: Colors.grey,
+        //                         offset: Offset(2, 1),
+        //                         blurRadius: 10)
+        //                   ],
+        //                 ),);
+        //     }
+
+        //   }),
+          // const Text("User Home Page",
+          // style: TextStyle(
+          //                 fontSize: 25,
+          //                 color: Colors.black,
+          //                 fontWeight: FontWeight.w700,
+          //                 shadows: [
+          //                   Shadow(
+          //                       color: Colors.grey,
+          //                       offset: Offset(2, 1),
+          //                       blurRadius: 10)
+          //                 ],
+          //               ),),
          const SizedBox(height:20),
          Container(
                   margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -54,7 +101,8 @@ HomeViewmodel vm=HomeViewmodel();
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 80),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
                         height: 5.0,
@@ -110,6 +158,7 @@ HomeViewmodel vm=HomeViewmodel();
                       
                       },
                     ),
+                    SizedBox(height:10),
 
                       ] )  ),
         
@@ -121,11 +170,11 @@ HomeViewmodel vm=HomeViewmodel();
                     
         SizedBox(height:5),
         const SizedBox(height:50),
-                ViewModelBuilder<HomeViewmodel>.reactive(
-            builder: (context, viewmodel, child)
-               { return LogoutButton(viewmodel: viewmodel, state: state);},
-            viewModelBuilder: () => HomeViewmodel(),
-          ),
+          //       ViewModelBuilder<HomeViewmodel>.reactive(
+          //   builder: (context, viewmodel, child)
+          //      { return LogoutButton(viewmodel: viewmodel, state: state);},
+          //   viewModelBuilder: () => HomeViewmodel(),
+          // ),
                      
                       
                     ],
