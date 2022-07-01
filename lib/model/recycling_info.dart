@@ -9,7 +9,6 @@ class RecyclingInfo {
     this.title = '',
     this.content = '',
     this.image = '',
-    //this.createdDate = DateTime.utc(2022, 1, 9),
     Timestamp? creationDate,
   }) : createdDate = creationDate ?? Timestamp.now();
 
@@ -32,9 +31,4 @@ class RecyclingInfo {
       content: json['content'],
       image: json['image'],
       creationDate: json['createdDate'] as Timestamp);
-  /*json['createdTime'] == null
-          ? null
-          : const CustomDateTimeConverter()
-              .fromJson(json['createdTime'] as String)*/
-  //json['createdDate'] as DateTime);
 }

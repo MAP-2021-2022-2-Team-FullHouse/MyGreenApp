@@ -7,22 +7,9 @@ abstract class RecyclingInfoService {
       {required String title,
       required String content,
       required String image,
-      //required String createdDate,
       File? file});
   Future deleteRecyclingInfo(String infoId);
   Stream<List<RecyclingInfo>> readRecyclingInfoList();
   Future<String> getRecyclingInfoImage(String pathname);
   Future<RecyclingInfo?> readRecyclingInfo(String infoId);
-  /*Future editRecyclingInfo(
-      {required String id,
-      required String title,
-      required String content,
-      required String image,
-      required String creationDate});
-  Future deleteCenter(String infoId);
-  Future getRecyclingInfoList();
-  Stream<List<RecyclingInfo>> readRecyclingInfo();
-  Future<RecyclingInfo?> getRecyclingInfo(String infoId);
-  Future getRC(String docemail);
-  */
 }

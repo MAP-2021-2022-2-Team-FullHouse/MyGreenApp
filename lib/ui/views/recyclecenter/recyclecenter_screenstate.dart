@@ -21,50 +21,41 @@ class RecycleCenterScreenfulState extends State<RecycleCenterScreenful> {
     await viewmodel.deleteCenter(email);
   }
 
-  
-
-  Widget getViewContainer(context,RecycleCenterViewmodel viewmodel)
-  {
-    if(viewmodel.isViewAction==true)
-    {
-      print (RecycleCenterViewmodel.viewAction);
+  Widget getViewContainer(context, RecycleCenterViewmodel viewmodel) {
+    if (viewmodel.isViewAction == true) {
+      //print(RecycleCenterViewmodel.viewAction);
       return ViewMap(
-              viewmodel: RecycleCenterViewmodel(),
-              state: this,
-              model: RecycleCenterViewmodel.recycleCenter);
-    }
-    else 
-    {
+          viewmodel: RecycleCenterViewmodel(),
+          state: this,
+          model: RecycleCenterViewmodel.recycleCenter);
+    } else {
       return Container();
     }
   }
 
   Future<String?> getImgUrl(String imgUrl) async {
-    RecycleCenterViewmodel viewmodel= new RecycleCenterViewmodel();
+    RecycleCenterViewmodel viewmodel = RecycleCenterViewmodel();
     return await viewmodel.getImgUrl(imgUrl);
   }
 
-  void onView(RecycleCenterViewmodel viewmodel, String email)
-  async {
+  void onView(RecycleCenterViewmodel viewmodel, String email) async {
     await viewmodel.viewRC(email);
-    
   }
-  void onCloseView(RecycleCenterViewmodel viewmodel)
-  {
+
+  void onCloseView(RecycleCenterViewmodel viewmodel) {
     viewmodel.closeViewRC();
-    
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: RecycleCenterBody(state:this));
+    return Scaffold(body: RecycleCenterBody(state: this));
   }
 }
 
 showAlertDialog(BuildContext context, String text) {
   // set up the button
   Widget okButton = TextButton(
-    child: Text("OK"),
+    child: const Text("OK"),
     onPressed: () {
       Navigator.pushNamed(context, routes.loginRoute);
     },
@@ -72,7 +63,7 @@ showAlertDialog(BuildContext context, String text) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title: Text("Error"),
+    title: const Text("Error"),
     content: Text(text),
     actions: [
       okButton,

@@ -3,6 +3,7 @@ import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_body.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_viewmodel.dart';
 
+// ignore: use_key_in_widget_constructors
 class RecyclingInfoScreenful extends StatefulWidget {
   static Route route() =>
       MaterialPageRoute(builder: (_) => RecyclingInfoScreenful());
@@ -13,42 +14,13 @@ class RecyclingInfoScreenful extends StatefulWidget {
 
 class RecyclingInfoScreenfulState extends State<RecyclingInfoScreenful> {
   void onDelete(RecyclingInfoViewmodel viewmodel, String id) async {
-    //dynamic result;
     await viewmodel.deleteRecyclingInfo(id);
   }
 
   Future<String?> getImgUrl(String imgUrl) async {
-    RecyclingInfoViewmodel viewmodel = new RecyclingInfoViewmodel();
+    RecyclingInfoViewmodel viewmodel = RecyclingInfoViewmodel();
     return await viewmodel.getImgUrl(imgUrl);
   }
-
-/*
-  Widget getViewContainer(context,RecycleCenterViewmodel viewmodel)
-  {
-    if(viewmodel.isViewAction==true)
-    {
-      print (RecycleCenterViewmodel.viewAction);
-      return ViewMap(
-              viewmodel: RecycleCenterViewmodel(),
-              state: this,
-              model: RecycleCenterViewmodel.recycleCenter);
-    }
-    else 
-    {
-      return Container();
-    }
-  }*/
-/*
-  void onView(RecycleCenterViewmodel viewmodel, String email)
-  async {
-    await viewmodel.viewRC(email);
-    
-  }
-  void onCloseView(RecycleCenterViewmodel viewmodel)
-  {
-    viewmodel.closeViewRC();
-    
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +31,7 @@ class RecyclingInfoScreenfulState extends State<RecyclingInfoScreenful> {
 showAlertDialog(BuildContext context, String text) {
   // set up the button
   Widget okButton = TextButton(
-    child: Text("OK"),
+    child: const Text("OK"),
     onPressed: () {
       Navigator.pushNamed(context, routes.loginRoute);
     },
@@ -67,7 +39,7 @@ showAlertDialog(BuildContext context, String text) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title: Text("Error"),
+    title: const Text("Error"),
     content: Text(text),
     actions: [
       okButton,

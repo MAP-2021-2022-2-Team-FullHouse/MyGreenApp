@@ -43,6 +43,7 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
       final destination = "recyclingInfo/$img";
       final ref = FirebaseStorage.instance.ref(destination);
       return ref.putFile(file);
+      // ignore: unused_catch_clause
     } on FirebaseException catch (e) {
       return null;
     }
@@ -60,19 +61,19 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
     try {
       final ref = FirebaseStorage.instance.ref().child(pathname);
       String imageUrl = await ref.getDownloadURL();
-      print(imageUrl);
+      //print(imageUrl);
       return imageUrl;
     } catch (e) {
-      print("Error: $e");
+      //print("Error: $e");
       return e.toString();
     }
   }
 
   @override
   Future<RecyclingInfo?> readRecyclingInfo(String infoId) async {
-    final rc =
-        FirebaseFirestore.instance.collection("RecycleCenter").doc(infoId);
-    final snapshot = await rc.get();
+    final recyclingInfo =
+        FirebaseFirestore.instance.collection("RecyclingInfo").doc(infoId);
+    final snapshot = await recyclingInfo.get();
     if (snapshot.exists) {
       return RecyclingInfo.fromJson(snapshot.data()!);
     } else {
@@ -86,16 +87,7 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
       await firestoreInstance.collection("RecyclingInfo").doc(infoId).delete();
       return true;
     } on FirebaseException catch (e) {
-      return e.code + ". Something went wrong. Please try again.";
+      return "${e.code}. Something went wrong. Please try again.";
     }
   }
-
-/*  static Future<UploadTask?> uploadImage(String destination, File file) async {
-    try {
-      final ref = FirebaseStorage.instance.ref(destination);
-      return ref.putFile(file);
-    } on FirebaseException catch (e) {
-      return null;
-    }
-  }*/
 }

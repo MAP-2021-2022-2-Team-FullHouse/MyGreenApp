@@ -2,12 +2,13 @@ import 'package:my_green_app/ui/views/recyclinginfo/create_recyclinginfo/create_
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/app/locator.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import '../../../../services/recycling_info/recycling_info_service.dart';
 import '../../../../services/recycling_info/recycling_info_service_firebase.dart';
 
+// ignore: camel_case_types
 class CreateRecyclingInfo_ViewModel extends BaseViewModel {
+  // ignore: non_constant_identifier_names
   final _RecyclingInfoService = locator<RecyclingInfoService>();
   static late File? file;
   static late String fileName;
@@ -32,18 +33,7 @@ class CreateRecyclingInfo_ViewModel extends BaseViewModel {
     {
       state.fileField.text = fileName;
     }
-    //return file;
   }
-
-  /*static Future uploadFile(String img) async {
-    if (file == null) {
-      return;
-    }
-    final destination = 'recyclingInfo/$img';
-    UploadTask? task =
-        await RecyclingInfoServiceFirebase.uploadFile(destination, file!);
-    if (task == null) return;
-  }*/
 
   Future addRecyclingInfo({
     required String title,

@@ -11,7 +11,7 @@ class RecyclingInfoNavigationBar extends StatefulWidget {
 
 class _RecyclingInfoNavigationBarState
     extends State<RecyclingInfoNavigationBar> {
-  int currIndex = 0;
+  int currIndex = 3;
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -21,13 +21,17 @@ class _RecyclingInfoNavigationBarState
             currIndex = index,
             if (currIndex == 1)
               {Navigator.of(context).pushNamed(routes.rcRoute)}
-            else if (currIndex == 4)
-              {Navigator.of(context).pushNamed(routes.profileRoute)}
+            else if (currIndex == 0)
+              {Navigator.of(context).pushNamed(routes.adminRewardRoute)}
+            else if (currIndex == 3)
+              {Navigator.of(context).pushNamed(routes.recyclingInfoRoute)}
+            else if (currIndex == 2)
+              {Navigator.of(context).pushNamed(routes.adminRoute)}
           }),
-      items: [
+      items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.article),
-          label: 'Info',
+          icon: Icon(Icons.redeem),
+          label: 'Reward',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.recycling),
@@ -38,12 +42,8 @@ class _RecyclingInfoNavigationBarState
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.store),
-          label: 'Shop',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Admin',
+          icon: Icon(Icons.article),
+          label: 'Info',
         ),
       ],
     );

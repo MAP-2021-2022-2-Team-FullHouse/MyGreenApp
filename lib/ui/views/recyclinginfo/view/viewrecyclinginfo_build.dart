@@ -9,17 +9,22 @@ List<Widget> buildRecyclingInfo(
     [
       Text(
         rl.title,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         textAlign: TextAlign.left,
+      ),
+      const SizedBox(
+        height: 10,
       ),
       FutureBuilder(
         future: state.getImgUrl("recyclingInfo/${rl.image}"),
         builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
-          //bool error = snapshot.data == null;
           return Container(
             child: buildImage(snapshot.data),
           );
         },
+      ),
+      const SizedBox(
+        height: 100,
       ),
       Text(
         DateFormat('yyyy-MM-dd').format(rl.createdDate.toDate()),
@@ -35,16 +40,14 @@ List<Widget> buildRecyclingInfo(
     ];
 
 Widget buildImage(String? data) {
-  return Container(
-    child: Material(
-      color: Colors.transparent,
-      child: Ink.image(
-        image: NetworkImage(data.toString()),
-        fit: BoxFit.cover,
-        width: 200,
-        height: 150,
-        child: InkWell(),
-      ),
+  return Material(
+    color: Colors.transparent,
+    child: Ink.image(
+      image: NetworkImage(data.toString()),
+      fit: BoxFit.cover,
+      width: 300,
+      height: 150,
+      child: const InkWell(),
     ),
   );
 }

@@ -17,18 +17,10 @@ class RecycleCenter {
       this.documentId = '',
       this.password=''});
 
-  // RecycleCenter(name, address,phone,image, email, lat, lon){
-  //     this.name=name;
-  //     this.address=address;
-  //     this.phone=phone;
-  //     this.image=image;
-  //     this.email=email;
-  //     this.lat=lat;
-  //     this.lon=lon;
-  // }
 
   static Future getCenterList() async {
     // Get docs from collection reference
+    // ignore: no_leading_underscores_for_local_identifiers
     CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection('RecycleCenter');
     List centerList = [];

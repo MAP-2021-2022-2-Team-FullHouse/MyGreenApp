@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -20,6 +21,11 @@ class AuthenticationServiceFirebase extends AuthenticationService {
   final navigator = NavigatorService();
 
   @override
+  String? getCurrentUserEmail() {
+    return _auth.currentUser!.email;
+  }
+
+  @override
   Future signIn({required String email, required String password}) async {
     try {
       final UserCredential credential = await _auth.signInWithEmailAndPassword(
@@ -30,6 +36,12 @@ class AuthenticationServiceFirebase extends AuthenticationService {
         return;
       } else {
         print(_auth.currentUser?.uid);
+        FirebaseMessaging.instance.getToken().then((token) {
+          FirebaseFirestore.instance
+              .collection('User')
+              .doc(_auth.currentUser?.uid)
+              .update({'fcmToken': token});
+        });
         return user;
       }
     } on FirebaseAuthException catch (e) {
@@ -43,11 +55,33 @@ class AuthenticationServiceFirebase extends AuthenticationService {
   }
 
   @override
+  Future<String> getEmail(String uid) async {
+    final docUser = FirebaseFirestore.instance.collection('User').doc(uid);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data()).email;
+  }
+
+  @override
   Future<String> getRole(String userid) async {
     final docUser = FirebaseFirestore.instance.collection('User').doc(userid);
     final snapshot = await docUser.get();
     return AppUser.User.fromJson(snapshot.data()).role;
     //return role;
+  }
+
+  @override
+  Future<String> getDevice(String userid) async {
+    final docUser = FirebaseFirestore.instance.collection('User').doc(userid);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data()).deviceToken;
+    //return role;
+  }
+
+  @override
+  Future readUser(String docID) async {
+    final docUser = FirebaseFirestore.instance.collection('User').doc(docID);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data());
   }
 
   @override
@@ -65,6 +99,13 @@ class AuthenticationServiceFirebase extends AuthenticationService {
     final docUser = FirebaseFirestore.instance.collection('User').doc(uid);
     final snapshot = await docUser.get();
     return AppUser.User.fromJson(snapshot.data()).role;
+  }
+
+  static Future<String> getCurrentEmail() async {
+    final String uid = FirebaseAuth.instance.currentUser!.uid;
+    final docUser = FirebaseFirestore.instance.collection('User').doc(uid);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data()).email;
   }
 
   @override

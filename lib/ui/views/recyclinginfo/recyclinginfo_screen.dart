@@ -6,7 +6,7 @@ import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_screenstate.da
 
 class RecyclingInfoScreen extends StatelessWidget {
   static Route route() =>
-      MaterialPageRoute(builder: (_) => RecyclingInfoScreen());
+      MaterialPageRoute(builder: (_) => const RecyclingInfoScreen());
   const RecyclingInfoScreen({Key? key}) : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class RecyclingInfoScreen extends StatelessWidget {
         appBar: const RecyclingInfoAppBar(),
         body: RecyclingInfoScreenful(),
         //floatingActionButton: const AdminFloat(),
-        bottomNavigationBar: RecyclingInfoNavigationBar(),
+        bottomNavigationBar: const RecyclingInfoNavigationBar(),
       ),
     );
   }

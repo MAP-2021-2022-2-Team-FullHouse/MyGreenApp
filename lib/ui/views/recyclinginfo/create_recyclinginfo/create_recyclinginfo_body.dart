@@ -9,10 +9,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'create_recyclinginfo_image.dart';
 import 'create_recyclinginfo_viewmodel.dart';
 
+// ignore: must_be_immutable
 class CreateRecyclingInfoBody extends StatelessWidget {
   final CreateRecyclingInfoScreenState _state;
   UploadTask? task;
   File? file;
+  // ignore: use_key_in_widget_constructors
   CreateRecyclingInfoBody(this._state);
 
   @override
@@ -61,8 +63,8 @@ class CreateRecyclingInfoBody extends StatelessWidget {
                       const SizedBox(
                         height: 15.0,
                       ),
-                      Center(
-                          child: const Text(
+                      const Center(
+                          child: Text(
                         "Create Recycling Info",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -80,7 +82,7 @@ class CreateRecyclingInfoBody extends StatelessWidget {
                       const SizedBox(
                         height: 15.0,
                       ),
-                      Text(
+                      const Text(
                         "Title",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 15),
@@ -91,7 +93,7 @@ class CreateRecyclingInfoBody extends StatelessWidget {
                         hintText: "Enter the Title",
                       ),
                       const SizedBox(height: 30.0),
-                      Text(
+                      const Text(
                         "Content",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 15),
@@ -104,7 +106,7 @@ class CreateRecyclingInfoBody extends StatelessWidget {
                       const SizedBox(height: 10.0),
                       CreateRecyclingInfoImage(state: _state),
                       const SizedBox(height: 10.0),
-                      new Positioned(
+                      Positioned(
                         top: 50,
                         left: 0,
                         right: 0,

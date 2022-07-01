@@ -7,8 +7,8 @@ import 'package:stacked_services/stacked_services.dart';
 class RecyclingInfoViewmodel extends BaseViewModel {
   late final _dialogService = locator<DialogService>();
   late final _recyclingInfoService = locator<RecyclingInfoService>();
-  late List<RecyclingInfo> _rc = <RecyclingInfo>[];
-  List<RecyclingInfo> get rc => _rc;
+  late final List<RecyclingInfo> _rl = <RecyclingInfo>[];
+  List<RecyclingInfo> get rc => _rl;
   static RecyclingInfo recyclingInfo = RecyclingInfo();
   RecyclingInfo get getRC => recyclingInfo;
   static bool viewAction = false;
@@ -20,12 +20,6 @@ class RecyclingInfoViewmodel extends BaseViewModel {
     var results = _recyclingInfoService.readRecyclingInfoList();
     return results;
   }
-
-  /*Future viewRC( String email)
-  async {
-    recycleCenter=await _recycleCenterService.getRC(email);
-    viewAction=true;
-  }*/
 
   Future<String?> getImgUrl(String imgUrl) async {
     var result = await _recyclingInfoService.getRecyclingInfoImage(imgUrl);
@@ -53,7 +47,6 @@ class RecyclingInfoViewmodel extends BaseViewModel {
           dialogPlatform: DialogPlatform.Material, // DialogPlatform.Material
         );
         setBusy(false);
-        //_navigationService.navigateTo(homeRoute);
       } else {
         result = "Error";
         _dialogService.showDialog(

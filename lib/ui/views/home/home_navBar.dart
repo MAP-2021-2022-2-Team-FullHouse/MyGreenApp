@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
+import 'package:my_green_app/ui/views/home/home_viewmodel.dart';
 
 class HomeNavigationBar extends StatefulWidget {
   final int pageNo;
@@ -10,6 +11,8 @@ class HomeNavigationBar extends StatefulWidget {
 }
 
 class _HomeNavigationBarState extends State<HomeNavigationBar> {
+  HomeViewmodel model = HomeViewmodel();
+  var role = HomeViewmodel.getCurrentRole();
   @override
   Widget build(BuildContext context) {
     int currIndex;
@@ -21,12 +24,19 @@ class _HomeNavigationBarState extends State<HomeNavigationBar> {
             currIndex = index,
             if (currIndex == 0)
               {Navigator.of(context).pushReplacementNamed(routes.user_rcRoute)}
+            else if (currIndex == 1)
+              {
+                Navigator.of(context)
+                    .pushReplacementNamed(routes.appointmentRoute)
+              }
             else if (currIndex == 2)
               {Navigator.of(context).pushReplacementNamed(routes.homeRoute)}
+            else if (currIndex == 3)
+              {Navigator.of(context).pushReplacementNamed(routes.shopRoute)}
             else if (currIndex == 4)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
           }),
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.map),
           label: 'Map',

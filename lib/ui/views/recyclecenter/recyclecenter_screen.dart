@@ -6,7 +6,7 @@ import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screenstate.da
 
 class RecycleCenterScreen extends StatelessWidget {
   static Route route() =>
-      MaterialPageRoute(builder: (_) => RecycleCenterScreen());
+      MaterialPageRoute(builder: (_) => const RecycleCenterScreen());
   const RecycleCenterScreen({Key? key}) : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class RecycleCenterScreen extends StatelessWidget {
         appBar: const RecycleCenterAppBar(),
         body: RecycleCenterScreenful(),
         //floatingActionButton: const AdminFloat(),
-        bottomNavigationBar: RecycleCenterNavigationBar(),
+        bottomNavigationBar: const RecycleCenterNavigationBar(),
       ),
     );
   }

@@ -6,7 +6,7 @@ class CreateButton extends StatelessWidget {
   final firestoreInstance = FirebaseFirestore.instance;
   final CreateRecyclingInfoScreenState state;
 
- CreateButton({required this.state});
+  CreateButton({required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +21,12 @@ class CreateButton extends StatelessWidget {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 3,
-              offset: Offset(0, 2), // changes position of shadow
+              offset: const Offset(0, 2), // changes position of shadow
             ),
           ],
         ),
         child: MaterialButton(
-            onPressed: () => {state.addRecyclingInfo()}, child: Text("Create")));
+            onPressed: () => {state.addRecyclingInfo()},
+            child: const Text("Create")));
   }
 }

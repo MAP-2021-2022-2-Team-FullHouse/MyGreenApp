@@ -8,7 +8,8 @@ import 'create_recyclinginfo/create_recyclinginfo_screen.dart';
 
 class RecyclingInfoBody extends StatefulWidget {
   final RecyclingInfoScreenfulState state;
-  RecyclingInfoBody({required this.state});
+  // ignore: use_key_in_widget_constructors
+  const RecyclingInfoBody({required this.state});
 
   @override
   State<RecyclingInfoBody> createState() => _RecyclingInfoBodyState();
@@ -25,7 +26,8 @@ class _RecyclingInfoBodyState extends State<RecyclingInfoBody> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
+                  // ignore: sized_box_for_whitespace
                   Container(
                     width: 350,
                     height: 50,
@@ -34,11 +36,11 @@ class _RecyclingInfoBodyState extends State<RecyclingInfoBody> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: Colors.greenAccent,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 10),
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold)),
-                        child: Text("Create"),
+                        child: const Text("Create"),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => CreateRecyclingInfoScreen(),
@@ -47,35 +49,31 @@ class _RecyclingInfoBodyState extends State<RecyclingInfoBody> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   StreamBuilder<List<RecyclingInfo>>(
                       stream: model.getRecyclingInfoList(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
-                          return Center(child: Text('Something went wrong'));
+                          return const Center(
+                              child: Text('Something went wrong'));
                         }
                         if (snapshot.hasData) {
-                          final RecyclingInfos = snapshot.data!;
+                          final recyclingInfos = snapshot.data!;
                           return ListView(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
+                            // ignore: sort_child_properties_last
                             children:
-                                RecyclingInfos.map(buildRecyclingInfo).toList(),
+                                recyclingInfos.map(buildRecyclingInfo).toList(),
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                           );
                         } else {
-                          return Center(child: Text('No data found'));
+                          return const Center(child: Text('No data found'));
                         }
                       }),
                 ],
               ),
-            ), /*
-            Positioned(
-              top: 0,
-              left: 0,
-              child: Container(
-                  child: widget.state.getViewContainer(context, model)),
-            ),*/
+            ),
           ],
         ),
       ),

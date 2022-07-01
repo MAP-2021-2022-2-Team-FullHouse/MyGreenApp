@@ -23,11 +23,13 @@ class _RecycleCenterNavigationBarState
               {Navigator.of(context).pushNamed(routes.adminRoute)}
             else if (currIndex == 4)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
+              else if (currIndex == 0)
+              {Navigator.of(context).pushReplacementNamed(routes.adminRewardRoute)}
           }),
-      items: [
+      items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.article),
-          label: 'Info',
+          icon: Icon(Icons.redeem),
+          label: 'Reward',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.recycling),

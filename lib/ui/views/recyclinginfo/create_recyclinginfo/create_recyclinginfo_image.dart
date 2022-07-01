@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'create_recyclinginfo_screen.dart';
@@ -7,12 +6,9 @@ import 'widget/create_button.dart';
 
 class CreateRecyclingInfoImage extends StatefulWidget {
   final CreateRecyclingInfoScreenState state;
-// const CreateLatLon({Key? key, required this.state}) : super(key: key);
 
-  CreateRecyclingInfoImage({required this.state});
-  // CreateLatLon(CreateRecycleCenterScreenState _state){
-  //   this._state=_state;
-  // }
+  // ignore: use_key_in_widget_constructors
+  const CreateRecyclingInfoImage({required this.state});
 
   @override
   State<CreateRecyclingInfoImage> createState() =>
@@ -39,7 +35,7 @@ class _CreateRecyclingInfoImageState extends State<CreateRecyclingInfoImage> {
           TextFormField(
             controller: widget.state.fileField,
             keyboardType: keyboard,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 labelText: "Image File ",
                 labelStyle: TextStyle(
                     color: Colors.black,
@@ -54,7 +50,7 @@ class _CreateRecyclingInfoImageState extends State<CreateRecyclingInfoImage> {
                 CreateRecyclingInfo_ViewModel.selectFile(widget.state);
                 //widget.state.fileField.text=vm.fileName;
               }),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           // task != null ? buildUploadStatus(task!) : Container(),
         ]);
   }
@@ -62,7 +58,7 @@ class _CreateRecyclingInfoImageState extends State<CreateRecyclingInfoImage> {
   showAlertDialog(BuildContext context, String text) {
     // set up the button
     Widget okButton = TextButton(
-      child: Text("OK"),
+      child: const Text("OK"),
       onPressed: () {
         Navigator.pushNamed(context, routes.createRecycleCenterRoute);
       },
@@ -70,7 +66,7 @@ class _CreateRecyclingInfoImageState extends State<CreateRecyclingInfoImage> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Error"),
+      title: const Text("Error"),
       content: Text(text),
       actions: [
         okButton,

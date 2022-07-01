@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_green_app/model/recycling_info.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_screenstate.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_viewmodel.dart';
-//import 'ditRecycleCenter/EditRecycleCenter_Screen.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/view/viewrecyclinginfo_screen.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 
@@ -15,20 +14,18 @@ class RecyclingInfoListButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: avoid_unnecessary_containers
     return Container(
         child: Row(children: <Widget>[
       ElevatedButton.icon(
-        icon: Icon(
-          Icons.preview_outlined, 
+        icon: const Icon(
+          Icons.preview_outlined,
           size: 18.0,
         ),
-        label: Text('View'),
+        label: const Text('View'),
         onPressed: () async {
-          //state.onView(viewmodel, model.email);
-          //Navigator.of(context).pushNamed(routes.rcRoute);
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                ViewRecyclingInfoScreen(infoId: model.infoId),
+            builder: (context) => ViewRecyclingInfoScreen(infoId: model.infoId),
           ));
         },
       ),
@@ -36,14 +33,12 @@ class RecyclingInfoListButton extends StatelessWidget {
         width: 8,
       ),
       ElevatedButton.icon(
-        icon: Icon(
+        icon: const Icon(
           Icons.edit,
           size: 18.0,
         ),
-        label: Text('Edit'),
+        label: const Text('Edit'),
         onPressed: () async {
-          //Navigator.of(context).push(MaterialPageRoute(
-          //builder: (context) =>) );
           Navigator.of(context).pushNamed(routes.recyclingInfoRoute);
         },
       ),
@@ -51,11 +46,11 @@ class RecyclingInfoListButton extends StatelessWidget {
         width: 8,
       ),
       ElevatedButton.icon(
-        icon: Icon(
+        icon: const Icon(
           Icons.delete,
           size: 18.0,
         ),
-        label: Text('Delete'),
+        label: const Text('Delete'),
         onPressed: () async {
           state.onDelete(viewmodel, model.infoId);
         },

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:my_green_app/model/RecycleCenter.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/view/viewrecyclinginfo_body.dart';
 import 'viewrecyclinginfo_viewmodel.dart';
-//import 'package:my_green_app/ui/views/recyclinginfo/view/viewrecyclinginfo_viewmodel.dart';
-//import 'viewrecyclinginfo_body.dart';
 
 class ViewRecyclingInfoScreen extends StatefulWidget {
   final String infoId;
@@ -34,7 +31,7 @@ class ViewRecyclingInfoScreenState extends State<ViewRecyclingInfoScreen> {
   }
 
   Future<String?> getImgUrl(String imgUrl) async {
-    ViewRecyclingInfo_ViewModel viewmodel = new ViewRecyclingInfo_ViewModel();
+    ViewRecyclingInfo_ViewModel viewmodel = ViewRecyclingInfo_ViewModel();
     return await viewmodel.getImgUrl(imgUrl);
   }
 }

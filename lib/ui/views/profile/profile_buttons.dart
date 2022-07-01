@@ -7,6 +7,7 @@ import 'package:my_green_app/ui/views/profile/profile_viewmodel.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_button.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screenstate.dart'
     as state;
+import 'package:my_green_app/ui/views/reward/userViewReward/user_reward_screen.dart';
 
 class ProfileButton extends StatelessWidget {
   final ProfileViewmodel viewmodel;
@@ -48,7 +49,9 @@ class ProfileButton extends StatelessWidget {
             ),
             label: Text('Redeem Rewards'),
             onPressed: () async {
-              //state.onRedeem(viewmodel);
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => UserRewardScreen()),
+              );
             },
           ),
         ]));
