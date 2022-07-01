@@ -8,6 +8,7 @@ import 'recycling_info_service.dart';
 
 class RecyclingInfoServiceFirebase extends RecyclingInfoService {
   final navigator = NavigatorService();
+  final storageInstance = FirebaseStorage.instance;
   final firestoreInstance = FirebaseFirestore.instance;
 
   @override
@@ -16,8 +17,7 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
       required String content,
       required String image,
       File? file}) async {
-    final recyclingInfo =
-        FirebaseFirestore.instance.collection('RecyclingInfo').doc();
+    final recyclingInfo = firestoreInstance.collection('RecyclingInfo').doc();
     try {
       String? img = '';
       int pos = image.indexOf('.');
@@ -32,6 +32,32 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
       if (file != null) {
         uploadFile(img, file);
       }
+      return "ok";
+    } on FirebaseException catch (e) {
+      return e;
+    }
+  }
+
+  @override
+  Future editRecyclingInfo(
+      {required String infoId,
+      required String title,
+      required String content,
+      required String image,
+      File? file}) async {
+    try {
+      String? img = '';
+      int pos = image.indexOf('.');
+      img = "$infoId${image.substring(pos)}";
+      if (file != null) {
+        uploadFile(img, file);
+      }
+      firestoreInstance.collection('RecyclingInfo').doc(infoId).update({
+        "title": title,
+        "content": content,
+        "image": image,
+        "createdDate": DateTime.now(),
+      });
       return "ok";
     } on FirebaseException catch (e) {
       return e;
@@ -85,9 +111,28 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
   Future deleteRecyclingInfo(String infoId) async {
     try {
       await firestoreInstance.collection("RecyclingInfo").doc(infoId).delete();
-      return true;
+      // Create a reference to the file to delete
+      final storageRef = storageInstance.ref();
+      final image = getImageName(infoId);
+      final imagePath = "recyclingInfo/$image";
+      // Create a child reference
+      final imageRef = storageRef.child(imagePath);
+      // Delete the file
+      await imageRef.delete();
     } on FirebaseException catch (e) {
       return "${e.code}. Something went wrong. Please try again.";
+    }
+  }
+
+  static Future<String> getImageName(String infoId) async {
+    final recyclingInfo =
+        FirebaseFirestore.instance.collection("RecyclingInfo").doc(infoId);
+    final snapshot = await recyclingInfo.get();
+    if (snapshot.exists) {
+      final recyclingInfo = RecyclingInfo.fromJson(snapshot.data()!);
+      return recyclingInfo.image;
+    } else {
+      return '';
     }
   }
 }

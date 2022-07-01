@@ -1,3 +1,4 @@
+import 'package:my_green_app/model/recycling_info.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/edit_recyclinginfo/edit_recyclinginfo_screen.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/app/locator.dart';
@@ -5,7 +6,9 @@ import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import '../../../../services/recycling_info/recycling_info_service.dart';
 
+// ignore: camel_case_types
 class EditRecyclingInfo_ViewModel extends BaseViewModel {
+  // ignore: non_constant_identifier_names
   final _RecyclingInfoService = locator<RecyclingInfoService>();
   static late File? file;
   static late String fileName;
@@ -31,6 +34,11 @@ class EditRecyclingInfo_ViewModel extends BaseViewModel {
       state.fileField.text = fileName;
     }
     //return file;
+  }
+
+  Future<RecyclingInfo?> readRecyclingInfo(String infoId) {
+    var recyclingInfo = _RecyclingInfoService.readRecyclingInfo(infoId);
+    return recyclingInfo;
   }
 
   Future editRecyclingInfo({

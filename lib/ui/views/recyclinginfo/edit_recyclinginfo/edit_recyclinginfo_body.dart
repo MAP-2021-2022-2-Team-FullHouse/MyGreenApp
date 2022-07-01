@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_green_app/model/recycling_info.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/edit_recyclinginfo/widget/edit_multilinetextfield.dart';
 import 'package:stacked/stacked.dart';
 import 'edit_recyclinginfo_screen.dart';
@@ -61,48 +62,21 @@ class EditRecyclingInfoBody extends StatelessWidget {
                       const SizedBox(
                         height: 15.0,
                       ),
-                      const Center(
-                          child: const Text(
-                        "Edit Recycling Info",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          shadows: [
-                            Shadow(
-                                color: Colors.grey,
-                                offset: Offset(2, 1),
-                                blurRadius: 10)
-                          ],
-                        ),
-                      )),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      Text(
-                        "Title",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                        textAlign: TextAlign.left,
-                      ),
-                      EditTextField(
-                        controller: _state.titleController,
-                        hintText: "Enter the Title",
-                      ),
-                      const SizedBox(height: 30.0),
-                      Text(
-                        "Content",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                        textAlign: TextAlign.left,
-                      ),
-                      EditMultiLineTextField(
-                        controller: _state.contentController,
-                        hintText: "Enter the Content",
-                      ),
-                      const SizedBox(height: 10.0),
-                      EditRecyclingInfoImage(state: _state),
+                      FutureBuilder<RecyclingInfo?>(
+                          future: viewmodel.readRecyclingInfo(_state.recyclingInfoId),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return Center(
+                                  child: Text('Something went wrong'));
+                            }
+                            if (snapshot.hasData) {
+                              final recyclingInfo = snapshot.data!;
+                              return Wrap(
+                                  children: buildEditTextFields(_state,recyclingInfo));
+                            } else {
+                              return Center(child: Text('No data found'));
+                            }
+                      }),
                       const SizedBox(height: 10.0),
                       new Positioned(
                         top: 50,
