@@ -7,7 +7,7 @@ class RecycleCenterAppointmentAppBar extends StatelessWidget
   }) : super(key: key);
 
   @override
-  Size get preferredSize => Size.fromHeight(55);
+  Size get preferredSize => const Size.fromHeight(55);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class RecycleCenterAppointmentAppBar extends StatelessWidget
       toolbarHeight: 70,
       elevation: 5,
       automaticallyImplyLeading: false,
-      title: Text("Appointment"),
+      title: const Text("Appointment"),
       //centerTitle: true,
     );
   }

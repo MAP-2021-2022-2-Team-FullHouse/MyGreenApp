@@ -130,7 +130,7 @@ class HomeBody extends StatelessWidget {
                         return const Center(child: Text('No data found'));
                       }
                     }),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
               ],
             ),
           ),

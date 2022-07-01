@@ -28,6 +28,7 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
         "content": content,
         "image": img,
         "createdDate": DateTime.now(),
+        "lastModifiedDate": DateTime.now(),
       });
       if (file != null) {
         uploadFile(img, file);
@@ -55,8 +56,8 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
       firestoreInstance.collection('RecyclingInfo').doc(infoId).update({
         "title": title,
         "content": content,
-        "image": image,
-        "createdDate": DateTime.now(),
+        "image": img,
+        "lastModifiedDate": DateTime.now(),
       });
       return "ok";
     } on FirebaseException catch (e) {

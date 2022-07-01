@@ -22,15 +22,15 @@ List<Widget> buildEditTextFields(
         textAlign: TextAlign.left,
       ),
       EditMultiLineTextField(
-        controller: state.contentController,
+        controller: state.contentController..text = recyclingInfo.content,
       ),
-      const SizedBox(height: 10.0),
+      const Text(
+        "Image File",
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+        textAlign: TextAlign.left,
+      ),
       EditTextField(
         controller: state.fileField..text = recyclingInfo.image,
-        labelText: "Image File: ",
-      ),
-      const SizedBox(
-        height: 70.0,
       ),
       ElevatedButton(
           style: ElevatedButton.styleFrom(

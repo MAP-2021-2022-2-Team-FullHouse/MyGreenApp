@@ -16,6 +16,12 @@ class AppointmentItem extends StatelessWidget {
       height: 60,
       margin: const EdgeInsets.only(top: 20),
       alignment: Alignment.center,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: const [
+            BoxShadow(blurRadius: 8, color: Colors.grey, spreadRadius: 3)
+          ]),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -24,17 +30,11 @@ class AppointmentItem extends StatelessWidget {
             child: Text(post.rcName),
           )),
           IconButton(
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
             onPressed: () {},
           ),
         ],
       ),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(5),
-          boxShadow: [
-            BoxShadow(blurRadius: 8, color: Colors.grey, spreadRadius: 3)
-          ]),
     );
   }
 }

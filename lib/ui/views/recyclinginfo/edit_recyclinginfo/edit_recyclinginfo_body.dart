@@ -63,7 +63,8 @@ class EditRecyclingInfoBody extends StatelessWidget {
                         height: 15.0,
                       ),
                       FutureBuilder<RecyclingInfo?>(
-                          future: viewmodel.readRecyclingInfo(_state.recyclingInfoId),
+                          future: viewmodel
+                              .readRecyclingInfo(_state.recyclingInfoId),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
                               return const Center(
@@ -72,18 +73,14 @@ class EditRecyclingInfoBody extends StatelessWidget {
                             if (snapshot.hasData) {
                               final recyclingInfo = snapshot.data!;
                               return Wrap(
-                                  children: buildEditTextFields(_state,recyclingInfo));
+                                  children: buildEditTextFields(
+                                      _state, recyclingInfo));
                             } else {
                               return const Center(child: Text('No data found'));
                             }
-                      }),
-                      const SizedBox(height: 10.0),
-                      new Positioned(
-                        top: 50,
-                        left: 0,
-                        right: 0,
-                        child: EditButton(state: _state),
-                      ),
+                          }),
+                      const SizedBox(height: 30.0),
+                      EditButton(state: _state),
                       const SizedBox(
                         height: 30.0,
                       ),

@@ -24,8 +24,7 @@ class EditMultiLineTextField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<EditMultiLineTextField> createState() =>
-      _EditMultiLineTextFieldState();
+  State<EditMultiLineTextField> createState() => _EditMultiLineTextFieldState();
 }
 
 class _EditMultiLineTextFieldState extends State<EditMultiLineTextField> {
@@ -37,6 +36,7 @@ class _EditMultiLineTextFieldState extends State<EditMultiLineTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 20),
       child: TextFormField(
         controller: widget.controller,
         minLines: 5,

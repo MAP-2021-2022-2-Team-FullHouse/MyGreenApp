@@ -11,7 +11,7 @@ import 'package:stacked/stacked.dart';
 
 class RecycleCenterAppointmentBody extends StatefulWidget {
   final RecycleCenterAppointmentScreenfulState state;
-  RecycleCenterAppointmentBody({required this.state});
+  const RecycleCenterAppointmentBody({super.key, required this.state});
 
   @override
   State<RecycleCenterAppointmentBody> createState() =>
@@ -22,6 +22,7 @@ class _RecycleCenterAppointmentBodyState
     extends State<RecycleCenterAppointmentBody> {
   final StreamController _myStreamCtrl = StreamController.broadcast();
   Stream get onVariableChanged => _myStreamCtrl.stream;
+  // ignore: prefer_typing_uninitialized_variables
   var stream;
 
   @override
@@ -71,24 +72,25 @@ class _RecycleCenterAppointmentBodyState
                           return const CircularProgressIndicator();
                         }
                         if (snapshot.hasError) {
-                          return Center(child: Text('Something went wrong'));
+                          return const Center(
+                              child: Text('Something went wrong'));
                         }
-                        if (snapshot.data!.length == 0) {
-                          return Center(
+                        if (snapshot.data!.isEmpty) {
+                          return const Center(
                               child: Text('There are no appointments.'));
                         }
                         if (snapshot.hasData) {
                           final appointments = snapshot.data!;
 
                           return ListView(
-                            physics: NeverScrollableScrollPhysics(),
-                            children:
-                                appointments.map(buildRCAppointment).toList(),
+                            physics: const NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
+                            children:
+                                appointments.map(buildRCAppointment).toList(),
                           );
                         } else {
-                          return Center(child: Text('No data found'));
+                          return const Center(child: Text('No data found'));
                         }
                       }),
                 ],

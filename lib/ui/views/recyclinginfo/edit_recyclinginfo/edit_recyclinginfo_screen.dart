@@ -35,12 +35,13 @@ class EditRecyclingInfoScreenState extends State<EditRecyclingInfoScreen> {
         showConfirmDialog(context, "Edited Successfully!");
       }
     } catch (e) {
-      showAlertDialog(context, "Form is not completely filled.");
+      showAlertDialog(context, "Something went wrong.");
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    recyclingInfoId = widget.infoId;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
