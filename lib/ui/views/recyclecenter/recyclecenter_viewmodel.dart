@@ -59,16 +59,15 @@ class RecycleCenterViewmodel extends BaseViewModel {
       setBusy(true);
       dynamic result = await _recycleCenterService.deleteCenter(email);
 
-      if (result == true) {
+      if (result == "ok") {
         result = null;
         _dialogService.showDialog(
-          title: 'Successfull',
+          title: 'Success',
           description: 'You have deleted the recycle center.',
           buttonTitle: 'OK',
           dialogPlatform: DialogPlatform.Material, // DialogPlatform.Material
         );
         setBusy(false);
-        //_navigationService.navigateTo(homeRoute);
       } else {
         result = "Error";
         _dialogService.showDialog(

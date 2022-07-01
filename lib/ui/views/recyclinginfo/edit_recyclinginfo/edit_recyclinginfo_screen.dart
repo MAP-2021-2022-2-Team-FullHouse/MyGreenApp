@@ -39,6 +39,7 @@ class EditRecyclingInfoScreenState extends State<EditRecyclingInfoScreen> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

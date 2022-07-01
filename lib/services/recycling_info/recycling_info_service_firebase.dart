@@ -109,30 +109,35 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
 
   @override
   Future deleteRecyclingInfo(String infoId) async {
-    try {
-      await firestoreInstance.collection("RecyclingInfo").doc(infoId).delete();
-      // Create a reference to the file to delete
-      final storageRef = storageInstance.ref();
-      final image = getImageName(infoId);
-      final imagePath = "recyclingInfo/$image";
-      // Create a child reference
-      final imageRef = storageRef.child(imagePath);
-      // Delete the file
-      await imageRef.delete();
-    } on FirebaseException catch (e) {
-      return "${e.code}. Something went wrong. Please try again.";
-    }
+    //Get Image
+    final recyclingInfo =
+        FirebaseFirestore.instance.collection("RecyclingInfo").doc(infoId);
+    final snapshot = await recyclingInfo.get();
+    final image = RecyclingInfo.fromJson(snapshot.data()!).image.toString();
+    //return recyclingInfo.image;
+    final imagePath = "recyclingInfo/$image";
+    // Create a reference to the file to delete
+    final storageRef = storageInstance.ref();
+    // Create a child reference
+    final imageRef = storageRef.child(imagePath);
+    // Delete the file
+    await imageRef.delete();
+    await firestoreInstance.collection("RecyclingInfo").doc(infoId).delete();
+    return "ok";
   }
+}
 
+
+  /*
   static Future<String> getImageName(String infoId) async {
     final recyclingInfo =
         FirebaseFirestore.instance.collection("RecyclingInfo").doc(infoId);
     final snapshot = await recyclingInfo.get();
     if (snapshot.exists) {
       final recyclingInfo = RecyclingInfo.fromJson(snapshot.data()!);
-      return recyclingInfo.image;
+      return recyclingInfo.image.toString();
     } else {
       return '';
     }
-  }
-}
+  }*/
+

@@ -6,7 +6,7 @@ class EditButton extends StatelessWidget {
   final firestoreInstance = FirebaseFirestore.instance;
   final EditRecyclingInfoScreenState state;
 
-  EditButton({required this.state});
+  EditButton({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +15,13 @@ class EditButton extends StatelessWidget {
         height: 30,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Color.fromRGBO(195, 196, 141, 100),
+          color: const Color.fromRGBO(195, 196, 141, 100),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 3,
-              offset: Offset(0, 2), // changes position of shadow
+              offset: const Offset(0, 2), // changes position of shadow
             ),
           ],
         ),
