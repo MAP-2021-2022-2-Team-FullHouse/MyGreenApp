@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_green_app/model/Appointment.dart';
 import 'package:my_green_app/ui/views/appointment/appointment_user_list.dart';
 import 'package:my_green_app/ui/views/appointment/appointment_screenstate.dart';
+import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_build_summary.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_list.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_screenstate.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_viewmodel.dart';
@@ -64,8 +65,26 @@ class _RecycleCenterAppointmentBodyState
                           return Center(child: Text(snapshot.error.toString()));
                         }
                         if (snapshot.hasData) {
-                          final List<int> value = snapshot.data!;
-                          return Wrap(children: <Widget>[
+                          final List<int> appointmentData = snapshot.data!;
+                          return Container(
+                            height: MediaQuery.of(context).size.height/3,
+                            margin: const EdgeInsets.all(15),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.0),
+                              color: Colors.grey,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(0, 3), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Wrap(children: buildSummary(appointmentData))
+                          );
+                          /*<Widget>[
                             Padding(
                               padding: const EdgeInsets.only(top: 16),
                               child: Column(children: [
@@ -104,8 +123,7 @@ class _RecycleCenterAppointmentBodyState
                                   value[2].toString(),
                                 ),
                               ]),
-                            )
-                          ]);
+                            )*/
                         } else {
                           return const Center(child: Text('No data found'));
                         }
