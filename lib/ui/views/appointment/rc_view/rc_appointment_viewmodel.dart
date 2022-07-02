@@ -126,4 +126,9 @@ class RecycleCenterAppointmentViewmodel extends BaseViewModel {
     var result = _AppointmentService.getPhotoURLs(id);
     return result;
   }
+
+  Future<List<int>> trackAppointmentData() {
+    var appointmentData = _AppointmentService.trackAppointment();
+    return appointmentData;
+  }
 }

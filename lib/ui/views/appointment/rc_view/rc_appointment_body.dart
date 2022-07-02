@@ -57,12 +57,59 @@ class _RecycleCenterAppointmentBodyState
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  /* const SizedBox(height: 10),
-                  Container(
-                    width: 350,
-                    height: 50,
-                    //child:
-                  ), */
+                  FutureBuilder<List<int>>(
+                      future: model.trackAppointmentData(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Center(child: Text(snapshot.error.toString()));
+                        }
+                        if (snapshot.hasData) {
+                          final List<int> value = snapshot.data!;
+                          return Wrap(children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(top: 16),
+                              child: Column(children: [
+                                const Text(
+                                  "Appointment:",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    shadows: [
+                                      Shadow(
+                                          color: Colors.grey,
+                                          offset: Offset(1, 1),
+                                          blurRadius: 5)
+                                    ],
+                                  ),
+                                ),
+                                Text(
+                                  value[0].toString(),
+                                  style: const TextStyle(
+                                    fontSize: 38,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    shadows: [
+                                      Shadow(
+                                          color: Colors.grey,
+                                          offset: Offset(1, 1),
+                                          blurRadius: 5)
+                                    ],
+                                  ),
+                                ),
+                                Text(
+                                  value[1].toString(),
+                                ),
+                                Text(
+                                  value[2].toString(),
+                                ),
+                              ]),
+                            )
+                          ]);
+                        } else {
+                          return const Center(child: Text('No data found'));
+                        }
+                      }),
                   const SizedBox(height: 20),
                   StreamBuilder<List<Appointment>>(
                       stream: model.getAppointmentList(),

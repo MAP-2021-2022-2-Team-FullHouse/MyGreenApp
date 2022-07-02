@@ -16,7 +16,6 @@ class RecycleCenterAppointmentAppBar extends StatelessWidget
       elevation: 5,
       automaticallyImplyLeading: false,
       title: const Text("Appointment"),
-      //centerTitle: true,
     );
   }
 }
