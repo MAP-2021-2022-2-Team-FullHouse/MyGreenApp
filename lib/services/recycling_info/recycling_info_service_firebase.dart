@@ -61,7 +61,7 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
           "image": image,
         });
       }
-      return "ok";
+      //return "ok";
     } on FirebaseException catch (e) {
       return e;
     }

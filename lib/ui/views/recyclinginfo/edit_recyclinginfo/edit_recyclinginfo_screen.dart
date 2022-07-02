@@ -24,13 +24,16 @@ class EditRecyclingInfoScreenState extends State<EditRecyclingInfoScreen> {
   void editRecyclingInfo() async {
     dynamic result;
     try {
+      if (titleController.text.isEmpty || contentController.text.isEmpty) {
+        showConfirmDialog(context, "Please fill in the form completely");
+      }
       result = await viewmodel.editRecyclingInfo(
         infoId: recyclingInfoId,
         title: titleController.text,
         content: contentController.text,
         image: fileField.text,
       );
-      if (result == 'ok') {
+      if (result == "ok") {
         // ignore: use_build_context_synchronously
         showConfirmDialog(context, "Edited Successfully!");
       }
