@@ -47,18 +47,20 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
       required String image,
       File? file}) async {
     try {
-      String? img = '';
-      int pos = image.indexOf('.');
-      img = "$infoId${image.substring(pos)}";
-      if (file != null) {
-        uploadFile(img, file);
-      }
       firestoreInstance.collection('RecyclingInfo').doc(infoId).update({
         "title": title,
         "content": content,
-        "image": img,
         "lastModifiedDate": DateTime.now(),
       });
+      if (file != null) {
+        String? img = '';
+        int pos = image.indexOf('.');
+        img = "$infoId${image.substring(pos)}";
+        uploadFile(img, file);
+        firestoreInstance.collection('RecyclingInfo').doc(infoId).update({
+          "image": image,
+        });
+      }
       return "ok";
     } on FirebaseException catch (e) {
       return e;

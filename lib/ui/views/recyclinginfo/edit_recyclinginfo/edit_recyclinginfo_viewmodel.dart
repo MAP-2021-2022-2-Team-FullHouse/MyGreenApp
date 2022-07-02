@@ -28,12 +28,10 @@ class EditRecyclingInfo_ViewModel extends BaseViewModel {
     // ignore: await_only_futures
     fileName = await path.substring(path.lastIndexOf('/') + 1);
     // ignore: unnecessary_null_comparison
-    if (fileName != null)
-    // ignore: await_only_futures
-    {
-      state.fileField.text = fileName;
+    if (fileName != null) {
+      // ignore: await_only_futures
+      state.fileField.text = await fileName;
     }
-    //return file;
   }
 
   Future<RecyclingInfo?> readRecyclingInfo(String infoId) {
@@ -54,7 +52,7 @@ class EditRecyclingInfo_ViewModel extends BaseViewModel {
       image: image,
       file: file,
     );
-    if (result != null) {
+    if (result == "ok") {
       return "ok";
     } else {
       return "Something went wrong.";

@@ -3,14 +3,13 @@ import 'package:my_green_app/ui/views/reset/reset_text.dart';
 import 'package:my_green_app/ui/views/reset/reset_textfields.dart';
 import 'package:my_green_app/ui/views/reset/reset_button.dart';
 import 'package:stacked/stacked.dart';
-import 'reset_button.dart';
 import 'reset_screen.dart';
 import 'reset_viewmodel.dart';
 
 class ResetBody extends StatelessWidget {
   final ResetScreenState _state;
 
-  ResetBody(this._state);
+  const ResetBody(this._state, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class ResetBody extends StatelessWidget {
           body: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -35,8 +34,8 @@ class ResetBody extends StatelessWidget {
                     child: Image.asset('assets/logo.png',
                         height: 150, width: 250)),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 5, 0, 40),
-                  child: Text(
+                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 40),
+                  child: const Text(
                     'Forgot Password?',
                     style: TextStyle(
                         color: Colors.black,
@@ -56,13 +55,14 @@ class ResetBody extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 5,
                           blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),
                     padding: const EdgeInsets.fromLTRB(30, 20, 20, 0),
                     child: Column(children: [
-                      ResetText(),
+                      const ResetText(),
                       ...buildResetTextFields(_state),
                       ResetButton(viewmodel: viewmodel, state: _state),
                     ]))
