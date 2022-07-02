@@ -15,15 +15,15 @@ import 'package:my_green_app/constants/routes_path.dart' as routes;
 class CreateListingViewmodel extends BaseViewModel {
   CreateListingViewmodel();
   late final _shopService = locator<ShopService>();
-  static String userEmail="";
+  static String userID="";
   static late File? file;
   static late String fileName;
   final _navigationService = locator<NavigationService>();
 
   
-  Future setUserEmail()
-  async {
-    userEmail=await AuthenticationServiceFirebase.getCurrentEmail();
+   void setUserID()
+   {
+    userID= AuthenticationServiceFirebase.getCurrentID();
   }
 
   static Future selectFile(CreateListingScreenfulState state) async {
@@ -60,7 +60,7 @@ class CreateListingViewmodel extends BaseViewModel {
         description:description,
         method:method,  
         file:file,
-        useremail: userEmail
+        userID: userID
        );
     if (result != null) {
         

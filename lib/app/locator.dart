@@ -75,5 +75,4 @@ void setupLocator() {
       () => ManageListingViewmodel());
   locator.registerLazySingleton<RecyclingInfoViewmodel>(
       () => RecyclingInfoViewmodel());
-      
 }

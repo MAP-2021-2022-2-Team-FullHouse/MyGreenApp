@@ -48,10 +48,8 @@ class EditListingScreenfulState extends State<EditListingScreenful> {
   @override
   void initState () {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      viewmodel.setUserEmail();
+      viewmodel.setUserID();
       EditListingViewmodel.docid=widget.docid;
-    });
           
   }
 

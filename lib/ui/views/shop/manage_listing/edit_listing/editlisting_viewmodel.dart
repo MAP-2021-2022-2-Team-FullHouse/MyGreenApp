@@ -12,15 +12,15 @@ import 'package:stacked/stacked.dart';
 class EditListingViewmodel extends BaseViewModel {
   EditListingViewmodel();
   late final _shopService = locator<ShopService>();
-  static String userEmail="";
+  static String userID="";
   static late File? file;
   static late String fileName;
-  static late String docid="";
+  static String docid="";
   static get id=>docid;
   
-  Future setUserEmail()
-  async {
-    userEmail=await AuthenticationServiceFirebase.getCurrentEmail();
+  void setUserID()
+   {
+    userID= AuthenticationServiceFirebase.getCurrentID();
   }
 
   static Future selectFile(EditListingScreenfulState state) async {
@@ -76,7 +76,7 @@ class EditListingViewmodel extends BaseViewModel {
         description:description,
         method:method,  
         file:file,
-        useremail: userEmail,
+        userID: userID,
         docid:docid
        );
     if (result != null) {

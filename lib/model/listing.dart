@@ -3,6 +3,7 @@ class Listing {
   late String documentId;
   late String price;
   late String seller;
+  late String sellerID;
 
   Listing(
       {this.title = '',
@@ -13,7 +14,8 @@ class Listing {
       this.image = '',
       this.documentId = '',
       this.price='',
-      this.seller=''});
+      this.seller='',
+      this.sellerID=''});
 
   static Listing fromJson(String id,Map<String, dynamic> json) => Listing(
       title: json['title'],
@@ -24,6 +26,9 @@ class Listing {
       image: json['image'] ,
       price: json['price'],
       documentId: id,
+      sellerID: json['sellerID'],
       seller: json['seller']
       );
+  
+  
 }

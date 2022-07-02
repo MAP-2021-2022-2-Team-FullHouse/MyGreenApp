@@ -87,6 +87,22 @@ class AuthenticationServiceFirebase extends AuthenticationService {
     return AppUser.User.fromJson(snapshot.data()).email;
   }
 
+  static String getCurrentID() =>FirebaseAuth.instance.currentUser!.uid;
+
+  static Future<String> getUserName(docid) async {
+    final docUser = FirebaseFirestore.instance.collection('User').doc(docid);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data()).name;
+  }
+
+  @override
+  Future<String> getPhoneNo(String userid) async
+  {
+    final docUser = FirebaseFirestore.instance.collection('User').doc(userid);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data()).phone;
+  }
+
   @override
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUser() {
     final String uid = FirebaseAuth.instance.currentUser!.uid;

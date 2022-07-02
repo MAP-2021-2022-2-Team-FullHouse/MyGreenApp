@@ -5,16 +5,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:my_green_app/model/listing.dart';
+import 'package:my_green_app/services/authentication/authentication_service_firebase.dart';
 import 'package:my_green_app/services/shop/shop_service.dart';
 
 class ShopServiceFirebase extends ShopService {
   final firestoreInstance = FirebaseFirestore.instance;
 
   @override
-  Stream<List<Listing>> readListingList(String email) =>
+  Stream<List<Listing>> readListingList(String userID) =>
       FirebaseFirestore.instance
           .collection('Listing')
-          .where('seller', isEqualTo: email)
+          .where('sellerID', isEqualTo: userID)
           .snapshots()
           .map((snapshot) => snapshot.docs
               .map((doc) => Listing.fromJson(doc.id, doc.data()))
@@ -48,11 +49,12 @@ class ShopServiceFirebase extends ShopService {
       required String description,
       required String method,
       required String image,
-      required String useremail,
+      required String userID,
       File? file}) async {
     try {
       String? img = '';
       int pos = image.indexOf('.');
+      String user=await AuthenticationServiceFirebase.getUserName(userID);
       final listingFirebase =
           await firestoreInstance.collection("Listing").add({
         "title": title,
@@ -61,7 +63,8 @@ class ShopServiceFirebase extends ShopService {
         "price": price,
         "description": description,
         "method": method,
-        "seller": useremail,
+        "sellerID": userID,
+        "seller":user
       });
       img = "${listingFirebase.id}${image.substring(pos)}";
       if (file != null) {
@@ -83,10 +86,11 @@ class ShopServiceFirebase extends ShopService {
       required String description,
       required String method,
       required String image,
-      required String useremail,
+      required String userID,
       required String docid,
       File? file}) async {
     try {
+      String user=await AuthenticationServiceFirebase.getUserName(userID);
       await firestoreInstance.collection("Listing").doc(docid).update({
         "title": title,
         "category": category,
@@ -94,12 +98,13 @@ class ShopServiceFirebase extends ShopService {
         "price": price,
         "description": description,
         "method": method,
-        "seller": useremail,
+        "sellerID": userID,
+        "seller":user
       });
       if (image.isNotEmpty) {
         String? img = '';
         int pos = image.indexOf('.');
-        img = "${docid}${image.substring(pos)}";
+        img = "$docid${image.substring(pos)}";
         if (file != null) {
           uploadFile(img, file);
         }
