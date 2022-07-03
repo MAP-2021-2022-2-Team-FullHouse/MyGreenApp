@@ -43,7 +43,7 @@ Widget buildImage(String? data) {
     color: Colors.transparent,
     child: Ink.image(
       image: NetworkImage(data.toString()),
-      fit: BoxFit.cover,
+      fit: BoxFit.fill,
       width: 300,
       height: 150,
       child: const InkWell(),

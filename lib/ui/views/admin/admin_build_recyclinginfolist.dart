@@ -47,42 +47,13 @@ class BuildRecyclingInfoList extends StatelessWidget {
   }
 }
 
-/*
-Widget buildRecyclingInfoList(RecyclingInfo recyclingInfo) => ListTile(
-      leading: SizedBox.square(
-        child: FutureBuilder(
-          future: viewmodel.getImgUrl("recyclingInfo/${recyclingInfo.image}"),
-          builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
-            return Container(
-              child: buildImage(snapshot.data),
-            );
-          },
-        ),
-      ),
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) =>
-            ViewRecyclingInfoScreen(infoId: recyclingInfo.infoId),
-      )),
-      //ViewRecyclingInfoScreen(infoId: recyclingInfo.infoId),
-      title: Text(recyclingInfo.title),
-      subtitle: Row(
-        children: <Widget>[
-          const Icon(Icons.date_range),
-          Text(DateFormat('yyyy-MM-dd')
-              .format(recyclingInfo.createdDate.toDate())),
-          Row(),
-        ],
-      ),
-    );
-*/
 Widget buildImage(String? data) {
   return Material(
     color: Colors.transparent,
     child: Ink.image(
       image: NetworkImage(data.toString()),
-      fit: BoxFit.cover,
-      width: 128,
-      height: 128,
+      fit: BoxFit.fill,
+      width: 125,
       child: const InkWell(),
     ),
   );
