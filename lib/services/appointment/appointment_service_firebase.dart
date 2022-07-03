@@ -300,6 +300,12 @@ class AppointmentServiceFirebase extends AppointmentService {
     return coll.docs[0]['phone'];
   }
 
+  /*static DateTime StartOfWeek(DateTime dt)
+  {
+    DateTime ndt = dt.Subtract(TimeSpan.FromDays((int)dt.DayOfWeek));
+    return new DateTime(ndt.Year, ndt.Month, ndt.Day, 0, 0, 0, 0);
+  }*/
+
   @override
   Future<List<int>> trackAppointment() async {
     var currEmail = getEmail();
@@ -314,54 +320,52 @@ class AppointmentServiceFirebase extends AppointmentService {
         cancelledAppointment,
         completedAppointment;
     var now = DateTime.now();
-    //var now2 = Timestamp.now();
-    var now_1w = now.subtract(const Duration(days: 7));
-    var now_1m = DateTime(now.year, now.month - 1, now.day);
-    var now_1y = DateTime(now.year - 1, now.month, now.day);
+    int currentDay = now.weekday == 7 ? 0 : now.weekday;
+    var nowWeekStart = now.subtract(Duration(days: currentDay));
+    nowWeekStart = DateTime(
+        nowWeekStart.year, nowWeekStart.month, nowWeekStart.day, 0, 0, 0);
+    var nextWeekStart =
+        now.add(Duration(days: DateTime.daysPerWeek - currentDay));
+    nextWeekStart = DateTime(
+        nextWeekStart.year, nextWeekStart.month, nextWeekStart.day, 0, 0, 0);
+    var nowMonthStart = DateTime(now.year, now.month, 1, 0, 0, 0);
+    var nextMonthStart = DateTime(now.year, now.month + 1, 1);
+    var nowYearStart = DateTime(now.year, 1, 1);
+    var nextYearStart = DateTime(now.year + 1, 1, 1);
+    //Get number of appointments in this week starting from Sunday to Saturday
     await FirebaseFirestore.instance
         .collection('Appointment')
         .where('recycleCenterEmail', isEqualTo: currEmail)
-        .where('dateTime', isGreaterThanOrEqualTo: Timestamp.fromDate(now_1w))
+        .where('dateTime',
+            isGreaterThanOrEqualTo: Timestamp.fromDate(nowWeekStart))
+        .where('dateTime', isLessThan: Timestamp.fromDate(nextWeekStart))
         .get()
         .then((data) {
-      /*if (data.docs.isNotEmpty) {
-        weekAppointment = data.docs.length;
-      } else {
-        weekAppointment = 0;
-      }*/
       weekAppointment = data.docs.length;
       appointmentData[0] = weekAppointment;
-      print(weekAppointment);
-      //print(appointmentData[0]);
     });
+    //Get number of appointments in this month
     await FirebaseFirestore.instance
         .collection('Appointment')
         .where('recycleCenterEmail', isEqualTo: currEmail)
-        .where('dateTime', isGreaterThanOrEqualTo: Timestamp.fromDate(now_1m))
+        .where('dateTime',
+            isGreaterThanOrEqualTo: Timestamp.fromDate(nowMonthStart))
+        .where('dateTime', isLessThan: Timestamp.fromDate(nextMonthStart))
         .get()
         .then((data) {
-      /*if (data.docs.isNotEmpty) {
-        monthAppointment = data.docs.length;
-      } else {
-        monthAppointment = 0;
-      }*/
       monthAppointment = data.docs.length;
       appointmentData[1] = monthAppointment;
-      print(monthAppointment);
     });
+    //Get number of appointments in this year
     await FirebaseFirestore.instance
         .collection('Appointment')
         .where('recycleCenterEmail', isEqualTo: currEmail)
-        .where('dateTime', isGreaterThanOrEqualTo: Timestamp.fromDate(now_1y))
+        .where('dateTime',
+            isGreaterThanOrEqualTo: Timestamp.fromDate(nowYearStart))
+        .where('dateTime', isLessThan: Timestamp.fromDate(nextYearStart))
         .get()
         .then((data) {
-      /*if (data.docs.isNotEmpty) {
-        yearAppointment = data.docs.length;
-      } else {
-        yearAppointment = 0;
-      }*/
       yearAppointment = data.docs.length;
-      print(yearAppointment);
       appointmentData[2] = yearAppointment;
     });
     // Get number of pending appointments
