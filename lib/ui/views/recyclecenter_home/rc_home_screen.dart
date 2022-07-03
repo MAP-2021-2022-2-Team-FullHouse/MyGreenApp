@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/home/home_app_bar.dart';
 import 'package:my_green_app/ui/views/home/rc_home_navBar.dart';
 import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_navBar.dart';
-import 'package:my_green_app/ui/views/recyclecenter_home/home_screenState.dart';
+import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_screenState.dart';
 import 'rc_home.dart';
 
 class RecycleCenterHomeScreen extends StatelessWidget {
