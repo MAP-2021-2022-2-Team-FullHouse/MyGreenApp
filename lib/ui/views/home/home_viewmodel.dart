@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:my_green_app/app/locator.dart';
+import 'package:my_green_app/model/recycling_info.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:my_green_app/services/authentication/authentication_service_firebase.dart';
 import 'package:my_green_app/services/push_notification_service.dart';
+import 'package:my_green_app/services/recycling_info/recycling_info_service.dart';
 import 'package:my_green_app/services/reward/reward_firebaseservice.dart';
 import 'package:my_green_app/services/reward/reward_service.dart';
 import 'package:stacked/stacked.dart';
@@ -15,6 +17,7 @@ class HomeViewmodel extends BaseViewModel {
   final _authService = locator<AuthenticationService>();
   final _pushNotificationService = locator<PushNotificationService>();
   final _navigationService = locator<NavigationService>();
+  final _recyclingInfoService = locator<RecyclingInfoService>();
   final streamController = StreamController(
     onPause: () => print('Paused'),
     onResume: () => print('Resumed'),
@@ -81,5 +84,15 @@ class HomeViewmodel extends BaseViewModel {
   static String getCurrentRole() {
     getUserRole();
     return currUserRole;
+  }
+  
+  Stream<List<RecyclingInfo>> getRecyclingInfoList() {
+    var results = _recyclingInfoService.readRecyclingInfoList();
+    return results;
+  }
+
+  Future<String?> getImgUrl(String imgUrl) async {
+    var result = await _recyclingInfoService.getRecyclingInfoImage(imgUrl);
+    return result;
   }
 }

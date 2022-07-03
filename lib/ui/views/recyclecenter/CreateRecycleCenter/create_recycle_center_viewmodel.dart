@@ -3,7 +3,6 @@ import 'package:my_green_app/services/services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/app/locator.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'package:geolocator/geolocator.dart';
 import 'create_recycle_center.dart';
@@ -12,8 +11,6 @@ import 'create_recycle_center.dart';
 // ignore: camel_case_types
 class CreateRecycleCenter_ViewModel extends BaseViewModel{
    final _recycleCenterService = locator<RecycleCenterService>();
-  //final _navigationService = locator<NavigationService>();
-  // final _gpsService = locator<GPSService>();
    static late String lat;
    static late String lon;
    static late File?  file;

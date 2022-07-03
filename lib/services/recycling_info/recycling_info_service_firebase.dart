@@ -80,8 +80,11 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
 
   @override
   Stream<List<RecyclingInfo>> readRecyclingInfoList() =>
-      FirebaseFirestore.instance.collection('RecyclingInfo').snapshots().map(
-          (snapshot) => snapshot.docs
+      FirebaseFirestore.instance
+          .collection('RecyclingInfo')
+          .orderBy('createdDate', descending: true)
+          .snapshots()
+          .map((snapshot) => snapshot.docs
               .map((doc) => RecyclingInfo.fromJson(doc.data()))
               .toList());
 

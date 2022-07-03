@@ -59,6 +59,11 @@ class HomeScreenfulState extends State<HomeScreenful> {
     await viewmodel.signOut();
   }
 
+  /*
+  Future<String?> getImgUrl(String imgUrl) async {
+     return await HomeViewmodel().getImgUrl(imgUrl);
+  }*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

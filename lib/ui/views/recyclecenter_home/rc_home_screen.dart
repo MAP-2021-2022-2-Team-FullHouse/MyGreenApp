@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_green_app/ui/views/recyclecenter_home/home_navBar.dart';
+import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_navBar.dart';
 import 'package:my_green_app/ui/views/recyclecenter_home/home_screenState.dart';
-import 'home.dart';
+import 'rc_home.dart';
 
 class RecycleCenterHomeScreen extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const RecycleCenterHomeScreen());

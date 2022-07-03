@@ -3,7 +3,7 @@ import 'package:my_green_app/ui/views/recyclecenter_home/home_screenState.dart';
 import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_build_appointment_summary.dart';
 import 'package:my_green_app/ui/views/recyclecenter_home/widget/logout_button.dart';
 import 'package:stacked/stacked.dart';
-import '../recyclecenter_home/home_viewmodel.dart';
+import 'rc_home_viewmodel.dart';
 
 class RecycleCenterHomeBody extends StatelessWidget {
   final RecycleCenterHomeScreenfulState state;
@@ -35,22 +35,6 @@ class RecycleCenterHomeBody extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
-          /*Container(
-            margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.0),
-              color: const Color.fromARGB(255, 2, 234, 255),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 2,
-                  offset: const Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 80),
-            child: */
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -94,7 +78,6 @@ class RecycleCenterHomeBody extends StatelessWidget {
               const SizedBox(height: 5),
             ],
           ),
-          //),
           const SizedBox(height: 50),
           ViewModelBuilder<RecycleCenterHomeViewmodel>.reactive(
             builder: (context, viewmodel, child) =>

@@ -26,6 +26,6 @@ class EditButton extends StatelessWidget {
           ],
         ),
         child: MaterialButton(
-            onPressed: () => {state.editRecyclingInfo()}, child: Text("Save")));
+            onPressed: () => {state.editRecyclingInfo()}, child: const Text("Save")));
   }
 }

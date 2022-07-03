@@ -28,7 +28,7 @@ Widget buildRC(RecycleCenter rc) => ListTile(
           Text(rc.email),
           Text(rc.phone),
           Text(rc.address),
-          Container(child: Row()),
+          Row(),
           RCListButton(
             viewmodel: rcviewmodel.RecycleCenterViewmodel(),
             model: rc,

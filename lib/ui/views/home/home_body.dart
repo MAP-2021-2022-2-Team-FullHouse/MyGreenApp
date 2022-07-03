@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_green_app/model/recycling_info.dart';
+import 'package:my_green_app/ui/views/home/home_build_recyclinginfolist.dart';
 import 'package:my_green_app/ui/views/home/home_screenState.dart';
 import 'package:my_green_app/ui/views/home/widget/logout_button.dart';
 import 'package:stacked/stacked.dart';
@@ -16,7 +18,11 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     HomeViewmodel vm = HomeViewmodel();
 
-    return Center(
+    return Scaffold(
+        //margin: const EdgeInsets.only(top: 5, bottom: 100),
+        //width: MediaQuery.of(context).size.width,
+        //height: MediaQuery.of(context).size.height,
+        body: SingleChildScrollView(
       child: Column(
         children: <Widget>[
           const SizedBox(height: 20),
@@ -99,19 +105,81 @@ class HomeBody extends StatelessWidget {
                         return const Center(child: Text('No data found'));
                       }
                     }),
-                const SizedBox(height: 5),
+                const SizedBox(height: 20),
               ],
             ),
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 30),
+          const Text(
+            "Recycling Info",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              shadows: [
+                Shadow(color: Colors.grey, offset: Offset(2, 1), blurRadius: 10)
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+          Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //const SizedBox(height: 10),
+                    StreamBuilder<List<RecyclingInfo>>(
+                        stream: vm.getRecyclingInfoList(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return const Center(
+                                child: Text('Something went wrong'));
+                          }
+                          if (snapshot.hasData) {
+                            final recyclingInfos = snapshot.data!;
+                            return ListView.builder(
+                              physics: const ClampingScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              //children: ListView.builder(
+                              itemCount: recyclingInfos.length,
+                              itemBuilder: (context, index) =>
+                                  BuildRecyclingInfoList(
+                                      recyclingInfoList: recyclingInfos,
+                                      index: index),
+                            );
+                            //context: context,
+                            //color: const Color.fromARGB(255, 3, 140, 28),
+                            //tiles: recyclingInfos
+                            //    .map(buildRecyclingInfoList),
+                            //).toList());
+                            /*children: ListTile.divideTiles(
+                                  context: context,
+                                  color: const Color.fromARGB(255, 3, 140, 28),
+                                  tiles: recyclingInfos
+                                      .map(buildRecyclingInfoList),
+                                ).toList());*/
+                          } else {
+                            return const Center(child: Text('No data found'));
+                          }
+                        }),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 30),
           ViewModelBuilder<HomeViewmodel>.reactive(
             builder: (context, viewmodel, child) =>
                 LogoutButton(viewmodel: viewmodel, state: state),
             viewModelBuilder: () => HomeViewmodel(),
             onModelReady: (model) => model.listenToMessage(),
           ),
+          const SizedBox(height: 20),
         ],
       ),
-    );
+    ));
   }
 }
