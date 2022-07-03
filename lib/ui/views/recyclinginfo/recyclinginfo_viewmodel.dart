@@ -41,7 +41,7 @@ class RecyclingInfoViewmodel extends BaseViewModel {
       if (result == true) {
         result = null;
         _dialogService.showDialog(
-          title: 'Successfull',
+          title: 'Success',
           description: 'You have deleted the recycling info',
           buttonTitle: 'OK',
           dialogPlatform: DialogPlatform.Material, // DialogPlatform.Material

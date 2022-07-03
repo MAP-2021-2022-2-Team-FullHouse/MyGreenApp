@@ -48,10 +48,8 @@ class _CreateRecyclingInfoImageState extends State<CreateRecyclingInfoImage> {
               icon: Icons.attach_file,
               onClicked: () {
                 CreateRecyclingInfo_ViewModel.selectFile(widget.state);
-                //widget.state.fileField.text=vm.fileName;
               }),
           const SizedBox(height: 20),
-          // task != null ? buildUploadStatus(task!) : Container(),
         ]);
   }
 

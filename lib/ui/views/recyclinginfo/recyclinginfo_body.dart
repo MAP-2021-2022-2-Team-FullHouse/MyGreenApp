@@ -65,7 +65,7 @@ class _RecyclingInfoBodyState extends State<RecyclingInfoBody> {
                             children:
                                 recyclingInfos.map(buildRecyclingInfo).toList(),
                             scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
+                            shrinkWrap: true,                   
                           );
                         } else {
                           return const Center(child: Text('No data found'));

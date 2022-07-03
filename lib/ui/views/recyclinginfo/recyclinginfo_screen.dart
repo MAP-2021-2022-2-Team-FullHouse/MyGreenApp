@@ -15,7 +15,6 @@ class RecyclingInfoScreen extends StatelessWidget {
       child: Scaffold(
         appBar: const RecyclingInfoAppBar(),
         body: RecyclingInfoScreenful(),
-        //floatingActionButton: const AdminFloat(),
         bottomNavigationBar: const RecyclingInfoNavigationBar(),
       ),
     );
