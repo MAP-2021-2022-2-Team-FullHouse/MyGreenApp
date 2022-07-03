@@ -32,10 +32,8 @@ import 'package:my_green_app/services/recycling_info/recycling_info_service.dart
 import 'package:my_green_app/services/recycling_info/recycling_info_service_firebase.dart';
 import 'package:my_green_app/services/push_notification_service.dart';
 import 'package:my_green_app/services/local_notification_service.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 GetIt locator = GetIt.instance;
-final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 void setupLocator() {
   // Services
   locator.registerLazySingleton<RegistrationService>(

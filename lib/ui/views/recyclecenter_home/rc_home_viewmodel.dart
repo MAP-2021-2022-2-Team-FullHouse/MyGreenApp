@@ -4,7 +4,6 @@ import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/services/appointment/appointment_service.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:my_green_app/services/push_notification_service.dart';
-import 'package:my_green_app/services/recycling_info/recycling_info_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:stacked_services/stacked_services.dart';
@@ -12,17 +11,11 @@ import 'package:stacked_services/stacked_services.dart';
 class RecycleCenterHomeViewmodel extends BaseViewModel {
   final _appointmentService = locator<AppointmentService>();
   final _authService = locator<AuthenticationService>();
-  //final _pushNotificationService = locator<PushNotificationService>();
   final _navigationService = locator<NavigationService>();
   final _pushNotificationService = locator<PushNotificationService>();
-  final _recyclingInfoService = locator<RecyclingInfoService>();
   final streamController = StreamController(
-    onPause: () => print('Paused'),
-    onResume: () => print('Resumed'),
-    onCancel: () => print('Cancelled'),
-    onListen: () => print('Listens'),
   );
-  static RemoteMessage newMessage = RemoteMessage();
+  static RemoteMessage newMessage = const RemoteMessage();
   RecycleCenterHomeViewmodel();
 
   Future<void> signOut() async {
@@ -53,6 +46,7 @@ class RecycleCenterHomeViewmodel extends BaseViewModel {
 
   String? getToken() {
     _pushNotificationService.getToken();
+    return null;
   }
 
   void listenToMessage() {
@@ -66,13 +60,4 @@ class RecycleCenterHomeViewmodel extends BaseViewModel {
       setBusy(false);
     });
   }
-
-  /*static Future getUserRole() async {
-    currUserRole = await AuthenticationServiceFirebase.getCurrentRole();
-  }
-
-  static String getCurrentRole() {
-    getUserRole();
-    return currUserRole;
-  }*/
 }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/login/login_screen.dart';
-import 'package:my_green_app/ui/views/register/register_body.dart';
 import 'package:my_green_app/ui/views/register/register_screen.dart';
 import 'package:my_green_app/ui/views/admin/admin_screen.dart';
 import 'package:my_green_app/ui/views/reset/reset_screen.dart';
-
 import '../ui/views/appointment/appointment_screen.dart';
 import '../ui/views/home/home_screen.dart';
 
@@ -28,7 +26,7 @@ class Routes {
         return AdminScreen.route();
       case resetRoute:
         return ResetScreen.route();
-       case appointmentRoute:
+      case appointmentRoute:
         return AppointmentScreen.route();
     }
     return null;

@@ -12,7 +12,6 @@ class RecycleCenterHomeNavigationBar extends StatefulWidget {
 
 class _RecycleCenterHomeNavigationBarState extends State<RecycleCenterHomeNavigationBar> {
   RecycleCenterHomeViewmodel model = RecycleCenterHomeViewmodel();
-  //var role = RecycleCenterHomeViewmodel.getCurrentRole();
   @override
   Widget build(BuildContext context) {
     int currIndex;

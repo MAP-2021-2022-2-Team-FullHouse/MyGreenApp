@@ -26,69 +26,8 @@ class HomeBody extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-
           children: <Widget>[
             const SizedBox(height: 20),
-            // FutureBuilder<String>(
-            //   future: HomeViewmodel().myName(),
-            //   builder: (context, snapshot){
-            //     if(snapshot.hasError){
-            //       return Text("User Home Page",style: TextStyle(
-            //                   fontSize: 25,
-            //                   color: Colors.black,
-            //                   fontWeight: FontWeight.w700,
-            //                   shadows: [
-            //                     Shadow(
-            //                         color: Colors.grey,
-            //                         offset: Offset(2, 1),
-            //                         blurRadius: 10)
-            //                   ],
-            //                 ),);
-            //     }
-            //     if(snapshot.hasData){
-            //       return SizedBox(
-
-            //         width:300,
-            //         child: Text('Welcome, \n${snapshot.data}', textAlign: TextAlign.center,style: TextStyle(
-            //                     fontSize: 25,
-            //                     color: Colors.black,
-            //                     fontWeight: FontWeight.w700,
-            //                     shadows: [
-            //                       Shadow(
-            //                           color: Colors.grey,
-            //                           offset: Offset(2, 1),
-            //                           blurRadius: 10)
-            //                     ],
-            //                   ),),
-            //       );
-            //     }else{
-            //       return Text("User Home Page",style: TextStyle(
-            //                   fontSize: 25,
-            //                   color: Colors.black,
-            //                   fontWeight: FontWeight.w700,
-            //                   shadows: [
-            //                     Shadow(
-            //                         color: Colors.grey,
-            //                         offset: Offset(2, 1),
-            //                         blurRadius: 10)
-            //                   ],
-            //                 ),);
-            //     }
-
-            //   }),
-            // const Text("User Home Page",
-            // style: TextStyle(
-            //                 fontSize: 25,
-            //                 color: Colors.black,
-            //                 fontWeight: FontWeight.w700,
-            //                 shadows: [
-            //                   Shadow(
-            //                       color: Colors.grey,
-            //                       offset: Offset(2, 1),
-            //                       blurRadius: 10)
-            //                 ],
-            //               ),),
             const SizedBox(height: 20),
             Container(
                 margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -109,7 +48,7 @@ class HomeBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 5.0,
                       ),
                       FutureBuilder<String>(
@@ -161,10 +100,9 @@ class HomeBody extends StatelessWidget {
                           }
                         },
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                     ])),
-
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             const SizedBox(height: 30),
             const Text(
               "Recycling Info",
@@ -183,10 +121,8 @@ class HomeBody extends StatelessWidget {
               children: [
                 SingleChildScrollView(
                   child: Column(
-                    //mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //const SizedBox(height: 10),
                       StreamBuilder<List<RecyclingInfo>>(
                           stream: vm.getRecyclingInfoList(),
                           builder: (context, snapshot) {
@@ -207,17 +143,6 @@ class HomeBody extends StatelessWidget {
                                         recyclingInfoList: recyclingInfos,
                                         index: index),
                               );
-                              //context: context,
-                              //color: const Color.fromARGB(255, 3, 140, 28),
-                              //tiles: recyclingInfos
-                              //    .map(buildRecyclingInfoList),
-                              //).toList());
-                              /*children: ListTile.divideTiles(
-                                    context: context,
-                                    color: const Color.fromARGB(255, 3, 140, 28),
-                                    tiles: recyclingInfos
-                                        .map(buildRecyclingInfoList),
-                                  ).toList());*/
                             } else {
                               return const Center(child: Text('No data found'));
                             }
@@ -228,28 +153,9 @@ class HomeBody extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 30),
-            //       ViewModelBuilder<HomeViewmodel>.reactive(
-            //   builder: (context, viewmodel, child)
-            //      { return LogoutButton(viewmodel: viewmodel, state: state);},
-            //   viewModelBuilder: () => HomeViewmodel(),
-            // ),
           ],
         ),
       ),
     );
   }
-
-  // Future<String> readUser() async {
-  //   User? user = FirebaseAuth.instance.currentUser;
-  //   final docUser =
-  //       FirebaseFirestore.instance.collection("users").doc(user!.uid);
-  //   final snapshot = await docUser.get();
-
-  //   if (snapshot.exists) {
-  //     return "Hi!${AppUser.User.fromJson(snapshot.data()!).name}";
-  //   } else {
-  //     return " ";
-  //   }
-  // }
-
 }
