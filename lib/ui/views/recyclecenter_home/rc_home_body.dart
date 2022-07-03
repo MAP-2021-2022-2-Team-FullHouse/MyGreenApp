@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:my_green_app/ui/views/home/home_screenState.dart';
-import '../home/rc_home_viewmodel.dart';
+import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_build_appointment_summary.dart';
+import 'package:my_green_app/ui/views/recyclecenter_home/widget/logout_button.dart';
+import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_screenstate.dart';
+import 'package:stacked/stacked.dart';
+import 'rc_home_viewmodel.dart';
 
-class RCHomeBody extends StatelessWidget {
-  final HomeScreenfulState state;
-  const RCHomeBody({Key? key, required this.state}) : super(key: key);
+class RecycleCenterHomeBody extends StatelessWidget {
+  final RecycleCenterHomeScreenfulState state;
+  const RecycleCenterHomeBody(RecycleCenterHomeScreenfulState recycleCenterHomeScreenfulState, {Key? key, required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,17 +54,17 @@ class RCHomeBody extends StatelessWidget {
                           alignment: WrapAlignment.center,
                           //runSpacing: 5,
                           children: buildSummary(appointmentData)));
-                          } else {
+                } else {
                   return const Center(child: Text('No data found'));
                 }
               }),
-            const SizedBox(height: 5),
+          const SizedBox(height: 5),
           const SizedBox(height: 50),
-          //       ViewModelBuilder<HomeViewmodel>.reactive(
-          //   builder: (context, viewmodel, child)
-          //      { return LogoutButton(viewmodel: viewmodel, state: state);},
-          //   viewModelBuilder: () => HomeViewmodel(),
-          // ),
+                 ViewModelBuilder<RecycleCenterHomeViewmodel>.reactive(
+             builder: (context, viewmodel, child)
+                { return LogoutButton(viewmodel: viewmodel, state: state);},
+             viewModelBuilder: () => RecycleCenterHomeViewmodel(),
+           ),
         ],
       ),
     );

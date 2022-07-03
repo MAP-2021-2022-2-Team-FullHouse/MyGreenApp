@@ -1,11 +1,6 @@
 import 'dart:async';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_green_app/model/Appointment.dart';
-import 'package:my_green_app/ui/views/appointment/appointment_user_list.dart';
-import 'package:my_green_app/ui/views/appointment/appointment_screenstate.dart';
-import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_build_summary.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_list.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_screenstate.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_viewmodel.dart';

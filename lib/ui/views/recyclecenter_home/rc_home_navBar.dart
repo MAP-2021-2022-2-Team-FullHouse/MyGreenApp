@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 
-class RCHomeNavigationBar extends StatefulWidget {
+class RecycleCenterHomeNavigationBar extends StatefulWidget {
   final int pageNo;
-  const RCHomeNavigationBar({Key? key, required this.pageNo}) : super(key: key);
+  const RecycleCenterHomeNavigationBar({Key? key, required this.pageNo}) : super(key: key);
 
   @override
-  State<RCHomeNavigationBar> createState() => _RCHomeNavigationBarState();
+  State<RecycleCenterHomeNavigationBar> createState() => _RecycleCenterHomeNavigationBarState();
 }
 
-class _RCHomeNavigationBarState extends State<RCHomeNavigationBar> {
+class _RecycleCenterHomeNavigationBarState extends State<RecycleCenterHomeNavigationBar> {
   @override
   Widget build(BuildContext context) {
     int currIndex;
@@ -22,7 +22,7 @@ class _RCHomeNavigationBarState extends State<RCHomeNavigationBar> {
             if (currIndex == 0)
               {Navigator.of(context).pushReplacementNamed(routes.recycleCenterAppointmentRoute)}
             else if (currIndex == 1)
-              {Navigator.of(context).pushReplacementNamed(routes.rcHomeRoute)}
+              {Navigator.of(context).pushReplacementNamed(routes.RecycleCenterHomeRoute)}
             else if (currIndex == 2)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
           }),

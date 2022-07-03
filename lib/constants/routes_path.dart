@@ -1,7 +1,7 @@
 const String loginRoute = 'login';
 const String homeRoute = 'home';
 const String adminRoute = 'admin';
-const String rcHomeRoute = 'rcHome';
+const String recycleCenterHomeRoute = 'recycleCenterHome';
 const String rcRoute = 'recyclecenter';
 const String profileRoute = 'profile';
 const String user_rcRoute = 'user_rc';
