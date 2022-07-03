@@ -309,14 +309,6 @@ class AppointmentServiceFirebase extends AppointmentService {
         QuerySnapshot querySnapshot =
             await _collectionRef.doc(docID).collection('photos').get();
         return _collectionRef.doc(docID).collection('photos').get();
-        /* .then((value) {
-          for (var i in value.docs) {
-            dataPhoto.add(i.data());
-            return i.data();
-          } */
-        //});
-        //return dataPhoto;
-        //return photoList = querySnapshot.docs.map((doc) => doc.data()).toList();
       }
     });
   }
@@ -379,16 +371,22 @@ class AppointmentServiceFirebase extends AppointmentService {
         completedAppointment;
     var now = DateTime.now();
     int currentDay = now.weekday == 7 ? 0 : now.weekday;
+    //Get this Sunday date
     var nowWeekStart = now.subtract(Duration(days: currentDay));
     nowWeekStart = DateTime(
         nowWeekStart.year, nowWeekStart.month, nowWeekStart.day, 0, 0, 0);
+    //Get next Sunday date
     var nextWeekStart =
         now.add(Duration(days: DateTime.daysPerWeek - currentDay));
     nextWeekStart = DateTime(
         nextWeekStart.year, nextWeekStart.month, nextWeekStart.day, 0, 0, 0);
-    var nowMonthStart = DateTime(now.year, now.month, 1, 0, 0, 0);
+    //Get current month starting date
+    var nowMonthStart = DateTime(now.year, now.month, 1);
+    //Get next month starting date
     var nextMonthStart = DateTime(now.year, now.month + 1, 1);
+    //Get current year starting date
     var nowYearStart = DateTime(now.year, 1, 1);
+    //Get next year starting date
     var nextYearStart = DateTime(now.year + 1, 1, 1);
     //Get number of appointments in this week starting from Sunday to Saturday
     await FirebaseFirestore.instance
@@ -446,7 +444,7 @@ class AppointmentServiceFirebase extends AppointmentService {
       acceptedAppointment = data.docs.length;
       appointmentData[4] = acceptedAppointment;
     });
-    // Get number of in-progress(going) appointments
+    // Get number of going appointments
     await FirebaseFirestore.instance
         .collection('Appointment')
         .where('recycleCenterEmail', isEqualTo: currEmail)
@@ -488,53 +486,4 @@ class AppointmentServiceFirebase extends AppointmentService {
     });
     return appointmentData;
   }
-
-/*
-  @override
-  Future getPostsOnceOff() async {
-    try {
-      var currEmail = getEmail();
-      print(currEmail);
-      var appointments;
-      var documents = await FirebaseFirestore.instance
-          .collection('Appointment')
-          .where('recycleCenterEmail', isEqualTo: currEmail)
-          .get();
-      if (documents.docs.isNotEmpty) {
-        return documents.docs
-            .map((snapshot) => Appointment.fromMap(snapshot.data()))
-            .toList();
-      }
-    } catch (e) {
-      if (e is PlatformException) {
-        return e.message;
-      }
-      return e.toString();
-    }
-  }
-   // Create the controller that will broadcast the posts
-  final StreamController<List<Appointment>> _appsController =
-      StreamController<List<Appointment>>.broadcast();
-  @override
-  Stream listenToPostsRealTime() {
-    // Register the handler for when the posts data changes
-    var currEmail = getEmail();
-    print(currEmail);
-    FirebaseFirestore.instance
-        .collection('Appointment')
-        .where('recycleCenterEmail', isEqualTo: currEmail)
-        .snapshots()
-        .listen((postsSnapshot) {
-      if (postsSnapshot.docs.isNotEmpty) {
-        var posts = postsSnapshot.docs
-            .map((snapshot) => Appointment.fromMap(snapshot.data()))
-            //.where((mappedItem) => mappedItem.title != null)
-            .toList();
-        // Add the posts onto the controller
-        _appsController.add(posts);
-      }
-    });
-    // Return the stream underlying our _postsController.
-    return _appsController.stream;
-  } */
 }
