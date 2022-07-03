@@ -22,7 +22,7 @@ class _RecycleCenterHomeNavigationBarState extends State<RecycleCenterHomeNaviga
             if (currIndex == 0)
               {Navigator.of(context).pushReplacementNamed(routes.recycleCenterAppointmentRoute)}
             else if (currIndex == 1)
-              {Navigator.of(context).pushReplacementNamed(routes.RecycleCenterHomeRoute)}
+              {Navigator.of(context).pushReplacementNamed(routes.recycleCenterHomeRoute)}
             else if (currIndex == 2)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
           }),

@@ -15,7 +15,7 @@ class RecycleCenterHomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: const HomeAppBar(),
-        body:RecycleCenterHomeBody(state:RecycleCenterHomeScreenfulState()),
+        body:RecycleCenterHomeScreenful(),
         bottomNavigationBar: const RecycleCenterHomeNavigationBar(pageNo: 1),
       ),
     );

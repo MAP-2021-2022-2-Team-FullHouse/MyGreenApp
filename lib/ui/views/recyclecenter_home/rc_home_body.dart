@@ -7,7 +7,8 @@ import 'rc_home_viewmodel.dart';
 
 class RecycleCenterHomeBody extends StatelessWidget {
   final RecycleCenterHomeScreenfulState state;
-  const RecycleCenterHomeBody(RecycleCenterHomeScreenfulState recycleCenterHomeScreenfulState, {Key? key, required this.state}) : super(key: key);
+  const RecycleCenterHomeBody({Key? key, required this.state})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +61,12 @@ class RecycleCenterHomeBody extends StatelessWidget {
               }),
           const SizedBox(height: 5),
           const SizedBox(height: 50),
-                 ViewModelBuilder<RecycleCenterHomeViewmodel>.reactive(
-             builder: (context, viewmodel, child)
-                { return LogoutButton(viewmodel: viewmodel, state: state);},
-             viewModelBuilder: () => RecycleCenterHomeViewmodel(),
-           ),
+          ViewModelBuilder<RecycleCenterHomeViewmodel>.reactive(
+            builder: (context, viewmodel, child) {
+              return LogoutButton(viewmodel: viewmodel, state: state);
+            },
+            viewModelBuilder: () => RecycleCenterHomeViewmodel(),
+          ),
         ],
       ),
     );
