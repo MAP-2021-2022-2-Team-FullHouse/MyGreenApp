@@ -5,8 +5,7 @@ import 'package:my_green_app/ui/views/reset/reset_viewmodel.dart';
 class ResetButton extends StatelessWidget {
   final ResetViewmodel viewmodel;
   final ResetScreenState state;
-  //const ResetButton({Key? key}) : super(key: key);
-  const ResetButton({required this.viewmodel, required this.state});
+  const ResetButton({super.key, required this.viewmodel, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +14,13 @@ class ResetButton extends StatelessWidget {
         height: 35,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Color.fromRGBO(195, 196, 141, 100),
+          color: const Color.fromRGBO(195, 196, 141, 100),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 3,
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -29,6 +28,6 @@ class ResetButton extends StatelessWidget {
             onPressed: () async {
               state.resetPassword(viewmodel);
             },
-            child: Text("Reset Password")));
+            child: const Text("Reset Password")));
   }
 }
