@@ -73,8 +73,8 @@ class AppointmentViewmodel extends BaseViewModel {
     return phone;
   }
 
-  Future cancelAppointment(String id) async {
-    await _AppointmentService.cancelAppointment(id);
+  Future cancelAppointment(String id, String rcEmail) async {
+    await _AppointmentService.cancelAppointment(id, rcEmail);
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> getAppointmentData() {

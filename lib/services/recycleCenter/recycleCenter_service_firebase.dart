@@ -11,6 +11,7 @@ import '../../model/user.dart' as AppUser;
 import '../firebase.dart';
 import 'recycleCenter_service.dart';
 
+
 class RecycleCenterServiceFirebase extends RecycleCenterService {
   final navigator = NavigatorService();
   final firestoreInstance = FirebaseFirestore.instance;

@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/services/navigation_service.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import '../../model/user.dart' as AppUser;
 
 import '../firebase.dart';
@@ -20,8 +20,15 @@ class AuthenticationServiceFirebase extends AuthenticationService {
   final navigator = NavigatorService();
 
    @override
-  String? getUID() {
+String? getCurrentUserEmail() {
     return _auth.currentUser!.email;
+  }
+ @override
+  Future<String> getDevice(String userid) async {
+    final docUser = FirebaseFirestore.instance.collection('User').doc(userid);
+    final snapshot = await docUser.get();
+    return AppUser.User.fromJson(snapshot.data()).deviceToken;
+    //return role;
   }
 
   @override
@@ -35,6 +42,12 @@ class AuthenticationServiceFirebase extends AuthenticationService {
         return;
       } else {
         print(_auth.currentUser?.uid);
+        FirebaseMessaging.instance.getToken().then((token) {
+          FirebaseFirestore.instance
+              .collection('User')
+              .doc(_auth.currentUser?.uid)
+              .update({'fcmToken': token});
+        });
         return user;
       }
     } on FirebaseAuthException catch (e) {

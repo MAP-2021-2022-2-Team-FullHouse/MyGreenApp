@@ -35,14 +35,15 @@ class RecycleCenterAppointmentDetailsScreenState
     return viewmodel.getImgUrls(RecycleCenterAppointmentViewmodel.chosenID);
   }
 
-  void onCancel(RecycleCenterAppointmentViewmodel viewmodel) {
-    viewmodel.cancelAppointment(RecycleCenterAppointmentViewmodel.chosenID);
+  void onCancel(RecycleCenterAppointmentViewmodel viewmodel, String uEmail) {
+    viewmodel.cancelAppointment(
+        RecycleCenterAppointmentViewmodel.chosenID, uEmail);
   }
 
-  void onChangeStatus(
-      RecycleCenterAppointmentViewmodel viewmodel, String newStatus) {
+  void onChangeStatus(RecycleCenterAppointmentViewmodel viewmodel,
+      String newStatus, String uEmail) {
     viewmodel.changeAppointmentStatus(
-        RecycleCenterAppointmentViewmodel.chosenID, newStatus);
+        RecycleCenterAppointmentViewmodel.chosenID, newStatus, uEmail);
   }
 
   @override

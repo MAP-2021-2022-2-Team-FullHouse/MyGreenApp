@@ -12,7 +12,7 @@ abstract class AuthenticationService {
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUser();
   Future updateUser(AppUser.User user);
    Future readUser(String docID);
-   String? getUID();
+   String? getCurrentUserEmail();
     Future getUserRole();
     Future getUserName();
   //Future<String> getCurrentRole();

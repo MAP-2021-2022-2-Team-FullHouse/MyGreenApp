@@ -43,7 +43,7 @@ class RecycleCenterAppointmentViewmodel extends BaseViewModel {
   late List<Appointment> _posts = [];
   List<Appointment> get posts => _posts;
 
-  void listenToPosts() {
+  /* void listenToPosts() {
     setBusy(true);
     _AppointmentService.listenToPostsRealTime().listen((postsData) {
       List<Appointment> updatedPosts = postsData;
@@ -53,7 +53,7 @@ class RecycleCenterAppointmentViewmodel extends BaseViewModel {
       }
       setBusy(false);
     });
-  }
+  } */
 
   Future navigateToCreateView() async {
     await NavigationService().navigateTo(homeRoute);
@@ -103,12 +103,13 @@ class RecycleCenterAppointmentViewmodel extends BaseViewModel {
     //notifyListeners();
   }
 
-  Future cancelAppointment(String id) async {
-    await _AppointmentService.cancelAppointment(id);
+  Future cancelAppointment(String id, String oppositeEmail) async {
+    await _AppointmentService.cancelAppointment(id, oppositeEmail);
   }
 
-  Future changeAppointmentStatus(String id, String newStatus) async {
-    await _AppointmentService.changeAppointmentStatus(id, newStatus);
+  Future changeAppointmentStatus(
+      String id, String newStatus, String email) async {
+    await _AppointmentService.changeAppointmentStatus(id, newStatus, email);
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> getAppointmentData() {

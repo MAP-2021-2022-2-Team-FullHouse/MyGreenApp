@@ -26,8 +26,11 @@ class _AppointmentNavigationBarState extends State<AppointmentNavigationBar> {
               {Navigator.of(context).pushReplacementNamed(routes.shopRoute)}
             else if (currIndex == 4)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
-              else if(currIndex==1)
-              {Navigator.of(context).pushReplacementNamed(routes.appointmentRoute)}
+            else if (currIndex == 1)
+              {
+                Navigator.of(context)
+                    .pushReplacementNamed(routes.appointmentRoute)
+              }
           }),
       items: [
         BottomNavigationBarItem(

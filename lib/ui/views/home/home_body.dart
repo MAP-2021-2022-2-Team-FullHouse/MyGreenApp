@@ -7,6 +7,8 @@ import 'package:my_green_app/ui/views/home/home_screenState.dart';
 import 'package:my_green_app/ui/views/home/widget/logout_button.dart';
 import 'package:stacked/stacked.dart';
 import '../home/home_viewmodel.dart';
+import 'package:my_green_app/ui/notification_badge.dart';
+import '../../../model/PushNotification.dart';
 
 
 class HomeBody extends StatelessWidget {
