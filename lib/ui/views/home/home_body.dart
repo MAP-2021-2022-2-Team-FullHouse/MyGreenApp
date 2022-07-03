@@ -1,12 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// ignore: library_prefixes
-import 'package:my_green_app/model/user.dart' as AppUser;
 import 'package:my_green_app/ui/views/home/home_screenState.dart';
 import 'package:my_green_app/ui/views/home/widget/logout_button.dart';
 import 'package:stacked/stacked.dart';
-import '../../../model/PushNotification.dart';
 import '../home/home_viewmodel.dart';
 
 class HomeBody extends StatelessWidget {
@@ -24,33 +19,7 @@ class HomeBody extends StatelessWidget {
     return Center(
       child: Column(
         children: <Widget>[
-          /* notification != null
-              //? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'TITLE: ${notification!.title}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                    SizedBox(height: 8.0),
-                    Text(
-                      'BODY: ${notification!.body}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                  ],
-                )
-              : Container(), */
           const SizedBox(height: 20),
-          /* Text(
-            notificationMsg,
-            textAlign: TextAlign.center,
-          ), */
           const Text(
             "User Home Page",
             style: TextStyle(

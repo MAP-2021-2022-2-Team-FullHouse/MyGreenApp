@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:my_green_app/model/Appointment.dart';
 import 'package:my_green_app/ui/views/appointment/appointment_user_list.dart';
@@ -29,18 +30,7 @@ class _RecycleCenterAppointmentBodyState
   @override
   void initState() {
     super.initState();
-    // stream = newStream();
   }
-
-  /* Stream<List<Appointment>> newStream() => RecycleCenterAppointmentViewmodel()
-      .getRCList()
-      .map((snapshot) => snapshot.docs.map((doc) {
-            var a = Appointment.fromJson(doc.data());
-            a.rcName = RecycleCenterAppointmentViewmodel()
-                .setName(a.recycleCenterEmail);
-            a.documentId = doc.id;
-            return a;
-          }).toList()); */
 
   @override
   void dispose() {
@@ -58,32 +48,7 @@ class _RecycleCenterAppointmentBodyState
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  FutureBuilder<List<int>>(
-                      future: model.trackAppointmentData(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return Center(child: Text(snapshot.error.toString()));
-                        }
-                        if (snapshot.hasData) {
-                          final List<int> appointmentData = snapshot.data!;
-                          return Container(
-                            height: MediaQuery.of(context).size.height/3,
-                            margin: const EdgeInsets.all(15),
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.0),
-                              color: Colors.grey,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: const Offset(0, 3), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Wrap(children: buildSummary(appointmentData))
-                          );
+                  
                           /*<Widget>[
                             Padding(
                               padding: const EdgeInsets.only(top: 16),
@@ -124,10 +89,6 @@ class _RecycleCenterAppointmentBodyState
                                 ),
                               ]),
                             )*/
-                        } else {
-                          return const Center(child: Text('No data found'));
-                        }
-                      }),
                   const SizedBox(height: 20),
                   StreamBuilder<List<Appointment>>(
                       stream: model.getAppointmentList(),

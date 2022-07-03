@@ -1,16 +1,12 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/constants/routes_path.dart';
 import 'package:my_green_app/model/Appointment.dart';
-import 'package:my_green_app/services/navigation_service.dart';
 import 'package:my_green_app/services/appointment/appointment_service.dart';
-import 'package:my_green_app/services/user/user_repository.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:my_green_app/constants/routes_path.dart' as routes;
 
 class RecycleCenterAppointmentViewmodel extends BaseViewModel {
   /* StreamSubscription? _streamListener;
@@ -42,18 +38,6 @@ class RecycleCenterAppointmentViewmodel extends BaseViewModel {
   RecycleCenterAppointmentViewmodel() {}
   late List<Appointment> _posts = [];
   List<Appointment> get posts => _posts;
-
-  /* void listenToPosts() {
-    setBusy(true);
-    _AppointmentService.listenToPostsRealTime().listen((postsData) {
-      List<Appointment> updatedPosts = postsData;
-      if (updatedPosts != null && updatedPosts.length > 0) {
-        _posts = updatedPosts;
-        notifyListeners();
-      }
-      setBusy(false);
-    });
-  } */
 
   Future navigateToCreateView() async {
     await NavigationService().navigateTo(homeRoute);
@@ -125,10 +109,5 @@ class RecycleCenterAppointmentViewmodel extends BaseViewModel {
   Future getImgUrls(String id) async {
     var result = _AppointmentService.getPhotoURLs(id);
     return result;
-  }
-
-  Future<List<int>> trackAppointmentData() {
-    var appointmentData = _AppointmentService.trackAppointment();
-    return appointmentData;
   }
 }
