@@ -27,11 +27,14 @@ class _RecycleCenterAppointmentNavigationBarState
                     .pushReplacementNamed(routes.recycleCenterAppointmentRoute)
               }
             else if (currIndex == 1)
-              {Navigator.of(context).pushReplacementNamed(routes.rcHomeRoute)}
+              {
+                Navigator.of(context)
+                    .pushReplacementNamed(routes.recycleCenterHomeRoute)
+              }
             else if (currIndex == 2)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
           }),
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.book_online),
           label: 'Appointment',
