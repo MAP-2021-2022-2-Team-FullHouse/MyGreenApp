@@ -52,7 +52,7 @@ class EditRecyclingInfo_ViewModel extends BaseViewModel {
       image: image,
       file: file,
     );
-    if (result != null) {
+    if (result == "ok") {
       return "ok";
     } else {
       return "Something went wrong.";

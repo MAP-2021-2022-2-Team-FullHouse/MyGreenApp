@@ -58,10 +58,10 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
         img = "$infoId${image.substring(pos)}";
         uploadFile(img, file);
         firestoreInstance.collection('RecyclingInfo').doc(infoId).update({
-          "image": image,
+          "image": img,
         });
       }
-      //return "ok";
+      return "ok";
     } on FirebaseException catch (e) {
       return e;
     }
