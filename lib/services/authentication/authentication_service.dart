@@ -13,6 +13,7 @@ abstract class AuthenticationService {
   Future updateUser(AppUser.User user);
   Future readUser(String docID);
   String? getCurrentUserEmail();
+  String getCurrentID();
   Future getUserRole();
   Future getUserName();
 

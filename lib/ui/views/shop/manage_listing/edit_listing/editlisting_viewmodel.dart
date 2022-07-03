@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/model/listing.dart';
+import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:my_green_app/services/authentication/authentication_service_firebase.dart';
 import 'package:my_green_app/services/shop/shop_service.dart';
 import 'package:my_green_app/ui/views/shop/manage_listing/edit_listing/editlisting_screenstate.dart';
@@ -12,15 +13,15 @@ import 'package:stacked/stacked.dart';
 class EditListingViewmodel extends BaseViewModel {
   EditListingViewmodel();
   late final _shopService = locator<ShopService>();
-  static String userID="";
+  late final _authService = locator<AuthenticationService>();
+  static String userID = "";
   static late File? file;
   static late String fileName;
-  static String docid="";
-  static get id=>docid;
-  
-  void setUserID()
-   {
-    userID= AuthenticationServiceFirebase.getCurrentID();
+  static String docid = "";
+  static get id => docid;
+
+  void setUserID() {
+    userID = _authService.getCurrentID();
   }
 
   static Future selectFile(EditListingScreenfulState state) async {
@@ -29,14 +30,15 @@ class EditListingViewmodel extends BaseViewModel {
     // ignore: await_only_futures
     final path = await result.files.single.path!;
     // ignore: await_only_futures
-    file=await File(path);
+    file = await File(path);
     // ignore: await_only_futures
-    fileName=await path.substring(path.lastIndexOf('/')+1); 
+    fileName = await path.substring(path.lastIndexOf('/') + 1);
     // ignore: unnecessary_null_comparison
-    if(fileName!=null)
+    if (fileName != null)
     // ignore: await_only_futures
-    {state.fileField.text=await fileName;}
-    
+    {
+      state.fileField.text = await fileName;
+    }
   }
 
   // static Future uploadFile(String img) async {
@@ -58,37 +60,35 @@ class EditListingViewmodel extends BaseViewModel {
   //   return img;
   // }
 
-  Future editListing(
-      { required String title,
-      required String category,
-      required String condition,
-      required String price,
-      required String description,
-      required String method,
-      required String image,
-      }) async {  
+  Future editListing({
+    required String title,
+    required String category,
+    required String condition,
+    required String price,
+    required String description,
+    required String method,
+    required String image,
+  }) async {
     dynamic result = await _shopService.editListing(
-      title: title,
-       category: category,
+        title: title,
+        category: category,
         condition: condition,
-        image:image,
+        image: image,
         price: price,
-        description:description,
-        method:method,  
-        file:file,
+        description: description,
+        method: method,
+        file: file,
         userID: userID,
-        docid:docid
-       );
+        docid: docid);
     if (result != null) {
-
     } else {
       return "Something went wrong.";
-      
     }
   }
+
   Future<Listing?> readListing(String docid) {
     var listing = _shopService.readListing(docid);
-    
+
     return listing;
   }
 }

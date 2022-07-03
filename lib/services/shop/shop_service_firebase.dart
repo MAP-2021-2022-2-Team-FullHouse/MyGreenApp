@@ -12,7 +12,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 class ShopServiceFirebase extends ShopService {
   final firestoreInstance = FirebaseFirestore.instance;
 
-  /* @override
+  @override
   Stream<List<Listing>> readListingList(String userID) => FirebaseFirestore
       .instance
       .collection('Listing')
@@ -20,42 +20,15 @@ class ShopServiceFirebase extends ShopService {
       .snapshots()
       .map((snapshot) => snapshot.docs
           .map((doc) => Listing.fromJson(doc.id, doc.data()))
-          .toList()); */
+          .toList());
 
   @override
-  Stream<List<Listing>> readListingList(String userID) {
-    var lists;
-    lists = FirebaseFirestore.instance
-        .collection('Listing')
-        .where('sellerID', isEqualTo: userID)
-        .snapshots()
-        .map((snapshot) => snapshot.docs.map((doc) {
-              var a = Listing.fromJson(doc.id, doc.data());
-              a.documentId = doc.id;
-              return a;
-            }).toList());
-
-    return lists;
-  }
-
-  /* @override
   Stream<List<Listing>> readAllListingList() => FirebaseFirestore.instance
       .collection('Listing')
       .snapshots()
       .map((snapshot) => snapshot.docs
           .map((doc) => Listing.fromJson(doc.id, doc.data()))
-          .toList()); */
-
-  @override
-  Stream<List<Listing>> readAllListingList() {
-    var lists;
-    lists = FirebaseFirestore.instance.collection('Listing').snapshots().map(
-        (snapshot) => snapshot.docs
-            .map((doc) => Listing.fromJson(doc.id, doc.data()))
-            .toList());
-
-    return lists;
-  }
+          .toList());
 
   @override
   Future<String> getImage(String pathname) async {

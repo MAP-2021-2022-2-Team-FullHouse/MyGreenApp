@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/services/navigation_service.dart';
@@ -100,7 +99,8 @@ class AuthenticationServiceFirebase extends AuthenticationService {
     return AppUser.User.fromJson(snapshot.data()).email;
   }
 
-  static String getCurrentID() => FirebaseAuth.instance.currentUser!.uid;
+  @override
+  String getCurrentID() => FirebaseAuth.instance.currentUser!.uid;
 
   static Future<String> getCurrentUserName(docid) async {
     final docUser = FirebaseFirestore.instance.collection('User').doc(docid);
@@ -205,7 +205,7 @@ class AuthenticationServiceFirebase extends AuthenticationService {
           .doc(uid)
           .get()
           .then((value) {
-        name = value.data()?['name'];
+        name = value.data()!['name'];
       });
       return name;
     } catch (e) {

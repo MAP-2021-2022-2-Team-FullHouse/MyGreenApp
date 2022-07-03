@@ -16,7 +16,7 @@ abstract class ShopService {
       required String image,
       required String userID,
       File? file});
-  Future editListing(
+    Future editListing(
       {required String title,
       required String category,
       required String condition,
@@ -27,7 +27,7 @@ abstract class ShopService {
       required String userID,
       required String docid,
       File? file});
-  Future<Listing?> readListing(String docid);
-  Future deleteListing(String docid);
-  Future contactSeller(String phoneNo, Listing model);
+    Future<Listing?> readListing(String docid);
+    Future deleteListing(String docid);
+    Future contactSeller(String phoneNo, Listing model);
 }
