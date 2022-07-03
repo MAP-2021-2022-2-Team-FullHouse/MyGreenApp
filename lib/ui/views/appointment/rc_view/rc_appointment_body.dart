@@ -48,47 +48,6 @@ class _RecycleCenterAppointmentBodyState
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  
-                          /*<Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(top: 16),
-                              child: Column(children: [
-                                const Text(
-                                  "Appointment:",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    shadows: [
-                                      Shadow(
-                                          color: Colors.grey,
-                                          offset: Offset(1, 1),
-                                          blurRadius: 5)
-                                    ],
-                                  ),
-                                ),
-                                Text(
-                                  value[0].toString(),
-                                  style: const TextStyle(
-                                    fontSize: 38,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    shadows: [
-                                      Shadow(
-                                          color: Colors.grey,
-                                          offset: Offset(1, 1),
-                                          blurRadius: 5)
-                                    ],
-                                  ),
-                                ),
-                                Text(
-                                  value[1].toString(),
-                                ),
-                                Text(
-                                  value[2].toString(),
-                                ),
-                              ]),
-                            )*/
                   const SizedBox(height: 20),
                   StreamBuilder<List<Appointment>>(
                       stream: model.getAppointmentList(),
