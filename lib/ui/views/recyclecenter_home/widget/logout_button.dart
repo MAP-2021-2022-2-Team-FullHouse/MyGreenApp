@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_screenstate.dart';
-import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_viewmodel.dart';
+import 'package:my_green_app/ui/views/recyclecenter_home/home_screenState.dart';
+import 'package:my_green_app/ui/views/recyclecenter_home/home_viewmodel.dart';
 
 class LogoutButton extends StatelessWidget {
   final RecycleCenterHomeViewmodel viewmodel;

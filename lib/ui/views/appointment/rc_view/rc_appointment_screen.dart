@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_appbar.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_screenstate.dart';
-import '../../recyclecenter_home/rc_home_navBar.dart';
+import '../../recyclecenter_home/home_navBar.dart';
 
 class RecycleCenterAppointmentScreen extends StatelessWidget {
   static Route route() =>

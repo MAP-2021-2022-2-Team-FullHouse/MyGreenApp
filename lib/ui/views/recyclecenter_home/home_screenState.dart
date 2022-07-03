@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_body.dart';
-import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_viewmodel.dart';
+import 'package:my_green_app/ui/views/recyclecenter_home/home.dart';
+import 'package:my_green_app/ui/views/recyclecenter_home/home_viewmodel.dart';
 
 class RecycleCenterHomeScreenful extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => RecycleCenterHomeScreenful());
+  const RecycleCenterHomeScreenful({Key? key}) : super(key: key);
+
+  static Route route() =>
+      MaterialPageRoute(builder: (_) => const RecycleCenterHomeScreenful());
 
   @override
   State<RecycleCenterHomeScreenful> createState() => RecycleCenterHomeScreenfulState();
@@ -12,12 +16,19 @@ class RecycleCenterHomeScreenful extends StatefulWidget {
 }
 
 class RecycleCenterHomeScreenfulState extends State<RecycleCenterHomeScreenful> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   void onLogout(RecycleCenterHomeViewmodel viewmodel) async {
     await viewmodel.signOut();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: RecycleCenterHomeBody(state: this));
+    return Scaffold(
+      body: RecycleCenterHomeBody(state: this));
   }
 }

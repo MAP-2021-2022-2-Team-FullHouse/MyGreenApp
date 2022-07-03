@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
+import 'package:my_green_app/ui/views/recyclecenter_home/home_viewmodel.dart';
 
 class RecycleCenterHomeNavigationBar extends StatefulWidget {
   final int pageNo;
@@ -10,6 +11,8 @@ class RecycleCenterHomeNavigationBar extends StatefulWidget {
 }
 
 class _RecycleCenterHomeNavigationBarState extends State<RecycleCenterHomeNavigationBar> {
+  RecycleCenterHomeViewmodel model = RecycleCenterHomeViewmodel();
+  //var role = RecycleCenterHomeViewmodel.getCurrentRole();
   @override
   Widget build(BuildContext context) {
     int currIndex;

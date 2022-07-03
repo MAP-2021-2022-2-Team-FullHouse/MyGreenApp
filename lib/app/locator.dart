@@ -23,8 +23,6 @@ import 'package:my_green_app/ui/views/reset/reset_viewmodel.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:my_green_app/services/reward/reward_service.dart';
 import 'package:my_green_app/services/reward/reward_firebaseservice.dart';
-import '../services/appointment/appointment_service.dart';
-import '../services/appointment/appointment_service_firebase.dart';
 import '../services/authentication/authentication_service.dart';
 import '../services/authentication/authentication_service_firebase.dart';
 import '../services/resetpassword/reset_service.dart';

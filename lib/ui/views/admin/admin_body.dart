@@ -6,7 +6,7 @@ import '../admin/admin_viewmodel.dart';
 
 class AdminBody extends StatelessWidget {
   final AdminScreenfulState _state;
-  const AdminBody(this._state);
+  const AdminBody(this._state, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class AdminBody extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Admin Home Page"),
+              const Text("Admin Home Page"),
               ViewModelBuilder<AdminViewmodel>.reactive(
                 builder: (context, viewmodel, child) =>
                     LogoutButton(viewmodel: viewmodel, state: _state),

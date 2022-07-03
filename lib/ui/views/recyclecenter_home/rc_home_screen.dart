@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_body.dart';
-import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_navBar.dart';
-import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_screenState.dart';
-
-import '../home/home.dart';
-
+import 'package:my_green_app/ui/views/recyclecenter_home/home_navBar.dart';
+import 'package:my_green_app/ui/views/recyclecenter_home/home_screenState.dart';
+import 'home.dart';
 
 class RecycleCenterHomeScreen extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const RecycleCenterHomeScreen());
@@ -12,11 +9,11 @@ class RecycleCenterHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
-        appBar: const HomeAppBar(),
-        body:RecycleCenterHomeScreenful(),
-        bottomNavigationBar: const RecycleCenterHomeNavigationBar(pageNo: 1),
+        appBar: RecycleCenterHomeAppBar(),
+        body: RecycleCenterHomeScreenful(),
+        bottomNavigationBar: RecycleCenterHomeNavigationBar(pageNo: 1),
       ),
     );
   }
