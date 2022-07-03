@@ -19,7 +19,7 @@ class RecycleCenterHomeBody extends StatelessWidget {
     return Center(
       child: Column(
         children: <Widget>[
-          const SizedBox(height: 20),
+          const SizedBox(height: 40),
           const Text(
             'Appointment Summary',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -41,11 +41,9 @@ class RecycleCenterHomeBody extends StatelessWidget {
                       final List<int> appointmentData = snapshot.data!;
                       return Container(
                           margin: const EdgeInsets.fromLTRB(20, 15, 15, 15),
-                          //padding: const EdgeInsets.symmetric(horizontal: 80),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16.0),
                             color: Colors.white,
-                            //Color.fromARGB(156, 11, 205, 27),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.5),
