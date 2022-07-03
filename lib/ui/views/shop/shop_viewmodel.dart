@@ -24,17 +24,7 @@ class ShopViewmodel extends BaseViewModel {
   Future contactSeller(Listing model) async
   {
     var sellerPhoneNo=await _authService.getPhoneNo(model.sellerID);
-    String text= "Hi ${model.seller}! I am interested to the *${model.title}* you listed in MyGreenApp!";
 
-    var whatsappURl = "whatsapp://send?phone=+6$sellerPhoneNo&text=$text";    
-    // if(await canLaunchUrlString(whatsappURl))
-    // {
-      await launchUrlString(whatsappURl);
-    // }
-    // else
-    // {
-    //   print("error");
-    // }
-    
+    await _shopService.contactSeller(sellerPhoneNo, model);
   }
 }

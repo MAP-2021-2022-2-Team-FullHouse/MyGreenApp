@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:my_green_app/model/listing.dart';
 import 'package:my_green_app/services/authentication/authentication_service_firebase.dart';
 import 'package:my_green_app/services/shop/shop_service.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ShopServiceFirebase extends ShopService {
   final firestoreInstance = FirebaseFirestore.instance;
@@ -156,5 +157,14 @@ class ShopServiceFirebase extends ShopService {
     } on FirebaseException catch (e) {
       return "${e.code}. Something went wrong. Please try again.";
     }
+  }
+
+  @override 
+  Future contactSeller(String phoneNo, Listing model) async
+  {
+    String text= "Hi ${model.seller}! I am interested to the *${model.title}* you listed in MyGreenApp!";
+
+    var whatsappURl = "whatsapp://send?phone=+6$phoneNo&text=$text";    
+    await launchUrlString(whatsappURl);
   }
 }

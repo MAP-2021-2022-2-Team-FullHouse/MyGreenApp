@@ -29,4 +29,5 @@ abstract class ShopService {
       File? file});
     Future<Listing?> readListing(String docid);
     Future deleteListing(String docid);
+    Future contactSeller(String phoneNo, Listing model);
 }
