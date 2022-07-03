@@ -7,7 +7,9 @@ import 'rc_home_viewmodel.dart';
 
 class RecycleCenterHomeBody extends StatelessWidget {
   final RecycleCenterHomeScreenfulState state;
-  const RecycleCenterHomeBody({Key? key, required this.state})
+  final String notificationMsg;
+  const RecycleCenterHomeBody(
+      {Key? key, required this.state, required this.notificationMsg})
       : super(key: key);
 
   @override
@@ -17,18 +19,6 @@ class RecycleCenterHomeBody extends StatelessWidget {
     return Center(
       child: Column(
         children: <Widget>[
-          const SizedBox(height: 20),
-          const Text(
-            "RecycleCenter Home Page",
-            style: TextStyle(
-              fontSize: 25,
-              color: Colors.black,
-              fontWeight: FontWeight.w700,
-              shadows: [
-                Shadow(color: Colors.grey, offset: Offset(2, 1), blurRadius: 10)
-              ],
-            ),
-          ),
           const SizedBox(height: 20),
           const Text(
             'Appointment Summary',
@@ -77,12 +67,6 @@ class RecycleCenterHomeBody extends StatelessWidget {
                   }),
               const SizedBox(height: 5),
             ],
-          ),
-          const SizedBox(height: 50),
-          ViewModelBuilder<RecycleCenterHomeViewmodel>.reactive(
-            builder: (context, viewmodel, child) =>
-                LogoutButton(viewmodel: viewmodel, state: state),
-            viewModelBuilder: () => RecycleCenterHomeViewmodel(),
           ),
         ],
       ),

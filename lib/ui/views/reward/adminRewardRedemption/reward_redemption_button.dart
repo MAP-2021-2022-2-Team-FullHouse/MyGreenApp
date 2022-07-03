@@ -14,14 +14,18 @@ class RewardRedemptionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: <Widget>[
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
       
       ElevatedButton.icon(
+        style:  ElevatedButton.styleFrom(primary:Color.fromARGB(255, 211, 254, 68)),
     icon: const Icon(
       Icons.edit,
-      size: 18.0,
+      size: 20.0,
     ),
-    label: const Text('Edit Tracking Number'),
+    label: const Text('Edit Tracking Number', style:TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
     onPressed: () async {
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>

@@ -9,17 +9,16 @@ import 'package:stacked_services/stacked_services.dart';
 class ManageListingViewmodel extends BaseViewModel {
   ManageListingViewmodel();
   late final _shopService = locator<ShopService>();
-  static String userEmail="";
+  static String userID="";
   late final _dialogService = locator<DialogService>();
 
   
-  Future setUserEmail()
-  async {
-    userEmail=await AuthenticationServiceFirebase.getCurrentEmail();
+  void setUserID(){
+    userID= AuthenticationServiceFirebase.getCurrentID();
   }
 
   Stream<List<Listing>> getListingList() {
-    var results = _shopService.readListingList(userEmail);
+    var results = _shopService.readListingList(userID);
     return results;
   }
 

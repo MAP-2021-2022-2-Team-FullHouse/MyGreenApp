@@ -7,6 +7,8 @@ import 'package:my_green_app/ui/views/recyclecenter/UserView/rc_list.dart';
 import 'package:my_green_app/ui/views/recyclecenter/UserView/rc_viewmodel.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:stacked/stacked.dart';
+import 'package:my_green_app/ui/views/recyclecenter/UserView/rc_viewmodel.dart'
+    as userRCviewmodel;
 
 import '../../map/MapViewModel.dart';
 import '../../map/mapScreen.dart';
@@ -15,7 +17,9 @@ import 'rc_screenstate.dart';
 class RCSearchBody extends StatelessWidget {
   final String queryString;
   final RCScreenfulState state;
-  const RCSearchBody(this.state, this.queryString, {Key? key}) : super(key: key);
+    final Position p;
+   
+  const RCSearchBody(this.state, this.queryString, this.p,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,21 +50,18 @@ class RCSearchBody extends StatelessWidget {
                       return const Center(child: Text('Something went wrong'));
                     }
                     if (snapshot.hasData) {
-                      
+                     
                       final recyclecenters = snapshot.data!;
+                     
                       List<Map<String, dynamic>> rlist = [];
                       List<RecycleCenter> rcInOrder = [];
                       for (int i = 0; i < recyclecenters.length; i++) {
                         RecycleCenter rc = recyclecenters[i];
                         // ignore: unused_local_variable
-                        late Position p;
-                        CreateRecycleCenter_ViewModel.getPosition()
-                            .then((value) {
-                          p = value;
-                        });
+                       
                         // p=GPSService.abc();
                         double distance = RCViewmodel.calculateDistance(
-                            rc.lat, rc.lon, 1.48576, 103.6488);
+                            rc.lat, rc.lon, p.latitude, p.longitude);
 
                         rlist.add({
                           "Recycle Center": recyclecenters[i],
@@ -73,6 +74,7 @@ class RCSearchBody extends StatelessWidget {
                       for (int j = 0; j < rlist.length; j++) {
                         rcInOrder.add(rlist[j]["Recycle Center"]);
                       }
+                      
                       if (queryString.isNotEmpty) {
                        
                         return ListView.builder(
@@ -102,57 +104,70 @@ class RCSearchBody extends StatelessWidget {
                                   ),
                                   title: Text(rcInOrder[index].name,
                                       style: const TextStyle(fontSize: 20)),
-                                  subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(rcInOrder[index].email),
-                                      Text(rcInOrder[index].phone),
-                                      Text(rcInOrder[index].address),
-                                      ButtonBar(
-                                        children: <Widget>[
-                                          ElevatedButton(
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.green),
-                                              foregroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.white),
-                                            ),
-                                            onPressed: () {
-                                              MapViewModel.openMap(
-                                                  rcInOrder[index].lat,
-                                                  rcInOrder[index].lon);
-                                            },
-                                            child: const Text('Direction'),
-                                          ),
-                                          ElevatedButton(
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.green),
-                                              foregroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.white),
-                                            ),
-                                            onPressed: () {
-                                              // ignore: deprecated_member_use
-                                              UrlLauncher.launch(
-                                                  'tel:+${rcInOrder[index].phone}');
-                                            },
-                                            child: const Text('Call'),
-                                          ),
-                                        ],
+                                  subtitle:  Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+          
+            Text(rcInOrder[index].address),
+            Text(rlist[index]['Distance'].toStringAsFixed(2)+" km", style:TextStyle(fontWeight: FontWeight.bold, color: Colors.red, ),),
+            Row(
+             
+              children: <Widget>[
+                                ElevatedButton.icon(
+                          
+                                    label:Text("Appointment", style:TextStyle(color:Colors.white,)),
+                                    icon:Icon(Icons.edit, color:Colors.white),
+                                   style: ElevatedButton.styleFrom(
+                                       primary: Color.fromARGB(255, 0, 229, 187),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
                                       ),
-                                      const SizedBox(
-                                        width: 350,
-                                        child: Divider(
-                                          thickness: 2,
-                                        ),
-                                      ),
-                                    ],
+                                    ),
+                                    onPressed: () {
+                                      userRCviewmodel.RCViewmodel.navigateAppointment(rcInOrder[index].email);
+                                    },
+                                    
                                   ),
+                                  ElevatedButton(
+                                    child:Icon(Icons.directions, color:Colors.white),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color.fromARGB(255, 7, 214, 255),
+                                        shape: CircleBorder(),
+                                        padding: EdgeInsets.all(10),
+                                      ),
+                                    onPressed: () {
+                                      MapViewModel.openMap(
+                                          rcInOrder[index].lat,
+                                          rcInOrder[index].lon);
+                                    },
+                                    
+                                  ),
+                                  ElevatedButton(
+                                    child:Icon(Icons.phone, color:Colors.white),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.amber,
+                                        shape: CircleBorder(),
+                                        padding: EdgeInsets.all(10),
+                                      ),
+                                    onPressed: () {
+                                      UrlLauncher.launch(
+                                          'tel:+${rcInOrder[index].phone}');
+                                    },
+                                    // label: Text('Call'),
+                                  ),
+                     
+            
+          ],   
+        ),
+                              SizedBox(
+                                width: 350,
+                                child: Divider(
+                                  thickness: 2,
+                                ),
+                              ),
+                                   
+        ]
+        )
                                 );
                               }
                              

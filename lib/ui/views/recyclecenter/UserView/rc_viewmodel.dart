@@ -3,14 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_green_app/app/locator.dart';
-import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/constants/routes_path.dart';
 import 'package:my_green_app/model/RecycleCenter.dart';
 import 'package:my_green_app/services/navigation_service.dart';
 import 'package:my_green_app/services/recycleCenter/recycleCenter_service.dart';
 import 'package:my_green_app/services/user/user_repository.dart';
-import 'package:my_green_app/ui/views/appointment/CreateAppointment/create_appointment_viewmodel.dart';
-import 'package:my_green_app/ui/views/appointment/appointment_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -37,20 +34,20 @@ class RCViewmodel extends BaseViewModel {
     CreateAppointment_ViewModel.retrievedRCEmail = chosenRecycleCenter;
     NavigationService().navigateTo(createAppointmentRoute);
   }
-
-  Future<String?> getImgUrl(String imgUrl) async {
-    RecycleCenterServiceFirebase rcService = new RecycleCenterServiceFirebase();
-    var result = await rcService.getImage(imgUrl);
+  
+ Future<String?> getImgUrl(String imgUrl) async {
+    RecycleCenterServiceFirebase rcService=new RecycleCenterServiceFirebase();
+    var result=await rcService.getImage(imgUrl);
     return result;
   }
-
   Stream<List<RecycleCenter>> getRCList() {
     print("here");
     var results = _recycleCenterService.readRC();
-
+   
     return results;
+  
   }
-
+ 
   static double calculateDistance(lat1, lon1, lat2, lon2) {
     var p = 0.017453292519943295;
     var a = 0.5 -
@@ -58,4 +55,8 @@ class RCViewmodel extends BaseViewModel {
         cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
   }
+
+  
+
+  
 }

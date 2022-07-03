@@ -10,7 +10,7 @@ class HomeFloat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewmodel>.reactive(
-       builder: (context, viewmodel, child) =>
+      /* shouldRebuild: false, */ builder: (context, viewmodel, child) =>
           Container(),
       viewModelBuilder: () => HomeViewmodel(),
     );

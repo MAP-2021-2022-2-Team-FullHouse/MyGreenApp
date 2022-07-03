@@ -5,12 +5,10 @@ import 'create_recycle_center.dart';
 class CreateRecycleCenterScreen extends StatefulWidget {
   const CreateRecycleCenterScreen({Key? key}) : super(key: key);
 
-  static Route route() =>
-      MaterialPageRoute(builder: (_) => const CreateRecycleCenterScreen());
+  static Route route() => MaterialPageRoute(builder: (_) => const CreateRecycleCenterScreen());
 
   @override
-  CreateRecycleCenterScreenState createState() =>
-      CreateRecycleCenterScreenState();
+  CreateRecycleCenterScreenState createState() => CreateRecycleCenterScreenState();
 }
 
 class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
@@ -19,31 +17,36 @@ class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
   final emailField = TextEditingController();
   final phoneField = TextEditingController();
   final addrsField = TextEditingController();
-  var latField = TextEditingController();
-  var lonField = TextEditingController();
-  var fileField = TextEditingController();
+  var latField=TextEditingController();
+  var lonField=TextEditingController();
+  var fileField=TextEditingController();
   bool _showPassword = false;
   String? filename;
   CreateRecycleCenter_ViewModel viewmodel = CreateRecycleCenter_ViewModel();
   get showPassword => _showPassword;
   set showPassword(value) => setState(() => _showPassword = value);
 
-  void addRecycleCenter() async {
+
+ 
+   void addRecycleCenter() async {
+
     dynamic result;
     try {
       result = await viewmodel.addRecycleCenter(
-        name: nameController.text,
-        address: addrsField.text,
-        phone: phoneField.text,
-        image: fileField.text,
-        email: emailField.text,
-        lat: double.parse(latField.text),
-        lon: double.parse(lonField.text),
-        password: passwordController.text,
-      );
-
+          name: nameController.text,
+          address: addrsField.text,
+          phone: phoneField.text,
+          image:fileField.text,
+          email: emailField.text,
+          lat:double.parse(latField.text),
+          lon:double.parse(lonField.text),
+         
+          password: passwordController.text,
+          );
+         
       if (result != null) {
         if (result == 'Email is registered.') {
+         
           // ignore: use_build_context_synchronously
           showAlertDialog(context, "Email is registered.");
         } else if (result == "weak-password") {
@@ -52,23 +55,42 @@ class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
         } else if (result == 'invalid-email') {
           // ignore: use_build_context_synchronously
           showAlertDialog(context, "Invalid email address.");
-        } else if (result == "Name duplicated") {
+        }else if(result=="Name duplicated"){
           // ignore: use_build_context_synchronously
-          showAlertDialog(
-              context, "This recycle center name is already registered.");
-        } else if (result == "Image duplicated") {
+          showAlertDialog(context, "This recycle center name is already registered.");
+        }else if(result=="Image duplicated"){
           // ignore: use_build_context_synchronously
           showAlertDialog(context, "This image is already uploaded.");
-        } else if (result == "Phone duplicated") {
+        }
+        else if(result=="Phone duplicated"){
           // ignore: use_build_context_synchronously
           showAlertDialog(context, "This phone is already registered.");
-        } else {
+        }
+        else if(result=="Form is not completely filled."){
+          // ignore: use_build_context_synchronously
+          showAlertDialog(context, "Form is not completely filled.");
+        }
+        else if(result=="Invalid email format."){
+          // ignore: use_build_context_synchronously
+          showAlertDialog(context, "Invalid email format.");
+        }
+        else if(result=="Invalid phone format."){
+          // ignore: use_build_context_synchronously
+          showAlertDialog(context, "Invalid phone format.");
+        }
+        else if(result=="Password too short."){
+          // ignore: use_build_context_synchronously
+          showAlertDialog(context, "Password too short.");
+        }
+        else {
           // ignore: use_build_context_synchronously
           showConfirmDialog(context, "Created Successfully!");
+          
         }
       }
+     
     } catch (e) {
-      showAlertDialog(context, "Form is not completely filled.");
+      showAlertDialog(context, "Something wrong. Please try again.");
     }
   }
 
@@ -83,19 +105,19 @@ class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
           'Nearest Recycle center',
           style: TextStyle(color: Colors.black.withOpacity(1.0)),
         ),
+        
       ),
-      body: CreateRecycleCenterBody(this),
+      body:CreateRecycleCenterBody(this),
     );
   }
-
-  showConfirmDialog(BuildContext context, String text) {
+  showConfirmDialog(BuildContext context, String text){
     Widget okButton = TextButton(
       child: const Text("OK"),
       onPressed: () {
         //Navigator.pushNamed(context, Routes.homeRoute);
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const RecycleCenterScreen(),
-        ));
+              builder: (context) => const RecycleCenterScreen(),
+            ));
       },
     );
 
@@ -116,7 +138,6 @@ class CreateRecycleCenterScreenState extends State<CreateRecycleCenterScreen> {
       },
     );
   }
-
   showAlertDialog(BuildContext context, String text) {
     // set up the button
     Widget okButton = TextButton(

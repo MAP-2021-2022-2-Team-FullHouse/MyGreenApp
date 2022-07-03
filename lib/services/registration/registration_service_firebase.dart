@@ -33,8 +33,9 @@ class RegistrationServiceFirebase extends RegistrationService {
         "email": email,
         "address": address,
         "role": role,
-        "point": 0,
+       "point": 0,
         "image": "default.jpg"
+      
       }).then((value) {
         print('User added');
       });

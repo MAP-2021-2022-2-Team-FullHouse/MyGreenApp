@@ -8,7 +8,6 @@ import 'recycling_info_service.dart';
 
 class RecyclingInfoServiceFirebase extends RecyclingInfoService {
   final navigator = NavigatorService();
-  final storageInstance = FirebaseStorage.instance;
   final firestoreInstance = FirebaseFirestore.instance;
 
   @override
@@ -17,7 +16,8 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
       required String content,
       required String image,
       File? file}) async {
-    final recyclingInfo = firestoreInstance.collection('RecyclingInfo').doc();
+    final recyclingInfo =
+        FirebaseFirestore.instance.collection('RecyclingInfo').doc();
     try {
       String? img = '';
       int pos = image.indexOf('.');
@@ -28,38 +28,9 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
         "content": content,
         "image": img,
         "createdDate": DateTime.now(),
-        "lastModifiedDate": DateTime.now(),
       });
       if (file != null) {
         uploadFile(img, file);
-      }
-      return "ok";
-    } on FirebaseException catch (e) {
-      return e;
-    }
-  }
-
-  @override
-  Future editRecyclingInfo(
-      {required String infoId,
-      required String title,
-      required String content,
-      required String image,
-      File? file}) async {
-    try {
-      firestoreInstance.collection('RecyclingInfo').doc(infoId).update({
-        "title": title,
-        "content": content,
-        "lastModifiedDate": DateTime.now(),
-      });
-      if (file != null) {
-        String? img = '';
-        int pos = image.indexOf('.');
-        img = "$infoId${image.substring(pos)}";
-        uploadFile(img, file);
-        firestoreInstance.collection('RecyclingInfo').doc(infoId).update({
-          "image": img,
-        });
       }
       return "ok";
     } on FirebaseException catch (e) {
@@ -80,11 +51,8 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
 
   @override
   Stream<List<RecyclingInfo>> readRecyclingInfoList() =>
-      FirebaseFirestore.instance
-          .collection('RecyclingInfo')
-          .orderBy('createdDate', descending: true)
-          .snapshots()
-          .map((snapshot) => snapshot.docs
+      FirebaseFirestore.instance.collection('RecyclingInfo').snapshots().map(
+          (snapshot) => snapshot.docs
               .map((doc) => RecyclingInfo.fromJson(doc.data()))
               .toList());
 
@@ -115,35 +83,11 @@ class RecyclingInfoServiceFirebase extends RecyclingInfoService {
 
   @override
   Future deleteRecyclingInfo(String infoId) async {
-    //Get Image
-    final recyclingInfo =
-        FirebaseFirestore.instance.collection("RecyclingInfo").doc(infoId);
-    final snapshot = await recyclingInfo.get();
-    final image = RecyclingInfo.fromJson(snapshot.data()!).image.toString();
-    //return recyclingInfo.image;
-    final imagePath = "recyclingInfo/$image";
-    // Create a reference to the file to delete
-    final storageRef = storageInstance.ref();
-    // Create a child reference
-    final imageRef = storageRef.child(imagePath);
-    // Delete the file
-    await imageRef.delete();
-    await firestoreInstance.collection("RecyclingInfo").doc(infoId).delete();
-    return "ok";
+    try {
+      await firestoreInstance.collection("RecyclingInfo").doc(infoId).delete();
+      return true;
+    } on FirebaseException catch (e) {
+      return "${e.code}. Something went wrong. Please try again.";
+    }
   }
 }
-
-
-  /*
-  static Future<String> getImageName(String infoId) async {
-    final recyclingInfo =
-        FirebaseFirestore.instance.collection("RecyclingInfo").doc(infoId);
-    final snapshot = await recyclingInfo.get();
-    if (snapshot.exists) {
-      final recyclingInfo = RecyclingInfo.fromJson(snapshot.data()!);
-      return recyclingInfo.image.toString();
-    } else {
-      return '';
-    }
-  }*/
-

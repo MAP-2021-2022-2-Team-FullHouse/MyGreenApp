@@ -7,12 +7,12 @@ import '../../../model/RecycleCenter.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_viewmodel.dart'
     as rcviewmodel;
 
-RecycleCenterScreenfulState state = RecycleCenterScreenfulState();
+RecycleCenterScreenfulState state = new RecycleCenterScreenfulState();
 
 Widget buildRC(RecycleCenter rc) => ListTile(
       leading: CircleAvatar(
         child: FutureBuilder(
-          future: state.getImgUrl("files/${rc.image}"),
+          future: state.getImgUrl("files/" + rc.image),
           builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
             bool error = snapshot.data == null;
             return Container(
@@ -28,7 +28,7 @@ Widget buildRC(RecycleCenter rc) => ListTile(
           Text(rc.email),
           Text(rc.phone),
           Text(rc.address),
-          Row(),
+          Container(child: Row()),
           RCListButton(
             viewmodel: rcviewmodel.RecycleCenterViewmodel(),
             model: rc,
@@ -47,7 +47,7 @@ Widget buildImage(String? data) {
         fit: BoxFit.cover,
         width: 128,
         height: 128,
-        child: const InkWell(),
+        child: InkWell(/* onTap: onClicked */),
       ),
     ),
   );

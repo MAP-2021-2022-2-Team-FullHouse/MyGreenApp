@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:my_green_app/model/listing.dart';
 
 abstract class ShopService {
-  Stream<List<Listing>> readListingList(String email);
+  Stream<List<Listing>> readListingList(String userID);
   Stream<List<Listing>> readAllListingList();
   Future<String> getImage(String pathname);
   Future addListing(
@@ -14,9 +14,9 @@ abstract class ShopService {
       required String description,
       required String method,
       required String image,
-      required String useremail,
+      required String userID,
       File? file});
-    Future editListing(
+  Future editListing(
       {required String title,
       required String category,
       required String condition,
@@ -24,9 +24,10 @@ abstract class ShopService {
       required String description,
       required String method,
       required String image,
-      required String useremail,
+      required String userID,
       required String docid,
       File? file});
-    Future<Listing?> readListing(String docid);
-    Future deleteListing(String docid);
+  Future<Listing?> readListing(String docid);
+  Future deleteListing(String docid);
+  Future contactSeller(String phoneNo, Listing model);
 }

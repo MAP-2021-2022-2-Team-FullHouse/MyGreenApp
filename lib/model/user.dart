@@ -1,3 +1,5 @@
+
+
 class User {
   String username;
   String password;
@@ -48,6 +50,7 @@ class User {
         'email': email,
         'phone': phone,
         'address': address,
+        
       };
 
   Map<String, dynamic> updateFirestore() =>
@@ -72,9 +75,10 @@ class User {
             email: from.email,
             phone: from.phone);
 
-  /* 
+    
+            /* 
             username: json?['username'],
             password: json?['password'], 
             uid: json?['uid'],*/
-
+            
 }

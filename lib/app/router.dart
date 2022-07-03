@@ -1,23 +1,24 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/ui/views/admin/admin_screen.dart';
-import 'package:my_green_app/ui/views/appointment/CreateAppointment/create_appointment_screen.dart';
-import 'package:my_green_app/ui/views/appointment/CreateAppointment/create_appointment_upload.dart';
-import 'package:my_green_app/ui/views/appointment/appointment_screen.dart';
-import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_screen.dart';
-import 'package:my_green_app/ui/views/appointment/rc_view_details/rc_appointment_view_screen.dart';
-import 'package:my_green_app/ui/views/appointment/view/appointment_view_screen.dart';
 import 'package:my_green_app/ui/views/home/home_screen.dart';
 import 'package:my_green_app/ui/views/login/login_screen.dart';
 import 'package:my_green_app/ui/views/profile/profile_screen.dart';
 import 'package:my_green_app/ui/views/recyclecenter/CreateRecycleCenter/create_recycle_center_screen.dart';
 import 'package:my_green_app/ui/views/recyclecenter/UserView/rc_screen.dart';
 import 'package:my_green_app/ui/views/recyclecenter/recyclecenter_screen.dart';
+import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_screen.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/create_recyclinginfo/create_recyclinginfo_screen.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_screen.dart';
-import '../ui/views/home/view/viewrecyclinginfo_screen.dart';
-import '../ui/views/recyclecenter_home/rc_home_screen.dart';
-//import '../ui/views/home/home_screen.dart';
+
+import '../ui/views/appointment/CreateAppointment/create_appointment_screen.dart';
+import '../ui/views/appointment/CreateAppointment/create_appointment_upload.dart';
+import '../ui/views/appointment/appointment_screen.dart';
+import '../ui/views/appointment/rc_view/rc_appointment_screen.dart';
+import '../ui/views/appointment/rc_view_details/rc_appointment_view_screen.dart';
+import '../ui/views/appointment/view/appointment_view_screen.dart';
+import '../ui/views/home/rc_home_screen.dart';
 import '../ui/views/reward/adminViewReward/admin_reward_screen.dart';
 import '../ui/views/reward/createReward/create_reward_screen.dart';
 import 'package:my_green_app/ui/views/shop/manage_listing/managelisting_screen.dart';
@@ -46,9 +47,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => AdminRewardScreen());
     case routes.recycleCenterHomeRoute:
       return MaterialPageRoute(builder: (context) => RecycleCenterHomeScreen());
-    case routes.createRecyclingInfoRoute:
-      return MaterialPageRoute(
-          builder: (context) => CreateRecyclingInfoScreen());
     case routes.appointmentRoute:
       return MaterialPageRoute(builder: (context) => AppointmentScreen());
     case routes.createAppointmentRoute:
@@ -70,9 +68,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ManageListingScreen());
     case routes.recyclingInfoRoute:
       return MaterialPageRoute(builder: (context) => RecyclingInfoScreen());
-    //case routes.viewRecyclingInfoRoute:
-    //  return MaterialPageRoute(
-    //      builder: (context, snapshot) => ViewRecyclingInfoScreen(infoId: snapshot.infoId));
+    case routes.createRecyclingInfoRoute:
+      return MaterialPageRoute(
+          builder: (context) => CreateRecyclingInfoScreen());
 
     default:
       return MaterialPageRoute(

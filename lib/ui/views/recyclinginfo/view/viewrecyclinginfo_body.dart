@@ -13,6 +13,8 @@ class ViewRecyclingInfoBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //EditRecycleCenter_ViewModel vm=EditRecycleCenter_ViewModel();
+    //final rc = ModalRoute.of(context)!.settings.arguments;
     return ViewModelBuilder<ViewRecyclingInfo_ViewModel>.reactive(
       builder: (context, viewmodel, _) => Scaffold(
           body: Container(

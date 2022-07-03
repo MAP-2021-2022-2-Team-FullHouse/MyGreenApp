@@ -1,15 +1,26 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/constants/routes_path.dart';
 import 'package:my_green_app/model/Appointment.dart';
+import 'package:my_green_app/model/user.dart';
+import 'package:my_green_app/services/navigation_service.dart';
 import 'package:my_green_app/services/appointment/appointment_service.dart';
+import 'package:my_green_app/services/user/user_repository.dart';
 import 'package:stacked/stacked.dart';
+import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:my_green_app/constants/routes_path.dart' as routes;
 
 class AppointmentViewmodel extends BaseViewModel {
-  // ignore: non_constant_identifier_names
+  /* StreamSubscription? _streamListener;
+  bool get isListeningToStream => _streamListener != null; */
+  late final _dialogService = locator<DialogService>();
   late final _AppointmentService = locator<AppointmentService>();
+  late final _authenticationService = locator<AuthenticationService>();
 
   late List<Appointment> _rc = <Appointment>[];
   List<Appointment> get rc => _rc;
@@ -29,7 +40,7 @@ class AppointmentViewmodel extends BaseViewModel {
   List recycleCenterEmails = [];
   List recycleCenterNames = [];
   String rcName = '';
-  AppointmentViewmodel();
+  AppointmentViewmodel() {}
 
   Stream<List<Appointment>> getAppointmentList() {
     var results = _AppointmentService.readUserAppointment();
@@ -67,6 +78,8 @@ class AppointmentViewmodel extends BaseViewModel {
   }
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> getAppointmentData() {
+    //Future.delayed(Duration(milliseconds: 5000));
+    print(chosenID + "here stream");
     return _AppointmentService.getAppointment(chosenID);
   }
 

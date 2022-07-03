@@ -57,7 +57,7 @@ class _EditTextFieldState extends State<EditTextField> {
           hintStyle: const TextStyle(color: Colors.grey, fontSize: 12),
           labelText: widget.labelText,
           errorText: error,
-          labelStyle: const TextStyle(color: Colors.black, fontSize: 12)),
+          labelStyle: const TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold)),
       onChanged: (text) => setState(() => ""),
     );
   }

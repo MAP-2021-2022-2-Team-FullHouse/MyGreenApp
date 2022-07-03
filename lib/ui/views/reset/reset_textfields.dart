@@ -11,7 +11,7 @@ List<Widget> buildResetTextFields(ResetScreenState state) => [
         autoCorrect: false,
         keyboard: TextInputType.emailAddress,
       ),
-      const SizedBox(
+      SizedBox(
         height: 35.0,
       ),
     ];

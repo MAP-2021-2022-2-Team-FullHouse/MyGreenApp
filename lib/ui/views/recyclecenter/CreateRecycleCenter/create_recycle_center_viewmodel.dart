@@ -1,8 +1,10 @@
 
+import 'package:my_green_app/model/RecycleCenter.dart';
 import 'package:my_green_app/services/services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/app/locator.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'package:geolocator/geolocator.dart';
 import 'create_recycle_center.dart';
@@ -11,6 +13,8 @@ import 'create_recycle_center.dart';
 // ignore: camel_case_types
 class CreateRecycleCenter_ViewModel extends BaseViewModel{
    final _recycleCenterService = locator<RecycleCenterService>();
+  //final _navigationService = locator<NavigationService>();
+  // final _gpsService = locator<GPSService>();
    static late String lat;
    static late String lon;
    static late File?  file;
@@ -78,19 +82,11 @@ static Future selectFile(CreateRecycleCenterScreenState state) async {
     //final fileName = basename(file!.path);
     
     // final destination = 'recycleCenter/$img';
-
+RecycleCenter rc=RecycleCenter(name:name, address:address, phone:phone, image:image, email:email, lat:lat, lon:lon,password:password);
     
     dynamic result = await _recycleCenterService.addRecycleCenter(
-      name: name,
-       address: address,
-        phone: phone,
-        image:image,
-        email: email,
-        lat:lat,
-        lon:lon,
-        password: password,
-        
-        file:file
+      rc: rc,
+      file:file
        );
       //uploadFile( image); 
     if (result != null) {
@@ -106,7 +102,15 @@ static Future selectFile(CreateRecycleCenterScreenState state) async {
         return "Image duplicated";
       }else if (result == 'phone duplicated') {
         return "Phone duplicated";
-      }else {
+      }else if (result == 'Form is not completely filled') {
+        return "Form is not completely filled.";}
+        else if (result == 'Invalid email format') {
+        return "Invalid email format.";}
+        else if (result == 'Invalid phone format') {
+        return "Invalid phone format.";}
+         else if (result == 'Password too short') {
+        return "Password too short.";}
+        else {
         return "ok";
       }
       //  else {

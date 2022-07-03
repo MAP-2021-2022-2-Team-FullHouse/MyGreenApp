@@ -7,7 +7,7 @@ class ResetText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.start, children: const [
+    return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       SizedBox(
         child: Text(
           "Enter your registered email and we'll send you an email to reset your password.",

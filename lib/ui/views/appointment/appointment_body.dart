@@ -8,7 +8,7 @@ import 'package:my_green_app/constants/routes_path.dart' as routes;
 
 class AppointmentBody extends StatefulWidget {
   final AppointmentScreenfulState state;
-  const AppointmentBody({super.key, required this.state});
+  AppointmentBody({required this.state});
 
   @override
   State<AppointmentBody> createState() => _AppointmentBodyState();
@@ -30,18 +30,17 @@ class _AppointmentBodyState extends State<AppointmentBody> {
                       stream: model.getAppointmentList(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
-                          return const Center(
-                              child: Text('Something went wrong'));
+                          return Center(child: Text('Something went wrong'));
                         }
 
                         if (snapshot.hasData) {
-                          if (snapshot.data!.isEmpty) {
+                          if (snapshot.data!.length == 0) {
                             return ListView(
-                                physics: const NeverScrollableScrollPhysics(),
+                                physics: NeverScrollableScrollPhysics(),
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 children: [
-                                  const Center(
+                                  Center(
                                       child: Text(
                                           'You do not have any appointments made.')),
                                   ElevatedButton.icon(
@@ -58,20 +57,21 @@ class _AppointmentBodyState extends State<AppointmentBody> {
                                 ]);
                           }
                           final appointments = snapshot.data!;
+
                           return ListView(
-                            physics: const NeverScrollableScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
                             children:
                                 appointments.map(buildAppointment).toList(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
                           );
                         } else {
                           return ListView(
-                              physics: const NeverScrollableScrollPhysics(),
+                              physics: NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
                               children: [
-                                const Center(
+                                Center(
                                     child: Text(
                                         'You do not have any appointments made.')),
                                 ElevatedButton.icon(

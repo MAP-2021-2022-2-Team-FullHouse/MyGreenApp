@@ -10,10 +10,23 @@ import 'package:my_green_app/services/authentication/authentication_service.dart
 import 'package:stacked_services/stacked_services.dart';
 
 class AdminViewmodel extends BaseViewModel {
+  /* StreamSubscription? _streamListener;
+  bool get isListeningToStream => _streamListener != null; */
+  final _recyclingInfoService = locator<RecyclingInfoService>();
   final _authService = locator<AuthenticationService>();
   final _navigationService = locator<NavigationService>();
-  final _recyclingInfoService = locator<RecyclingInfoService>();
-  AdminViewmodel();
+
+  AdminViewmodel() {
+    /* _userRepository.addListener(() {
+      notifyListeners();
+    }); */
+  }
+/* 
+  @override
+  void init() async {
+    super.init();
+    notifyListenersOnFailure = true;
+  } */
 
   Future signOut() async {
     dynamic result = await _authService.signOut();

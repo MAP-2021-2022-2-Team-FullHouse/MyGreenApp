@@ -1,6 +1,7 @@
 
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/app/locator.dart';
+import '../../../../model/RewardUnit.dart';
 import '../../../../services/reward/reward_service.dart';
 
 class RedeemRewardViewModel extends BaseViewModel{
@@ -22,12 +23,10 @@ class RedeemRewardViewModel extends BaseViewModel{
     
      
       }) async {
-
+    RewardUnit rewardUnit=RewardUnit(rewardId:rewardId,shippingAddress:shippingAddress,phone:phone);
     dynamic result = await _rewardService.redeemReward(
     
-      rewardId:rewardId,
-      shippingAddress:shippingAddress,
-      phone:phone,
+      rewardUnit: rewardUnit,
     
        );
        if(result=='ok') {

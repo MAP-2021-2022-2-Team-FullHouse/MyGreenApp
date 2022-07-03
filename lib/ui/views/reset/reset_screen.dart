@@ -27,13 +27,10 @@ class ResetScreenState extends State<ResetScreen> {
       result = await viewmodel.sendResetPassEmail(
           email: emailController.text.trim());
       if (result == 'invalid-email') {
-        // ignore: use_build_context_synchronously
         showAlertDialog(context, "Email entered is invalid.");
       } else if (result == "user-not-found") {
-        // ignore: use_build_context_synchronously
         showAlertDialog(context, "Email associated is not found.");
       } else {
-        // ignore: use_build_context_synchronously
         showAlertDialog2(
             context, "The password reset link has been sent to your email.");
       }
@@ -52,7 +49,7 @@ class ResetScreenState extends State<ResetScreen> {
   showAlertDialog(BuildContext context, String text) {
     // set up the button
     Widget okButton = TextButton(
-      child: const Text("OK"),
+      child: Text("OK"),
       onPressed: () {
         Navigator.pushNamed(context, Routes.resetRoute);
       },
@@ -60,7 +57,7 @@ class ResetScreenState extends State<ResetScreen> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: const Text("Error"),
+      title: Text("Error"),
       content: Text(text),
       actions: [
         okButton,
@@ -79,17 +76,15 @@ class ResetScreenState extends State<ResetScreen> {
   showAlertDialog2(BuildContext context, String text) {
     // set up the button
     Widget okButton = TextButton(
-      child: const Text("OK"),
+      child: Text("OK"),
       onPressed: () {
-        //Navigator.pushNamed(context, Routes.loginRoute);
-        //Navigator.of(context).pushNamed(Routes.loginRoute);
-        Navigator.pop(context);
+        Navigator.pushNamed(context, Routes.loginRoute);
       },
     );
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: const Text("Confirm"),
+      title: Text("Confirm"),
       content: Text(text),
       actions: [
         okButton,

@@ -5,28 +5,57 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:my_green_app/model/listing.dart';
+import 'package:my_green_app/services/authentication/authentication_service_firebase.dart';
 import 'package:my_green_app/services/shop/shop_service.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ShopServiceFirebase extends ShopService {
   final firestoreInstance = FirebaseFirestore.instance;
 
-  @override
-  Stream<List<Listing>> readListingList(String email) =>
-      FirebaseFirestore.instance
-          .collection('Listing')
-          .where('seller', isEqualTo: email)
-          .snapshots()
-          .map((snapshot) => snapshot.docs
-              .map((doc) => Listing.fromJson(doc.id, doc.data()))
-              .toList());
+  /* @override
+  Stream<List<Listing>> readListingList(String userID) => FirebaseFirestore
+      .instance
+      .collection('Listing')
+      .where('sellerID', isEqualTo: userID)
+      .snapshots()
+      .map((snapshot) => snapshot.docs
+          .map((doc) => Listing.fromJson(doc.id, doc.data()))
+          .toList()); */
 
   @override
+  Stream<List<Listing>> readListingList(String userID) {
+    var lists;
+    lists = FirebaseFirestore.instance
+        .collection('Listing')
+        .where('sellerID', isEqualTo: userID)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) {
+              var a = Listing.fromJson(doc.id, doc.data());
+              a.documentId = doc.id;
+              return a;
+            }).toList());
+
+    return lists;
+  }
+
+  /* @override
   Stream<List<Listing>> readAllListingList() => FirebaseFirestore.instance
       .collection('Listing')
       .snapshots()
       .map((snapshot) => snapshot.docs
           .map((doc) => Listing.fromJson(doc.id, doc.data()))
-          .toList());
+          .toList()); */
+
+  @override
+  Stream<List<Listing>> readAllListingList() {
+    var lists;
+    lists = FirebaseFirestore.instance.collection('Listing').snapshots().map(
+        (snapshot) => snapshot.docs
+            .map((doc) => Listing.fromJson(doc.id, doc.data()))
+            .toList());
+
+    return lists;
+  }
 
   @override
   Future<String> getImage(String pathname) async {
@@ -48,11 +77,13 @@ class ShopServiceFirebase extends ShopService {
       required String description,
       required String method,
       required String image,
-      required String useremail,
+      required String userID,
       File? file}) async {
     try {
       String? img = '';
       int pos = image.indexOf('.');
+      String user =
+          await AuthenticationServiceFirebase.getCurrentUserName(userID);
       final listingFirebase =
           await firestoreInstance.collection("Listing").add({
         "title": title,
@@ -61,7 +92,8 @@ class ShopServiceFirebase extends ShopService {
         "price": price,
         "description": description,
         "method": method,
-        "seller": useremail,
+        "sellerID": userID,
+        "seller": user
       });
       img = "${listingFirebase.id}${image.substring(pos)}";
       if (file != null) {
@@ -83,10 +115,12 @@ class ShopServiceFirebase extends ShopService {
       required String description,
       required String method,
       required String image,
-      required String useremail,
+      required String userID,
       required String docid,
       File? file}) async {
     try {
+      String user =
+          await AuthenticationServiceFirebase.getCurrentUserName(userID);
       await firestoreInstance.collection("Listing").doc(docid).update({
         "title": title,
         "category": category,
@@ -94,12 +128,13 @@ class ShopServiceFirebase extends ShopService {
         "price": price,
         "description": description,
         "method": method,
-        "seller": useremail,
+        "sellerID": userID,
+        "seller": user
       });
       if (image.isNotEmpty) {
         String? img = '';
         int pos = image.indexOf('.');
-        img = "${docid}${image.substring(pos)}";
+        img = "$docid${image.substring(pos)}";
         if (file != null) {
           uploadFile(img, file);
         }
@@ -151,5 +186,14 @@ class ShopServiceFirebase extends ShopService {
     } on FirebaseException catch (e) {
       return "${e.code}. Something went wrong. Please try again.";
     }
+  }
+
+  @override
+  Future contactSeller(String phoneNo, Listing model) async {
+    String text =
+        "Hi ${model.seller}! I am interested to the *${model.title}* you listed in MyGreenApp!";
+
+    var whatsappURl = "whatsapp://send?phone=+6$phoneNo&text=$text";
+    await launchUrlString(whatsappURl);
   }
 }

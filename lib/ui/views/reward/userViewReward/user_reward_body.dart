@@ -22,6 +22,7 @@ class _UserRewardBodyState extends State<UserRewardBody> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<UserRewardViewmodel>.reactive(
       builder: (context, model, child) => Scaffold(
+        
         body: Stack(
           children:  [
             SingleChildScrollView(
@@ -33,11 +34,18 @@ class _UserRewardBodyState extends State<UserRewardBody> {
                     alignment: Alignment.center,
                     child: 
                     ElevatedButton.icon(
-                      icon: const Icon(
-                        Icons.redeem,
-                        size: 18.0,
+                      style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 80, 229, 0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      label: const Text('Reward Redemption Record'),
+                      icon: Icon(
+                       
+                        Icons.redeem,
+                        color:Colors.white,
+                      ),
+                      label: const Text('Reward Redemption Record', style:TextStyle(color:Colors.white)),
                       onPressed: () async {
                         
                             Navigator.of(context).push(MaterialPageRoute(
@@ -60,6 +68,7 @@ class _UserRewardBodyState extends State<UserRewardBody> {
                         if (snapshot.hasData) {
                           final rewards = snapshot.data!;
                           return ListView(
+                            padding:EdgeInsets.all(10),
                             physics: const NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,

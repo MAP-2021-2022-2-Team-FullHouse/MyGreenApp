@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:my_green_app/ui/views/appointment/appointment_screen.dart';
 import 'package:my_green_app/ui/views/login/login_screen.dart';
+import 'package:my_green_app/ui/views/register/register_body.dart';
 import 'package:my_green_app/ui/views/register/register_screen.dart';
 import 'package:my_green_app/ui/views/admin/admin_screen.dart';
-import 'package:my_green_app/ui/views/recyclecenter_home/rc_home_screen.dart';
 import 'package:my_green_app/ui/views/reset/reset_screen.dart';
+
+import '../ui/views/appointment/appointment_screen.dart';
 import '../ui/views/home/home_screen.dart';
 
 class Routes {
   static const String homeRoute = '/home';
-  static const String recycleCenterHomeRoute = '/home';
   static const String loginRoute = '/login';
   static const String registerRoute = '/register';
   static const String adminRoute = '/admin';
@@ -20,9 +20,6 @@ class Routes {
     switch (settings.name) {
       case homeRoute:
         return HomeScreen.route();
-      // ignore: no_duplicate_case_values
-      case recycleCenterHomeRoute:
-        return RecycleCenterHomeScreen.route();
       case loginRoute:
         return LoginScreen.route();
       case registerRoute:
@@ -31,7 +28,7 @@ class Routes {
         return AdminScreen.route();
       case resetRoute:
         return ResetScreen.route();
-      case appointmentRoute:
+       case appointmentRoute:
         return AppointmentScreen.route();
     }
     return null;

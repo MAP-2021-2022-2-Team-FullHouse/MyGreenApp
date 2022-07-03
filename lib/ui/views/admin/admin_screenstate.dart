@@ -1,11 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_green_app/app/routes.dart';
 import 'package:my_green_app/ui/views/admin/admin.dart';
 import 'package:my_green_app/ui/views/admin/admin_viewmodel.dart';
 
 class AdminScreenful extends StatefulWidget {
-  const AdminScreenful({super.key});
-
-  static Route route() => MaterialPageRoute(builder: (_) => const AdminScreenful());
+  static Route route() => MaterialPageRoute(builder: (_) => AdminScreenful());
 
   @override
   State<AdminScreenful> createState() => AdminScreenfulState();

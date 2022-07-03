@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_appbar.dart';
+
 import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_screenstate.dart';
-import '../../recyclecenter_home/rc_home_navBar.dart';
+
+import '../../home/rc_home_navBar.dart';
 
 class RecycleCenterAppointmentScreen extends StatelessWidget {
   static Route route() =>
-      MaterialPageRoute(builder: (_) => const RecycleCenterAppointmentScreen());
+      MaterialPageRoute(builder: (_) => RecycleCenterAppointmentScreen());
   const RecycleCenterAppointmentScreen({Key? key}) : super(key: key);
 
   @override
@@ -14,7 +16,8 @@ class RecycleCenterAppointmentScreen extends StatelessWidget {
       child: Scaffold(
         appBar: const RecycleCenterAppointmentAppBar(),
         body: RecycleCenterAppointmentScreenful(),
-        bottomNavigationBar: const RecycleCenterHomeNavigationBar(pageNo: 0),
+        //floatingActionButton: const AdminFloat(),
+        bottomNavigationBar: const RCHomeNavigationBar(pageNo: 0),
       ),
     );
   }

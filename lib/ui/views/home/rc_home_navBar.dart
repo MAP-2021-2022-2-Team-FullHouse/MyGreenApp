@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
-import 'package:my_green_app/constants/routes_path.dart';
-import 'package:my_green_app/ui/views/appointment/rc_view/rc_appointment_screen.dart';
 
-class RecycleCenterAppointmentNavigationBar extends StatefulWidget {
-  const RecycleCenterAppointmentNavigationBar({Key? key}) : super(key: key);
+class RCHomeNavigationBar extends StatefulWidget {
+  final int pageNo;
+  const RCHomeNavigationBar({Key? key, required this.pageNo}) : super(key: key);
 
   @override
-  State<RecycleCenterAppointmentNavigationBar> createState() =>
-      _RecycleCenterAppointmentNavigationBarState();
+  State<RCHomeNavigationBar> createState() => _RCHomeNavigationBarState();
 }
 
-class _RecycleCenterAppointmentNavigationBarState
-    extends State<RecycleCenterAppointmentNavigationBar> {
-  int currIndex = 1;
+class _RCHomeNavigationBarState extends State<RCHomeNavigationBar> {
   @override
   Widget build(BuildContext context) {
+    int currIndex;
+    currIndex = widget.pageNo;
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: currIndex,
