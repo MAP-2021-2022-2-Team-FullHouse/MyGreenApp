@@ -15,6 +15,16 @@ class ShopAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 10,
       automaticallyImplyLeading: false, 
       title: const Text("Second Hand Shop"),
+      // actions: [
+      //   IconButton(
+      //     onPressed: () async{
+      //       Navigator.of(context).push(MaterialPageRoute(
+      //             builder: (context) => const ChatScreen(),
+      //       ));
+      //     }, 
+      //     icon: const Icon(Icons.chat)
+      //     )
+      // ],
       centerTitle: true,
     );
   }

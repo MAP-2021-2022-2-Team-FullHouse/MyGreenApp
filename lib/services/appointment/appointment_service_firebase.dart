@@ -83,7 +83,6 @@ class AppointmentServiceFirebase extends AppointmentService {
         }
       });
     } catch (e) {
-      print(e);
       return e.toString();
     }
   }
@@ -94,7 +93,6 @@ class AppointmentServiceFirebase extends AppointmentService {
     //print(email);
   }
 
-  @override
   Future<String> getRole() async {
     var id = _auth.currentUser!.uid;
     return await AuthenticationServiceFirebase().getRole(id);
@@ -123,17 +121,6 @@ class AppointmentServiceFirebase extends AppointmentService {
     }
   }
 
-  /* static Reference transferReference(File img, String userEmail) {
-    //File img;
-    //String dir = Path.dirname(img.path);
-    //String newPath = Path.join(dir, 'case01wd03id01.jpg');
-    //print('NewPath: ${newPath}');
-    //img.renameSync(newPath);
-    return FirebaseStorage.instance
-        .ref()
-        .child('appointment/${userEmail}/${Path.basename(img.path)}');
-  } */
-
   @override
   Future<String> readAppointmentID(
       String rcEmail, DateTime dt, String uEmail) async {
@@ -151,24 +138,13 @@ class AppointmentServiceFirebase extends AppointmentService {
       }
     });
     return id;
-    /* final rc = FirebaseFirestore.instance.collection("Appointment").doc(id);
-    final snapshot = await rc.get();
-    if (snapshot.exists) {
-      return Appointment.fromJson(snapshot.data()!);
-    } else {
-      return null;
-    } */
   }
 
   Future getPhotos(String docID) async {
     try {
       var list = Appointment.getPhotos(docID);
-      //final ref = FirebaseStorage.instance.ref().child(pathname);
-      //String imageUrl = await ref.getDownloadURL();
-      print(list);
       return list;
     } catch (e) {
-      print("Error: $e");
       return e.toString();
     }
   }
@@ -176,9 +152,8 @@ class AppointmentServiceFirebase extends AppointmentService {
   @override
   Stream<List<Appointment>> readUserAppointment() {
     var currEmail = getEmail();
-    print(currEmail);
-    var appointments;
-    appointments = FirebaseFirestore.instance
+    //var appointments;
+    var appointments = FirebaseFirestore.instance
         .collection('Appointment')
         .where('userEmail', isEqualTo: currEmail)
         .snapshots()
@@ -196,9 +171,9 @@ class AppointmentServiceFirebase extends AppointmentService {
   @override
   Stream<List<Appointment>> readRCAppointments() {
     var currEmail = getEmail();
-    print(currEmail);
-    var appointments;
-    appointments = FirebaseFirestore.instance
+    //print(currEmail);
+    //var appointments;
+    var appointments = FirebaseFirestore.instance
         .collection('Appointment')
         .where('recycleCenterEmail', isEqualTo: currEmail)
         .snapshots()
@@ -309,14 +284,6 @@ class AppointmentServiceFirebase extends AppointmentService {
         QuerySnapshot querySnapshot =
             await _collectionRef.doc(docID).collection('photos').get();
         return _collectionRef.doc(docID).collection('photos').get();
-        /* .then((value) {
-          for (var i in value.docs) {
-            dataPhoto.add(i.data());
-            return i.data();
-          } */
-        //});
-        //return dataPhoto;
-        //return photoList = querySnapshot.docs.map((doc) => doc.data()).toList();
       }
     });
   }
@@ -364,57 +331,134 @@ class AppointmentServiceFirebase extends AppointmentService {
     //return phone;
   }
 
-/*
   @override
-  Future getPostsOnceOff() async {
-    try {
-      var currEmail = getEmail();
-      print(currEmail);
-      var appointments;
-      var documents = await FirebaseFirestore.instance
-          .collection('Appointment')
-          .where('recycleCenterEmail', isEqualTo: currEmail)
-          .get();
-      if (documents.docs.isNotEmpty) {
-        return documents.docs
-            .map((snapshot) => Appointment.fromMap(snapshot.data()))
-            .toList();
-      }
-    } catch (e) {
-      if (e is PlatformException) {
-        return e.message;
-      }
-
-      return e.toString();
-    }
-  }
-
-   // Create the controller that will broadcast the posts
-  final StreamController<List<Appointment>> _appsController =
-      StreamController<List<Appointment>>.broadcast();
-
-  @override
-  Stream listenToPostsRealTime() {
-    // Register the handler for when the posts data changes
+  Future<List<int>> trackAppointment() async {
     var currEmail = getEmail();
-    print(currEmail);
-    FirebaseFirestore.instance
+    List<int> appointmentData = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    int weekAppointment,
+        monthAppointment,
+        yearAppointment,
+        pendingAppointment,
+        acceptedAppointment,
+        goingAppointment,
+        rejectedAppointment,
+        cancelledAppointment,
+        completedAppointment;
+    var now = DateTime.now();
+    int currentDay = now.weekday == 7 ? 0 : now.weekday;
+    //Get this Sunday date
+    var nowWeekStart = now.subtract(Duration(days: currentDay));
+    nowWeekStart = DateTime(
+        nowWeekStart.year, nowWeekStart.month, nowWeekStart.day, 0, 0, 0);
+    //Get next Sunday date
+    var nextWeekStart =
+        now.add(Duration(days: DateTime.daysPerWeek - currentDay));
+    nextWeekStart = DateTime(
+        nextWeekStart.year, nextWeekStart.month, nextWeekStart.day, 0, 0, 0);
+    //Get current month starting date
+    var nowMonthStart = DateTime(now.year, now.month, 1);
+    //Get next month starting date
+    var nextMonthStart = DateTime(now.year, now.month + 1, 1);
+    //Get current year starting date
+    var nowYearStart = DateTime(now.year, 1, 1);
+    //Get next year starting date
+    var nextYearStart = DateTime(now.year + 1, 1, 1);
+    //Get number of appointments in this week starting from Sunday to Saturday
+    await FirebaseFirestore.instance
         .collection('Appointment')
         .where('recycleCenterEmail', isEqualTo: currEmail)
-        .snapshots()
-        .listen((postsSnapshot) {
-      if (postsSnapshot.docs.isNotEmpty) {
-        var posts = postsSnapshot.docs
-            .map((snapshot) => Appointment.fromMap(snapshot.data()))
-            //.where((mappedItem) => mappedItem.title != null)
-            .toList();
-
-        // Add the posts onto the controller
-        _appsController.add(posts);
-      }
+        .where('dateTime',
+            isGreaterThanOrEqualTo: Timestamp.fromDate(nowWeekStart))
+        .where('dateTime', isLessThan: Timestamp.fromDate(nextWeekStart))
+        .get()
+        .then((data) {
+      weekAppointment = data.docs.length;
+      appointmentData[0] = weekAppointment;
     });
-
-    // Return the stream underlying our _postsController.
-    return _appsController.stream;
-  } */
+    //Get number of appointments in this month
+    await FirebaseFirestore.instance
+        .collection('Appointment')
+        .where('recycleCenterEmail', isEqualTo: currEmail)
+        .where('dateTime',
+            isGreaterThanOrEqualTo: Timestamp.fromDate(nowMonthStart))
+        .where('dateTime', isLessThan: Timestamp.fromDate(nextMonthStart))
+        .get()
+        .then((data) {
+      monthAppointment = data.docs.length;
+      appointmentData[1] = monthAppointment;
+    });
+    //Get number of appointments in this year
+    await FirebaseFirestore.instance
+        .collection('Appointment')
+        .where('recycleCenterEmail', isEqualTo: currEmail)
+        .where('dateTime',
+            isGreaterThanOrEqualTo: Timestamp.fromDate(nowYearStart))
+        .where('dateTime', isLessThan: Timestamp.fromDate(nextYearStart))
+        .get()
+        .then((data) {
+      yearAppointment = data.docs.length;
+      appointmentData[2] = yearAppointment;
+    });
+    // Get number of pending appointments
+    await FirebaseFirestore.instance
+        .collection('Appointment')
+        .where('recycleCenterEmail', isEqualTo: currEmail)
+        .where('status', isEqualTo: 'pending')
+        .get()
+        .then((data) {
+      pendingAppointment = data.docs.length;
+      appointmentData[3] = pendingAppointment;
+    });
+    // Get number of accepted appointments
+    await FirebaseFirestore.instance
+        .collection('Appointment')
+        .where('recycleCenterEmail', isEqualTo: currEmail)
+        .where('status', isEqualTo: 'accept')
+        .get()
+        .then((data) {
+      acceptedAppointment = data.docs.length;
+      appointmentData[4] = acceptedAppointment;
+    });
+    // Get number of going appointments
+    await FirebaseFirestore.instance
+        .collection('Appointment')
+        .where('recycleCenterEmail', isEqualTo: currEmail)
+        .where('status', isEqualTo: 'going')
+        .get()
+        .then((data) {
+      goingAppointment = data.docs.length;
+      appointmentData[5] = goingAppointment;
+    });
+    // Get number of rejected appointments
+    await FirebaseFirestore.instance
+        .collection('Appointment')
+        .where('recycleCenterEmail', isEqualTo: currEmail)
+        .where('status', isEqualTo: 'reject')
+        .get()
+        .then((data) {
+      rejectedAppointment = data.docs.length;
+      appointmentData[6] = rejectedAppointment;
+    });
+    // Get number of cancelled appointments
+    await FirebaseFirestore.instance
+        .collection('Appointment')
+        .where('recycleCenterEmail', isEqualTo: currEmail)
+        .where('status', isEqualTo: 'cancel')
+        .get()
+        .then((data) {
+      cancelledAppointment = data.docs.length;
+      appointmentData[7] = cancelledAppointment;
+    });
+    // Get number of completed appointments
+    await FirebaseFirestore.instance
+        .collection('Appointment')
+        .where('recycleCenterEmail', isEqualTo: currEmail)
+        .where('status', isEqualTo: 'complete')
+        .get()
+        .then((data) {
+      completedAppointment = data.docs.length;
+      appointmentData[8] = completedAppointment;
+    });
+    return appointmentData;
+  }
 }

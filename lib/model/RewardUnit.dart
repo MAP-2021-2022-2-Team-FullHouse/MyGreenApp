@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class RewardUnit {
@@ -38,4 +39,18 @@ class RewardUnit {
      
       return reward;
 }
+
+  Map<String, dynamic> toJson() => {
+        
+        'userId':userId,
+        'rewardId': rewardId,
+        'shippingAddress': shippingAddress,
+        'phone': phone,
+        'trackingNo':trackingNo,
+        'status':status,
+       'creationTime':Timestamp.now(),
+     
+        
+      };
+
 }

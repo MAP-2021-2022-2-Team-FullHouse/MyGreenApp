@@ -19,10 +19,7 @@ class ManageListingScreenfulState extends State<ManageListingScreenful> {
   @override
   void initState () {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      viewmodel.setUserEmail();
-    });
-          
+    viewmodel.setUserID();   
   }
 
   @override

@@ -30,6 +30,5 @@ abstract class AppointmentService {
   Future changeAppointmentStatus(String id, String status, String email);
   Future getPhotoURLs(String id);
   Future readPhoto(String email);
-  //Future getPostsOnceOff();
-  //Stream listenToPostsRealTime();
+  Future<List<int>> trackAppointment();
 }

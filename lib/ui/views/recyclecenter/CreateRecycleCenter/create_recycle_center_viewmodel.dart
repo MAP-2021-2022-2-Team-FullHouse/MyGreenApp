@@ -1,4 +1,5 @@
 
+import 'package:my_green_app/model/RecycleCenter.dart';
 import 'package:my_green_app/services/services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:my_green_app/app/locator.dart';
@@ -81,19 +82,11 @@ static Future selectFile(CreateRecycleCenterScreenState state) async {
     //final fileName = basename(file!.path);
     
     // final destination = 'recycleCenter/$img';
-
+RecycleCenter rc=RecycleCenter(name:name, address:address, phone:phone, image:image, email:email, lat:lat, lon:lon,password:password);
     
     dynamic result = await _recycleCenterService.addRecycleCenter(
-      name: name,
-       address: address,
-        phone: phone,
-        image:image,
-        email: email,
-        lat:lat,
-        lon:lon,
-        password: password,
-        
-        file:file
+      rc: rc,
+      file:file
        );
       //uploadFile( image); 
     if (result != null) {
@@ -109,7 +102,15 @@ static Future selectFile(CreateRecycleCenterScreenState state) async {
         return "Image duplicated";
       }else if (result == 'phone duplicated') {
         return "Phone duplicated";
-      }else {
+      }else if (result == 'Form is not completely filled') {
+        return "Form is not completely filled.";}
+        else if (result == 'Invalid email format') {
+        return "Invalid email format.";}
+        else if (result == 'Invalid phone format') {
+        return "Invalid phone format.";}
+         else if (result == 'Password too short') {
+        return "Password too short.";}
+        else {
         return "ok";
       }
       //  else {

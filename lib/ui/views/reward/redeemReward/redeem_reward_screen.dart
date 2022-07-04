@@ -22,6 +22,7 @@ class RedeemRewardScreenState extends State<RedeemRewardScreen> {
    void redeemReward(String rewardId) async {
     dynamic result;
     try {
+      
       result = await viewmodel.redeemReward(
           rewardId: rewardId,
           shippingAddress: addressController.text,

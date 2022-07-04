@@ -26,7 +26,7 @@ class _RecycleCenterNavigationBarState
               else if (currIndex == 0)
               {Navigator.of(context).pushReplacementNamed(routes.adminRewardRoute)}
           }),
-      items: const [
+      items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.redeem),
           label: 'Reward',

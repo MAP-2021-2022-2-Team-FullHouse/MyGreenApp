@@ -16,11 +16,18 @@ class UserRewardButton extends StatelessWidget {
     return Row(children: <Widget>[
    
       ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+        primary: Color.fromARGB(255, 0, 229, 187),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+),
     icon: const Icon(
       Icons.redeem,
+      color: Colors.white,
       size: 18.0,
     ),
-    label: const Text('Redeem Reward'),
+    label: const Text('Redeem Reward',style:TextStyle(color:Colors.white)),
     onPressed: () async {
       String result=await viewmodel.isPointSufficient(model.id);
       if(result=="true"){

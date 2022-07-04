@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'create_recycle_center.dart';
+
 
 class CreateLatLon extends StatefulWidget {
   final CreateRecycleCenterScreenState state;
@@ -26,12 +28,12 @@ class _CreateLatLonState extends State<CreateLatLon> {
 
   CreateRecycleCenter_ViewModel vm = CreateRecycleCenter_ViewModel();
   // UploadTask? task;
-
+ 
   // late var filename="no file selected";
   // var latField=TextEditingController();
   // var lonField=TextEditingController();
   // var fileField=TextEditingController();
-
+  
   TextInputType? key;
 
   get keyboard => key;
@@ -65,9 +67,11 @@ class _CreateLatLonState extends State<CreateLatLon> {
                 minimumSize: const Size.fromHeight(50),
               ),
               onPressed: () async {
-                widget.state.latField.text = "1.482641";
-                widget.state.lonField.text =
-                    "103.644991"; //for testing in emulator
+         
+
+                // widget.state.latField.text = "0";
+                // widget.state.lonField.text =
+                    // "103.644991"; for testing in emulator
                 Position p = await CreateRecycleCenter_ViewModel.getPosition();
                 String lat = p.latitude.toString(); //set realtime latitude
                 String lon = p.longitude.toString(); //set realtime longtitude

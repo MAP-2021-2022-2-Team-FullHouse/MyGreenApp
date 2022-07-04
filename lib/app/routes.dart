@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_green_app/ui/views/appointment/appointment_screen.dart';
 import 'package:my_green_app/ui/views/login/login_screen.dart';
 import 'package:my_green_app/ui/views/register/register_body.dart';
 import 'package:my_green_app/ui/views/register/register_screen.dart';
@@ -29,7 +28,7 @@ class Routes {
         return AdminScreen.route();
       case resetRoute:
         return ResetScreen.route();
-      case appointmentRoute:
+       case appointmentRoute:
         return AppointmentScreen.route();
     }
     return null;

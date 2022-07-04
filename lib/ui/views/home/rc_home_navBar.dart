@@ -20,14 +20,19 @@ class _RCHomeNavigationBarState extends State<RCHomeNavigationBar> {
       onTap: (index) => setState(() => {
             currIndex = index,
             if (currIndex == 0)
-              {Navigator.of(context).pushReplacementNamed(routes.recycleCenterAppointmentRoute)}
+              {
+                Navigator.of(context)
+                    .pushReplacementNamed(routes.recycleCenterAppointmentRoute)
+              }
             else if (currIndex == 1)
-              {Navigator.of(context).pushReplacementNamed(routes.rcHomeRoute)}
+              {
+                Navigator.of(context)
+                    .pushReplacementNamed(routes.recycleCenterHomeRoute)
+              }
             else if (currIndex == 2)
               {Navigator.of(context).pushReplacementNamed(routes.profileRoute)}
           }),
       items: [
-        
         BottomNavigationBarItem(
           icon: Icon(Icons.book_online),
           label: 'Appointment',
@@ -36,7 +41,6 @@ class _RCHomeNavigationBarState extends State<RCHomeNavigationBar> {
           icon: Icon(Icons.home),
           label: 'Home',
         ),
-        
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
           label: 'Profile',

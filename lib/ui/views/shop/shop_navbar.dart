@@ -5,12 +5,10 @@ class ShopNavigationBar extends StatefulWidget {
   const ShopNavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<ShopNavigationBar> createState() =>
-      _ShopNavigationBarState();
+  State<ShopNavigationBar> createState() => _ShopNavigationBarState();
 }
 
-class _ShopNavigationBarState
-    extends State<ShopNavigationBar> {
+class _ShopNavigationBarState extends State<ShopNavigationBar> {
   int currIndex = 3;
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,11 @@ class _ShopNavigationBarState
             currIndex = index,
             if (currIndex == 0)
               {Navigator.of(context).pushReplacementNamed(routes.user_rcRoute)}
-            
+            else if (currIndex == 1)
+              {
+                Navigator.of(context)
+                    .pushReplacementNamed(routes.appointmentRoute)
+              }
             else if (currIndex == 2)
               {Navigator.of(context).pushReplacementNamed(routes.homeRoute)}
             else if (currIndex == 3)

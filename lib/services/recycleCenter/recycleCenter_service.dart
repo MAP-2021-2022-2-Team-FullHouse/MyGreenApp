@@ -9,14 +9,7 @@ abstract class RecycleCenterService {
   Stream<List<RecycleCenter>> readRC();
   Future<RecycleCenter?> readCenter(String docemail);
   Future addRecycleCenter(
-      {required String name,
-      required String address,
-      required String phone,
-      required String image,
-      required String email,
-      required double lat,
-      required double lon,
-      required String password,
+      {required RecycleCenter rc,
    
       File? file});
   Future editRecycleCenter(

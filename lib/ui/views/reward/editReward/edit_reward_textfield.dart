@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_green_app/model/Reward.dart';
+import 'package:my_green_app/ui/views/reward/editReward/widget/edit_pic.dart';
 import 'edit_reward.dart';
 
 
@@ -36,5 +37,8 @@ List<Widget> buildEditRewardTextFields(
       const SizedBox(
         height: 68.0,
       ),
-      
+       EditPicture(state: state,reward:rc),
+        const SizedBox(
+        height: 68.0,
+      ),
     ];

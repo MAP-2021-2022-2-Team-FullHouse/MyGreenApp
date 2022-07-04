@@ -172,7 +172,6 @@ class PushNotificationService {
       //    "${event.data['route']} ${event.notification!.body} I am coming from background";
       //Navigator.of(context).pushNamed(event.data['route']);
       rm = event;
-      NavigationService().navigateTo(event.data['route']);
       //});
     });
     return rm;
