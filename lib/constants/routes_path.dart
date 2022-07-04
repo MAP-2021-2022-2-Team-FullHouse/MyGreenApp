@@ -1,13 +1,13 @@
 const String loginRoute = 'login';
 const String homeRoute = 'home';
 const String adminRoute = 'admin';
-const String rcHomeRoute='rcHome';
+const String recycleCenterHomeRoute = 'rcHome';
 const String rcRoute = 'recyclecenter';
 const String profileRoute = 'profile';
 const String user_rcRoute = 'user_rc';
 const String createRecycleCenterRoute = 'createRecycleCenter';
 const String createRewardRoute = 'createReward';
-const String adminRewardRoute='adminReward';
+const String adminRewardRoute = 'adminReward';
 const String appointmentRoute = 'appointment';
 const String createAppointmentRoute = 'createAppointment';
 const String addImageRoute = 'addImage';

@@ -17,7 +17,7 @@ class RecycleCenterAppointmentScreen extends StatelessWidget {
         appBar: const RecycleCenterAppointmentAppBar(),
         body: RecycleCenterAppointmentScreenful(),
         //floatingActionButton: const AdminFloat(),
-        bottomNavigationBar: const RCHomeNavigationBar(pageNo:0),
+        bottomNavigationBar: const RCHomeNavigationBar(pageNo: 0),
       ),
     );
   }

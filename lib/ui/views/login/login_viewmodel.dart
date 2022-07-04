@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:my_green_app/constants/routes_path.dart' as routes;
 import 'package:my_green_app/app/locator.dart';
@@ -15,6 +16,7 @@ class LoginViewmodel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authService = locator<AuthenticationService>();
   static String currRole = '';
+  static String? token = '';
 
   User get user => _userRepository.user.copyWith();
   String? _errorMessage;
@@ -25,6 +27,9 @@ class LoginViewmodel extends BaseViewModel {
         await _authService.signIn(email: email, password: password);
     if (result != null) {
       _errorMessage = null;
+
+      getToken();
+      print(token);
 
       print(result.uid);
       String role = await _authService.getRole(result.uid);
@@ -39,7 +44,7 @@ class LoginViewmodel extends BaseViewModel {
         _navigationService.navigateTo(routes.adminRoute);
       } else if (role.toString() == "Recycle Center") {
         print("recycle center page");
-        _navigationService.navigateTo(routes.rcHomeRoute);
+        _navigationService.navigateTo(routes.recycleCenterHomeRoute);
       } else {
         print("error");
         throw 'error occur in reading user role';
@@ -51,5 +56,11 @@ class LoginViewmodel extends BaseViewModel {
     } else {
       return result;
     }
+  }
+
+  void getToken() async {
+    await FirebaseMessaging.instance.getToken().then((value) {
+      token = value;
+    });
   }
 }

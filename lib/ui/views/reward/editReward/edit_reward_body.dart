@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_green_app/ui/views/reward/editReward/widget/edit_pic.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../model/Reward.dart';
 import 'edit_reward.dart';
@@ -69,11 +70,12 @@ class EditRewardBody extends StatelessWidget {
                             }
                           }),
                       // ignore: unnecessary_null_comparison
-                      if (viewmodel.errorMessage != null)
-                        Text(
-                          viewmodel.errorMessage,
-                          style: const TextStyle(color: Colors.red, fontSize: 20.0),
-                        ),
+                      // if (viewmodel.errorMessage != null)
+                      //   Text(
+                      //     viewmodel.errorMessage,
+                      //     style: const TextStyle(color: Colors.red, fontSize: 20.0),
+                      //   ),
+                      
                       const SizedBox(height: 3.0),
                       EditRewardButton(state: state),
                       const SizedBox(

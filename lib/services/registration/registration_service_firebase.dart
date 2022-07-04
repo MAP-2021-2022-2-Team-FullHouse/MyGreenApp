@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../../model/user.dart' as AppUser;
 
@@ -32,11 +33,17 @@ class RegistrationServiceFirebase extends RegistrationService {
         "email": email,
         "address": address,
         "role": role,
-        "point":0,
-        "image":"default.jpg"
+       "point": 0,
+        "image": "default.jpg"
       
       }).then((value) {
         print('User added');
+      });
+      FirebaseMessaging.instance.getToken().then((token) {
+        FirebaseFirestore.instance
+            .collection('User')
+            .doc(_auth.currentUser?.uid)
+            .set({'fcmToken': token});
       });
       final UserCredential credential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);

@@ -11,6 +11,7 @@ import '../../model/user.dart' as AppUser;
 import '../firebase.dart';
 import 'recycleCenter_service.dart';
 
+
 class RecycleCenterServiceFirebase extends RecycleCenterService {
   final navigator = NavigatorService();
   final firestoreInstance = FirebaseFirestore.instance;
@@ -176,62 +177,70 @@ Future queryData(String queryString)async{
 
   @override
   Future addRecycleCenter(
-      {required String name,
-      required String address,
-      required String phone,
-      required String image,
-      required String email,
-      required double lat,
-      required double lon,
-      required String password,
+      {required RecycleCenter rc,
      
       File? file}) async {
-    late bool n, i, p;
+    late bool n, p;
     try {
-      n = await isRecycleCenterNameExist(name);
-      i = await isImageExist(image);
-      p = await isPhoneExist(phone);
+      
+
+      if(rc.address.isEmpty||rc.phone.isEmpty||rc.name.isEmpty||rc.email.isEmpty||rc.password.isEmpty||rc.lat.isNaN||rc.lon.isNaN){
+       
+        return "Form is not completely filled";
+      }
+       String pattern = r'\w+@\w+\.\w+';
+       RegExp regex;
+        regex=RegExp(pattern);
+       if(!regex.hasMatch(rc.email)){
+        return "Invalid email format";
+       }
+       pattern= r'^(\+?6?01)[02-46-9]-*[0-9]{7}|^(\+?6?01)[1]-*[0-9]{8}$';
+        regex=RegExp(pattern);
+         if(!regex.hasMatch(rc.phone)){
+        return "Invalid phone format";
+       }
+       if(rc.password.length<8){
+        return "Password too short";
+       }
+
+       n = await isRecycleCenterNameExist(rc.name);
+      
+      p = await isPhoneExist(rc.phone);
       if (n == true) {
         return "name duplicated";
       }
-      if (image != null && image != "" && i == true) {
-        return "image duplicated";
-      }
+    
       if (p == true) {
         return "phone duplicated";
       }
+
+      
+
+
       final recycleCenterCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
+        email: rc.email,
+        password: rc.password,
       );
       String? img='';
-      int pos=image.indexOf('.');
-      img="${recycleCenterCredential.user?.uid}${image.substring(pos)}";
+      int pos=rc.image.indexOf('.');
+      if(img.contains('.'))
+      {img="${recycleCenterCredential.user?.uid}${rc.image.substring(pos)}";}
 
       firestoreInstance
           .collection("RecycleCenter")
           .doc(recycleCenterCredential.user?.uid)
-          .set({
-        "name": name,
-        "address": address,
-        "phone": phone,
-        "image": img,
-        "email": email,
-        "lat": lat,
-        "lon": lon,
-        "password": password
-      }).then((value) {
+          .set(rc.toJson()).then((value) {
         print('Recycle Center added');
       });
       firestoreInstance
           .collection("User")
           .doc(recycleCenterCredential.user?.uid)
           .set({
-        "name": name,
-        "phone": phone,
-        "email": email,
-        "address": address,
+        "name": rc.name,
+        "phone": rc.phone,
+        "email": rc.email,
+        "address": rc.address,
         "role": "Recycle Center",
       }).then((value) {
         print('User added');

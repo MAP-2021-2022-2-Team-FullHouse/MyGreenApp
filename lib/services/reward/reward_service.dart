@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:my_green_app/model/Reward.dart';
 
@@ -6,23 +7,18 @@ import '../../model/RewardUnit.dart';
 
 abstract class RewardService {
   Future<String> getRewardPoint();
+  Future<String> getImage(String pathname) ;
   Future addReward(
-      {required String title,
-      required String description,
-      required int quantity,
-      required int point});
+      {required Reward reward, File? file});
 Stream<List<Reward>> readUserRewards();
    Stream<List<Reward>>readRewards() ;
    Stream<List<RewardUnit>>readRewardUnits() ;
     Future getReward(String docID) ;
+    Future returnImage(String pathname) ;
      Future getUser(String docID) ;
   Future deleteReward(String docID);
   Future editReward(
-      {required String id,
-        required String title,
-      required String description,
-      required int quantity,
-      required int point});
+      {required Reward reward, File?file});
   Future editRewardUnit( {
     required String id,
     required String trackingNo,
@@ -31,9 +27,7 @@ Stream<List<Reward>> readUserRewards();
 Future getRewardUnit(String docID) ;
  Future redeemReward(
       {
-      required String rewardId,
-      required String shippingAddress,
-      required String phone,
+      required RewardUnit rewardUnit,
      
       });
       Future isPointSufficient(String docID);

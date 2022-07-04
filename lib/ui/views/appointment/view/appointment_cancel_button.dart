@@ -21,7 +21,7 @@ Widget buildButton(DocumentSnapshot<Map<String, dynamic>> a) {
         ),
         label: Text('Cancel'),
         onPressed: () async {
-          state.onCancel(viewmodel);
+          state.onCancel(viewmodel, a['recycleCenterEmail']);
         },
       ),
       const SizedBox(

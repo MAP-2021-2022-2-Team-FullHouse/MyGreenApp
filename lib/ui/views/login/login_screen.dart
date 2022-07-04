@@ -5,6 +5,7 @@ import 'package:my_green_app/app/router.dart' as router;
 //import 'login_body.dart';
 import 'login_viewmodel.dart';
 
+
 class LoginScreen extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => LoginScreen());
 
@@ -47,7 +48,8 @@ class LoginScreenState extends State<LoginScreen> {
     Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
-        Navigator.pushNamed(context, routes.loginRoute);
+        // Navigator.pushNamed(context, routes.loginRoute);
+         Navigator.pop(context);
       },
     );
 

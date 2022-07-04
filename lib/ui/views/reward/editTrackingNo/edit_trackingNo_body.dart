@@ -36,7 +36,8 @@ class EditTrackingNoBody extends StatelessWidget {
                   height: 11.0,
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                 
+                  margin: const EdgeInsets.fromLTRB(15,200, 15, 0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.0),
                     color: Colors.white,

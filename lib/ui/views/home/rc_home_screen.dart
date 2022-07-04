@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_green_app/ui/views/home/rc_home_body.dart';
 import 'package:my_green_app/ui/views/home/rc_home_navBar.dart';
 import 'package:my_green_app/ui/views/home/home_screenState.dart';
 import 'package:my_green_app/ui/views/map/mapScreen.dart';
@@ -15,7 +16,7 @@ class RCHomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: const HomeAppBar(),
-        body:HomeScreenful(),
+        body:RCHomeBody(state:HomeScreenfulState()),
         bottomNavigationBar: RCHomeNavigationBar(pageNo: 1),
       ),
     );

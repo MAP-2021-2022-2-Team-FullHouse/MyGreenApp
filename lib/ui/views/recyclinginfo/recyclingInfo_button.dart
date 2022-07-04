@@ -3,7 +3,8 @@ import 'package:my_green_app/model/recycling_info.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_screenstate.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_viewmodel.dart';
 import 'package:my_green_app/ui/views/recyclinginfo/view/viewrecyclinginfo_screen.dart';
-import 'package:my_green_app/constants/routes_path.dart' as routes;
+
+import 'edit_recyclinginfo/edit_recyclinginfo_screen.dart';
 
 class RecyclingInfoListButton extends StatelessWidget {
   final RecyclingInfoViewmodel viewmodel;
@@ -39,7 +40,9 @@ class RecyclingInfoListButton extends StatelessWidget {
         ),
         label: const Text('Edit'),
         onPressed: () async {
-          Navigator.of(context).pushNamed(routes.recyclingInfoRoute);
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => EditRecyclingInfoScreen(infoId: model.infoId),
+          ));
         },
       ),
       const SizedBox(

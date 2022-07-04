@@ -21,7 +21,7 @@ Widget buildRecycleCenterButton(DocumentSnapshot<Map<String, dynamic>> a) {
         ),
         label: const Text('Accept'),
         onPressed: () async {
-          state.onChangeStatus(viewmodel, 'accept');
+          state.onChangeStatus(viewmodel, 'accept', a['userEmail']);
         },
       ),
       const SizedBox(
@@ -34,7 +34,7 @@ Widget buildRecycleCenterButton(DocumentSnapshot<Map<String, dynamic>> a) {
         ),
         label: const Text('Reject'),
         onPressed: () async {
-          state.onChangeStatus(viewmodel, 'reject');
+          state.onChangeStatus(viewmodel, 'reject', a['userEmail']);
         },
       ),
     ]));
@@ -48,7 +48,7 @@ Widget buildRecycleCenterButton(DocumentSnapshot<Map<String, dynamic>> a) {
         ),
         label: const Text('Going Now'),
         onPressed: () async {
-          state.onChangeStatus(viewmodel, 'going');
+          state.onChangeStatus(viewmodel, 'going', a['userEmail']);
         },
       ),
       FutureBuilder<String>(
@@ -79,7 +79,7 @@ Widget buildRecycleCenterButton(DocumentSnapshot<Map<String, dynamic>> a) {
         ),
         label: const Text('Cancel Appointment'),
         onPressed: () async {
-          state.onCancel(viewmodel);
+          state.onCancel(viewmodel,a['userEmail']);
         },
       ),
     ]));
@@ -144,7 +144,7 @@ Widget buildRecycleCenterButton(DocumentSnapshot<Map<String, dynamic>> a) {
         ),
         label: const Text('Complete'),
         onPressed: () async {
-          state.onChangeStatus(viewmodel, 'complete');
+          state.onChangeStatus(viewmodel, 'complete', a['userEmail']);
         },
       ),
       Text('Tap to complete the appointment.',

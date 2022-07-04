@@ -1,30 +1,30 @@
 import 'package:my_green_app/app/locator.dart';
 import 'package:my_green_app/model/listing.dart';
+import 'package:my_green_app/services/authentication/authentication_service.dart';
 import 'package:my_green_app/services/authentication/authentication_service_firebase.dart';
 import 'package:my_green_app/services/shop/shop_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-
 class ManageListingViewmodel extends BaseViewModel {
   ManageListingViewmodel();
   late final _shopService = locator<ShopService>();
-  static String userEmail="";
+
+  late final _authService = locator<AuthenticationService>();
+  static String userID = "";
   late final _dialogService = locator<DialogService>();
 
-  
-  Future setUserEmail()
-  async {
-    userEmail=await AuthenticationServiceFirebase.getCurrentEmail();
+  void setUserID() {
+    userID = _authService.getCurrentID();
   }
 
   Stream<List<Listing>> getListingList() {
-    var results = _shopService.readListingList(userEmail);
+    var results = _shopService.readListingList(userID);
     return results;
   }
 
   Future<String?> getImgUrl(String imgUrl) async {
-    var result=await _shopService.getImage(imgUrl);
+    var result = await _shopService.getImage(imgUrl);
     return result;
   }
 
@@ -60,7 +60,6 @@ class ManageListingViewmodel extends BaseViewModel {
         );
         setBusy(false);
       }
-
     }
   }
 }

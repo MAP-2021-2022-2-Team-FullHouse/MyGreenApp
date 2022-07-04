@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:my_green_app/ui/views/reward/createReward/widget/create_pic.dart';
 import 'package:stacked/stacked.dart';
 import 'create_reward.dart';
 
@@ -71,6 +72,7 @@ class CreateRewardBody extends StatelessWidget {
                         height: 5.0,
                       ),
                       ...buildCreateTextFields(state),
+                       UploadPicture(state: state),
                
                       
                       // ignore: unnecessary_null_comparison

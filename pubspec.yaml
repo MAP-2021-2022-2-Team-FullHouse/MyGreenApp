@@ -54,6 +54,11 @@ dependencies:
   path: ^1.8.1
   firebase_image: ^1.1.1
   datetime_picker_formfield: ^2.0.0
+  firebase_messaging: ^11.4.2
+  overlay_support: ^2.0.1
+  flutter_local_notifications: ^9.6.1
+  flutter_launch: ^0.3.0
+  quiver: ^3.1.0
   intl: ^0.17.0
 
 dev_dependencies:

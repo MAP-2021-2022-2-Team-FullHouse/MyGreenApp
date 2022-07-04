@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_green_app/model/listing.dart';
 import 'package:my_green_app/ui/views/shop/shop_body.dart';
 import 'package:my_green_app/ui/views/shop/shop_viewmodel.dart';
 
@@ -23,4 +24,8 @@ class ShopScreenfulState extends State<ShopScreenful> {
     return await viewmodel.getImgUrl(imgUrl);
   }
 
+  Future contactSeller(Listing model) async
+  {
+    viewmodel.contactSeller(model);
+  }
 }

@@ -69,9 +69,9 @@ class _CreateLatLonState extends State<CreateLatLon> {
               onPressed: () async {
          
 
-                widget.state.latField.text = "1.482641";
-                widget.state.lonField.text =
-                    "103.644991"; //for testing in emulator
+                // widget.state.latField.text = "0";
+                // widget.state.lonField.text =
+                    // "103.644991"; for testing in emulator
                 Position p = await CreateRecycleCenter_ViewModel.getPosition();
                 String lat = p.latitude.toString(); //set realtime latitude
                 String lon = p.longitude.toString(); //set realtime longtitude

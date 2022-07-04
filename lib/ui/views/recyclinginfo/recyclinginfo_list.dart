@@ -10,7 +10,7 @@ import 'package:my_green_app/ui/views/recyclinginfo/recyclinginfo_viewmodel.dart
 RecyclingInfoScreenfulState state = RecyclingInfoScreenfulState();
 
 Widget buildRecyclingInfo(RecyclingInfo recyclingInfo) => ListTile(
-      leading: CircleAvatar(
+      leading: SizedBox.square(
         child: FutureBuilder(
           future: state.getImgUrl("recyclingInfo/${recyclingInfo.image}"),
           builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
@@ -41,9 +41,8 @@ Widget buildImage(String? data) {
     color: Colors.transparent,
     child: Ink.image(
       image: NetworkImage(data.toString()),
-      fit: BoxFit.cover,
-      width: 128,
-      height: 128,
+      fit: BoxFit.fill,
+      width: 100,
       child: const InkWell(),
     ),
   );

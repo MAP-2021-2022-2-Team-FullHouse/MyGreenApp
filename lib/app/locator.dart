@@ -30,9 +30,12 @@ import 'package:my_green_app/ui/views/shop/manage_listing/managelisting_viewmode
 import 'package:my_green_app/ui/views/shop/shop_viewmodel.dart';
 import 'package:my_green_app/services/recycling_info/recycling_info_service.dart';
 import 'package:my_green_app/services/recycling_info/recycling_info_service_firebase.dart';
+import 'package:my_green_app/services/push_notification_service.dart';
+import 'package:my_green_app/services/local_notification_service.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 GetIt locator = GetIt.instance;
-
+final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 void setupLocator() {
   // Services
   locator.registerLazySingleton<RegistrationService>(
@@ -54,6 +57,10 @@ void setupLocator() {
   locator.registerLazySingleton<NavigatorService>(() => NavigatorService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
+  locator.registerLazySingleton<PushNotificationService>(
+      () => PushNotificationService());
+  locator.registerLazySingleton<LocalNotificationService>(
+      () => LocalNotificationService());
   
   locator.registerLazySingleton<UserRepository>(() => UserRepository());
 
